@@ -1,7 +1,7 @@
-import { Input } from "./styles";
+import { Container } from "./styles";
 
-const Inputs = () => {
-  return <Input />;
+const Input = ({ register, name, ...rest }) => {
+  return <Container {...rest} {...register(name)} />;
 };
 
-export default Inputs;
+export default Input;
