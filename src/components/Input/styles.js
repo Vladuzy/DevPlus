@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Input = styled.input`
+export const Container = styled.input`
   width: 220px;
   height: 35px;
   background-color: var(--cinza-claro);
