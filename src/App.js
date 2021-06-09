@@ -1,9 +1,9 @@
-import globalStyles from './styles/global.js'
+import GlobalStyle from "./styles/global.js";
 
 function App() {
   return (
     <>
-      <globalStyles />
+      <GlobalStyle />
     </>
   );
 }
