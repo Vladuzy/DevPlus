@@ -1,9 +1,11 @@
-import globalStyles from './styles/global.js'
+import GlobalStyle from "./styles/global.js";
+import FormRegister from "./components/Register";
 
 function App() {
   return (
     <>
-      <globalStyles />
+      <FormRegister></FormRegister>
+      <GlobalStyle />
     </>
   );
 }

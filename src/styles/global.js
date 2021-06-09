@@ -1,13 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: 0;
-  }
-
   :root {
     --verde: #3DD598;
     --branco: #F9F9F9;
@@ -16,6 +9,13 @@ export default createGlobalStyle`
     --cinza-escuro: #21343A;
     --cinza-claro: #30444D;
   }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: 0;
+  }
+
 
   body {
     font-family: 'Roboto Mono', monospace;
@@ -37,4 +37,4 @@ export default createGlobalStyle`
   a {
     text-decoration: none;
   }
-`
+`;
