@@ -1,7 +1,11 @@
-import { Button } from "./styles";
+import { Container } from "./styles";
 
-const Buttons = (props) => {
-  return <Button>{props.children}</Button>;
+const Button = ({ children, ...rest }) => {
+  return (
+    <Container type="button" {...rest}>
+      {children}
+    </Container>
+  );
 };
 
-export default Buttons;
+export default Button;
