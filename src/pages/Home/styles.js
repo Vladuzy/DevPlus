@@ -5,8 +5,10 @@ export const Container = styled.div `
     width: 100vw;
     height: 100vh;
     background-color: var(--cinza-escuro);
-    header > section{
+    @media(max-width: 758px){
+        header > section{
         display: none;
+        }
     }
 `
 
@@ -16,7 +18,7 @@ export const HeaderStyles = styled.header `
     display: flex;
     color: var(--branco);
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     input{
         display:none;
     }
@@ -24,6 +26,10 @@ export const HeaderStyles = styled.header `
         display: none;
     }
     @media(max-width: 758px){
+        justify-content: space-between;
+        p{
+            display: none;
+        }
         h4{
             margin-left: 7vw;
         }
@@ -51,6 +57,17 @@ export const ContactContainer = styled.section `
         color: black;
         margin-top: 20px;
         margin-left: 10px;
+    }
+    @media(min-width: 758px){
+        display:flex;
+        justify-content: space-between;
+        p{
+            color: var(--white);
+        }
+        background: transparent;
+        width: 35vw;
+        margin-top: 100px;
+        margin-left: 50vw;
     }
 `
 
