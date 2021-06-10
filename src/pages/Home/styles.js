@@ -57,6 +57,7 @@ export const ContactContainer = styled.section `
         color: black;
         margin-top: 20px;
         margin-left: 10px;
+        display: block;
     }
     @media(min-width: 758px){
         display:flex;
