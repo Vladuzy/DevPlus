@@ -1,4 +1,5 @@
 import {Route, Switch} from "react-router-dom";
+import Home from "../pages/Home";
 
 import Login from "../pages/Login"
 import NotFound from "../pages/NotFound"
@@ -7,8 +8,7 @@ const Routes = () => {
     return(
         <Switch>
             <Route exact path = "/">
-                {/* <Home/> */}
-                <Login/>
+                <Home/>
             </Route>
             <Route path="/login">
                 <Login/>
@@ -26,4 +26,4 @@ const Routes = () => {
     )
 }
 
-export default Routes;
+export default Routes
