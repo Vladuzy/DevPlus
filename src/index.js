@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import GlobalStyles from './styles/global'
-import App from './App';
-import {BrowserRouter} from "react-router-dom";
+import React from "react";
+import ReactDOM from "react-dom";
+import GlobalStyles from "./styles/global";
+import App from "./App";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <GlobalStyles/>
-        <App />
+      <GlobalStyles />
+      <App />
     </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
