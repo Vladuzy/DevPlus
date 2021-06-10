@@ -1,16 +1,39 @@
 import Button from "../../components/Button"
 import Input from "../../components/Input"
 
+<<<<<<< HEAD
+=======
+import {
+    Container, 
+    HeaderContainer, 
+    TitleContainer, 
+    SubTitleContainer, 
+    FormContainer,
+    FooterContainer, 
+    TitleFooterContainer, 
+    SubTitleFooterContainer
+} from "./styled"
+
+>>>>>>> 3f9fec00906b3c1428ca076fbdf78661d14d136f
 import {useForm} from "react-hook-form";
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
 
+<<<<<<< HEAD
 // import { Link, useHistory, Redirect } from "react-router-dom"
+=======
+import { Link, useHistory, Redirect } from "react-router-dom"
+>>>>>>> 3f9fec00906b3c1428ca076fbdf78661d14d136f
 import api from "../../services/index"
 
 import jwt_decode from "jwt-decode";
 // import { toast } from "react-toastify";
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 3f9fec00906b3c1428ca076fbdf78661d14d136f
 const Login = () => {
 
     const schema = yup.object().shape({
@@ -54,6 +77,7 @@ const Login = () => {
     // }
 
     return(
+<<<<<<< HEAD
         <form onSubmit={handleSubmit(onSubmitFunction)}>
             <h1>Login</h1>
             <label htmlFor="username"> Digite seu username </label>
@@ -75,6 +99,36 @@ const Login = () => {
             <Button type={"submit"} >Enviar</Button>
             {/* <p> Não tem uma conta? Faça seu <Link to={"/signup"}>cadastro</Link></p> */}
         </form>
+=======
+        <Container>
+            <HeaderContainer>
+                <TitleContainer>Olá novamente!</TitleContainer>
+                <SubTitleContainer>:&#x00029;</SubTitleContainer>
+            </HeaderContainer>
+            <FormContainer onSubmit={handleSubmit(onSubmitFunction)}>
+                <Input
+                    register={register}
+                    name={"username"}
+                    placeholder={"Nome"}
+                    error = {errors.username?.message}
+                />
+
+                <Input
+                    register={register}
+                    name={"password"}
+                    type={"password"}
+                    placeholder={"Senha"}
+                    error = {errors.password?.message}
+                />
+                <Button type={"submit"} >CONECTE-SE</Button>
+            </FormContainer>
+            <FooterContainer>
+                <TitleFooterContainer>Não possui conta?</TitleFooterContainer>
+                <SubTitleFooterContainer><Link to={"/register"}>REGISTRE-SE</Link></SubTitleFooterContainer>
+             </FooterContainer>
+        </Container>
+        
+>>>>>>> 3f9fec00906b3c1428ca076fbdf78661d14d136f
     )
 
 }
