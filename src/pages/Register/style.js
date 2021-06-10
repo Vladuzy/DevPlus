@@ -43,9 +43,17 @@ export const FooterContainer = styled.form`
 export const TitleFooterContainer = styled.h4`
   color: var(--branco);
   font-size: 13px;
+  margin-right: 5px;
 `;
 
 export const SubTitleFooterContainer = styled.p`
   color: var(--verde);
   font-size: 13px;
+  height: 14px;
+  font-style: normal;
+  font-weight: normal;
+
+  a {
+    color: var(--verde);
+  }
 `;
