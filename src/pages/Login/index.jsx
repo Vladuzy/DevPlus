@@ -16,13 +16,14 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { Link, useHistory, Redirect } from "react-router-dom";
-import api from "../../services/index";
+import { Link, useHistory } from "react-router-dom";
+import { useAuth } from '../../providers/AuthProvider'
 
 import jwt_decode from "jwt-decode";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const { handleLogin } = useAuth()
   const schema = yup.object().shape({
     username: yup.string().required("Campo Obrigatório!!"),
 
@@ -38,23 +39,10 @@ const Login = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  // const history = useHistory("/dashboard");
+  const history = useHistory("/dashboard");
 
   const onSubmitFunction = (data) => {
-    api
-      .post("/sessions/", data)
-      .then((reponse) => {
-        const token = reponse.data.access;
-        console.log(token);
-        localStorage.setItem("@DevelopingHabitus:token", JSON.stringify(token));
-        const decodedToken = jwt_decode(token);
-        console.log(decodedToken);
-        const id = decodedToken.user_id;
-        console.log(id);
-        localStorage.setItem("@DevelopingHabitus:user", JSON.stringify(id));
-        // return history.push("/dashboard");
-      })
-      .catch((err) => alert("Username ou senha inválidos!!"));
+    handleLogin(data, jwt_decode, history, toast)
   };
 
   // if(isAuthenticated){
