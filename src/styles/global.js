@@ -1,6 +1,13 @@
 import { createGlobalStyle } from "styled-components";
 
-export default createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: 0;
+  }
+
   :root {
     --verde: #3DD598;
     --branco: #F9F9F9;
@@ -38,3 +45,5 @@ export default createGlobalStyle`
     text-decoration: none;
   }
 `;
+
+export default GlobalStyles;

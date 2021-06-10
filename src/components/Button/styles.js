@@ -8,4 +8,5 @@ export const Container = styled.button`
   font-size: 16px;
   font-family: "Roboto", sans-serif;
   border: none;
+  color: var(--branco);
 `;

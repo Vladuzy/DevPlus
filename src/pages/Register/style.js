@@ -8,17 +8,11 @@ export const TitleContainer = styled.h1`
   color: var(--branco);
   font-size: 30px;
   padding: 7px;
-  width: 272px;
-  height: 41px;
 `;
-
 export const SubTitleContainer = styled.h3`
   color: var(--amarelo);
   font-size: 15px;
-  line-height: 18px;
   padding: 7px;
-  width: 126px;
-  height: 22px;
 `;
 
 export const HeaderContainer = styled.section`
@@ -34,9 +28,8 @@ export const FormContainer = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 221px;
-  height: 133px;
-  margin: 84px auto 0;
+  height: 231px;
+  margin-top: 100px;
 `;
 
 export const FooterContainer = styled.form`
@@ -45,13 +38,11 @@ export const FooterContainer = styled.form`
   justify-content: center;
   margin-top: 20px;
   margin-left: 23px;
-  font-family: "Roboto";
 `;
 
 export const TitleFooterContainer = styled.h4`
   color: var(--branco);
   font-size: 13px;
-  height: 14px;
   margin-right: 5px;
 `;
 
@@ -61,7 +52,6 @@ export const SubTitleFooterContainer = styled.p`
   height: 14px;
   font-style: normal;
   font-weight: normal;
-  margin-right: 5px;
 
   a {
     color: var(--verde);
