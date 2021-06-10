@@ -26,6 +26,10 @@ const FormRegister = () => {
       .string()
       .min(7, "Minimo de 7 digitos")
       .required("Campo obrigatório"),
+    passwordConfirm: yup
+      .string()
+      .oneOf([yup.ref("password")], "senhas diferentes")
+      .required("Senha obrigatória"),
   });
 
   const {
