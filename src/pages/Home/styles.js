@@ -95,7 +95,37 @@ export const MainStyles = styled.main `
         width: 265px;
         margin-left: 4vw;
     }
-    button{
+    div{
         margin-top: 30px;
+        width: 220px;
+        button{
+            margin-top: 30px;
+        }
+    }
+
+    @media(min-width: 758px){
+        align-items: flex-start;
+        h1{
+            margin-top: 50px;
+            font-size: 2.2rem;
+            margin-left: 20vw;
+        }
+        h2{
+            margin-left: 10vw;
+            font-size: 2rem;
+            width: 600px; 
+        }
+        p{
+            margin-left: 10vw;
+            font-size: 1.5rem;
+            width: 500px;
+        }
+        div{
+            width: 60vw;
+            margin-left: 10vw;
+            button + button{
+                margin-left: 20px;
+            }
+        }
     }
 `

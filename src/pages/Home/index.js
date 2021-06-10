@@ -20,8 +20,10 @@ export default function Home() {
                 <h1>Habbits app</h1>
                 <h2>Venha fazer parte da nossa familia!</h2>
                 <p> o melhor jeito de você organizar os seus habitos e com uma otima comunidade!</p>
-                <Buttons>Fazer Cadastro</Buttons>
-                <Buttons>Fazer Login</Buttons>                                                            
+                <div>
+                    <Buttons>Fazer Cadastro</Buttons>
+                    <Buttons>Fazer Login</Buttons>   
+                </div>                                                         
             </MainStyles>
         </Container>
     )
