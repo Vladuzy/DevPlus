@@ -41,7 +41,7 @@ const FormRegister = () => {
 
   const handleForm = (data) => {
     axios
-      .post("https://kabit-api.herokuapp.com/users/", data)
+      .get("https://kabit-api.herokuapp.com/users/", data)
       .then((response) => {
         console.log(response);
         reset();
