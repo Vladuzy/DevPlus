@@ -26,8 +26,4 @@ const Routes = () => {
     )
 }
 
-<<<<<<< HEAD
 export default Routes
-=======
-export default Routes;
->>>>>>> b6e5997b2ce18b2ba2485fb97dda2445e9d24277
