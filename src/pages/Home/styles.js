@@ -42,7 +42,7 @@ export const HeaderStyles = styled.header `
 `
 
 export const ContactContainer = styled.section `
-    width: 40vw;
+    width: 35vw;
     height: 150px;
     background: var(--verde);
     border-radius: 20px;
@@ -51,5 +51,34 @@ export const ContactContainer = styled.section `
         color: black;
         margin-top: 20px;
         margin-left: 10px;
+    }
+`
+
+export const MainStyles = styled.main `
+    width: 100vw;
+    height: calc(100vh - 80px);
+    background: var(--cinza-escuro);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h1{
+        color: var(--verde);
+        font-size: 1.5rem;
+        margin-top: 110px;
+    }
+    h2{
+        color: var(--branco);
+        margin-top:  30px;
+        width: 250px;             
+    }
+    p{
+        margin-top: 20px;
+        font-size: 1rem;
+        color: var(--amarelo);
+        width: 265px;
+        margin-left: 4vw;
+    }
+    button{
+        margin-top: 30px;
     }
 `
