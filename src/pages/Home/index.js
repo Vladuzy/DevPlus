@@ -7,8 +7,15 @@ import {
 } from "./styles";
 import { FiAlignJustify } from "react-icons/fi";
 import Buttons from "../../components/Button";
+import { useHistory } from "react-router-dom";
 
 export default function Home() {
+  const history = useHistory();
+
+  const handleClick = (value) => {
+    history.push(value);
+  };
+
   return (
     <Container>
       <HeaderStyles>
@@ -32,8 +39,10 @@ export default function Home() {
           comunidade!
         </p>
         <div>
-          <Buttons>Fazer Cadastro</Buttons>
-          <Buttons>Fazer Login</Buttons>
+          <Buttons onClick={() => handleClick("/register")}>
+            Fazer Cadastro
+          </Buttons>
+          <Buttons onClick={() => handleClick("/login")}>Fazer Login</Buttons>
         </div>
       </MainStyles>
     </Container>

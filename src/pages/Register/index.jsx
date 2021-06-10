@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useHistory } from "react-router";
-import axios from "axios";
+import { useHistory, Link } from "react-router-dom";
+import api from "../../services";
 import {
   Container,
   SubTitleContainer,
@@ -15,6 +15,7 @@ import {
 } from "./style.js";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import { toast } from "react-toastify";
 
 const FormRegister = () => {
   const history = useHistory();
@@ -39,15 +40,35 @@ const FormRegister = () => {
     reset,
   } = useForm({ resolver: yupResolver(schema) });
 
-  const handleForm = (data) => {
-    axios
-      .get("https://kabit-api.herokuapp.com/users/", data)
+  const handleForm = ({ username, email, password }) => {
+    const addUser = { username, email, password };
+    api
+      .post("/users/", addUser)
       .then((response) => {
         console.log(response);
+        toast.success("Cadastrado com sucesso!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         reset();
-        history.push("/");
+        history.push("/login");
       })
-      .catch((e) => console.log(e));
+      .catch((e) =>
+        toast.error(" Usuário ou Email já cadastrado!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      );
   };
 
   return (
@@ -60,11 +81,13 @@ const FormRegister = () => {
         <Input placeholder="nome *" register={register} name="username"></Input>
         <Input placeholder="email *" register={register} name="email"></Input>
         <Input
+          type="password"
           placeholder="senha *"
           register={register}
           name="password"
         ></Input>
         <Input
+          type="password"
           placeholder="confirmar senha"
           register={register}
           name="passwordConfirm"
@@ -73,7 +96,9 @@ const FormRegister = () => {
       </FormContainer>
       <FooterContainer>
         <TitleFooterContainer>Já possui conta?</TitleFooterContainer>
-        <SubTitleFooterContainer>LOGAR-SE</SubTitleFooterContainer>
+        <SubTitleFooterContainer>
+          <Link to={"/login"}>LOGAR-SE</Link>
+        </SubTitleFooterContainer>
       </FooterContainer>
     </Container>
   );

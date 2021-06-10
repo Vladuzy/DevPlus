@@ -61,19 +61,7 @@ export const HabitsProviders = ({ children }) => {
   };
 
   useEffect(() => {
-    createHabits();
-  }, []);
-
-  useEffect(() => {
-    deleteHabits();
-  }, []);
-
-  useEffect(() => {
     getHabits();
-  }, []);
-
-  useEffect(() => {
-    updateHabits();
   }, []);
 
   return <HabitsContext.Provider>{children}</HabitsContext.Provider>;
