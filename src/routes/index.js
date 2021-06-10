@@ -1,6 +1,7 @@
 import {Route, Switch} from "react-router-dom";
 
 import Login from "../pages/Login"
+import NotFound from "../pages/NotFound"
 
 const Routes = () => {
     return(
@@ -12,12 +13,17 @@ const Routes = () => {
             <Route path="/login">
                 <Login/>
             </Route>
+            <Route path="/register">
+                {/* <Register/> */}
+            </Route>
             <Route path="/dashboard">
                 {/* <Dashboard/> */}
             </Route>
             <Route>
-                {/* <PageNotFound/> */}
+                <NotFound/>
             </Route>
         </Switch>
     )
 }
+
+export default Routes;
