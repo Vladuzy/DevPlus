@@ -1,11 +1,12 @@
-import { AuthProvider } from './AuthProvider'
+import { AuthProvider } from "./AuthProvider";
+import { ActiviesProvider } from "./Activities";
 
 const Providers = ({ children }) => {
-  return(
+  return (
     <AuthProvider>
-      {children}
+      <ActiviesProvider>{children}</ActiviesProvider>
     </AuthProvider>
-  )
-}
+  );
+};
 
-export default Providers
+export default Providers;

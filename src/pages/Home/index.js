@@ -8,9 +8,13 @@ import {
 import { FiAlignJustify } from "react-icons/fi";
 import Buttons from "../../components/Button";
 import { useHistory } from "react-router-dom";
+import { useActivity } from "../../providers/Activities";
 
 export default function Home() {
   const history = useHistory();
+
+  const teste = useActivity();
+  console.log(teste.patchActivies());
 
   const handleClick = (value) => {
     history.push(value);
@@ -43,6 +47,7 @@ export default function Home() {
             Fazer Cadastro
           </Buttons>
           <Buttons onClick={() => handleClick("/login")}>Fazer Login</Buttons>
+          <button onClick={teste}>Clica aqui</button>
         </div>
       </MainStyles>
     </Container>
