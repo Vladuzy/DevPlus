@@ -46,35 +46,37 @@ export const GoalsProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
-  const patchGoal = () => {
+  const patchGoal = (goal) => {
     //Lembrar de receber o goal por props na função quando pegar no card
     //Lembrar de mandar o que ta sendo enviado "dataGoal" ok
     //Lembrar de passar o Id do goal (goal.id)
     //Lembrar de alterar o id no url
     //Lembrar de passar o token ok
-    const dataGoalUpdate = {
-      achieved: true,
-    };
+
+    // const dataGoalUpdate = {
+    //   achieved: false,
+    // };
 
     //Mudança do data
-    // const dataGoalUpdate = {}
-    // if(goal.archieved === true){
-    //     dataGoalUpdate = {
-    //         "achieved": true
-    //       }
-    // }else{
-    //     dataGoalUpdate = {
-    //         "achieved": false
-    //       }
-    // }
+    let dataGoalUpdate = {}
+    if(goal.achieved === true){
+        dataGoalUpdate = {
+            "achieved": false
+          }
+    }else{
+        dataGoalUpdate = {
+            "achieved": true
+          }
+    }
 
     api
-      .patch("/goals/1576/", dataGoalUpdate, {
+      .patch(`/goals/${goal.id}/`, dataGoalUpdate, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       })
+      .then((response) => console.log(response))
       .then(() => getGoals())
       .catch((err) => console.log(err));
   };
