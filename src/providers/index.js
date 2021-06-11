@@ -1,9 +1,12 @@
 import { AuthProvider } from './AuthProvider'
+import {GoalsProvider} from "./Goals"
 
 const Providers = ({ children }) => {
   return(
     <AuthProvider>
-      {children}
+      <GoalsProvider>
+         {children}
+      </GoalsProvider>
     </AuthProvider>
   )
 }

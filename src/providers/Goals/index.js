@@ -1,10 +1,14 @@
-import {createContext, useState, useEffect} from "react"
+import {createContext, useState, useEffect, useContext} from "react"
+
+import {AuthContext} from "../AuthProvider"
 
 import api from "../../services"
 
 export const GoalsContext = createContext()
 
 export const GoalsProvider = ({children}) => {
+     const { token }= useContext(AuthContext)
+
     const [goals, setGoals] = useState([]);
 
     const getGoals = () => {
@@ -31,7 +35,7 @@ export const GoalsProvider = ({children}) => {
         api.post("/goals/", dataGoal, {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzAxNzg2LCJqdGkiOiJiMTg0YzE3MTQ2YzY0ZmRlYWYyNDZjZmMyNWZiZTc1NiIsInVzZXJfaWQiOjcxOX0.0crrAoZHgW0W81FZR5wqcL_SdvcYP7m6seKxQe1VY94"}`,
+                Authorization: `Bearer ${token}`,
             }
         })
             .then(() => getGoals())
@@ -49,7 +53,7 @@ export const GoalsProvider = ({children}) => {
         api.patch("/goals/1576/", dataGoalUpdate, {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzAxNzg2LCJqdGkiOiJiMTg0YzE3MTQ2YzY0ZmRlYWYyNDZjZmMyNWZiZTc1NiIsInVzZXJfaWQiOjcxOX0.0crrAoZHgW0W81FZR5wqcL_SdvcYP7m6seKxQe1VY94"}`,
+                Authorization: `Bearer ${token}`,
             }
         })
             .then(() => getGoals())
@@ -63,7 +67,7 @@ export const GoalsProvider = ({children}) => {
         api.delete("/goals/1577/", {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzAxNzg2LCJqdGkiOiJiMTg0YzE3MTQ2YzY0ZmRlYWYyNDZjZmMyNWZiZTc1NiIsInVzZXJfaWQiOjcxOX0.0crrAoZHgW0W81FZR5wqcL_SdvcYP7m6seKxQe1VY94"}`,
+                Authorization: `Bearer ${token}`,
             }
         })
             .then(() => getGoals())
