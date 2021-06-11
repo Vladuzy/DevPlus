@@ -5,17 +5,19 @@ import { HabitsProviders } from "./Habits";
 import { GroupsProviders } from "./Groups";
 
 const Providers = ({ children }) => {
-  return (
-    <AuthProvider>
-      <ActiviesProvider>
-        <GoalsProvider>
+    return (
+      <AuthProvider>
+        <HabitsProviders>
           <GroupsProviders>
-            <HabitsProviders>{children}</HabitsProviders>
+            <GoalsProvider>
+              <ActiviesProvider>
+                {children}
+              </ActiviesProvider>
+            </GoalsProvider>
           </GroupsProviders>
-        </GoalsProvider>
-      </ActiviesProvider>
-    </AuthProvider>
-  );
+        </HabitsProviders>
+      </AuthProvider>
+    );
 };
 
 export default Providers;
