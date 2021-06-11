@@ -1,14 +1,21 @@
-import { AuthProvider } from './AuthProvider'
-import {GoalsProvider} from "./Goals"
+import { AuthProvider } from "./AuthProvider";
+import { ActiviesProvider } from "./Activities";
+import { GoalsProvider } from "./Goals";
+import { HabitsProviders } from "./Habits";
+import { GroupsProviders } from "./Groups";
 
 const Providers = ({ children }) => {
-  return(
+  return (
     <AuthProvider>
-      <GoalsProvider>
-         {children}
-      </GoalsProvider>
+      <ActiviesProvider>
+        <GoalsProvider>
+          <GroupsProviders>
+            <HabitsProviders>{children}</HabitsProviders>
+          </GroupsProviders>
+        </GoalsProvider>
+      </ActiviesProvider>
     </AuthProvider>
-  )
-}
+  );
+};
 
-export default Providers
+export default Providers;
