@@ -9,6 +9,8 @@ export const GoalsContext = createContext()
 export const GoalsProvider = ({children}) => {
      const { token }= useContext(AuthContext)
 
+    //Lembrar de passar setGoal para receber os dados do modal criar Goal
+    // const [goal, setGoal] = useState({})
     const [goals, setGoals] = useState([]);
 
     const getGoals = () => {
@@ -22,7 +24,7 @@ export const GoalsProvider = ({children}) => {
     }
    
     const postGoal = () => {
-        //Lembrar de mandar o que ta sendo enviado "dataGoal"
+        //Lembrar de mandar o que ta sendo enviado "dataGoal" (pegar os inputs no modal de criar Goal)
         //Lembrar de passar o Id do grupo
         //Lembrar de passar o token
         const dataGoal = {
@@ -43,12 +45,26 @@ export const GoalsProvider = ({children}) => {
     }
 
     const patchGoal = () => {
-        //Lembrar de mandar o que ta sendo enviado "dataGoal"
-        //Lembrar de passar o Id do goal
-        //Lembrar de passar o token
+        //Lembrar de receber o goal por props na função quando pegar no card
+        //Lembrar de mandar o que ta sendo enviado "dataGoal" ok
+        //Lembrar de passar o Id do goal (goal.id)
+        //Lembrar de alterar o id no url
+        //Lembrar de passar o token ok
         const dataGoalUpdate = {
             "achieved": true
-          }
+        }
+
+        //Mudança do data
+        // const dataGoalUpdate = {}
+        // if(goal.archieved === true){
+        //     dataGoalUpdate = {
+        //         "achieved": true
+        //       }
+        // }else{
+        //     dataGoalUpdate = {
+        //         "achieved": false
+        //       }
+        // }
 
         api.patch("/goals/1576/", dataGoalUpdate, {
             headers: {
@@ -61,7 +77,9 @@ export const GoalsProvider = ({children}) => {
     }
 
     const deleteGoal = () => {
-        //Lembrar de passar o Id do goal
+        //Lembrar de receber o goal por props na função quando pegar no card
+        //Lembrar de passar o Id do goal (goal.id)
+        //Lembrar de alterar o id no url
         //Lembrar de passar o token
 
         api.delete("/goals/1577/", {
