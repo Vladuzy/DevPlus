@@ -16,7 +16,7 @@ export const ActiviesProvider = ({ children }) => {
     api
       .post("/activities/", data, {
         headers: {
-          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNDkzOTgxLCJqdGkiOiI1ZDRiMmYxNGM3M2Q0MjAwYTcwZjQwMTUxNDEzNjI1YiIsInVzZXJfaWQiOjY0OX0.upqN4ro1KBwxz1tbNWCVXiPGcIZaGBKKYaCQxb3L7EI"}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => console.log(response))
@@ -41,7 +41,7 @@ export const ActiviesProvider = ({ children }) => {
     api
       .patch("/activities/1/", activityUpdate, {
         headers: {
-          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNDkzOTgxLCJqdGkiOiI1ZDRiMmYxNGM3M2Q0MjAwYTcwZjQwMTUxNDEzNjI1YiIsInVzZXJfaWQiOjY0OX0.upqN4ro1KBwxz1tbNWCVXiPGcIZaGBKKYaCQxb3L7EI"}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => console.log(response))
@@ -50,9 +50,9 @@ export const ActiviesProvider = ({ children }) => {
 
   const deleteActivity = () => {
     api
-      .delete("/activities/1/", {
+      .delete("/activities/690/", {
         headers: {
-          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNDkzOTgxLCJqdGkiOiI1ZDRiMmYxNGM3M2Q0MjAwYTcwZjQwMTUxNDEzNjI1YiIsInVzZXJfaWQiOjY0OX0.upqN4ro1KBwxz1tbNWCVXiPGcIZaGBKKYaCQxb3L7EI"}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => console.log(response))
