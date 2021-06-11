@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -16,6 +16,13 @@ const GlobalStyles = createGlobalStyle`
     --cinza-escuro: #21343A;
     --cinza-claro: #30444D;
   }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: 0;
+  }
+
 
   body {
     font-family: 'Roboto Mono', monospace;
@@ -37,6 +44,6 @@ const GlobalStyles = createGlobalStyle`
   a {
     text-decoration: none;
   }
-`
+`;
 
-export default GlobalStyles
+export default GlobalStyles;
