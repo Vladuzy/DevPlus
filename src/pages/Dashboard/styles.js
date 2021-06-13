@@ -19,13 +19,11 @@ export const HeaderContainer = styled.header`
 `
 
 export const MainContainer = styled.main`
-  height: 90vh;
   background-color: var(--cinza-escuro);
 
   border-top-left-radius: 30px;
 `
 export const MainMenuContainer = styled.section`
-  height: 4rem;
 
   display: flex;
   flex-direction: column;
@@ -33,6 +31,7 @@ export const MainMenuContainer = styled.section`
 `
 
 export const NavContainer = styled.ul`
+  margin-top: 20px;
   height: 100%;
   display: flex;
   justify-content: space-evenly;
