@@ -1,4 +1,4 @@
-import {GoalCardContainer, InfoContainer, ButtonClose, ButtonCheck, ButtonUncheck} from "./style"
+import {GoalCardContainer, InfoContainer, ButtonClose, ButtonCheck, ButtonUncheck, ProgressBar} from "./style"
 
 import { FaCheck } from 'react-icons/fa';
 import { IoClose } from "react-icons/io5"
@@ -20,7 +20,9 @@ const GoalCard = ({goal, patchGoal, deleteGoal, showArchived}) => {
             <InfoContainer>
                 <h2>{title}</h2>
                 <h3>{difficulty}</h3>
-                <h4>{how_much_achieved}</h4>
+                <ProgressBar progress={how_much_achieved}>
+                    <span></span>
+                </ProgressBar>
             </InfoContainer>
             {
                 (showArchived)? (

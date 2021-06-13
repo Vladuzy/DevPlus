@@ -71,3 +71,17 @@ export const ButtonUncheck = styled.button`
         font-weight: bold;
     }
 `
+
+export const ProgressBar = styled.div`
+    height: 25px;
+    background-color: #CCC;
+    position: relative;
+
+    span{
+        width: ${props => props.progress + "%"};
+        position: absolute;
+        height: 100%;
+        background-color: #0fd439;
+    }
+
+`
