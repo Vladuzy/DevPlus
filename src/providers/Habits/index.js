@@ -60,7 +60,7 @@ export const HabitsProviders = ({ children }) => {
       .then((response) => {
         const { data } = response;
         setHabits(response.data)
-        localStorage.setItem("@User:habits", JSON.stringify(data));
+        localStorage.setItem("@DevelopingHabitus:habits", JSON.stringify(data));
       });
   };
 
