@@ -35,8 +35,13 @@ export const FormContainer = styled.form`
   align-items: center;
   justify-content: space-between;
   width: 221px;
-  height: 133px;
   margin: 84px auto 0;
+`;
+
+export const SpanFormContainer = styled.span`
+  color: var(--vermelho);
+  font-size: 1rem;
+  margin: 5px 0 10px 50px;
 `;
 
 export const FooterContainer = styled.form`
