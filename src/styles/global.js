@@ -19,7 +19,6 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: 'Roboto', sans-serif;
-    background-color: var(--verde);
   }
 
   input {

@@ -28,10 +28,7 @@ const Login = () => {
   const schema = yup.object().shape({
     username: yup.string().required("Campo Obrigatório!!"),
 
-    password: yup.string()
-    .min(8, "Mínimo de 8 dígitos!!")
-    // .matches(/^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-    // "Sua senha deve conter ao menos uma letra maiúscula, uma minúscula, um número e um caracter especial!"),
+    password: yup.string().required("Campo Obrigatório!!")
   });
 
   const {
