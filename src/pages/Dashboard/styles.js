@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
+export const MainDashboard = styled.main`
+  background: ${props => (props["back-color"] === "green")?  "var(--verde)" : "var(--amarelo)"};
+`
+
 export const HeaderContainer = styled.header`
   height: 10vh;
   background: none;
@@ -45,7 +49,7 @@ export const NavContainer = styled.ul`
 
 export const AnimationContainer = styled(motion.div)`
   width: 100px;
-  border: 1px solid var(--verde);
+  border: 1px solid ${props => (props["border-color"] === "green")?  "var(--verde)" : "var(--amarelo)"};
 
   position: absolute;
   bottom: -10px;
