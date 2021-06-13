@@ -13,7 +13,7 @@ const Groups = () => {
   }
 
   return(
-    <MainDashboard back-color="yellow">
+    <MainDashboard>
     <HeaderContainer>
     <h2>Grupos</h2>
     </HeaderContainer>
@@ -24,11 +24,11 @@ const Groups = () => {
         <AnimateSharedLayout transition={{ duration: 0.5 }}>
             <Link to={`${url}`} onClick={() => handleAnimation('todos')} >
               TODOS
-              { selected === 'todos' && <AnimationContainer border-color="yellow" layoutId="underline"/>}
+              { selected === 'todos' && <AnimationContainer layoutId="underline"/>}
             </Link>
             <Link to={`${url}/mine`} onClick={() => handleAnimation('meus')}>
               MEUS
-              { selected === 'meus' && <AnimationContainer border-color="yellow" layoutId="underline"/>}
+              { selected === 'meus' && <AnimationContainer layoutId="underline"/>}
             </Link>
           </AnimateSharedLayout>
         </NavContainer>
