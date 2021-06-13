@@ -16,16 +16,10 @@ const GlobalStyles = createGlobalStyle`
     --cinza-escuro: #21343A;
     --cinza-claro: #30444D;
   }
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: 0;
-  }
-
 
   body {
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--verde);
   }
 
   input {
@@ -33,8 +27,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   h1, h2, h3, h4 {
-    font-family: 'Roboto Mono', monospace;
-    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
   }
 
   button {
