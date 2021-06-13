@@ -4,6 +4,9 @@ import api from "../../services";
 export const HabitsContext = createContext();
 
 export const HabitsProviders = ({ children }) => {
+
+  const [habits, setHabits] = useState([]);
+
   const createHabits = () => {
     const data = {
       title: "Calistenia a noite",
@@ -56,6 +59,7 @@ export const HabitsProviders = ({ children }) => {
       })
       .then((response) => {
         const { data } = response;
+        setHabits(response.data)
         localStorage.setItem("@User:habits", JSON.stringify(data));
       });
   };
@@ -64,7 +68,11 @@ export const HabitsProviders = ({ children }) => {
     getHabits();
   }, []);
 
-  return <HabitsContext.Provider>{children}</HabitsContext.Provider>;
+  return (
+    <HabitsContext.Provider value={{createHabits, updateHabits, deleteHabits, getHabits, habits}}>
+      {children}
+    </HabitsContext.Provider>
+  )
 };
 
 export const useHabits = () => useContext(HabitsContext);
