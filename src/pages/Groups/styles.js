@@ -2,8 +2,7 @@ import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
 export const MainDashboard = styled.main`
-  background: ${props => (props["back-color"] === "green")?  "var(--verde)" : "var(--amarelo)"};
-  height: 100vh;
+  background: var(--amarelo);
 `
 
 export const HeaderContainer = styled.header`
@@ -49,7 +48,7 @@ export const NavContainer = styled.nav`
 
 export const AnimationContainer = styled(motion.div)`
   width: 100px;
-  border: 1px solid ${props => (props["border-color"] === "green")?  "var(--verde)" : "var(--amarelo)"};
+  border: 1px solid var(--amarelo);
 
   position: absolute;
   bottom: -10px;
