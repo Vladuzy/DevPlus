@@ -31,6 +31,11 @@ export const FormContainer = styled.form`
   height: 231px;
   margin-top: 100px;
 `;
+export const SpanFormContainer = styled.span`
+  color: var(--vermelho);
+  font-size: 10px;
+  margin-left: 83px;
+`;
 
 export const FooterContainer = styled.form`
   display: flex;

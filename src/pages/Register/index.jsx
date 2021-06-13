@@ -12,6 +12,7 @@ import {
   TitleFooterContainer,
   SubTitleFooterContainer,
   HeaderContainer,
+  SpanFormContainer,
 } from "./style.js";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
@@ -25,7 +26,11 @@ const FormRegister = () => {
     email: yup.string().email("Email inválido").required("Campo obrigatório"),
     password: yup
       .string()
-      .min(7, "Minimo de 7 digitos")
+      .min(8, "Mínimo de 8 dígitos")
+      .matches(
+        /^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+        "Senha deve conter ao menos uma letra maiúscula, uma minúscula, um número e um caracter especial!"
+      )
       .required("Campo obrigatório"),
     passwordConfirm: yup
       .string()
@@ -79,19 +84,23 @@ const FormRegister = () => {
       </HeaderContainer>
       <FormContainer onSubmit={handleSubmit(handleForm)}>
         <Input placeholder="nome *" register={register} name="username"></Input>
+        <SpanFormContainer>{errors.username?.message}</SpanFormContainer>
         <Input placeholder="email *" register={register} name="email"></Input>
+        <SpanFormContainer>{errors.email?.message}</SpanFormContainer>
         <Input
           type="password"
           placeholder="senha *"
           register={register}
           name="password"
         ></Input>
+        <SpanFormContainer>{errors.password?.message}</SpanFormContainer>
         <Input
           type="password"
           placeholder="confirmar senha"
           register={register}
           name="passwordConfirm"
         ></Input>
+        <SpanFormContainer>{errors.passwordConfirm?.message}</SpanFormContainer>
         <Button type="submit">CADASTRAR</Button>
       </FormContainer>
       <FooterContainer>
