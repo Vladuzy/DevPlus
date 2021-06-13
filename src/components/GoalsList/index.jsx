@@ -7,36 +7,43 @@ import { useContext } from "react";
 import { GoalsContext } from "../../providers/Goals";
 
 
-const GoalsList = () => {
+const GoalsList = ({showArchived}) => {
 
     //Da para listar os achieved true ou false (botões para ficar alternando)
 
-    const {goals, patchGoal} = useContext(GoalsContext);
+    const {goals, patchGoal, deleteGoal} = useContext(GoalsContext);
 
     return(
         <GoalsListContainer>
             {
-                goals.map( goal => 
-                    (goal.achieved === false) && 
-                        (
-                            <GoalCard
-                                goal = {goal}
-                                patchGoal = {patchGoal}
-                            />
-                        )
+                (showArchived)? (
+                    goals.map( goal => 
+                        (goal.achieved) && 
+                            (
+                                <GoalCard
+                                    key={goal.id}
+                                    goal = {goal}
+                                    patchGoal = {patchGoal}
+                                    deleteGoal = {deleteGoal}
+                                    showArchived = {showArchived}
+                                />
+                            )
+                    )
+                ) : (
+                    goals.map( goal => 
+                        (goal.achieved === false) && 
+                            (
+                                <GoalCard
+                                    key={goal.id}
+                                    goal = {goal}
+                                    patchGoal = {patchGoal}
+                                    deleteGoal = {deleteGoal}
+                                    showArchived = {showArchived}
+                                />
+                            )
+                    )
                 )
             }
-            {/* {
-                goals.map( goal => 
-                    (goal.achieved) && 
-                        (
-                            <GoalCard
-                                goal = {goal}
-                                patchGoal = {patchGoal}
-                            />
-                        )
-                )
-            } */}
         </GoalsListContainer>
     )
 }

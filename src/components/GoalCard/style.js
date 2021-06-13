@@ -35,13 +35,39 @@ export const InfoContainer = styled.section`
     }
 `
 
+export const ButtonClose = styled.button`
+    width: 15%;
+    background-color: transparent;
+    border: none;
+    display: flex;
+
+    .close{
+        color: red;
+        font-size: 1.7rem;
+        font-weight: bold;
+    }
+`
+
 export const ButtonCheck = styled.button`
+    width: 15%;
     background-color: transparent;
     border: none;
 
   .check{
-      color:green;
+      color: green;
       font-size: 1.7rem;
       font-weight: bold;
   }
+`
+
+export const ButtonUncheck = styled.button`
+    width: 15%;
+    background-color: transparent;
+    border: none;
+
+    .uncheck{
+        color: yellow;
+        font-size: 1.7rem;
+        font-weight: bold;
+    }
 `
