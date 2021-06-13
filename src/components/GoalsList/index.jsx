@@ -16,15 +16,27 @@ const GoalsList = () => {
     return(
         <GoalsListContainer>
             {
-                goals.map( goal => {
-                    return(
-                        <GoalCard
-                            goal = {goal}
-                            patchGoal = {patchGoal}
-                        />
-                    )
-                })
+                goals.map( goal => 
+                    (goal.achieved === false) && 
+                        (
+                            <GoalCard
+                                goal = {goal}
+                                patchGoal = {patchGoal}
+                            />
+                        )
+                )
             }
+            {/* {
+                goals.map( goal => 
+                    (goal.achieved) && 
+                        (
+                            <GoalCard
+                                goal = {goal}
+                                patchGoal = {patchGoal}
+                            />
+                        )
+                )
+            } */}
         </GoalsListContainer>
     )
 }
