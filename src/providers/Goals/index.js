@@ -46,7 +46,7 @@ export const GoalsProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
-  const patchGoal = (goal) => {
+  const patchGoal = (goal, action) => {
     //Lembrar de receber o goal por props na função quando pegar no card
     //Lembrar de mandar o que ta sendo enviado "dataGoal" ok
     //Lembrar de passar o Id do goal (goal.id)
@@ -59,11 +59,11 @@ export const GoalsProvider = ({ children }) => {
 
     //Mudança do data
     let dataGoalUpdate = {}
-    if(goal.achieved === true){
+    if(goal.achieved === true && action === "activate"){
         dataGoalUpdate = {
             "achieved": false
           }
-    }else{
+    }else if(goal.achieved === false && action === "archieved"){
         dataGoalUpdate = {
             "achieved": true
           }
@@ -81,19 +81,20 @@ export const GoalsProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
-  const deleteGoal = () => {
+  const deleteGoal = (goal) => {
     //Lembrar de receber o goal por props na função quando pegar no card
     //Lembrar de passar o Id do goal (goal.id)
     //Lembrar de alterar o id no url
     //Lembrar de passar o token
 
     api
-      .delete("/goals/1577/", {
+      .delete(`/goals/${goal.id}/`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       })
+      .then((response => console.log(response)))
       .then(() => getGoals())
       .catch((err) => console.log(err));
   };
