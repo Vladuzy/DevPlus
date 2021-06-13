@@ -4,6 +4,8 @@ import { Link, Switch, Route, useRouteMatch } from 'react-router-dom'
 import { HeaderContainer, MainContainer, NavContainer, AnimationContainer, MainMenuContainer } from './styles'
 import { AnimateSharedLayout } from 'framer-motion'
 
+import Goals from "../Goals"
+
 const Dashboard = () => {
   const [selected, setSelected] = useState('ativos')
   let { path, url } = useRouteMatch('');
@@ -19,7 +21,7 @@ const Dashboard = () => {
       </HeaderContainer>
       <MainContainer>
         <MainMenuContainer>
-          <NavContainer>
+          {/* <NavContainer>
             <AnimateSharedLayout transition={{ duration: 0.5 }}>
               <Link to={`${url}`} onClick={() => handleAnimation('ativos')} >
                 ATIVOS
@@ -37,6 +39,28 @@ const Dashboard = () => {
             </Route>
             <Route path={`${path}/feitos`}>
               <p>AQUI VAI HABITOS FEITOS</p>
+            </Route>
+          </Switch> */}
+
+          <NavContainer>
+            <AnimateSharedLayout transition={{ duration: 0.5 }}>
+              <Link to={`${url}/groupX/metas/ativas`} onClick={() => handleAnimation('ativos')} >
+                ATIVOS
+                { selected === 'ativos' && <AnimationContainer layoutId="underline"/>}
+              </Link>
+              <Link to={`${url}/groupX/metas/feitas`} onClick={() => handleAnimation('feitos')}>
+                FEITOS
+                { selected === 'feitos' && <AnimationContainer layoutId="underline"/>}
+              </Link>
+            </AnimateSharedLayout>
+          </NavContainer>
+
+          <Switch>
+            <Route path={`${path}/groupX/metas/ativas`}>
+              <Goals showArchived = {false} />
+            </Route>
+            <Route path={`${path}/groupX/metas/feitas`}>
+              <Goals showArchived = {true} />
             </Route>
           </Switch>
         </MainMenuContainer>
