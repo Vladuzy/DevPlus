@@ -4,6 +4,10 @@ import api from "../../services";
 export const HabitsContext = createContext();
 
 export const HabitsProviders = ({ children }) => {
+  const [doingHabits, setDoingHabits] = useState(() => {
+    return JSON.parse(localStorage.getItem("@User:habits")) || [];
+  });
+
   const createHabits = () => {
     const data = {
       title: "Calistenia a noite",
@@ -20,7 +24,7 @@ export const HabitsProviders = ({ children }) => {
           Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzc2NzMwLCJqdGkiOiJmMWViZTk4MTgwN2Q0YzdlYmU2NDc3ZmI3YzFmN2Q5NyIsInVzZXJfaWQiOjcxOX0.lgfQ81zXE7u8uTbisp7YcdVLBbmWlqRpOpJW3EeFjE8"}`,
         },
       })
-      .then((response) => console.log(response));
+      .then((response) => setDoingHabits([...doingHabits, response]));
   };
 
   const updateHabits = () => {
@@ -34,7 +38,7 @@ export const HabitsProviders = ({ children }) => {
           Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzc2NzMwLCJqdGkiOiJmMWViZTk4MTgwN2Q0YzdlYmU2NDc3ZmI3YzFmN2Q5NyIsInVzZXJfaWQiOjcxOX0.lgfQ81zXE7u8uTbisp7YcdVLBbmWlqRpOpJW3EeFjE8"}`,
         },
       })
-      .then((response) => console.log(response));
+      .then((response) => setDoingHabits([...doingHabits, response]));
   };
 
   const deleteHabits = () => {
@@ -44,7 +48,7 @@ export const HabitsProviders = ({ children }) => {
           Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzc2NzMwLCJqdGkiOiJmMWViZTk4MTgwN2Q0YzdlYmU2NDc3ZmI3YzFmN2Q5NyIsInVzZXJfaWQiOjcxOX0.lgfQ81zXE7u8uTbisp7YcdVLBbmWlqRpOpJW3EeFjE8"}`,
         },
       })
-      .then((response) => console.log(response));
+      .then((response) => setDoingHabits([...doingHabits, response]));
   };
 
   const getHabits = () => {
@@ -64,7 +68,20 @@ export const HabitsProviders = ({ children }) => {
     getHabits();
   }, []);
 
-  return <HabitsContext.Provider>{children}</HabitsContext.Provider>;
+  return (
+    <HabitsContext.Provider
+      value={{
+        getHabits,
+        deleteHabits,
+        updateHabits,
+        createHabits,
+        doingHabits,
+        setDoingHabits,
+      }}
+    >
+      {children}
+    </HabitsContext.Provider>
+  );
 };
 
 export const useHabits = () => useContext(HabitsContext);
