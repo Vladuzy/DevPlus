@@ -4,6 +4,7 @@ import FormRegister from "../pages/Register";
 
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
+import Goals from "../pages/Goals";
 
 const Routes = () => {
   return (
@@ -15,10 +16,14 @@ const Routes = () => {
         <Login />
       </Route>
       <Route path="/register">
-        {/* <Register/> */}
         <FormRegister></FormRegister>
       </Route>
-      <Route path="/dashboard">{/* <Dashboard/> */}</Route>
+      <Route path="/dashboard">
+        <Goals/>
+      </Route>
+      <Route path="/dashboard">
+        {/* <Dashboard/> */}
+      </Route>
       <Route>
         <NotFound />
       </Route>
