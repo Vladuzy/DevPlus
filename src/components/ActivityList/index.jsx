@@ -3,27 +3,22 @@ import ActivityCard from "../ActivityCard";
 import { useActivity } from "../../providers/Activities";
 
 import {
-  ActivityListContainer,
-  HeaderContainer,
-  TitleContainer,
+  ActivitiesListContainer
 } from "./style";
 
 const ActivityList = () => {
-  const { activies, patchActivies } = useActivity();
+  const { activities, patchActivities } = useActivity();
 
-  console.log(activies);
+  console.log(activities);
 
   return (
-    <HeaderContainer>
-      <TitleContainer>- Voltar</TitleContainer>
-      <ActivityListContainer>
-        {activies.map((activity) => {
+      <ActivitiesListContainer>
+        {activities.map((activity) => {
           return (
-            <ActivityCard activity={activity} patchActivies={patchActivies} />
+            <ActivityCard activity={activity} patchActivities={patchActivities} />
           );
         })}
-      </ActivityListContainer>
-    </HeaderContainer>
+      </ActivitiesListContainer>
   );
 };
 

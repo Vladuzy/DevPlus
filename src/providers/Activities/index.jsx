@@ -2,12 +2,12 @@ import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../services";
 import { useAuth } from "../AuthProvider";
 
-export const ActiviesContext = createContext();
+export const ActivitiesContext = createContext();
 
-export const ActiviesProvider = ({ children }) => {
+export const ActivitiesProvider = ({ children }) => {
   const { token } = useAuth();
-  const [activies, setActivies] = useState([]);
-  const createActivies = () => {
+  const [activities, setActivities] = useState([]);
+  const createActivities = () => {
     const data = {
       title: "Crossfit",
       realization_time: "2021-03-10T15:00:00Z",
@@ -23,18 +23,18 @@ export const ActiviesProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
-  const getGroupActivies = () => {
+  const getGroupActivities = () => {
     api
       .get("/activities/?group=2")
       .then((response) => {
         // verificar no console os dados do response
-        setActivies(response.data.results);
-        localStorage.setItem("@User:activity", JSON.stringify(activies));
+        setActivities(response.data.results);
+        localStorage.setItem("@User:activity", JSON.stringify(activities));
       })
       .catch((err) => console.log(err));
   };
 
-  const patchActivies = (activity, action) => {
+  const patchActivities = (activity, action) => {
     // const activityUpdate = {
     //   title: "Crossfit Atualizado",
     // };
@@ -63,7 +63,7 @@ export const ActiviesProvider = ({ children }) => {
         },
       })
       .then((response) => console.log(response))
-      .then(() => getGroupActivies())
+      .then(() => getGroupActivities())
       .catch((err) => console.log(err));
   };
 
@@ -79,16 +79,16 @@ export const ActiviesProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    getGroupActivies();
+    getGroupActivities();
   }, []);
 
   return (
-    <ActiviesContext.Provider
-      value={{ activies, createActivies, patchActivies, deleteActivity }}
+    <ActivitiesContext.Provider
+      value={{ activities, createActivities, patchActivities, deleteActivity }}
     >
       {children}
-    </ActiviesContext.Provider>
+    </ActivitiesContext.Provider>
   );
 };
 
-export const useActivity = () => useContext(ActiviesContext);
+export const useActivity = () => useContext(ActivitiesContext);

@@ -17,6 +17,8 @@ import { IoIosArrowBack } from 'react-icons/io'
 
 import GroupGoals from '../GroupGoals'
 
+import GroupActivities from "../GroupActivities"
+
 const SpecificGroup = ({ group }) => {
   const history = useHistory()
   console.log(history)
@@ -49,7 +51,7 @@ const SpecificGroup = ({ group }) => {
           </NavContainer>
           <Switch>
             <Route exact path={`${path}`}>
-              <p>AQUI VAI ATIVIDADES FEITAS</p>
+              <GroupActivities />
             </Route>
             <Route path={`${path}/goals`}>
               <GroupGoals />
