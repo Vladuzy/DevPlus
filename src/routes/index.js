@@ -6,6 +6,8 @@ import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
 import Dashboard from "../pages/Dashboard";
 import Groups from "../pages/Groups";
+import SpecificGroup from "../pages/SpecificGroup";
+import CreatingPage from '../pages/CreationPage'
 
 const Routes = () => {
   return (
@@ -24,6 +26,12 @@ const Routes = () => {
       </Route>
       <Route path="/groups">
         <Groups />
+      </Route>
+      <Route exact path='/creation'>
+        <CreatingPage />
+      </Route>
+      <Route path='/:id'>
+        <SpecificGroup />
       </Route>
       <Route>
         <NotFound />
