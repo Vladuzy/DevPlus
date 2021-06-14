@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
 export const MainContainer = styled.main`
-  height: 90vh;
+  /* height: 90vh; */
   background-color: var(--cinza-escuro);
 
   border-top-left-radius: 30px;
