@@ -17,6 +17,9 @@ import { IoIosArrowBack } from 'react-icons/io'
 
 import GroupGoals from '../GroupGoals'
 
+// import Activity from "../Activity"
+import GroupActivities from "../GroupActivities"
+
 const SpecificGroup = ({ group }) => {
   // const { id } = group
   const history = useHistory()
@@ -38,7 +41,7 @@ const SpecificGroup = ({ group }) => {
           <DividerContainer />
           <NavContainer>
             <AnimateSharedLayout transition={{ duration: 0.5 }}>
-              <Link to={`${url}`} onClick={() => setSelected('atividades')} style={{width: '140px'}}>
+              <Link to={`${url}/activities`} onClick={() => setSelected('atividades')} style={{width: '140px'}}>
                 ATIVIDADES 
                 { selected === 'atividades' && <AnimationContainer atv layoutId="underline"/>}
               </Link>
@@ -49,8 +52,8 @@ const SpecificGroup = ({ group }) => {
             </AnimateSharedLayout>
           </NavContainer>
           <Switch>
-            <Route exact path={`${path}`}>
-              <p>AQUI VAI ATIVIDADES FEITAS</p>
+            <Route path={`${path}/activities`}>
+              <GroupActivities />
             </Route>
             <Route path={`${path}/goals`}>
               <GroupGoals />
