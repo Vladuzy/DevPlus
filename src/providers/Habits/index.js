@@ -27,28 +27,41 @@ export const HabitsProviders = ({ children }) => {
       .then((response) => setDoingHabits([...doingHabits, response]));
   };
 
-  const updateHabits = () => {
-    const data = {
-      how_much_achieved: 100,
-      achieved: true,
-    };
+  const updateHabits = (habit, action) => {
+  
+    //Mudança do data
+    let dataHabitUpdate = {}
+    if(habit.achieved === true && action === "activate"){
+      dataHabitUpdate = {
+            "achieved": false
+          }
+    }else if(habit.achieved === false && action === "archieved"){
+      dataHabitUpdate = {
+            "achieved": true
+          }
+    }
+
     api
-      .patch("/habits/1451/", data, {
+      .patch(`/habits/${habit.id}/`, dataHabitUpdate, {
         headers: {
           Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzc2NzMwLCJqdGkiOiJmMWViZTk4MTgwN2Q0YzdlYmU2NDc3ZmI3YzFmN2Q5NyIsInVzZXJfaWQiOjcxOX0.lgfQ81zXE7u8uTbisp7YcdVLBbmWlqRpOpJW3EeFjE8"}`,
         },
       })
-      .then((response) => setDoingHabits([...doingHabits, response]));
+      .then((response) => setDoingHabits([...doingHabits, response]))
+      .then(() => getHabits())
+      .catch((err) => console.log(err));
   };
 
-  const deleteHabits = () => {
+  const deleteHabits = (habit) => {
     api
-      .delete("/habits/1449/", {
+      .delete(`/habits/${habit.id}/`, {
         headers: {
           Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzc2NzMwLCJqdGkiOiJmMWViZTk4MTgwN2Q0YzdlYmU2NDc3ZmI3YzFmN2Q5NyIsInVzZXJfaWQiOjcxOX0.lgfQ81zXE7u8uTbisp7YcdVLBbmWlqRpOpJW3EeFjE8"}`,
         },
       })
-      .then((response) => setDoingHabits([...doingHabits, response]));
+      .then((response) =>console.log(response))
+      .then(() => getHabits())
+      .catch((err) => console.log(err));
   };
 
   const getHabits = () => {

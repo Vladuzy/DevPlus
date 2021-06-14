@@ -3,6 +3,7 @@ import { Link, Switch, Route, useRouteMatch } from 'react-router-dom'
 
 import { MainDashboard, HeaderContainer, MainContainer, NavContainer, AnimationContainer, MainMenuContainer } from './styles'
 import { AnimateSharedLayout } from 'framer-motion'
+import Habits from '../Habits'
 
 // import Goals from "../Goals"
 
@@ -37,10 +38,10 @@ const Dashboard = () => {
           </NavContainer>
           <Switch>
             <Route exact path={`${path}`}>
-              <p>AQUI VAI HABITOS ATIVOS</p>
+              <Habits showArchived = {false} />
             </Route>
             <Route path={`${path}/done`}>
-              <p>AQUI VAI HABITOS FEITOS</p>
+              <Habits showArchived = {true} />
             </Route>
           </Switch>
         </MainMenuContainer>
