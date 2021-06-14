@@ -25,7 +25,7 @@ export const ActiviesProvider = ({ children }) => {
 
   const getGroupActivies = () => {
     api
-      .get("/activities/")
+      .get("/activities/?group=2")
       .then((response) => {
         // verificar no console os dados do response
         setActivies(response.data.results);
@@ -34,17 +34,36 @@ export const ActiviesProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
-  const patchActivies = () => {
-    const activityUpdate = {
-      title: "Crossfit Atualizado",
-    };
+  const patchActivies = (activity, action) => {
+    // const activityUpdate = {
+    //   title: "Crossfit Atualizado",
+    // };
+
+    // Obtém a data/hora atual
+    let data = new Date();
+
+       //Mudança do data
+    let activityUpdate = {
+      realization_time: data.toISOString()
+    }
+    // if(activity.realization_time !== "" && action === "activate"){
+    //   activityUpdate = {
+    //         "realization_time": completeDate
+    //   }
+    // }else if(activity.realization_time === "" && action === "archieved"){
+    //   activityUpdate = {
+    //         "realization_time": completeDate
+    //   }
+    // }
+
     api
-      .patch("/activities/1/", activityUpdate, {
+      .patch(`/activities/${activity.id}/`, activityUpdate, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => console.log(response))
+      .then(() => getGroupActivies())
       .catch((err) => console.log(err));
   };
 
