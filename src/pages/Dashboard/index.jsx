@@ -17,7 +17,7 @@ const Dashboard = () => {
   }
 
   return(
-    <MainDashboard back-color="green">
+    <MainDashboard>
       <HeaderContainer>
         <h2>Habitos</h2>
       </HeaderContainer>
@@ -27,11 +27,11 @@ const Dashboard = () => {
             <AnimateSharedLayout transition={{ duration: 0.5 }}>
               <Link to={`${url}`} onClick={() => handleAnimation('ativos')} >
                 ATIVOS
-                { selected === 'ativos' && <AnimationContainer border-color="green" layoutId="underline"/>}
+                { selected === 'ativos' && <AnimationContainer layoutId="underline"/>}
               </Link>
               <Link to={`${url}/done`} onClick={() => handleAnimation('feitos')}>
                 FEITOS
-                { selected === 'feitos' && <AnimationContainer border-color="green" layoutId="underline"/>}
+                { selected === 'feitos' && <AnimationContainer layoutId="underline"/>}
               </Link>
             </AnimateSharedLayout>
           </NavContainer>
@@ -47,7 +47,7 @@ const Dashboard = () => {
       </MainContainer>
     </MainDashboard>
 
-  // <MainDashboard back-color="yellow">
+  // <MainDashboard">
   //   <HeaderContainer>
   //   <h2>Grupos</h2>
   //   </HeaderContainer>
@@ -58,11 +58,11 @@ const Dashboard = () => {
   //       <AnimateSharedLayout transition={{ duration: 0.5 }}>
   //           <Link to={`${url}/groupX/metas/ativas`} onClick={() => handleAnimation('ativos')} >
   //             ATIVOS
-  //             { selected === 'ativos' && <AnimationContainer border-color="yellow" layoutId="underline"/>}
+  //             { selected === 'ativos' && <AnimationContainer layoutId="underline"/>}
   //           </Link>
   //           <Link to={`${url}/groupX/metas/feitas`} onClick={() => handleAnimation('feitos')}>
   //             FEITOS
-  //             { selected === 'feitos' && <AnimationContainer border-color="yellow" layoutId="underline"/>}
+  //             { selected === 'feitos' && <AnimationContainer layoutId="underline"/>}
   //           </Link>
   //         </AnimateSharedLayout>
   //       </NavContainer>
