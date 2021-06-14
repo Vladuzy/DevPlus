@@ -9,10 +9,6 @@ const Groups = () => {
   const [selected, setSelected] = useState('todos')
   let { path, url } = useRouteMatch('');
 
-  const handleAnimation = (value) => {
-    setSelected(value)
-  }
-
   return(
     <MainDashboard>
     <HeaderContainer>
@@ -23,11 +19,11 @@ const Groups = () => {
         <NavContainer>
 
         <AnimateSharedLayout transition={{ duration: 0.5 }}>
-            <Link to={`${url}`} onClick={() => handleAnimation('todos')} >
+            <Link to={`${url}`} onClick={() => setSelected('todos')} >
               TODOS
               { selected === 'todos' && <AnimationContainer layoutId="underline"/>}
             </Link>
-            <Link to={`${url}/mine`} onClick={() => handleAnimation('meus')}>
+            <Link to={`${url}/mine`} onClick={() => setSelected('meus')}>
               MEUS
               { selected === 'meus' && <AnimationContainer layoutId="underline"/>}
             </Link>

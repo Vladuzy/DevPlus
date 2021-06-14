@@ -5,17 +5,9 @@ import { MainDashboard, HeaderContainer, MainContainer, NavContainer, AnimationC
 import { AnimateSharedLayout } from 'framer-motion'
 import Habits from '../Habits'
 
-// import Goals from "../Goals"
-
 const Dashboard = () => {
   const [selected, setSelected] = useState('ativos')
   let { path, url } = useRouteMatch('');
-  console.log(path)
-  console.log(url)
-
-  const handleAnimation = (value) => {
-    setSelected(value)
-  }
 
   return(
     <MainDashboard>
@@ -26,11 +18,11 @@ const Dashboard = () => {
         <MainMenuContainer>
           <NavContainer>
             <AnimateSharedLayout transition={{ duration: 0.5 }}>
-              <Link to={`${url}`} onClick={() => handleAnimation('ativos')} >
+              <Link to={`${url}`} onClick={() => setSelected('ativos')} >
                 ATIVOS
                 { selected === 'ativos' && <AnimationContainer layoutId="underline"/>}
               </Link>
-              <Link to={`${url}/done`} onClick={() => handleAnimation('feitos')}>
+              <Link to={`${url}/done`} onClick={() => setSelected('feitos')}>
                 FEITOS
                 { selected === 'feitos' && <AnimationContainer layoutId="underline"/>}
               </Link>
@@ -47,40 +39,6 @@ const Dashboard = () => {
         </MainMenuContainer>
       </MainContainer>
     </MainDashboard>
-
-  // <MainDashboard">
-  //   <HeaderContainer>
-  //   <h2>Grupos</h2>
-  //   </HeaderContainer>
-  //   <MainContainer>
-  //     <MainMenuContainer>
-  //       <NavContainer>
-
-  //       <AnimateSharedLayout transition={{ duration: 0.5 }}>
-  //           <Link to={`${url}/groupX/metas/ativas`} onClick={() => handleAnimation('ativos')} >
-  //             ATIVOS
-  //             { selected === 'ativos' && <AnimationContainer layoutId="underline"/>}
-  //           </Link>
-  //           <Link to={`${url}/groupX/metas/feitas`} onClick={() => handleAnimation('feitos')}>
-  //             FEITOS
-  //             { selected === 'feitos' && <AnimationContainer layoutId="underline"/>}
-  //           </Link>
-  //         </AnimateSharedLayout>
-  //       </NavContainer>
-
-  //       <Switch>
-  //         <Route path={`${path}/groupX/metas/ativas`}>
-  //           <Goals showArchived = {false} />
-  //         </Route>
-  //         <Route path={`${path}/groupX/metas/feitas`}>
-  //           <Goals showArchived = {true} />
-  //         </Route>
-  //       </Switch>
-  //     </MainMenuContainer>
-  //   </MainContainer>
-  // </MainDashboard>
-
-
   )
 }
 

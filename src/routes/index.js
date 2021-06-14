@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
 import Dashboard from "../pages/Dashboard";
 import Groups from "../pages/Groups";
+import SpecificGroup from "../pages/SpecificGroup";
 
 const Routes = () => {
   return (
@@ -24,6 +25,9 @@ const Routes = () => {
       </Route>
       <Route path="/groups">
         <Groups />
+      </Route>
+      <Route path='/:id'>
+        <SpecificGroup />
       </Route>
       <Route>
         <NotFound />
