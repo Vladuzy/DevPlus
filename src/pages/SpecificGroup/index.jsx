@@ -18,10 +18,11 @@ import { IoIosArrowBack } from 'react-icons/io'
 import GroupGoals from '../GroupGoals'
 
 const SpecificGroup = ({ group }) => {
+  // const { id } = group
   const history = useHistory()
   console.log(history)
   const [selected, setSelected] = useState('atividades')
-  const { id } = useParams()
+  const { groupName } = useParams()
   let { path, url } = useRouteMatch()
 
   return(
@@ -32,7 +33,7 @@ const SpecificGroup = ({ group }) => {
       <MainContainer>
         <MainMenuContainer>
           <GroupNameContainer>
-            {id}
+            {groupName}
           </GroupNameContainer>
           <DividerContainer />
           <NavContainer>

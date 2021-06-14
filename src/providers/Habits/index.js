@@ -12,14 +12,8 @@ export const HabitsProviders = ({ children }) => {
   });
 
   const createHabits = (data) => {
-    const achieved = false
-    const how_much_achieved = 0
-    const user = id
-
-    const newData = {...data, achieved, how_much_achieved, user}
-
     api
-      .post("/habits/", newData, {
+      .post("/habits/", data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

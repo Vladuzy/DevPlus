@@ -30,7 +30,7 @@ const Routes = () => {
       <Route exact path='/creation'>
         <CreatingPage />
       </Route>
-      <Route path='/:id'>
+      <Route path='/:groupName'>
         <SpecificGroup />
       </Route>
       <Route>
