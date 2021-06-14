@@ -30,6 +30,8 @@ export const InputStyled = styled.input `
     margin-left: 5px;
     background: transparent;
     border: none;
+    color: white;
+    font-size: 1.2rem;
     &::placeholder{
         color: var(--branco);
         font-size: 1rem;

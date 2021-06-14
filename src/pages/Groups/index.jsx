@@ -8,10 +8,16 @@ import InputSearch from '../../components/InputSearch'
 
 const Groups = () => {
   const [selected, setSelected] = useState('todos')
+  const [searchGroups, setSearchGroups] = useState('')
   let { path, url } = useRouteMatch('');
 
   const handleAnimation = (value) => {
     setSelected(value)
+  }
+
+  const searchGroup = (e) => {
+    setSearchGroups(e.target.value)
+    console.log(searchGroups)
   }
 
   return(
@@ -34,10 +40,10 @@ const Groups = () => {
             </Link>
           </AnimateSharedLayout>
         </NavContainer>
-        <InputSearch placeholder='pesquisar'/>
+        <InputSearch placeholder='pesquisar' onChange={searchGroup}/>
         <Switch>
           <Route exact path={`${path}`}>
-            <GroupList allGroups={true}/>
+            <GroupList allGroups={true} search={searchGroups}/>
           </Route>
           <Route path={`${path}/mine`}>
           <GroupList/>
