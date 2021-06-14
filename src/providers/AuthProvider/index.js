@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../services";
 
 export const AuthContext = createContext("");
@@ -10,6 +10,20 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => {
     return JSON.parse(localStorage.getItem("@DevelopingHabitus:token")) || "";
   });
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const handleAuth = () => {
+    if (token !== "") {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+  };
+
+  useEffect(() => {
+    handleAuth();
+  }, [token]);
 
   const handleLogin = (userData, decoder, history, toast) => {
     api
@@ -38,10 +52,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ handleLogin, token, id }}>
+    <AuthContext.Provider value={{ handleLogin, token, id, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
 export const useAuth = () => useContext(AuthContext);
+
+// 1 - Criar a variavel isAuthentication
+// 2 - setar pelo token criando função
+// 3 - chamar a função com o useEffect [token]
+// 4 - em cada page passar isAuthentication

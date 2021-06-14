@@ -19,7 +19,7 @@ export const HeaderContainer = styled.header`
 `
 
 export const MainContainer = styled.main`
-  height: 90vh;
+  min-height: 90vh;
   background-color: var(--cinza-escuro);
 
   border-top-left-radius: 30px;

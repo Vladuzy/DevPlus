@@ -7,6 +7,8 @@ export const Container = styled.div `
     background: var(--cinza-claro);
     padding: 10px;
     display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
     h3{
         color: white;
         font-size: 1.4rem;
