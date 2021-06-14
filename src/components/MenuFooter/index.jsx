@@ -10,18 +10,27 @@ const MenuFooter = () => {
     history.push(path);
   };
 
-  const handleCloseApplication = () => {
+  const handleCloseApplication = (value) => {
     localStorage.clear();
-    sendTo("/");
+    sendTo(value);
   };
 
   return (
     <MenuFooterImg>
-      <HiUserGroup className="figure"></HiUserGroup>
+      <HiUserGroup
+        onClick={() => handleCloseApplication("/groups")}
+        className="figure"
+      ></HiUserGroup>
 
-      <AiFillHome className="figure"></AiFillHome>
+      <AiFillHome
+        onClick={() => handleCloseApplication("/dashboard")}
+        className="figure"
+      ></AiFillHome>
 
-      <IoLogOut onClick={handleCloseApplication} className="figure"></IoLogOut>
+      <IoLogOut
+        onClick={() => handleCloseApplication("/")}
+        className="figure"
+      ></IoLogOut>
     </MenuFooterImg>
   );
 };
