@@ -4,6 +4,7 @@ import { MainDashboard, HeaderContainer, MainContainer, NavContainer, AnimationC
 import { AnimateSharedLayout } from 'framer-motion'
 import { useState } from 'react'
 import GroupList from '../../components/GroupList'
+import InputSearch from '../../components/InputSearch'
 
 const Groups = () => {
   const [selected, setSelected] = useState('todos')
@@ -33,7 +34,7 @@ const Groups = () => {
             </Link>
           </AnimateSharedLayout>
         </NavContainer>
-
+        <InputSearch placeholder='pesquisar'/>
         <Switch>
           <Route exact path={`${path}`}>
             <GroupList allGroups={true}/>
