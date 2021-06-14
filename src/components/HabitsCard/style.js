@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HabitCardContainer = styled.div`
-  width: 320px;
+  /* width: 320px; */
     /* max-width: 380px; */
     /* height: 85px; */
     padding: 10px;
