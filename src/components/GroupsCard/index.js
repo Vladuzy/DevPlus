@@ -6,9 +6,9 @@ export default function GroupsCard({ title, description, language}) {
     return (
         <Container>
             <div>
-                <h3>Nome do grupo</h3>
-                <p>descriçao um tanto medonha nao sei pq</p>
-                <p>C</p>
+                <h3>{title}</h3>
+                <p>{description}</p>
+                <p>{language}</p>
             </div>
             <ImgContainer/>
         </Container>

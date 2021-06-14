@@ -10,18 +10,20 @@ import {
 } from "./styles";
 import { AnimateSharedLayout } from "framer-motion";
 import { useState } from "react";
-import GroupsCard from "../../components/GroupsCard";
+
 import { useAuth } from "../../providers/AuthProvider";
+
+import GroupList from "../../components/GroupList";
 
 const Groups = () => {
   const { isAuthenticated } = useAuth();
   const [selected, setSelected] = useState("todos");
   let { path, url } = useRouteMatch("");
 
-  if (isAuthenticated === false) {
-    console.log("ta autenticado");
-    return <Redirect to="/login" />;
-  }
+  // if (isAuthenticated === false) {
+  //   console.log("ta autenticado");
+  //   return <Redirect to="/login" />;
+  // }
 
   return (
     <MainDashboard>
@@ -49,10 +51,10 @@ const Groups = () => {
 
           <Switch>
             <Route exact path={`${path}`}>
-              <GroupsCard />
+              <GroupList allGroups={true} />
             </Route>
             <Route path={`${path}/mine`}>
-              <p>TODOS OS MEUS GRUPOS AQUI</p>
+              <GroupList />
             </Route>
           </Switch>
         </MainMenuContainer>
