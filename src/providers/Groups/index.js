@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import api from "../../services";
 
@@ -9,14 +9,13 @@ export const GroupsProviders = ({ children }) => {
   const [groupsSubs, setGroupsSubs] = useState([]);
 
   const getGroups = () => {
-    api
-      .get("/groups/", {
-        headers: {
-          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzc2NzMwLCJqdGkiOiJmMWViZTk4MTgwN2Q0YzdlYmU2NDc3ZmI3YzFmN2Q5NyIsInVzZXJfaWQiOjcxOX0.lgfQ81zXE7u8uTbisp7YcdVLBbmWlqRpOpJW3EeFjE8"}`,
-        },
-      })
-      .then((response) => setGroups([...groups, ...response]));
+    api.get("groups/?category=programming")
+      .then((response) => setGroups([...response.data.results]));
   };
+
+  useEffect(_ => {
+    getGroups()
+  },[])
 
   const subsInAGroup = (id) => {
     api
@@ -50,8 +49,12 @@ export const GroupsProviders = ({ children }) => {
           Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzc2NzMwLCJqdGkiOiJmMWViZTk4MTgwN2Q0YzdlYmU2NDc3ZmI3YzFmN2Q5NyIsInVzZXJfaWQiOjcxOX0.lgfQ81zXE7u8uTbisp7YcdVLBbmWlqRpOpJW3EeFjE8"}`,
         },
       })
-      .then((response) => setGroupsSubs([...groupsSubs, ...response]));
+      .then((response) => setGroupsSubs([...response.data]));
   };
+
+  useEffect(_ => {
+    getGroupsSubs()
+  },[])
 
   return (
     <GroupsContext.Provider
