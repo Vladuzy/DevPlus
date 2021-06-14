@@ -18,7 +18,7 @@ import { RiArrowGoBackLine } from "react-icons/ri"
       <ButtonClose onClick={ () => deleteActivity(activity)}><IoClose className="close"/></ButtonClose>
       <InfoContainer>
         <h2>{title}</h2>
-        <h3>{realization_time}</h3>
+        <h3>{Number(realization_time.substring(11, 13)) - 3 + realization_time.substring(13, 16)+"h - " + realization_time.replace(/T.*/,'').split('-').reverse().join('-')}</h3>
       </InfoContainer>
       <ButtonCheck onClick={ () => patchActivies(activity, "archieved")}><FaCheck className="check" /></ButtonCheck>
 

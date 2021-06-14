@@ -9,6 +9,8 @@ import { FiAlignJustify } from "react-icons/fi";
 import Buttons from "../../components/Button";
 import { useHistory } from "react-router-dom";
 
+import Activity from "../Activity";
+
 export default function Home() {
   const history = useHistory();
 
@@ -18,6 +20,7 @@ export default function Home() {
 
   return (
     <Container>
+      <Activity/>
       <HeaderStyles>
         <h4>Habbits lifes</h4>
         <input id="check" type="checkbox" />
