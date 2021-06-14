@@ -3,6 +3,7 @@ import { Link, Switch, Route, useRouteMatch } from 'react-router-dom'
 import { MainDashboard, HeaderContainer, MainContainer, NavContainer, AnimationContainer, MainMenuContainer } from './styles'
 import { AnimateSharedLayout } from 'framer-motion'
 import { useState } from 'react'
+import GroupsCard from '../../components/GroupsCard'
 
 const Groups = () => {
   const [selected, setSelected] = useState('todos')
@@ -35,7 +36,7 @@ const Groups = () => {
 
         <Switch>
           <Route exact path={`${path}`}>
-            <p>TODOS OS GRUPOS AQUI</p>
+            <GroupsCard/>
           </Route>
           <Route path={`${path}/mine`}>
             <p>TODOS OS MEUS GRUPOS AQUI</p>
