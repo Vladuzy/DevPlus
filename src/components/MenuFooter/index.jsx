@@ -10,6 +10,10 @@ const MenuFooter = () => {
     history.push(path);
   };
 
+  const handleClick = (value) => {
+    sendTo(value);
+  };
+
   const handleCloseApplication = (value) => {
     localStorage.clear();
     sendTo(value);
@@ -18,12 +22,12 @@ const MenuFooter = () => {
   return (
     <MenuFooterImg>
       <HiUserGroup
-        onClick={() => handleCloseApplication("/groups")}
+        onClick={() => handleClick("/groups")}
         className="figure"
       ></HiUserGroup>
 
       <AiFillHome
-        onClick={() => handleCloseApplication("/dashboard")}
+        onClick={() => handleClick("/dashboard")}
         className="figure"
       ></AiFillHome>
 
