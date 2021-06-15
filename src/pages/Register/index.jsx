@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, Redirect } from "react-router-dom";
 import api from "../../services";
 import {
   Container,
@@ -17,10 +17,11 @@ import {
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { toast } from "react-toastify";
+import { useAuth } from "../../providers/AuthProvider";
 
 const FormRegister = () => {
   const history = useHistory();
-
+  const { isAuthenticated } = useAuth();
   const schema = yup.object().shape({
     username: yup.string().required("Campo obrigatório"),
     email: yup.string().email("Email inválido").required("Campo obrigatório"),
@@ -44,6 +45,11 @@ const FormRegister = () => {
     formState: { errors },
     reset,
   } = useForm({ resolver: yupResolver(schema) });
+
+  if (isAuthenticated === true) {
+    console.log("ta autenticado");
+    return <Redirect to="/dashboard" />;
+  }
 
   const handleForm = ({ username, email, password }) => {
     const addUser = { username, email, password };

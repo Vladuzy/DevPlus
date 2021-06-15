@@ -23,26 +23,22 @@ export const GoalsProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
-  const postGoal = () => {
+  const createGoals = (data) => {
     //Lembrar de mandar o que ta sendo enviado "dataGoal" (pegar os inputs no modal de criar Goal)
     //Lembrar de passar o Id do grupo
     //Lembrar de passar o token
-    const dataGoal = {
-      title:
-        "Nenhuma falta na academia cometida pelos membros do grupo na semana",
-      difficulty: "Díficil",
-      how_much_achieved: 100,
-      group: 2,
-    };
 
     api
-      .post("/goals/", dataGoal, {
+      .post("/goals/", data, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => getGoals())
+      .then((res) =>{ 
+        console.log(res)
+        getGoals()
+      })
       .catch((err) => console.log(err));
   };
 
@@ -105,9 +101,11 @@ export const GoalsProvider = ({ children }) => {
 
   return (
     <GoalsContext.Provider
-      value={{ goals, getGoals, postGoal, patchGoal, deleteGoal }}
+      value={{ goals, getGoals, createGoals, patchGoal, deleteGoal }}
     >
       {children}
     </GoalsContext.Provider>
   );
 };
+
+export const useGoals = () => useContext(GoalsContext)

@@ -1,6 +1,5 @@
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-
 import {
   Container,
   HeaderContainer,
@@ -10,25 +9,26 @@ import {
   FooterContainer,
   TitleFooterContainer,
   SubTitleFooterContainer,
-  SpanFormContainer
+  SpanFormContainer,
 } from "./styled";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { Link, useHistory } from "react-router-dom";
-import { useAuth } from '../../providers/AuthProvider'
+import { Link, useHistory, Redirect } from "react-router-dom";
+import { useAuth } from "../../providers/AuthProvider";
 
 import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const { handleLogin } = useAuth()
+  const { handleLogin, isAuthenticated } = useAuth();
+  console.log(isAuthenticated);
   const schema = yup.object().shape({
     username: yup.string().required("Campo Obrigatório!!"),
 
-    password: yup.string().required("Campo Obrigatório!!")
+    password: yup.string().required("Campo Obrigatório!!"),
   });
 
   const {
@@ -40,12 +40,13 @@ const Login = () => {
   const history = useHistory("/dashboard");
 
   const onSubmitFunction = (data) => {
-    handleLogin(data, jwt_decode, history, toast)
+    handleLogin(data, jwt_decode, history, toast);
   };
 
-  // if(isAuthenticated){
-  //     return <Redirect to={"/dashboard"} />
-  // }
+  if (isAuthenticated === true) {
+    console.log("ta autenticado");
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <Container>
@@ -54,11 +55,7 @@ const Login = () => {
         <SubTitleContainer>:&#x00029;</SubTitleContainer>
       </HeaderContainer>
       <FormContainer onSubmit={handleSubmit(onSubmitFunction)}>
-        <Input
-          register={register}
-          name={"username"}
-          placeholder={"Nome"}
-        />
+        <Input register={register} name={"username"} placeholder={"Nome"} />
         <SpanFormContainer>{errors.username?.message}</SpanFormContainer>
 
         <Input

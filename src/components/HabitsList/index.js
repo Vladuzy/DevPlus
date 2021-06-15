@@ -1,11 +1,42 @@
 import { HabitsContainer } from "./style";
 import HabitsCard from "../HabitsCard";
-import Button from "../Button";
+import { useHabits } from "../../providers/Habits";
 
-const HabitsList = () => {
+const HabitsList = ({showArchived}) => {
+
+  const { doingHabits, updateHabits, deleteHabits } = useHabits();
+
   return (
     <HabitsContainer>
-      <HabitsCard></HabitsCard>
+        {
+            (showArchived)? (
+              doingHabits.map( habit => 
+                    (habit.achieved) && 
+                        (
+                          <HabitsCard
+                          habit={habit}
+                          key={habit.id}
+                          updateHabits={updateHabits}
+                          deleteHabits={deleteHabits}
+                          showArchived={showArchived}
+                          />
+                        )
+                )
+            ) : (
+              doingHabits.map( habit =>
+                    (habit.achieved === false) && 
+                        (
+                          <HabitsCard
+                          habit={habit}
+                          key={habit.id}
+                          updateHabits={updateHabits}
+                          deleteHabits={deleteHabits}
+                          showArchived={showArchived}
+                          />
+                        )
+                )
+            )
+        }
     </HabitsContainer>
   );
 };

@@ -8,4 +8,10 @@ export const Container = styled.input`
   font-size: 16px;
   font-family: "Roboto", sans-serif;
   border: none;
+  color: var(--branco);
+  padding: 15px;
+
+  &::placeholder {
+    color: var(--verde);
+  }
 `;

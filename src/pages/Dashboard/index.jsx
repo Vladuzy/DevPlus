@@ -1,23 +1,31 @@
-import { useState } from 'react'
-import { Link, Switch, Route, useRouteMatch } from 'react-router-dom'
+import { useState } from "react";
+import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
 
-import { MainDashboard, HeaderContainer, MainContainer, NavContainer, AnimationContainer, MainMenuContainer } from './styles'
-import { AnimateSharedLayout } from 'framer-motion'
-
-// import Goals from "../Goals"
+import {
+  MainDashboard,
+  HeaderContainer,
+  MainContainer,
+  NavContainer,
+  AnimationContainer,
+  MainMenuContainer,
+} from "./styles";
+import { AnimateSharedLayout } from "framer-motion";
+import Habits from "../Habits";
+import { useAuth } from "../../providers/AuthProvider";
+import { Redirect } from "react-router-dom";
 
 const Dashboard = () => {
-  const [selected, setSelected] = useState('ativos')
-  let { path, url } = useRouteMatch('');
-  console.log(path)
-  console.log(url)
+  const { isAuthenticated } = useAuth();
+  const [selected, setSelected] = useState("ativos");
+  let { path, url } = useRouteMatch("");
 
-  const handleAnimation = (value) => {
-    setSelected(value)
+  if (isAuthenticated === false) {
+    console.log("ta autenticado");
+    return <Redirect to="/login" />;
   }
 
-  return(
-    <MainDashboard back-color="green">
+  return (
+    <MainDashboard>
       <HeaderContainer>
         <h2>Habitos</h2>
       </HeaderContainer>
@@ -25,62 +33,32 @@ const Dashboard = () => {
         <MainMenuContainer>
           <NavContainer>
             <AnimateSharedLayout transition={{ duration: 0.5 }}>
-              <Link to={`${url}`} onClick={() => handleAnimation('ativos')} >
+              <Link to={`${url}`} onClick={() => setSelected("ativos")}>
                 ATIVOS
-                { selected === 'ativos' && <AnimationContainer border-color="green" layoutId="underline"/>}
+                {selected === "ativos" && (
+                  <AnimationContainer layoutId="underline" />
+                )}
               </Link>
-              <Link to={`${url}/done`} onClick={() => handleAnimation('feitos')}>
+              <Link to={`${url}/done`} onClick={() => setSelected("feitos")}>
                 FEITOS
-                { selected === 'feitos' && <AnimationContainer border-color="green" layoutId="underline"/>}
+                {selected === "feitos" && (
+                  <AnimationContainer layoutId="underline" />
+                )}
               </Link>
             </AnimateSharedLayout>
           </NavContainer>
           <Switch>
             <Route exact path={`${path}`}>
-              <p>AQUI VAI HABITOS ATIVOS</p>
+              <Habits showArchived={false} />
             </Route>
             <Route path={`${path}/done`}>
-              <p>AQUI VAI HABITOS FEITOS</p>
+              <Habits showArchived={true} />
             </Route>
           </Switch>
         </MainMenuContainer>
       </MainContainer>
     </MainDashboard>
+  );
+};
 
-  // <MainDashboard back-color="yellow">
-  //   <HeaderContainer>
-  //   <h2>Grupos</h2>
-  //   </HeaderContainer>
-  //   <MainContainer>
-  //     <MainMenuContainer>
-  //       <NavContainer>
-
-  //       <AnimateSharedLayout transition={{ duration: 0.5 }}>
-  //           <Link to={`${url}/groupX/metas/ativas`} onClick={() => handleAnimation('ativos')} >
-  //             ATIVOS
-  //             { selected === 'ativos' && <AnimationContainer border-color="yellow" layoutId="underline"/>}
-  //           </Link>
-  //           <Link to={`${url}/groupX/metas/feitas`} onClick={() => handleAnimation('feitos')}>
-  //             FEITOS
-  //             { selected === 'feitos' && <AnimationContainer border-color="yellow" layoutId="underline"/>}
-  //           </Link>
-  //         </AnimateSharedLayout>
-  //       </NavContainer>
-
-  //       <Switch>
-  //         <Route path={`${path}/groupX/metas/ativas`}>
-  //           <Goals showArchived = {false} />
-  //         </Route>
-  //         <Route path={`${path}/groupX/metas/feitas`}>
-  //           <Goals showArchived = {true} />
-  //         </Route>
-  //       </Switch>
-  //     </MainMenuContainer>
-  //   </MainContainer>
-  // </MainDashboard>
-
-
-  )
-}
-
-export default Dashboard
+export default Dashboard;
