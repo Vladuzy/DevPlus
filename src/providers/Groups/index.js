@@ -1,10 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import api from "../../services";
+import { useAuth } from '../AuthProvider'
 
 export const GroupsContext = createContext();
 
 export const GroupsProviders = ({ children }) => {
+  const { token } = useAuth()
   const [groups, setGroups] = useState([]);
   const [groupsSubs, setGroupsSubs] = useState([]);
 
@@ -21,7 +23,7 @@ export const GroupsProviders = ({ children }) => {
     api
       .post(`/groups/${id}/subscribe/`, {
         headers: {
-          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzc2NzMwLCJqdGkiOiJmMWViZTk4MTgwN2Q0YzdlYmU2NDc3ZmI3YzFmN2Q5NyIsInVzZXJfaWQiOjcxOX0.lgfQ81zXE7u8uTbisp7YcdVLBbmWlqRpOpJW3EeFjE8"}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((_) => toast.success("usuario inserido no grupo"))
@@ -29,24 +31,28 @@ export const GroupsProviders = ({ children }) => {
   };
 
   const createGroup = (data) => {
+    console.log(data)
     api
       .post("/groups/", data, {
         headers: {
-          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzc2NzMwLCJqdGkiOiJmMWViZTk4MTgwN2Q0YzdlYmU2NDc3ZmI3YzFmN2Q5NyIsInVzZXJfaWQiOjcxOX0.lgfQ81zXE7u8uTbisp7YcdVLBbmWlqRpOpJW3EeFjE8"}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
         },
       })
       .then((response) => {
-        setGroups([...groups, ...response]);
+        setGroups([...groups, response.data]);
         toast.success("grupo criado com sucesso!!! :)");
       })
-      .catch((_) => toast.error("erro ao criar o grupo, tente novamente!"));
+      .catch(err => {
+        toast.error("erro ao criar o grupo, tente novamente!")
+      });
   };
 
   const getGroupsSubs = () => {
     api
       .get("/groups/subscriptions/", {
         headers: {
-          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzc2NzMwLCJqdGkiOiJmMWViZTk4MTgwN2Q0YzdlYmU2NDc3ZmI3YzFmN2Q5NyIsInVzZXJfaWQiOjcxOX0.lgfQ81zXE7u8uTbisp7YcdVLBbmWlqRpOpJW3EeFjE8"}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => setGroupsSubs([...response.data]));

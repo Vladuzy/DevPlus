@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useState } from 'react'
-import { Link, Switch, Route, useRouteMatch } from 'react-router-dom'
+import { Link, Switch, Route, useRouteMatch, useHistory } from 'react-router-dom'
 
 import { 
   MainDashboard, 
@@ -18,6 +18,8 @@ import { IoIosArrowBack } from 'react-icons/io'
 import GroupGoals from '../GroupGoals'
 
 const SpecificGroup = ({ group }) => {
+  const history = useHistory()
+  console.log(history)
   const [selected, setSelected] = useState('atividades')
   const { id } = useParams()
   let { path, url } = useRouteMatch()
@@ -25,7 +27,7 @@ const SpecificGroup = ({ group }) => {
   return(
     <MainDashboard>
       <HeaderContainer>
-        <Link to='/groups'><IoIosArrowBack /> Voltar</Link>
+        <h2 onClick={() => history.goBack()}><IoIosArrowBack /> Voltar</h2>
       </HeaderContainer>
       <MainContainer>
         <MainMenuContainer>

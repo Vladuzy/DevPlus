@@ -13,10 +13,15 @@ export const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
 
-  a {
+  h2 {
+    width: 100px;
     font-size: 24px;
     color: var(--cinza-escuro);
-    margin-left: 2rem;
+    margin-left: 1rem;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 `
 

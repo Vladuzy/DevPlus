@@ -2,7 +2,12 @@ import { AiFillHome } from "react-icons/ai";
 import { HiUserGroup } from "react-icons/hi";
 import { IoLogOut } from "react-icons/io5";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { MenuFooterImg, BackFooterImg, FooterContainer } from "./style";
+import {
+  MenuFooterImg,
+  BackFooterImg,
+  FooterContainer,
+  TitleFooter,
+} from "./style";
 import { useHistory, Redirect } from "react-router-dom";
 import { useAuth } from "../../providers/AuthProvider";
 const MenuFooter = () => {
@@ -53,6 +58,7 @@ const MenuFooter = () => {
             onClick={handleGoBack}
             className="backArrow"
           ></IoMdArrowRoundBack>
+          <TitleFooter>Voltar</TitleFooter>
         </BackFooterImg>
       )}
     </FooterContainer>
