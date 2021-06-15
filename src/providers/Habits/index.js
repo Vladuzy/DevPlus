@@ -27,6 +27,24 @@ export const HabitsProviders = ({ children }) => {
       });
   };
 
+  const updateTextHabits = (data, id) => {
+    //Mudança do data
+    let dataHabitUpdate = data;
+
+    api
+      .patch(`/habits/${id}/`, dataHabitUpdate, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(
+        (response) => console.log(response)
+        // setDoingHabits([...doingHabits, response])
+      )
+      .then(() => getHabits())
+      .catch((err) => console.log(err));
+  };
+
   const updateHabits = (habit, action) => {
     //Mudança do data
     let dataHabitUpdate = {};
@@ -90,6 +108,7 @@ export const HabitsProviders = ({ children }) => {
         createHabits,
         doingHabits,
         setDoingHabits,
+        updateTextHabits,
       }}
     >
       {children}

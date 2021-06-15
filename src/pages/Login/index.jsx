@@ -11,6 +11,7 @@ import {
   SubTitleFooterContainer,
   SpanFormContainer,
 } from "./styled";
+import MenuFooter from "../../components/MenuFooter";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -74,6 +75,7 @@ const Login = () => {
           <Link to={"/register"}>REGISTRE-SE</Link>
         </SubTitleFooterContainer>
       </FooterContainer>
+      <MenuFooter></MenuFooter>
     </Container>
   );
 };
