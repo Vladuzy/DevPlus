@@ -6,18 +6,31 @@ import {
   ActivitiesListContainer
 } from "./style";
 
-const ActivityList = () => {
+const ActivityList = ({showArchived}) => {
   const { activities, patchActivities } = useActivity();
 
   console.log(activities);
 
   return (
       <ActivitiesListContainer>
-        {activities.map((activity) => {
-          return (
-            <ActivityCard activity={activity} patchActivities={patchActivities} />
-          );
-        })}
+        {
+          (showArchived)?(
+            activities.map((activity) => 
+              (
+                (activity.realization_time !== "") && (
+                  <ActivityCard activity={activity} patchActivities={patchActivities} />
+                )
+              ))
+          ) : (
+            activities.map((activity) => 
+            (
+              (activity.realization_time === "") && (
+                <ActivityCard activity={activity} patchActivities={patchActivities} />
+              )
+           ))
+          )
+        }
+   
       </ActivitiesListContainer>
   );
 };
