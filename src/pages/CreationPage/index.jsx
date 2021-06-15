@@ -15,8 +15,8 @@ import HabitCreation from "../../components/HabitCreation";
 import GoalsCreation from "../../components/GoalsCreation";
 
 const CreationPage = ({ type, id }) => {
-  const history = useHistory();
-  type = "Meta";
+  const history = useHistory()
+  type = 'Habito'
 
   return (
     <BackgroundContainer>

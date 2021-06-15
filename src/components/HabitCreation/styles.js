@@ -16,6 +16,23 @@ export const FormContainer = styled.form`
   }
 `
 
+export const SelectContainer = styled.select`
+  width: 220px;
+  height: 35px;
+  background-color: var(--cinza-claro);
+  border-radius: 30px;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  color: var(--amarelo);
+  padding-left: 15px;
+  font-weight: 300;
+  
+  option {
+    border: none;
+  }
+`
+
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;

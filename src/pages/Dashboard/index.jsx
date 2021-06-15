@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
+import { Link, Switch, Route, useRouteMatch, Redirect, useHistory } from "react-router-dom";
 
 import {
   MainDashboard,
@@ -12,11 +11,11 @@ import {
 import { AnimateSharedLayout } from "framer-motion";
 import Habits from "../Habits";
 import { useAuth } from "../../providers/AuthProvider";
-import { Redirect } from "react-router-dom";
 
 const Dashboard = () => {
+  const history = useHistory()
+  const { location: { pathname } } = history
   const { isAuthenticated } = useAuth();
-  const [selected, setSelected] = useState("ativos");
   let { path, url } = useRouteMatch("");
 
   if (isAuthenticated === false) {
@@ -33,22 +32,23 @@ const Dashboard = () => {
         <MainMenuContainer>
           <NavContainer>
             <AnimateSharedLayout transition={{ duration: 0.5 }}>
-              <Link to={`${url}`} onClick={() => setSelected("ativos")}>
+              <Link to={`${url}/active`}>
                 ATIVOS
-                {selected === "ativos" && (
+                {pathname === "/dashboard/active" && (
                   <AnimationContainer layoutId="underline" />
                 )}
               </Link>
-              <Link to={`${url}/done`} onClick={() => setSelected("feitos")}>
+              <Link to={`${url}/done`}>
                 FEITOS
-                {selected === "feitos" && (
+                {pathname === "/dashboard/done" && (
                   <AnimationContainer layoutId="underline" />
                 )}
               </Link>
             </AnimateSharedLayout>
           </NavContainer>
           <Switch>
-            <Route exact path={`${path}`}>
+            <Route exact path={`${path}`} render={() => history.push(`${url}/active`)}/>
+            <Route path={`${path}/active`}>
               <Habits showArchived={false} />
             </Route>
             <Route path={`${path}/done`}>

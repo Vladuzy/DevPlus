@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link, Switch, Route, useRouteMatch, Redirect } from "react-router-dom";
+import { Link, Switch, Route, useRouteMatch, Redirect, useHistory } from "react-router-dom";
 
 import {
   MainContainer,
@@ -13,8 +12,10 @@ import { useAuth } from "../../providers/AuthProvider";
 import Activity from "../Activity";
 
 const GroupActivities = () => {
+  const history = useHistory()
+  const { location: { pathname } } = history
+  
   const { isAuthenticated } = useAuth();
-  const [selected, setSelected] = useState("ativos");
   let { path, url } = useRouteMatch("");
 
   if (isAuthenticated === false) {
@@ -27,15 +28,15 @@ const GroupActivities = () => {
       <MainMenuContainer>
         <NavContainer>
           <AnimateSharedLayout transition={{ duration: 0.5 }}>
-            <Link to={`${url}`} onClick={() => setSelected("ativos")}>
-              ATIVAS
-              {selected === "ativos" && (
+            <Link to={`${url}/active`}>
+              ATIVOS
+              {pathname === `${url}/active` && (
                 <AnimationContainer layoutId="underline" />
               )}
             </Link>
-            <Link to={`${url}/done`} onClick={() => setSelected("feitos")}>
-              FEITAS
-              {selected === "feitos" && (
+            <Link to={`${url}/done`}>
+              FEITOS
+              {pathname === `${url}/done` && (
                 <AnimationContainer layoutId="underline" />
               )}
             </Link>
@@ -43,7 +44,8 @@ const GroupActivities = () => {
         </NavContainer>
 
         <Switch>
-          <Route exact path={`${path}`}>
+          <Route exact path={`${path}`} render={() => history.push(`${url}/active`)}/>
+          <Route path={`${path}/active`}>
             <Activity showArchived={false} />
           </Route>
           <Route path={`${path}/done`}>

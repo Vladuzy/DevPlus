@@ -6,7 +6,7 @@ import { useGoals } from '../../providers/Goals'
 import Input from '../Input'
 import Button from '../Button'
 
-import { FormContainer, ErrorSpanContainer, InputContainer } from './styles'
+import { FormContainer, ErrorSpanContainer, InputContainer, SelectContainer } from './styles'
 
 const GoalsCreation = ({ id }) => {
   const { createGoals } = useGoals()
@@ -16,7 +16,8 @@ const GoalsCreation = ({ id }) => {
       .max(20, 'Máximo de 20 caracteres.'),
 
     difficulty: yup.string()
-      .required('Campo Obrigatório.'),
+      .required('Campo Obrigatório.')
+      .oneOf(['Fácil', 'Médio', 'Difícil'], 'Escolha uma das 3 opções.'),
 
   })
   const { handleSubmit, register, formState: { errors } } = useForm({
@@ -41,11 +42,14 @@ const GoalsCreation = ({ id }) => {
         {errors.title?.message && <ErrorSpanContainer>{errors.title?.message}</ErrorSpanContainer>}
       </InputContainer>
       <InputContainer>
-      <Input 
-          register={register}
-          name="difficulty"
-          placeholder={"Dificuldade"}
-        />
+        <SelectContainer 
+          {...register('difficulty')}
+        >
+          <option value=""></option>
+          <option value="Fácil">Fácil</option>
+          <option value="Médio">Médio</option>
+          <option value="Difícil">Difícil</option>
+        </SelectContainer>
         {errors.difficulty?.message && <ErrorSpanContainer>{errors.difficulty?.message}</ErrorSpanContainer>}
       </InputContainer>
       <Button>Criar Meta</Button>
