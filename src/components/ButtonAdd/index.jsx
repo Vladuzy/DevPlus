@@ -1,8 +1,9 @@
 import { IoIosAddCircle } from "react-icons/io";
 import { ButtonADD } from "./style";
-const ButtonAdd = () => {
+
+const ButtonAdd = ({ ...rest }) => {
   return (
-    <ButtonADD>
+    <ButtonADD {...rest}>
       <IoIosAddCircle className="ButtonADD"></IoIosAddCircle>
     </ButtonADD>
   );
