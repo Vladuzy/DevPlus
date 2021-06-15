@@ -80,7 +80,7 @@ export const HabitsProviders = ({ children }) => {
 
   useEffect(() => {
     getHabits();
-  }, []);
+  }, [token]);
 
   return (
     <HabitsContext.Provider
