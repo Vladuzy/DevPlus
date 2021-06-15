@@ -1,12 +1,12 @@
-import styled from 'styled-components'
-import { motion } from 'framer-motion'
+import styled from "styled-components";
+import { motion } from "framer-motion";
 
 export const MainDashboard = styled.main`
   background: var(--amarelo);
-`
+`;
 
 export const HeaderContainer = styled.header`
-  height: 10vh;
+  /* height: 10vh; */
   background: none;
 
   display: flex;
@@ -16,19 +16,19 @@ export const HeaderContainer = styled.header`
     color: var(--cinza-escuro);
     margin-left: 2rem;
   }
-`
+`;
 
 export const MainContainer = styled.main`
-  min-height: 90vh;
+  /* min-height: 90vh; */
   background-color: var(--cinza-escuro);
 
   border-top-left-radius: 30px;
-`
+`;
 export const MainMenuContainer = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-`
+`;
 
 export const NavContainer = styled.nav`
   height: 4rem;
@@ -44,7 +44,7 @@ export const NavContainer = styled.nav`
 
     position: relative;
   }
-`
+`;
 
 export const AnimationContainer = styled(motion.div)`
   width: 100px;
@@ -52,4 +52,4 @@ export const AnimationContainer = styled(motion.div)`
 
   position: absolute;
   bottom: -10px;
-`
+`;

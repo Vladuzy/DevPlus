@@ -10,6 +10,9 @@ export const MenuFooterImg = styled.footer`
   height: 65px;
   width: 100%;
   border-style: none;
+  bottom: 0px;
+  width: 100%;
+  position: fixed;
   .figure {
     width: 37.5px;
     height: 31.87px;
@@ -27,6 +30,9 @@ export const BackFooterImg = styled.button`
   height: 35px;
   width: 115px;
   border-style: none;
+  position: absolute;
+  bottom: 67px;
+  left: 17px;
   .backArrow {
     width: 37.5px;
     height: 31.87px;
