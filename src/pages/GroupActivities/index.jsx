@@ -29,13 +29,13 @@ const GroupActivities = () => {
         <NavContainer>
           <AnimateSharedLayout transition={{ duration: 0.5 }}>
             <Link to={`${url}/active`}>
-              ATIVOS
+              ATIVAS
               {pathname === `${url}/active` && (
                 <AnimationContainer layoutId="underline" />
               )}
             </Link>
             <Link to={`${url}/done`}>
-              FEITOS
+              FEITAS
               {pathname === `${url}/done` && (
                 <AnimationContainer layoutId="underline" />
               )}

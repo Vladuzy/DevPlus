@@ -6,7 +6,9 @@ export const ActivitiesContext = createContext();
 
 export const ActivitiesProvider = ({ children }) => {
   const { token } = useAuth();
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useState(() => {
+    return JSON.parse(localStorage.getItem("@DevelopingHabitus:activities")) || "";
+  });
   const [groupId, setGroupId] = useState("")
 
   const createActivities = () => {
@@ -40,7 +42,7 @@ export const ActivitiesProvider = ({ children }) => {
       .then((response) => {
         // verificar no console os dados do response
         setActivities(response.data.results);
-        localStorage.setItem( "@DevelopingHabitus:activity", JSON.stringify(response.data.results));
+        localStorage.setItem( "@DevelopingHabitus:activities", JSON.stringify(response.data.results));
       })
       .catch((err) => console.log(err));
     }
