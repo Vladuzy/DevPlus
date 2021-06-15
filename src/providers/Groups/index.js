@@ -60,7 +60,7 @@ export const GroupsProviders = ({ children }) => {
 
   useEffect(_ => {
     getGroupsSubs()
-  },[])
+  },[token])
 
   return (
     <GroupsContext.Provider
