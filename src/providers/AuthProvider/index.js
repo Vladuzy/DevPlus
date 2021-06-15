@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     return JSON.parse(localStorage.getItem("@DevelopingHabitus:token")) || "";
   });
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState((token !== "") ? true:false);
 
   const handleAuth = () => {
     if (token !== "") {
@@ -43,7 +43,9 @@ export const AuthProvider = ({ children }) => {
           `${decodedToken.user_id}`
         );
 
-        toast.success("Sucesso ao logar!");
+        toast.success("Sucesso ao logar!", {autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true});
         history.push("/dashboard");
       })
       .catch((err) => {
