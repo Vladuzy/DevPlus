@@ -11,11 +11,18 @@ export const GoalsProvider = ({ children }) => {
 
   //Lembrar de passar setGoal para receber os dados do modal criar Goal
   // const [goal, setGoal] = useState({})
-  const [goals, setGoals] = useState([]);
-  const [groupId, setGroupId] = useState("")
+  const [goals, setGoals] = useState(() => {
+    return JSON.parse(localStorage.getItem("@DevelopingHabitus:goals")) || "";
+  });
+  const [groupId, setGroupId] = useState(() => {
+    return parseInt(localStorage.getItem("@DevelopingHabitus:goalId")) || "";
+  });
 
   const getGoals = (id="") => {
+    //pegando o id do grupo
     setGroupId(id)
+    //salvando no localStorage
+    localStorage.setItem( "@DevelopingHabitus:goalId", JSON.stringify(id))
     //Lembrar de passar o Id do grupo
     if(id !== ""){
       api

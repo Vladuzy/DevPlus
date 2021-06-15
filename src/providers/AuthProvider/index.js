@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     return JSON.parse(localStorage.getItem("@DevelopingHabitus:token")) || "";
   });
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState((token !== "") ? true:false);
 
   const handleAuth = () => {
     if (token !== "") {
