@@ -13,10 +13,11 @@ import { useHistory } from "react-router-dom";
 import GroupCreation from "../../components/GroupCreation";
 import HabitCreation from "../../components/HabitCreation";
 import GoalsCreation from "../../components/GoalsCreation";
+import AtivityCreation from "../../components/AtivityCreation";
 
 const CreationPage = ({ type, id }) => {
   const history = useHistory()
-  type = 'Habito'
+  type = 'Atividade'
 
   return (
     <BackgroundContainer>
@@ -31,6 +32,7 @@ const CreationPage = ({ type, id }) => {
         {type === "Grupo" && <GroupCreation />}
         {type === "Habito" && <HabitCreation />}
         {type === "Meta" && <GoalsCreation />}
+        {type === "Atividade" && <AtivityCreation />}
       </MainContainer>
     </BackgroundContainer>
   );
