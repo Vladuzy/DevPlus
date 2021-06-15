@@ -6,7 +6,6 @@ export const MainDashboard = styled.main`
 `;
 
 export const HeaderContainer = styled.header`
-  /* height: 10vh; */
   background: none;
 
   display: flex;
@@ -19,7 +18,6 @@ export const HeaderContainer = styled.header`
 `;
 
 export const MainContainer = styled.main`
-  /* min-height: 90vh; */
   background-color: var(--cinza-escuro);
 
   border-top-left-radius: 30px;

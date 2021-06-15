@@ -5,7 +5,6 @@ export const BackgroundContainer = styled.main`
 `;
 
 export const HeaderContainer = styled.header`
-  /* height: 10vh; */
   background: none;
 
   display: flex;
@@ -24,7 +23,6 @@ export const HeaderContainer = styled.header`
 `;
 
 export const MainContainer = styled.main`
-  /* height: 90vh; */
   background-color: var(--cinza-escuro);
 
   display: flex;

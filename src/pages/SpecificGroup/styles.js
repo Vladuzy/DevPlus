@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 
 export const MainDashboard = styled.main`
   background: var(--verde);
-  /* height: 100vh; */
 `;
 
 export const HeaderContainer = styled.header`
@@ -26,7 +25,6 @@ export const HeaderContainer = styled.header`
 `;
 
 export const MainContainer = styled.main`
-  /* height: 90vh; */
   background-color: var(--cinza-escuro);
 
   border-top-left-radius: 30px;
