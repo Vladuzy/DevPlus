@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useGoals } from '../../providers/Goals'
+import { useActivity } from '../../providers/Activities'
 
 import Input from '../Input'
 import Button from '../Button'
@@ -9,7 +9,7 @@ import Button from '../Button'
 import { FormContainer, ErrorSpanContainer, InputContainer, CalendarInput } from './styles'
 
 const AtivityCreation = ({ id }) => {
-  const { createGoals } = useGoals()
+  const { createActivities } = useActivity()
   const formSchemaHabit = yup.object().shape({
     title: yup.string()
       .required('Campo Obrigatório.')
@@ -26,7 +26,7 @@ const AtivityCreation = ({ id }) => {
   const onSubmitData = (data) => {
     const group = id
     const newData = {...data, group}
-    createGoals(newData)
+    createActivities(newData)
   }
 
   return(

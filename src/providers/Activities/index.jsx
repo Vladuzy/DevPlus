@@ -7,16 +7,11 @@ export const ActivitiesContext = createContext();
 export const ActivitiesProvider = ({ children }) => {
   const { token } = useAuth();
   const [activities, setActivities] = useState(() => {
-    return JSON.parse(localStorage.getItem("@DevelopingHabitus:activities")) || "";
+    return JSON.parse(localStorage.getItem("@DevelopingHabitus:activities")) || [];
   });
   const [groupId, setGroupId] = useState("")
 
-  const createActivities = () => {
-    const data = {
-      title: "Crossfit",
-      realization_time: "2021-03-10T15:00:00Z",
-      group: 2,
-    };
+  const createActivities = (data) => {
     api
       .post("/activities/", data, {
         headers: {

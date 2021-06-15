@@ -62,6 +62,19 @@ export const GroupsProviders = ({ children }) => {
     getGroupsSubs()
   },[token])
 
+  const editGroups = (data, id) => {
+    api.patch(`/groups/${id}/`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
+      .then(_ => {
+        getGroupsSubs()
+        toast.success('Sucesso ao editar grupo!')
+      })
+      .catch(_ => toast.error('Erro ao editar grupo.'))
+  }
+
   return (
     <GroupsContext.Provider
       value={{
@@ -71,6 +84,7 @@ export const GroupsProviders = ({ children }) => {
         subsInAGroup,
         createGroup,
         getGroupsSubs,
+        editGroups
       }}
     >
       {children}
