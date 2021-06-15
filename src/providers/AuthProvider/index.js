@@ -43,7 +43,9 @@ export const AuthProvider = ({ children }) => {
           `${decodedToken.user_id}`
         );
 
-        toast.success("Sucesso ao logar!");
+        toast.success("Sucesso ao logar!", {autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true});
         history.push("/dashboard");
       })
       .catch((err) => {

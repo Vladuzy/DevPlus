@@ -25,10 +25,9 @@ const Groups = () => {
     console.log(searchGroups)
   }
 
-  // if (isAuthenticated === false) {
-  //   console.log("ta autenticado");
-  //   return <Redirect to="/login" />;
-  // }
+  if (isAuthenticated === false) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <MainDashboard>
