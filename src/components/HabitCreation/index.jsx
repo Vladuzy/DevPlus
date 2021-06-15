@@ -6,6 +6,7 @@ import { useAuth } from "../../providers/AuthProvider";
 
 import Input from "../Input";
 import Button from "../Buttons/Button";
+import { useHistory } from "react-router-dom";
 
 import {
   FormContainer,
@@ -15,6 +16,7 @@ import {
 } from "./styles";
 
 const HabitCreation = () => {
+  const history = useHistory();
   const { id } = useAuth();
   const { createHabits } = useHabits();
   const formSchemaHabit = yup.object().shape({
@@ -49,6 +51,7 @@ const HabitCreation = () => {
     const user = id;
     const newData = { ...data, achieved, how_much_achieved, user };
     createHabits(newData);
+    history.push("/dashboard");
   };
 
   return (

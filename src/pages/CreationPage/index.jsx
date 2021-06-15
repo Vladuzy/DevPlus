@@ -22,7 +22,7 @@ const CreationPage = ({ id }) => {
   // type = "Atividade";
   console.log(type);
   return (
-    <BackgroundContainer>
+    <BackgroundContainer type={type}>
       <HeaderContainer>
         <h2 onClick={() => history.goBack()}>
           <IoIosArrowBack /> Voltar

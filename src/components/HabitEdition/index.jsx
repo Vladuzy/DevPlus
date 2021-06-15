@@ -5,6 +5,7 @@ import { useHabits } from "../../providers/Habits";
 
 import Input from "../Input";
 import Button from "../Buttons/Button";
+import { useHistory } from "react-router-dom";
 
 import {
   FormContainer,
@@ -14,9 +15,10 @@ import {
 } from "./styles";
 import { useAuth } from "../../providers/AuthProvider";
 
-const HabitEdition = () => {
+const HabitEdition = ({ habitId }) => {
+  const history = useHistory();
   const { updateTextHabits } = useHabits();
-  const habit = { id: 2811 };
+  const habit = { id: habitId };
   const formSchemaHabit = yup.object().shape({
     title: yup
       .string()
@@ -45,6 +47,7 @@ const HabitEdition = () => {
 
   const onSubmitData = (data) => {
     updateTextHabits(data, habit.id);
+    history.push("/dashboard");
   };
 
   return (

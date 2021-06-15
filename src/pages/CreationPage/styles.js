@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const BackgroundContainer = styled.main`
-  background: var(--amarelo);
+  background-color: ${(props) =>
+    props.type === "Habito" ? "var(--verde)" : "var(--amarelo)"};
 `;
 
 export const HeaderContainer = styled.header`
