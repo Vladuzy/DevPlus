@@ -40,9 +40,9 @@ const HabitsList = ({ showArchived }) => {
               )
           )}
       {showArchived ? (
-        <ButtonAdd onClick={() => handleHabits("/edition")} />
+        <ButtonAdd onClick={() => handleHabits("/edition/Habito")} />
       ) : (
-        <ButtonAdd onClick={() => handleHabits("/creation")} />
+        <ButtonAdd onClick={() => handleHabits("/creation/Habito")} />
       )}
     </HabitsContainer>
   );
