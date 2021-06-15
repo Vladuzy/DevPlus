@@ -46,6 +46,7 @@ const Groups = () => {
             <GroupList allGroups={true} search={searchGroups}/>
           </Route>
           <Route path={`${path}/mine`}>
+          <GroupList allGroups={false} search={searchGroups}/>
           <GroupList/>
           </Route>
         </Switch>
