@@ -6,14 +6,13 @@ import {
   NavContainer,
   AnimationContainer,
   MainMenuContainer,
-  DividerContainer,
 } from "./styles";
 import { AnimateSharedLayout } from "framer-motion";
 import { useAuth } from "../../providers/AuthProvider";
 
-import Goals from "../Goals";
+import Activity from "../Activity";
 
-const GroupGoals = () => {
+const GroupActivities = () => {
   const { isAuthenticated } = useAuth();
   const [selected, setSelected] = useState("ativos");
   let { path, url } = useRouteMatch("");
@@ -45,10 +44,10 @@ const GroupGoals = () => {
 
         <Switch>
           <Route exact path={`${path}`}>
-            <Goals showArchived={false} />
+            <Activity showArchived={false} />
           </Route>
           <Route path={`${path}/done`}>
-            <Goals showArchived={true} />
+            <p>done</p>
           </Route>
         </Switch>
       </MainMenuContainer>
@@ -56,4 +55,4 @@ const GroupGoals = () => {
   );
 };
 
-export default GroupGoals;
+export default GroupActivities;

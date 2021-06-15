@@ -53,11 +53,8 @@ const MenuFooter = () => {
           ></IoLogOut>
         </MenuFooterImg>
       ) : (
-        <BackFooterImg>
-          <IoMdArrowRoundBack
-            onClick={handleGoBack}
-            className="backArrow"
-          ></IoMdArrowRoundBack>
+        <BackFooterImg onClick={handleGoBack}>
+          <IoMdArrowRoundBack className="backArrow"></IoMdArrowRoundBack>
           <TitleFooter>Voltar</TitleFooter>
         </BackFooterImg>
       )}

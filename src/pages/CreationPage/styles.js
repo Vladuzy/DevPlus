@@ -15,7 +15,6 @@ export const HeaderContainer = styled.header`
     font-size: 24px;
     color: var(--cinza-escuro);
     margin-left: 1rem;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
