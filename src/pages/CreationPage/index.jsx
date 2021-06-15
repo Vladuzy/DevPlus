@@ -10,7 +10,7 @@ import GoalsCreation from '../../components/GoalsCreation'
 
 const CreationPage = ({ type, id }) => {
   const history = useHistory()
-  type = 'Meta'
+  type = 'Habito'
 
   return(
   <BackgroundContainer>

@@ -9,7 +9,7 @@ export const Container = styled.input`
   font-family: "Roboto", sans-serif;
   border: none;
   color: var(--branco);
-  padding: 15px;
+  padding-left: 15px;
 
   &::placeholder {
     color: var(--verde);

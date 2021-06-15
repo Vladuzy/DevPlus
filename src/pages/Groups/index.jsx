@@ -1,4 +1,4 @@
-import { Link, Switch, Route, useRouteMatch, Redirect } from "react-router-dom";
+import { Link, Switch, Route, useRouteMatch, Redirect, useHistory } from "react-router-dom";
 
 import {
   MainDashboard,
@@ -9,15 +9,15 @@ import {
   MainMenuContainer,
 } from "./styles";
 import { AnimateSharedLayout } from "framer-motion";
-import { useState } from "react";
 
 import { useAuth } from "../../providers/AuthProvider";
 
 import GroupList from "../../components/GroupList";
 
 const Groups = () => {
+  const history = useHistory()
+  const { location: { pathname } } = history
   const { isAuthenticated } = useAuth();
-  const [selected, setSelected] = useState("todos");
   let { path, url } = useRouteMatch("");
 
   // if (isAuthenticated === false) {
@@ -34,15 +34,15 @@ const Groups = () => {
         <MainMenuContainer>
           <NavContainer>
             <AnimateSharedLayout transition={{ duration: 0.5 }}>
-              <Link to={`${url}`} onClick={() => setSelected("todos")}>
+              <Link to={`${url}/all`}>
                 TODOS
-                {selected === "todos" && (
+                {pathname === "/groups/all" && (
                   <AnimationContainer layoutId="underline" />
                 )}
               </Link>
-              <Link to={`${url}/mine`} onClick={() => setSelected("meus")}>
+              <Link to={`${url}/mine`}>
                 MEUS
-                {selected === "meus" && (
+                {pathname === "/groups/mine" && (
                   <AnimationContainer layoutId="underline" />
                 )}
               </Link>
@@ -50,7 +50,8 @@ const Groups = () => {
           </NavContainer>
 
           <Switch>
-            <Route exact path={`${path}`}>
+            <Route exact path={`${path}`} render={() => history.push(`${url}/all`)}/>
+            <Route path={`${path}/all`}>
               <GroupList allGroups={true} />
             </Route>
             <Route path={`${path}/mine`}>
