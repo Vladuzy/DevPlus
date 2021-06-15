@@ -7,7 +7,7 @@ import NotFound from "../pages/NotFound";
 import Dashboard from "../pages/Dashboard";
 import Groups from "../pages/Groups";
 import SpecificGroup from "../pages/SpecificGroup";
-import CreatingPage from '../pages/CreationPage'
+import CreatingPage from "../pages/CreationPage";
 
 const Routes = () => {
   return (
@@ -27,10 +27,10 @@ const Routes = () => {
       <Route path="/groups">
         <Groups />
       </Route>
-      <Route exact path='/creation'>
+      <Route exact path="/creation">
         <CreatingPage />
       </Route>
-      <Route path='/:groupName'>
+      <Route path="/:groupName">
         <SpecificGroup />
       </Route>
       <Route>
