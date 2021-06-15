@@ -7,8 +7,8 @@ export const ActivitiesContext = createContext();
 
 export const ActivitiesProvider = ({ children }) => {
   const { token } = useAuth();
-  const  { group } = useGroups();
   const [activities, setActivities] = useState([]);
+  const [groupId, setGroupId] = useState("")
 
   const createActivities = () => {
     const data = {
@@ -23,11 +23,12 @@ export const ActivitiesProvider = ({ children }) => {
         },
       })
       .then((response) => console.log(response))
+      .then(() => getGroupActivities(groupId))
       .catch((err) => console.log(err));
   };
 
   const getGroupActivities = (id="") => {
-    // let groupId = ""
+    setGroupId(id)
 
     // if(group !== undefined){
     //   groupId = group.id
@@ -39,9 +40,8 @@ export const ActivitiesProvider = ({ children }) => {
       .get(`/activities/?group=${id}`)
       .then((response) => {
         // verificar no console os dados do response
-        console.log(response)
         setActivities(response.data.results);
-        localStorage.setItem("@User:activity", JSON.stringify(activities));
+        localStorage.setItem( "@DevelopingHabitus:activity", JSON.stringify(response.data.results));
       })
       .catch((err) => console.log(err));
     }
@@ -76,7 +76,7 @@ export const ActivitiesProvider = ({ children }) => {
         },
       })
       .then((response) => console.log(response))
-      .then(() => getGroupActivities(group.id))
+      .then(() => getGroupActivities(groupId))
       .catch((err) => console.log(err));
   };
 
@@ -92,8 +92,8 @@ export const ActivitiesProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    getGroupActivities();
-  }, []);
+    getGroupActivities(groupId);
+  }, [groupId]);
 
   return (
     <ActivitiesContext.Provider

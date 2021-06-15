@@ -20,7 +20,6 @@ export default function GroupsCard({ currentGroup, title, description, language}
     };
   
     const handleClick = (value) => {
-      console.log(currentGroup)
       getGroupActivities(currentGroup.id)
       getGoals(currentGroup.id)
       setGroup(currentGroup)
