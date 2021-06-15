@@ -7,6 +7,8 @@ export const ActivitiesContext = createContext();
 export const ActivitiesProvider = ({ children }) => {
   const { token } = useAuth();
   const [activities, setActivities] = useState([]);
+  const [groupId, setGroupId] = useState("")
+
   const createActivities = () => {
     const data = {
       title: "Crossfit",
@@ -20,18 +22,28 @@ export const ActivitiesProvider = ({ children }) => {
         },
       })
       .then((response) => console.log(response))
+      .then(() => getGroupActivities(groupId))
       .catch((err) => console.log(err));
   };
 
-  const getGroupActivities = () => {
-    api
-      .get("/activities/?group=2")
+  const getGroupActivities = (id="") => {
+    setGroupId(id)
+
+    // if(group !== undefined){
+    //   groupId = group.id
+    // }else{
+    //   groupId = 2;
+    // }
+    if(id !==""){
+      api
+      .get(`/activities/?group=${id}`)
       .then((response) => {
         // verificar no console os dados do response
         setActivities(response.data.results);
-        localStorage.setItem("@User:activity", JSON.stringify(activities));
+        localStorage.setItem( "@DevelopingHabitus:activity", JSON.stringify(response.data.results));
       })
       .catch((err) => console.log(err));
+    }
   };
 
   const patchActivities = (activity, action) => {
@@ -63,7 +75,7 @@ export const ActivitiesProvider = ({ children }) => {
         },
       })
       .then((response) => console.log(response))
-      .then(() => getGroupActivities())
+      .then(() => getGroupActivities(groupId))
       .catch((err) => console.log(err));
   };
 
@@ -79,12 +91,12 @@ export const ActivitiesProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    getGroupActivities();
-  }, []);
+    getGroupActivities(groupId);
+  }, [groupId]);
 
   return (
     <ActivitiesContext.Provider
-      value={{ activities, createActivities, patchActivities, deleteActivity }}
+      value={{ activities, getGroupActivities, createActivities, patchActivities, deleteActivity }}
     >
       {children}
     </ActivitiesContext.Provider>

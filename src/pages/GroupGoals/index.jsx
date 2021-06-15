@@ -29,13 +29,13 @@ const GroupGoals = () => {
         <NavContainer>
           <AnimateSharedLayout transition={{ duration: 0.5 }}>
             <Link to={`${url}`} onClick={() => setSelected("ativos")}>
-              ATIVOS
+              ATIVAS
               {selected === "ativos" && (
                 <AnimationContainer layoutId="underline" />
               )}
             </Link>
             <Link to={`${url}/done`} onClick={() => setSelected("feitos")}>
-              FEITOS
+              FEITAS
               {selected === "feitos" && (
                 <AnimationContainer layoutId="underline" />
               )}

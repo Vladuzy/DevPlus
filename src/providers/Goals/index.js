@@ -12,15 +12,20 @@ export const GoalsProvider = ({ children }) => {
   //Lembrar de passar setGoal para receber os dados do modal criar Goal
   // const [goal, setGoal] = useState({})
   const [goals, setGoals] = useState([]);
+  const [groupId, setGroupId] = useState("")
 
-  const getGoals = () => {
+  const getGoals = (id="") => {
+    setGroupId(id)
     //Lembrar de passar o Id do grupo
-    api
-      .get("/goals/?group=2")
+    if(id !== ""){
+      api
+      .get(`/goals/?group=${id}`)
       .then((response) => {
         setGoals(response.data.results);
+        localStorage.setItem( "@DevelopingHabitus:goals", JSON.stringify(response.data.results));
       })
       .catch((err) => console.log(err));
+    }
   };
 
   const createGoals = (data) => {
@@ -37,7 +42,7 @@ export const GoalsProvider = ({ children }) => {
       })
       .then((res) =>{ 
         console.log(res)
-        getGoals()
+        getGoals(groupId)
       })
       .catch((err) => console.log(err));
   };
@@ -73,7 +78,7 @@ export const GoalsProvider = ({ children }) => {
         },
       })
       .then((response) => console.log(response))
-      .then(() => getGoals())
+      .then(() => getGoals(groupId))
       .catch((err) => console.log(err));
   };
 
@@ -91,13 +96,13 @@ export const GoalsProvider = ({ children }) => {
         },
       })
       .then((response => console.log(response)))
-      .then(() => getGoals())
+      .then(() => getGoals(groupId))
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    getGoals();
-  }, []);
+    getGoals(groupId);
+  }, [groupId]);
 
   return (
     <GoalsContext.Provider

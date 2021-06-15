@@ -10,6 +10,7 @@ export default function GroupList({ allGroups, search }) {
             groups.map( (element, index) => 
             <GroupsCard 
             key={index} 
+            currentGroup = {element}
             title={element.name}
             description={element.description}
             language={element.category}
@@ -21,6 +22,7 @@ export default function GroupList({ allGroups, search }) {
                             groupsSubs.map( (element, index) => 
                             <GroupsCard 
                             key={index} 
+                            currentGroup = {element}
                             title={element.name}
                             description={element.description}
                             language={element.category}
@@ -35,6 +37,7 @@ export default function GroupList({ allGroups, search }) {
                 .map((element, index) => {
                     return <GroupsCard 
                     key={index} 
+                    currentGroup = {element}
                     title={element.name}
                     description={element.description}
                     language={element.category}
@@ -49,6 +52,7 @@ export default function GroupList({ allGroups, search }) {
                 .map((element, index) => {
                     return <GroupsCard 
                     key={index} 
+                    currentGroup = {element}
                     title={element.name}
                     description={element.description}
                     language={element.category}
