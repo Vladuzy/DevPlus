@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../services";
 import { useAuth } from "../AuthProvider";
-import { useGroups } from "../Groups"
 
 export const ActivitiesContext = createContext();
 

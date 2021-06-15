@@ -10,8 +10,6 @@ export const GroupsProviders = ({ children }) => {
   const [groups, setGroups] = useState([]);
   const [groupsSubs, setGroupsSubs] = useState([]);
 
-  const [group, setGroup] = useState({})
-
   const getGroups = () => {
     api.get("groups/?category=programming")
       .then((response) => setGroups([...response.data.results]));
@@ -67,8 +65,6 @@ export const GroupsProviders = ({ children }) => {
   return (
     <GroupsContext.Provider
       value={{
-        group,
-        setGroup,
         groups,
         groupsSubs,
         getGroups,
