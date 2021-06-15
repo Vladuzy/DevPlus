@@ -11,10 +11,11 @@ import { IoIosArrowBack } from "react-icons/io";
 import { useHistory } from "react-router-dom";
 
 import HabitEdition from "../../components/HabitEdition";
+import GroupEdition from '../../components/GroupEdition'
 
 const EditionPage = ({ type, id }) => {
   const history = useHistory();
-  type = "Habito";
+  type = "Grupo";
 
   return (
     <BackgroundContainer>
@@ -28,6 +29,7 @@ const EditionPage = ({ type, id }) => {
         <DividerContainer />
 
         {type === "Habito" && <HabitEdition />}
+        {type === "Grupo" && <GroupEdition />}
       </MainContainer>
     </BackgroundContainer>
   );

@@ -13,11 +13,14 @@ import { useHistory } from "react-router-dom";
 import GroupCreation from "../../components/GroupCreation";
 import HabitCreation from "../../components/HabitCreation";
 import GoalsCreation from "../../components/GoalsCreation";
+import AtivityCreation from "../../components/ActivityCreation";
+import { useParams } from "react-router";
 
-const CreationPage = ({ type, id }) => {
-  const history = useHistory()
-  type = 'Habito'
-
+const CreationPage = ({ id }) => {
+  const history = useHistory();
+  const { type } = useParams();
+  // type = "Atividade";
+  console.log(type);
   return (
     <BackgroundContainer>
       <HeaderContainer>
@@ -31,6 +34,7 @@ const CreationPage = ({ type, id }) => {
         {type === "Grupo" && <GroupCreation />}
         {type === "Habito" && <HabitCreation />}
         {type === "Meta" && <GoalsCreation />}
+        {type === "Atividade" && <AtivityCreation />}
       </MainContainer>
     </BackgroundContainer>
   );
