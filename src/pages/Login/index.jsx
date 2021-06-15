@@ -1,4 +1,5 @@
-import Button from "../../components/Button";
+import Button from "../../components/Buttons/Button";
+import ButtonBack from "../../components/Buttons/ButtonBack";
 import Input from "../../components/Input";
 import {
   Container,
@@ -11,7 +12,6 @@ import {
   SubTitleFooterContainer,
   SpanFormContainer,
 } from "./styled";
-import MenuFooter from "../../components/MenuFooter";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -22,14 +22,15 @@ import { useAuth } from "../../providers/AuthProvider";
 
 import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
+// import ButtonAdd from "../../components/ButtonAdd";
 
 const Login = () => {
   const { handleLogin, isAuthenticated } = useAuth();
   console.log(isAuthenticated);
   const schema = yup.object().shape({
-    username: yup.string().required("Campo Obrigatório!!"),
+    username: yup.string().required("Campo Obrigatório*"),
 
-    password: yup.string().required("Campo Obrigatório!!"),
+    password: yup.string().required("Campo Obrigatório*"),
   });
 
   const {
@@ -75,7 +76,7 @@ const Login = () => {
           <Link to={"/register"}>REGISTRE-SE</Link>
         </SubTitleFooterContainer>
       </FooterContainer>
-      <MenuFooter></MenuFooter>
+      <ButtonBack></ButtonBack>
     </Container>
   );
 };

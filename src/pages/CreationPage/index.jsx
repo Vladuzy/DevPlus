@@ -13,14 +13,16 @@ import { useHistory } from "react-router-dom";
 import GroupCreation from "../../components/GroupCreation";
 import HabitCreation from "../../components/HabitCreation";
 import GoalsCreation from "../../components/GoalsCreation";
-import AtivityCreation from "../../components/AtivityCreation";
+import AtivityCreation from "../../components/ActivityCreation";
+import { useParams } from "react-router";
 
-const CreationPage = ({ type, id }) => {
-  const history = useHistory()
-  type = 'Atividade'
-
+const CreationPage = ({ id }) => {
+  const history = useHistory();
+  const { type } = useParams();
+  // type = "Atividade";
+  console.log(type);
   return (
-    <BackgroundContainer>
+    <BackgroundContainer type={type}>
       <HeaderContainer>
         <h2 onClick={() => history.goBack()}>
           <IoIosArrowBack /> Voltar

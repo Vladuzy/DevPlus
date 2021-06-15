@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 export const BackgroundContainer = styled.main`
-  background: var(--amarelo);
+  background-color: ${(props) =>
+    props.type === "Habito" ? "var(--verde)" : "var(--amarelo)"};
 `;
 
 export const HeaderContainer = styled.header`
+  height: 10vh;
   background: none;
-
+  height: 48px;
   display: flex;
   align-items: center;
 

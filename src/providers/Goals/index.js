@@ -12,7 +12,7 @@ export const GoalsProvider = ({ children }) => {
   //Lembrar de passar setGoal para receber os dados do modal criar Goal
   // const [goal, setGoal] = useState({})
   const [goals, setGoals] = useState(() => {
-    return JSON.parse(localStorage.getItem("@DevelopingHabitus:goals")) || "";
+    return JSON.parse(localStorage.getItem("@DevelopingHabitus:goals")) || [];
   });
   const [groupId, setGroupId] = useState(() => {
     return parseInt(localStorage.getItem("@DevelopingHabitus:goalId")) || "";

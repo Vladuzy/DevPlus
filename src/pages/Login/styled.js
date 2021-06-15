@@ -32,6 +32,7 @@ export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 150px;
   justify-content: space-between;
   width: 221px;
   margin: 84px auto 0;
@@ -40,7 +41,7 @@ export const FormContainer = styled.form`
 export const SpanFormContainer = styled.span`
   color: var(--vermelho);
   font-size: 1rem;
-  margin: 5px 0 10px 50px;
+  margin-left: 63px;
 `;
 
 export const FooterContainer = styled.form`

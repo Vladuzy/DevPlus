@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useGoals } from "../../providers/Goals";
+import { useActivity } from "../../providers/Activities";
 
 import Input from "../Input";
 import Button from "../Buttons/Button";
@@ -10,21 +10,18 @@ import {
   FormContainer,
   ErrorSpanContainer,
   InputContainer,
-  SelectContainer,
+  CalendarInput,
 } from "./styles";
 
-const GoalsCreation = ({ id }) => {
-  const { createGoals } = useGoals();
+const AtivityCreation = ({ id }) => {
+  const { createActivities } = useActivity();
   const formSchemaHabit = yup.object().shape({
     title: yup
       .string()
       .required("Campo Obrigatório.")
       .max(20, "Máximo de 20 caracteres."),
 
-    difficulty: yup
-      .string()
-      .required("Campo Obrigatório.")
-      .oneOf(["Fácil", "Médio", "Difícil"], "Escolha uma das 3 opções."),
+    realization_time: yup.string().required("Campo Obrigatório."),
   });
   const {
     handleSubmit,
@@ -35,10 +32,9 @@ const GoalsCreation = ({ id }) => {
   });
 
   const onSubmitData = (data) => {
-    const how_much_achieved = 0;
     const group = id;
-    const newData = { ...data, how_much_achieved, group };
-    createGoals(newData);
+    const newData = { ...data, group };
+    createActivities(newData);
   };
 
   return (
@@ -54,19 +50,21 @@ const GoalsCreation = ({ id }) => {
         )}
       </InputContainer>
       <InputContainer>
-        <SelectContainer {...register("difficulty")}>
-          <option value=""></option>
-          <option value="Fácil">Fácil</option>
-          <option value="Médio">Médio</option>
-          <option value="Difícil">Difícil</option>
-        </SelectContainer>
-        {errors.difficulty?.message && (
-          <ErrorSpanContainer>{errors.difficulty?.message}</ErrorSpanContainer>
+        <CalendarInput
+          register={register}
+          name="realization_time"
+          placeholder={"Dia da Realização"}
+          type="datetime-local"
+        />
+        {errors.realization_time?.message && (
+          <ErrorSpanContainer>
+            {errors.realization_time?.message}
+          </ErrorSpanContainer>
         )}
       </InputContainer>
-      <Button>Criar Meta</Button>
+      <Button>Criar Atividade</Button>
     </FormContainer>
   );
 };
 
-export default GoalsCreation;
+export default AtivityCreation;

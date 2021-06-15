@@ -8,20 +8,14 @@ import Button from "../Buttons/Button";
 
 import { FormContainer, ErrorSpanContainer, InputContainer } from "./styles";
 
-const GroupCreation = () => {
-  const { createGroup } = useGroups();
+const GroupEdition = ({ id }) => {
+  const { editGroups } = useGroups();
   const formSchemaGroup = yup.object().shape({
-    name: yup
-      .string()
-      .required("Campo Obrigatório.")
-      .max(20, "Máximo de 20 caracteres."),
+    name: yup.string().max(20, "Máximo de 20 caracteres."),
 
-    description: yup
-      .string()
-      .required("Campo Obrigatório.")
-      .max(20, "Máximo de 20 caracteres."),
+    description: yup.string().max(20, "Máximo de 20 caracteres."),
 
-    category: yup.string().required("Campo Obrigatório."),
+    category: yup.string(),
   });
   const {
     handleSubmit,
@@ -32,7 +26,9 @@ const GroupCreation = () => {
   });
 
   const onSubmitData = (data) => {
-    createGroup(data);
+    console.log(data);
+    id = 579;
+    editGroups(data, id);
   };
 
   return (
@@ -59,9 +55,9 @@ const GroupCreation = () => {
           <ErrorSpanContainer>{errors.category?.message}</ErrorSpanContainer>
         )}
       </InputContainer>
-      <Button>Criar Grupo</Button>
+      <Button>Salvar Alterações</Button>
     </FormContainer>
   );
 };
 
-export default GroupCreation;
+export default GroupEdition;

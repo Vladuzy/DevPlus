@@ -6,7 +6,7 @@ export const MainDashboard = styled.main`
 `;
 
 export const HeaderContainer = styled.header`
-  height: 10vh;
+  height: 48px;
   background: none;
 
   display: flex;
