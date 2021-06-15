@@ -1,23 +1,23 @@
 import { useParams } from 'react-router-dom'
 import { Link, Switch, Route, useRouteMatch, useHistory } from 'react-router-dom'
 
-import { 
-  MainDashboard, 
-  HeaderContainer, 
-  MainContainer, 
-  NavContainer, 
-  AnimationContainer, 
-  MainMenuContainer, 
+import {
+  MainDashboard,
+  HeaderContainer,
+  MainContainer,
+  NavContainer,
+  AnimationContainer,
+  MainMenuContainer,
   GroupNameContainer,
-  DividerContainer
-} from './styles'
-import { AnimateSharedLayout } from 'framer-motion'
-import { IoIosArrowBack } from 'react-icons/io'
+  DividerContainer,
+} from "./styles";
+import { AnimateSharedLayout } from "framer-motion";
+import { IoIosArrowBack } from "react-icons/io";
 
-import GroupGoals from '../GroupGoals'
+import GroupGoals from "../GroupGoals";
 
 // import Activity from "../Activity"
-import GroupActivities from "../GroupActivities"
+import GroupActivities from "../GroupActivities";
 
 const SpecificGroup = ({ group }) => {
   // const { id } = group
@@ -26,16 +26,16 @@ const SpecificGroup = ({ group }) => {
   const { groupName } = useParams()
   let { path, url } = useRouteMatch()
 
-  return(
+  return (
     <MainDashboard>
       <HeaderContainer>
-        <h2 onClick={() => history.goBack()}><IoIosArrowBack /> Voltar</h2>
+        <h2 onClick={() => history.goBack()}>
+          <IoIosArrowBack /> Voltar
+        </h2>
       </HeaderContainer>
       <MainContainer>
         <MainMenuContainer>
-          <GroupNameContainer>
-            {groupName}
-          </GroupNameContainer>
+          <GroupNameContainer>{groupName}</GroupNameContainer>
           <DividerContainer />
           <NavContainer>
             <AnimateSharedLayout transition={{ duration: 0.5 }}>
@@ -61,7 +61,7 @@ const SpecificGroup = ({ group }) => {
         </MainMenuContainer>
       </MainContainer>
     </MainDashboard>
-  )
-}
+  );
+};
 
-export default SpecificGroup
+export default SpecificGroup;

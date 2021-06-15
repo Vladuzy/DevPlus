@@ -1,12 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import api from "../../services";
-import { useAuth } from '../AuthProvider'
+import { useAuth } from "../AuthProvider";
 
 export const HabitsContext = createContext();
 
 export const HabitsProviders = ({ children }) => {
-  const { token, id } = useAuth()
+  const { token, id } = useAuth();
   const [doingHabits, setDoingHabits] = useState(() => {
     return JSON.parse(localStorage.getItem("@User:habits")) || [];
   });
@@ -19,26 +19,25 @@ export const HabitsProviders = ({ children }) => {
         },
       })
       .then((response) => {
-        toast.success('Criou habito com sucesso')
-        setDoingHabits([...doingHabits, response])
+        toast.success("Criou habito com sucesso");
+        setDoingHabits([...doingHabits, response]);
       })
-      .catch(_ => {
-        toast.error('Erro ao criar habito')
+      .catch((_) => {
+        toast.error("Erro ao criar habito");
       });
   };
 
   const updateHabits = (habit, action) => {
-  
     //Mudança do data
-    let dataHabitUpdate = {}
-    if(habit.achieved === true && action === "activate"){
+    let dataHabitUpdate = {};
+    if (habit.achieved === true && action === "activate") {
       dataHabitUpdate = {
-            "achieved": false
-          }
-    }else if(habit.achieved === false && action === "archieved"){
+        achieved: false,
+      };
+    } else if (habit.achieved === false && action === "archieved") {
       dataHabitUpdate = {
-            "achieved": true
-          }
+        achieved: true,
+      };
     }
 
     api
@@ -59,7 +58,7 @@ export const HabitsProviders = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) =>console.log(response))
+      .then((response) => console.log(response))
       .then(() => getHabits())
       .catch((err) => console.log(err));
   };
@@ -73,14 +72,14 @@ export const HabitsProviders = ({ children }) => {
       })
       .then((response) => {
         const { data } = response;
-        setDoingHabits(response.data)
+        setDoingHabits(response.data);
         localStorage.setItem("@DevelopingHabitus:habits", JSON.stringify(data));
       });
   };
 
   useEffect(() => {
     getHabits();
-  }, []);
+  }, [token]);
 
   return (
     <HabitsContext.Provider
