@@ -6,7 +6,7 @@ export const BackgroundContainer = styled.main`
 
 export const HeaderContainer = styled.header`
   background: none;
-
+  height: 48px;
   display: flex;
   align-items: center;
 

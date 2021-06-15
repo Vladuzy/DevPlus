@@ -18,25 +18,26 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { toast } from "react-toastify";
 import { useAuth } from "../../providers/AuthProvider";
+import ButtonBack from "../../components/ButtonBack";
 
 const FormRegister = () => {
   const history = useHistory();
   const { isAuthenticated } = useAuth();
   const schema = yup.object().shape({
-    username: yup.string().required("Campo obrigatório"),
-    email: yup.string().email("Email inválido").required("Campo obrigatório"),
+    username: yup.string().required("Campo obrigatório*"),
+    email: yup.string().email("Email inválido").required("Campo obrigatório*"),
     password: yup
       .string()
-      .min(8, "Mínimo de 8 dígitos")
+      .min(8, "Mínimo de 8 dígitos*")
       .matches(
         /^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
         "Senha deve conter ao menos uma letra maiúscula, uma minúscula, um número e um caracter especial!"
       )
-      .required("Campo obrigatório"),
+      .required("Campo obrigatório*"),
     passwordConfirm: yup
       .string()
       .oneOf([yup.ref("password")], "senhas diferentes")
-      .required("Senha obrigatória"),
+      .required("Senha obrigatória*"),
   });
 
   const {
@@ -115,6 +116,7 @@ const FormRegister = () => {
           <Link to={"/login"}>LOGAR-SE</Link>
         </SubTitleFooterContainer>
       </FooterContainer>
+      <ButtonBack></ButtonBack>
     </Container>
   );
 };

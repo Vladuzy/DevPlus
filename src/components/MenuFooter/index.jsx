@@ -1,14 +1,9 @@
 import { AiFillHome } from "react-icons/ai";
 import { HiUserGroup } from "react-icons/hi";
 import { IoLogOut } from "react-icons/io5";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import {
-  MenuFooterImg,
-  BackFooterImg,
-  FooterContainer,
-  TitleFooter,
-} from "./style";
-import { useHistory, Redirect } from "react-router-dom";
+
+import { MenuFooterImg, FooterContainer } from "./style";
+import { useHistory } from "react-router-dom";
 import { useAuth } from "../../providers/AuthProvider";
 const MenuFooter = () => {
   const { isAuthenticated, setIsAuthenticated } = useAuth();
@@ -28,14 +23,11 @@ const MenuFooter = () => {
     sendTo(value);
   };
 
-  const handleGoBack = () => {
-    sendTo(history.goBack());
-  };
   console.log(history);
 
   return (
     <FooterContainer>
-      {isAuthenticated ? (
+      {isAuthenticated && (
         <MenuFooterImg>
           <HiUserGroup
             onClick={() => handleClick("/groups")}
@@ -52,11 +44,6 @@ const MenuFooter = () => {
             className="figure"
           ></IoLogOut>
         </MenuFooterImg>
-      ) : (
-        <BackFooterImg onClick={handleGoBack}>
-          <IoMdArrowRoundBack className="backArrow"></IoMdArrowRoundBack>
-          <TitleFooter>Voltar</TitleFooter>
-        </BackFooterImg>
       )}
     </FooterContainer>
   );
