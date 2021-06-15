@@ -1,5 +1,5 @@
-import Button from "../../components/Button";
-import ButtonBack from "../../components/ButtonBack";
+import Button from "../../components/Buttons/Button";
+import ButtonBack from "../../components/Buttons/ButtonBack";
 import Input from "../../components/Input";
 import {
   Container,

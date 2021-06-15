@@ -6,7 +6,7 @@ import {
   MainStyles,
 } from "./styles";
 import { FiAlignJustify } from "react-icons/fi";
-import Buttons from "../../components/Button";
+import Buttons from "../../components/Buttons/Button";
 import { useHistory } from "react-router-dom";
 
 export default function Home() {

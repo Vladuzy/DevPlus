@@ -5,9 +5,14 @@ import { useHabits } from "../../providers/Habits";
 import { useAuth } from "../../providers/AuthProvider";
 
 import Input from "../Input";
-import Button from "../Button";
+import Button from "../Buttons/Button";
 
-import { FormContainer, ErrorSpanContainer, InputContainer, SelectContainer } from './styles'
+import {
+  FormContainer,
+  ErrorSpanContainer,
+  InputContainer,
+  SelectContainer,
+} from "./styles";
 
 const HabitCreation = () => {
   const { id } = useAuth();
@@ -23,9 +28,10 @@ const HabitCreation = () => {
       .required("Campo Obrigatório.")
       .max(20, "Máximo de 20 caracteres."),
 
-    difficulty: yup.string()
-      .required('Campo Obrigatório.')
-      .oneOf(['Fácil', 'Médio', 'Difícil'], 'Escolha uma das 3 opções.'),
+    difficulty: yup
+      .string()
+      .required("Campo Obrigatório.")
+      .oneOf(["Fácil", "Médio", "Difícil"], "Escolha uma das 3 opções."),
 
     frequency: yup.string().required("Campo Obrigatório."),
   });
@@ -64,15 +70,15 @@ const HabitCreation = () => {
         )}
       </InputContainer>
       <InputContainer>
-        <SelectContainer 
-          {...register('difficulty')}
-        >
+        <SelectContainer {...register("difficulty")}>
           <option value=""></option>
           <option value="Fácil">Fácil</option>
           <option value="Médio">Médio</option>
           <option value="Difícil">Difícil</option>
         </SelectContainer>
-        {errors.difficulty?.message && <ErrorSpanContainer>{errors.difficulty?.message}</ErrorSpanContainer>}
+        {errors.difficulty?.message && (
+          <ErrorSpanContainer>{errors.difficulty?.message}</ErrorSpanContainer>
+        )}
       </InputContainer>
       <InputContainer>
         <Input

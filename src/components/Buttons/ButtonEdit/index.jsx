@@ -1,8 +1,8 @@
 import { FaEdit } from "react-icons/fa";
 import { ButtonEditContainer } from "./style";
-const ButtonEdit = () => {
+const ButtonEdit = ({ ...rest }) => {
   return (
-    <ButtonEditContainer>
+    <ButtonEditContainer type="button" {...rest}>
       <FaEdit className="edit"></FaEdit>
     </ButtonEditContainer>
   );

@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useHabits } from "../../providers/Habits";
 
 import Input from "../Input";
-import Button from "../Button";
+import Button from "../Buttons/Button";
 
 import {
   FormContainer,

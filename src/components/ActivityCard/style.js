@@ -16,9 +16,12 @@ export const ActivityCardContainer = styled.section`
 
 export const InfoContainer = styled.section`
   width: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-  p {
-    color: var(--verde);
+  h2 {
+    color: var(--branco);
     font-size: 1.5rem;
     margin-bottom: 10px;
   }

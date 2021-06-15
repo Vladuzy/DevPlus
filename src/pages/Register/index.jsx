@@ -15,10 +15,10 @@ import {
   SpanFormContainer,
 } from "./style.js";
 import Input from "../../components/Input";
-import Button from "../../components/Button";
+import Button from "../../components/Buttons/Button";
 import { toast } from "react-toastify";
 import { useAuth } from "../../providers/AuthProvider";
-import ButtonBack from "../../components/ButtonBack";
+import ButtonBack from "../../components/Buttons/ButtonBack";
 
 const FormRegister = () => {
   const history = useHistory();

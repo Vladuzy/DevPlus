@@ -5,7 +5,7 @@ import {
   ButtonCheck,
   ButtonUncheck,
 } from "./style";
-
+import ButtonEdit from "../Buttons/ButtonEdit";
 import { FaCheck } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { RiArrowGoBackLine } from "react-icons/ri";
@@ -33,7 +33,7 @@ const ActivityCard = ({
             realization_time.replace(/T.*/, "").split("-").reverse().join("-")}
         </h3>
       </InfoContainer>
-
+      <ButtonEdit></ButtonEdit>
       {showArchived ? (
         <ButtonUncheck onClick={() => patchActivities(activity, "activate")}>
           <RiArrowGoBackLine className="uncheck" />
