@@ -1,10 +1,9 @@
-import styled from 'styled-components'
-import { motion } from 'framer-motion'
+import styled from "styled-components";
+import { motion } from "framer-motion";
 
 export const MainDashboard = styled.main`
   background: var(--verde);
-  height: 100vh;
-`
+`;
 
 export const HeaderContainer = styled.header`
   height: 10vh;
@@ -18,39 +17,38 @@ export const HeaderContainer = styled.header`
     font-size: 24px;
     color: var(--cinza-escuro);
     margin-left: 1rem;
-    
+
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-`
+`;
 
 export const MainContainer = styled.main`
-  height: 90vh;
   background-color: var(--cinza-escuro);
 
   border-top-left-radius: 30px;
-`
+`;
 export const GroupNameContainer = styled.h2`
   margin: 10px 0;
   color: var(--branco);
   font-size: 18px;
   text-align: center;
-`
+`;
 export const DividerContainer = styled.div`
   margin: 0 auto;
   width: 80%;
   border: 1px solid var(--cinza-claro);
-`
+`;
 
 export const MainMenuContainer = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-`
+`;
 
 export const NavContainer = styled.nav`
-  margin:  10px 0 15px 0;
+  margin: 10px 0 15px 0;
   height: 2rem;
   display: flex;
   justify-content: space-evenly;
@@ -64,12 +62,12 @@ export const NavContainer = styled.nav`
 
     position: relative;
   }
-`
+`;
 
 export const AnimationContainer = styled(motion.div)`
-  width: ${props => props.atv ? '140px' : '100px' };
+  width: ${(props) => (props.atv ? "140px" : "100px")};
   border: 1px solid var(--verde);
 
   position: absolute;
   bottom: -10px;
-`
+`;

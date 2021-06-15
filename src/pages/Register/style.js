@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: var(--cinza-escuro);
-  height: 100vh;
 `;
 export const TitleContainer = styled.h1`
   color: var(--branco);
@@ -16,7 +15,7 @@ export const SubTitleContainer = styled.h3`
 `;
 
 export const HeaderContainer = styled.section`
-  height: 150px;
+  height: 110px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -28,13 +27,13 @@ export const FormContainer = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 231px;
-  margin-top: 100px;
+  height: 260px;
+  margin-top: 37px;
 `;
 export const SpanFormContainer = styled.span`
   color: var(--vermelho);
-  font-size: 10px;
-  margin-left: 83px;
+  font-size: 1rem;
+  margin-left: 63px;
 `;
 
 export const FooterContainer = styled.form`

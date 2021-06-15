@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: var(--cinza-escuro);
-  height: 100vh;
 `;
 export const TitleContainer = styled.h1`
   color: var(--branco);

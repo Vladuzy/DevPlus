@@ -7,6 +7,10 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     outline: 0;
   }
+  #root{
+    height: 100vh;
+    background-color: var(--cinza-escuro);
+  }
 
   :root {
     --verde: #3DD598;

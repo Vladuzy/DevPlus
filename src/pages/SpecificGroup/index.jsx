@@ -1,53 +1,67 @@
-import { useParams } from 'react-router-dom'
-import { useState } from 'react'
-import { Link, Switch, Route, useRouteMatch, useHistory } from 'react-router-dom'
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+import {
+  Link,
+  Switch,
+  Route,
+  useRouteMatch,
+  useHistory,
+} from "react-router-dom";
 
-import { 
-  MainDashboard, 
-  HeaderContainer, 
-  MainContainer, 
-  NavContainer, 
-  AnimationContainer, 
-  MainMenuContainer, 
+import {
+  MainDashboard,
+  HeaderContainer,
+  MainContainer,
+  NavContainer,
+  AnimationContainer,
+  MainMenuContainer,
   GroupNameContainer,
-  DividerContainer
-} from './styles'
-import { AnimateSharedLayout } from 'framer-motion'
-import { IoIosArrowBack } from 'react-icons/io'
+  DividerContainer,
+} from "./styles";
+import { AnimateSharedLayout } from "framer-motion";
+import { IoIosArrowBack } from "react-icons/io";
 
-import GroupGoals from '../GroupGoals'
+import GroupGoals from "../GroupGoals";
 
 // import Activity from "../Activity"
-import GroupActivities from "../GroupActivities"
+import GroupActivities from "../GroupActivities";
 
 const SpecificGroup = ({ group }) => {
   // const { id } = group
-  const history = useHistory()
-  console.log(history)
-  const [selected, setSelected] = useState('atividades')
-  const { groupName } = useParams()
-  let { path, url } = useRouteMatch()
+  const history = useHistory();
+  console.log(history);
+  const [selected, setSelected] = useState("atividades");
+  const { groupName } = useParams();
+  let { path, url } = useRouteMatch();
 
-  return(
+  return (
     <MainDashboard>
       <HeaderContainer>
-        <h2 onClick={() => history.goBack()}><IoIosArrowBack /> Voltar</h2>
+        <h2 onClick={() => history.goBack()}>
+          <IoIosArrowBack /> Voltar
+        </h2>
       </HeaderContainer>
       <MainContainer>
         <MainMenuContainer>
-          <GroupNameContainer>
-            {groupName}
-          </GroupNameContainer>
+          <GroupNameContainer>{groupName}</GroupNameContainer>
           <DividerContainer />
           <NavContainer>
             <AnimateSharedLayout transition={{ duration: 0.5 }}>
-              <Link to={`${url}/activities`} onClick={() => setSelected('atividades')} style={{width: '140px'}}>
-                ATIVIDADES 
-                { selected === 'atividades' && <AnimationContainer atv layoutId="underline"/>}
+              <Link
+                to={`${url}/activities`}
+                onClick={() => setSelected("atividades")}
+                style={{ width: "140px" }}
+              >
+                ATIVIDADES
+                {selected === "atividades" && (
+                  <AnimationContainer atv layoutId="underline" />
+                )}
               </Link>
-              <Link to={`${url}/goals`} onClick={() => setSelected('metas')}>
+              <Link to={`${url}/goals`} onClick={() => setSelected("metas")}>
                 METAS
-                { selected === 'metas' && <AnimationContainer layoutId="underline"/>}
+                {selected === "metas" && (
+                  <AnimationContainer layoutId="underline" />
+                )}
               </Link>
             </AnimateSharedLayout>
           </NavContainer>
@@ -62,7 +76,7 @@ const SpecificGroup = ({ group }) => {
         </MainMenuContainer>
       </MainContainer>
     </MainDashboard>
-  )
-}
+  );
+};
 
-export default SpecificGroup
+export default SpecificGroup;
