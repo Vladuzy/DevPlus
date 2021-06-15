@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
-export const ButtonADD = styled.button`
+export const ButtonEditContainer = styled.button`
   background-color: transparent;
   border: none;
-  .ButtonADD {
-    width: 40px;
-    height: 40px;
+  margin-right: 10px;
+  .edit {
+    width: 28px;
+    height: 28px;
     color: var(--amarelo);
   }
 `;

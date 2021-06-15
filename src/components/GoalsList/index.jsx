@@ -3,7 +3,7 @@ import { GoalsListContainer } from "./style";
 import GoalCard from "../GoalCard";
 
 import { useContext } from "react";
-import ButtonAdd from "../ButtonAdd";
+import ButtonAdd from "../Buttons/ButtonAdd";
 
 import { GoalsContext } from "../../providers/Goals";
 import { useHistory, useParams } from "react-router-dom";

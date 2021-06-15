@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const FormContainer = styled.form`
   height: 250px;
@@ -7,14 +7,14 @@ export const FormContainer = styled.form`
   justify-content: space-between;
 
   input::placeholder {
-    color: var(--amarelo);
+    color: var(--verde);
   }
 
   button {
-    background-color: var(--amarelo);
+    background-color: var(--verde);
     color: var(--cinza-escuro);
   }
-`
+`;
 
 export const SelectContainer = styled.select`
   width: 220px;
@@ -24,20 +24,20 @@ export const SelectContainer = styled.select`
   font-size: 16px;
   font-family: "Roboto", sans-serif;
   border: none;
-  color: var(--amarelo);
+  color: var(--verde);
   padding-left: 15px;
   font-weight: 300;
-  
+
   option {
     border: none;
   }
-`
+`;
 
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 60px;
-`
+`;
 
 export const ErrorSpanContainer = styled.span`
   text-align: right;
@@ -45,4 +45,4 @@ export const ErrorSpanContainer = styled.span`
   color: var(--vermelho);
   font-size: 1rem;
   font-weight: 300;
-`
+`;

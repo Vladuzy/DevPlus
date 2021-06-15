@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { GroupsContext } from "../../providers/Groups";
-import ButtonAdd from "../ButtonAdd";
+import ButtonAdd from "../Buttons/ButtonAdd";
 import GroupsCard from "../GroupsCard";
 
 export default function GroupList({ allGroups, search }) {

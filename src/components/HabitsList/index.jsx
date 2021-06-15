@@ -1,7 +1,7 @@
 import { HabitsContainer } from "./style";
 import HabitsCard from "../HabitsCard";
 import { useHabits } from "../../providers/Habits";
-import ButtonAdd from "../ButtonAdd";
+import ButtonAdd from "../Buttons/ButtonAdd";
 import { useHistory } from "react-router-dom";
 
 const HabitsList = ({ showArchived }) => {
