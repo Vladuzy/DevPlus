@@ -13,14 +13,16 @@ export const GoalsProvider = ({ children }) => {
   // const [goal, setGoal] = useState({})
   const [goals, setGoals] = useState([]);
 
-  const getGoals = () => {
+  const getGoals = (id="") => {
     //Lembrar de passar o Id do grupo
-    api
-      .get("/goals/?group=2")
+    if(id !== ""){
+      api
+      .get(`/goals/?group=${id}`)
       .then((response) => {
         setGoals(response.data.results);
       })
       .catch((err) => console.log(err));
+    }
   };
 
   const createGoals = (data) => {

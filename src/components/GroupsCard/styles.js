@@ -24,11 +24,12 @@ export const Container = styled.div `
 `
 
 
-export const ImgContainer = styled.div`
+export const ImgContainer = styled.button`
     background: url(${Arrow});
     background-size: cover;
     width: 30px;
     height: 30px;
     align-self: center;
-    margin-left: 10px
+    margin-left: 10px;
+    border: none;
 `

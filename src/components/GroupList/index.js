@@ -10,6 +10,7 @@ export default function GroupList({ allGroups = false }) {
             groups.map( (element, index) => 
             <GroupsCard 
             key={index} 
+            currentGroup = {element}
             title={element.name}
             description={element.description}
             language={element.category}
@@ -18,6 +19,7 @@ export default function GroupList({ allGroups = false }) {
             groupsSubs.map( (element, index) => 
             <GroupsCard 
             key={index} 
+            currentGroup = {element}
             title={element.name}
             description={element.description}
             language={element.category}

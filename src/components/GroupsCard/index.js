@@ -1,8 +1,32 @@
 import React from 'react'
+import { useEffect } from 'react';
 import { Container, ImgContainer } from './styles'
+import { useHistory } from "react-router-dom";
+import { useGroups } from "../../providers/Groups"
+import {useActivity} from "../../providers/Activities"
+import {useGoals} from "../../providers/Goals"
+export default function GroupsCard({ currentGroup, title, description, language}) {
 
+    const {group, setGroup} = useGroups();
 
-export default function GroupsCard({ title, description, language}) {
+    const {getGroupActivities} = useActivity()
+
+    const {getGoals} = useGoals()
+
+    const history = useHistory();
+
+    const sendTo = (path) => {
+      history.push(path);
+    };
+  
+    const handleClick = (value) => {
+      console.log(currentGroup)
+      getGroupActivities(currentGroup.id)
+      getGoals(currentGroup.id)
+      setGroup(currentGroup)
+      sendTo(value);
+    };
+
     return (
         <Container>
             <div>
@@ -10,7 +34,7 @@ export default function GroupsCard({ title, description, language}) {
                 <p>{description}</p>
                 <p>{language}</p>
             </div>
-            <ImgContainer/>
+            <ImgContainer onClick = { () => handleClick( `/${title}/activities`)} />
         </Container>
     )
 }
