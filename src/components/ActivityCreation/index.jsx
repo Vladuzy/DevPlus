@@ -6,22 +6,18 @@ import { useHistory } from "react-router-dom";
 import Input from "../Input";
 import Button from "../Buttons/Button";
 
-import {
-  FormContainer,
-  ErrorSpanContainer,
-  InputContainer,
-} from "./styles";
+import { FormContainer, ErrorSpanContainer, InputContainer } from "./styles";
 
 const AtivityCreation = ({ id }) => {
   const { createActivities } = useActivity();
-  
-  const history = useHistory()
+
+  const history = useHistory();
 
   const formSchemaHabit = yup.object().shape({
     title: yup
       .string()
       .required("Campo Obrigatório.")
-      .max(20, "Máximo de 20 caracteres."),
+      .max(15, "Máximo de 15 caracteres."),
 
     // realization_time: yup.string().required("Campo Obrigatório."),
   });
@@ -32,11 +28,10 @@ const AtivityCreation = ({ id }) => {
   } = useForm({
     resolver: yupResolver(formSchemaHabit),
   });
-  
 
   const onSubmitData = (data) => {
     const realization_time = "1000-10-10T00:00:00Z";
-    const newData = { ...data, realization_time};
+    const newData = { ...data, realization_time };
     createActivities(newData);
     history.goBack();
   };

@@ -16,12 +16,14 @@ import {
   MainMenuContainer,
   GroupNameContainer,
   DividerContainer,
+  EditNameContainer,
 } from "./styles";
 import { AnimateSharedLayout } from "framer-motion";
 import { IoIosArrowBack } from "react-icons/io";
 import ButtonExitGroup from "../../components/Buttons/ButtonExitGroup";
 import ButtonOpenGroup from "../../components/Buttons/ButtonOpenGroup";
 import GroupGoals from "../GroupGoals";
+import ButtonEditGroup from "../../components/Buttons/ButtonEditGroup";
 
 // import Activity from "../Activity"
 import GroupActivities from "../GroupActivities";
@@ -34,6 +36,9 @@ const SpecificGroup = ({ group }) => {
   } = history;
   const { groupName, subscribe } = useParams();
   let { path, url } = useRouteMatch();
+  const handleEditGroup = (value) => {
+    history.push(value);
+  };
   return (
     <MainDashboard>
       <HeaderContainer>
@@ -43,7 +48,12 @@ const SpecificGroup = ({ group }) => {
       </HeaderContainer>
       <MainContainer>
         <MainMenuContainer>
-          <GroupNameContainer>{groupName}</GroupNameContainer>
+          <EditNameContainer>
+            <GroupNameContainer>{groupName}</GroupNameContainer>
+            <ButtonEditGroup
+              onClick={() => handleEditGroup("/edition/Grupo")}
+            />
+          </EditNameContainer>
           <DividerContainer />
           <NavContainer>
             <AnimateSharedLayout transition={{ duration: 0.5 }}>
