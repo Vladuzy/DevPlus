@@ -48,7 +48,6 @@ const FormRegister = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   if (isAuthenticated === true) {
-    console.log("ta autenticado");
     return <Redirect to="/dashboard" />;
   }
 
@@ -59,26 +58,18 @@ const FormRegister = () => {
       .then((response) => {
         console.log(response);
         toast.success("Cadastrado com sucesso!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
+          autoClose: 1500,
+          hideProgressBar: true,
           closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
         });
         reset();
         history.push("/login");
       })
       .catch((e) =>
         toast.error(" Usuário ou Email já cadastrado!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
+          autoClose: 1500,
+          hideProgressBar: true,
           closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
         })
       );
   };
