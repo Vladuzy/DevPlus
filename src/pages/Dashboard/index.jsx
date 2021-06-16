@@ -11,8 +11,10 @@ import {
 import { AnimateSharedLayout } from "framer-motion";
 import Habits from "../Habits";
 import { useAuth } from "../../providers/AuthProvider";
+import { useViewport } from '../../providers/GetViewport'
 
 const Dashboard = () => {
+  const { viewport: { width } } = useViewport()
   const history = useHistory()
   const { location: { pathname } } = history
   const { isAuthenticated } = useAuth();
@@ -47,7 +49,7 @@ const Dashboard = () => {
             </AnimateSharedLayout>
           </NavContainer>
           <Switch>
-            <Route exact path={`${path}`} render={() => history.push(`${url}/active`)}/>
+            <Route exact path={`${path}`} render={() => width < 769 && history.push(`${url}/active`)}/>
             <Route path={`${path}/active`}>
               <Habits showArchived={false} />
             </Route>

@@ -1,12 +1,14 @@
-import { AiFillHome } from "react-icons/ai";
-import { HiUserGroup } from "react-icons/hi";
-import { IoLogOut } from "react-icons/io5";
-
+import { AiFillHome, AiOutlineHome } from "react-icons/ai";
+import { HiUserGroup, HiOutlineUserGroup } from "react-icons/hi";
+import { IoLogOutOutline } from "react-icons/io5";
+import { useState } from "react";
 import { MenuFooterImg, FooterContainer } from "./style";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../providers/AuthProvider";
 const MenuFooter = () => {
   const { isAuthenticated, setIsAuthenticated } = useAuth();
+  const [inHome, setInHome] = useState(true)
+  const [inGroups, setInGroups] = useState(false)
   const history = useHistory();
 
   const sendTo = (path) => {
@@ -23,26 +25,54 @@ const MenuFooter = () => {
     sendTo(value);
   };
 
-  console.log(history);
+  const handleSwitchToHome = () => {
+    setInHome(true);
+    setInGroups(false);
+  }
+
+  const handleSwitchToGroups = () =>{
+    setInHome(false);
+    setInGroups(true);
+  }
 
   return (
     <FooterContainer>
       {isAuthenticated && (
         <MenuFooterImg>
-          <HiUserGroup
-            onClick={() => handleClick("/groups")}
-            className="figure"
-          ></HiUserGroup>
 
-          <AiFillHome
-            onClick={() => handleClick("/dashboard")}
-            className="figure"
-          ></AiFillHome>
+          {
+            (inGroups) ? (
+              <HiUserGroup
+                onClick={() => {handleClick("/groups"); handleSwitchToGroups()}}
+                className="figure"
+              ></HiUserGroup>
+            ) : (
+              <HiOutlineUserGroup
 
-          <IoLogOut
-            onClick={() => handleCloseApplication("/")}
+                onClick={() => {handleClick("/groups"); handleSwitchToGroups()}}
+                className="figure"
+              ></HiOutlineUserGroup>
+            )
+          }
+      
+          {
+            (inHome) ?  (
+              <AiFillHome
+                onClick={() =>  {handleClick("/dashboard"); handleSwitchToHome()} }
+                className="figure"
+              ></AiFillHome>
+            ) : (
+              <AiOutlineHome
+                onClick={() => {handleClick("/dashboard"); handleSwitchToHome()}}
+                className="figure"
+              ></AiOutlineHome>
+            )
+          } 
+         
+          <IoLogOutOutline
+            onClick={() => handleCloseApplication("/") }
             className="figure"
-          ></IoLogOut>
+          ></IoLogOutOutline>
         </MenuFooterImg>
       )}
     </FooterContainer>

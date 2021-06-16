@@ -8,8 +8,9 @@ export const ButtonADD = styled.button`
   right: 7px;
   bottom: 72px;
   .ButtonADD {
+    color: ${(props) =>
+      props.type === "Habito" ? "var(--verde)" : "var(--amarelo)"};
     width: 65px;
     height: 65px;
-    color: var(--amarelo);
   }
 `;

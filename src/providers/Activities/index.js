@@ -10,7 +10,9 @@ export const ActivitiesProvider = ({ children }) => {
   const [activities, setActivities] = useState(() => {
     return JSON.parse(localStorage.getItem("@DevelopingHabitus:activities")) || [];
   });
-  const [groupId, setGroupId] = useState("")
+  const [groupId, setGroupId] =  useState(() => {
+    return parseInt(localStorage.getItem("@DevelopingHabitus:groupId")) || "";
+  });
 
   const createActivities = (data) => {
     api
@@ -86,16 +88,46 @@ export const ActivitiesProvider = ({ children }) => {
       .catch(_ => toast.error('erro ao atualizar a atividade!'))
   }
 
-  const deleteActivity = () => {
+  const patchSwitchArchived = (activity, action) => {
+    
+    let activityUpdate = {}
+
+    if( action === "activate"){
+      activityUpdate = {
+          realization_time: "1000-10-10T00:00:00Z"
+      }
+    }else if(action === "archieved"){
+      let data = new Date().toISOString();
+      activityUpdate = {
+            realization_time: data
+      }
+    }
     api
-      .delete("/activities/690/", {
+      .patch(`/activities/${activity.id}/`, activityUpdate, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => console.log(response))
+      .then(() => getGroupActivities(groupId))
       .catch((err) => console.log(err));
   };
+
+  const deleteActivity = (activity) => {
+    api
+      .delete(`/activities/${activity.id}/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => console.log(response))
+      .then(() => getGroupActivities(groupId))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(()=>{
+    getGroupActivities(groupId);
+  }, [])
 
   useEffect(() => {
     getGroupActivities(groupId);
@@ -103,7 +135,7 @@ export const ActivitiesProvider = ({ children }) => {
 
   return (
     <ActivitiesContext.Provider
-      value={{ activities, getGroupActivities, createActivities, patchActivities, updateActivity, deleteActivity }}
+      value={{ activities, getGroupActivities, createActivities, patchActivities, updateActivity, deleteActivity, patchSwitchArchived }}
     >
       {children}
     </ActivitiesContext.Provider>

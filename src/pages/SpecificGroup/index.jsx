@@ -1,5 +1,11 @@
-import { useParams } from 'react-router-dom'
-import { Link, Switch, Route, useRouteMatch, useHistory } from 'react-router-dom'
+import { useParams } from "react-router-dom";
+import {
+  Link,
+  Switch,
+  Route,
+  useRouteMatch,
+  useHistory,
+} from "react-router-dom";
 
 import {
   MainDashboard,
@@ -21,15 +27,16 @@ import GroupActivities from "../GroupActivities";
 
 const SpecificGroup = ({ group }) => {
   // const { id } = group
-  const history = useHistory()
-  const { location: { pathname } } = history
-  const { groupName } = useParams()
-  let { path, url } = useRouteMatch()
-
+  const history = useHistory();
+  const {
+    location: { pathname },
+  } = history;
+  const { groupName, subscribe } = useParams();
+  let { path, url } = useRouteMatch();
   return (
     <MainDashboard>
       <HeaderContainer>
-        <h2 onClick={() => history.goBack()}>
+        <h2 onClick={() => history.push("/groups")}>
           <IoIosArrowBack /> Voltar
         </h2>
       </HeaderContainer>
@@ -39,18 +46,26 @@ const SpecificGroup = ({ group }) => {
           <DividerContainer />
           <NavContainer>
             <AnimateSharedLayout transition={{ duration: 0.5 }}>
-              <Link to={`${url}/activities`} style={{width: '140px'}}>
-                ATIVIDADES 
-                { pathname.includes(`${url}/activities`) && <AnimationContainer atv layoutId="underline"/>}
+              <Link to={`${url}/activities`} style={{ width: "140px" }}>
+                ATIVIDADES
+                {pathname.includes(`${url}/activities`) && (
+                  <AnimationContainer atv layoutId="underline" />
+                )}
               </Link>
               <Link to={`${url}/goals`}>
                 METAS
-                { pathname.includes(`${url}/goals`) && <AnimationContainer layoutId="underline"/>}
+                {pathname.includes(`${url}/goals`) && (
+                  <AnimationContainer layoutId="underline" />
+                )}
               </Link>
             </AnimateSharedLayout>
           </NavContainer>
           <Switch>
-            <Route exact path={`${path}`} render={() => history.push(`${url}/activities`)}/>
+            <Route
+              exact
+              path={`${path}`}
+              render={() => history.push(`${url}/activities`)}
+            />
             <Route path={`${path}/activities`}>
               <GroupActivities />
             </Route>
@@ -58,6 +73,11 @@ const SpecificGroup = ({ group }) => {
               <GroupGoals />
             </Route>
           </Switch>
+          {subscribe === "true" ? (
+            <p>Estou incrito</p>
+          ) : (
+            <p>Não estou inscrito</p>
+          )}
         </MainMenuContainer>
       </MainContainer>
     </MainDashboard>

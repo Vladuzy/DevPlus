@@ -7,9 +7,9 @@ export const ActivityCardContainer = styled.section`
   padding: 10px;
   /* margin:10px; */
   /* margin-bottom:10px; */
-  margin: 0 auto 10px;
+  margin: 0 auto 20px;
   background-color: var(--cinza-claro);
-  height: 110px;
+  min-height: 82px;
   display: flex;
   justify-content: space-around;
 `;
@@ -23,13 +23,12 @@ export const InfoContainer = styled.section`
   h2 {
     color: var(--branco);
     font-size: 1.5rem;
-    margin-bottom: 10px;
   }
 
   h3 {
     color: var(--amarelo);
     font-size: 12px;
-    margin-bottom: 10px;
+    margin: 10px 0;
   }
 
   h4 {
