@@ -2,13 +2,14 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useGroups } from "../../providers/Groups";
-
+import { useHistory } from "react-router-dom";
 import Input from "../Input";
 import Button from "../Buttons/Button";
 
 import { FormContainer, ErrorSpanContainer, InputContainer } from "./styles";
 
 const GroupCreation = () => {
+  const history = useHistory();
   const { createGroup } = useGroups();
   const formSchemaGroup = yup.object().shape({
     name: yup
@@ -32,7 +33,14 @@ const GroupCreation = () => {
   });
 
   const onSubmitData = (data) => {
-    createGroup(data);
+    const { description, name, category } = data;
+    const newData = {
+      description: description,
+      name: name,
+      category: `DevelopingHabitus${category}`,
+    };
+    createGroup(newData);
+    history.push("/groups");
   };
 
   return (

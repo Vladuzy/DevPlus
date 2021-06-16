@@ -8,7 +8,7 @@ export const HabitsContext = createContext();
 export const HabitsProviders = ({ children }) => {
   const { token, id } = useAuth();
   const [doingHabits, setDoingHabits] = useState(() => {
-    return JSON.parse(localStorage.getItem("@User:habits")) || [];
+    return JSON.parse(localStorage.getItem("@DevelopingHabitus:habits")) || [];
   });
 
   const createHabits = (data) => {
@@ -38,7 +38,7 @@ export const HabitsProviders = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) =>  setDoingHabits([...doingHabits, response]) )
+      .then((response) => setDoingHabits([...doingHabits, response]))
       .then(() => getHabits())
       .catch((err) => console.log(err));
   };
