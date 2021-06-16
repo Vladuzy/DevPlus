@@ -7,9 +7,9 @@ export const ActivityCardContainer = styled.section`
   padding: 10px;
   /* margin:10px; */
   /* margin-bottom:10px; */
-  margin: 0 auto 10px;
+  margin: 0 auto 20px;
   background-color: var(--cinza-claro);
-  height: 110px;
+  min-height: 82px;
   display: flex;
   justify-content: space-around;
 `;
