@@ -28,7 +28,6 @@ import {useAuth} from "../../providers/AuthProvider"
 
 // import Activity from "../Activity"
 import GroupActivities from "../GroupActivities";
-import { FaPlusSquare } from "react-icons/fa";
 
 const SpecificGroup = ({ group }) => {
   // const { id } = group
