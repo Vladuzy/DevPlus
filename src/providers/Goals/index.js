@@ -15,14 +15,14 @@ export const GoalsProvider = ({ children }) => {
     return JSON.parse(localStorage.getItem("@DevelopingHabitus:goals")) || [];
   });
   const [groupId, setGroupId] = useState(() => {
-    return parseInt(localStorage.getItem("@DevelopingHabitus:goalId")) || "";
+    return parseInt(localStorage.getItem("@DevelopingHabitus:groupId")) || "";
   });
 
   const getGoals = (id="") => {
     //pegando o id do grupo
     setGroupId(id)
     //salvando no localStorage
-    localStorage.setItem( "@DevelopingHabitus:goalId", JSON.stringify(id))
+    localStorage.setItem( "@DevelopingHabitus:groupId", JSON.stringify(id))
     //Lembrar de passar o Id do grupo
     if(id !== ""){
       api

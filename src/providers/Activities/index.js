@@ -9,7 +9,9 @@ export const ActivitiesProvider = ({ children }) => {
   const [activities, setActivities] = useState(() => {
     return JSON.parse(localStorage.getItem("@DevelopingHabitus:activities")) || [];
   });
-  const [groupId, setGroupId] = useState("")
+  const [groupId, setGroupId] =  useState(() => {
+    return parseInt(localStorage.getItem("@DevelopingHabitus:groupId")) || "";
+  });
 
   const createActivities = (data) => {
     api
