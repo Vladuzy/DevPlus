@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useActivity } from "../../providers/Activities";
-
+import { useHistory } from "react-router-dom";
 import Input from "../Input";
 import Button from "../Buttons/Button";
 
@@ -10,11 +10,13 @@ import {
   FormContainer,
   ErrorSpanContainer,
   InputContainer,
-  CalendarInput,
 } from "./styles";
 
 const AtivityCreation = ({ id }) => {
   const { createActivities } = useActivity();
+  
+  const history = useHistory()
+
   const formSchemaHabit = yup.object().shape({
     title: yup
       .string()
@@ -30,12 +32,13 @@ const AtivityCreation = ({ id }) => {
   } = useForm({
     resolver: yupResolver(formSchemaHabit),
   });
+  
 
   const onSubmitData = (data) => {
-    const group = 636;
     const realization_time = "1000-10-10T00:00:00Z";
-    const newData = { ...data, realization_time, group };
+    const newData = { ...data, realization_time};
     createActivities(newData);
+    history.goBack();
   };
 
   return (

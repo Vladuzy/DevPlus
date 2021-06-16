@@ -9,6 +9,7 @@ import ButtonEdit from "../Buttons/ButtonEdit";
 import { FaCheck } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { RiArrowGoBackLine } from "react-icons/ri";
+import { useHistory } from "react-router-dom";
 
 const ActivityCard = ({
   activity,
@@ -19,6 +20,12 @@ const ActivityCard = ({
 }) => {
   const { id, title, realization_time } = activity;
   const date = new Date(realization_time);
+
+  const history = useHistory();
+
+  const handleEditionActivity = (value) => {
+    history.push(value);
+  };
   return (
     <ActivityCardContainer key={id}>
       <ButtonClose onClick={() => deleteActivity(activity)}>
@@ -39,7 +46,7 @@ const ActivityCard = ({
         <InfoContainer>
           <h2>{title}</h2>
         </InfoContainer>
-        <ButtonEdit></ButtonEdit>
+        <ButtonEdit  onClick={() => handleEditionActivity(`/edition/Atividade/${id}`)}></ButtonEdit>
         <ButtonCheck onClick={() => patchSwitchArchived(activity, "archieved")}>
           <FaCheck className="check" />
         </ButtonCheck>

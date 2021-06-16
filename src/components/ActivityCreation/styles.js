@@ -2,23 +2,23 @@ import styled from 'styled-components'
 import Input from '../Input'
 
 export const FormContainer = styled.form`
-  height: 150px;
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
   input::placeholder {
-    color: var(--amarelo);
+    color: var(--verde);
   }
 
   button {
-    background-color: var(--amarelo);
+    background-color: var(--verde);
     color: var(--cinza-escuro);
   }
 `
 
 export const CalendarInput = styled(Input)`
-  color: var(--amarelo);
+  color: var(--verde);
 `
 
 export const InputContainer = styled.div`

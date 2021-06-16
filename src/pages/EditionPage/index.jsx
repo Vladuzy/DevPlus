@@ -16,7 +16,7 @@ import ActivityEdition from "../../components/ActivityEdition";
 import GoalsEdition from "../../components/GoalsEdition";
 
 const EditionPage = ({ id }) => {
-  const { habitId, type } = useParams();
+  const { cardId, type } = useParams();
   const history = useHistory();
 
   return (
@@ -30,10 +30,10 @@ const EditionPage = ({ id }) => {
         <TitleEditingContainer>Edição de {type}</TitleEditingContainer>
         <DividerContainer />
 
-        {type === "Habito" && <HabitEdition habitId={habitId} />}
+        {type === "Habito" && <HabitEdition cardId={cardId} />}
         {type === "Grupo" && <GroupEdition />}
-        {type === "Atividade" && <ActivityEdition />}
-        {type === "Meta" && <GoalsEdition />}
+        {type === "Atividade" && <ActivityEdition cardId={cardId} />}
+        {type === "Meta" && <GoalsEdition cardId={cardId} />}
       </MainContainer>
     </BackgroundContainer>
   );
