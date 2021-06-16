@@ -7,7 +7,7 @@ import {
   useHistory,
 } from "react-router-dom";
 
-import {useEffect} from "react"
+import { useEffect } from "react";
 
 import {
   MainDashboard,
@@ -18,13 +18,15 @@ import {
   MainMenuContainer,
   GroupNameContainer,
   DividerContainer,
+  EditNameContainer,
 } from "./styles";
 import { AnimateSharedLayout } from "framer-motion";
 import { IoIosArrowBack } from "react-icons/io";
 import ButtonExitGroup from "../../components/Buttons/ButtonExitGroup";
 import ButtonOpenGroup from "../../components/Buttons/ButtonOpenGroup";
 import GroupGoals from "../GroupGoals";
-import {useAuth} from "../../providers/AuthProvider"
+import ButtonEditGroup from "../../components/Buttons/ButtonEditGroup";
+import { useAuth } from "../../providers/AuthProvider";
 
 // import Activity from "../Activity"
 import GroupActivities from "../GroupActivities";
@@ -32,7 +34,7 @@ import GroupActivities from "../GroupActivities";
 const SpecificGroup = ({ group }) => {
   // const { id } = group
   // subscribe
-  const {setIsSubscribe, isSubscribe} = useAuth();
+  const { setIsSubscribe, isSubscribe } = useAuth();
   const history = useHistory();
   const {
     location: { pathname },
@@ -40,15 +42,18 @@ const SpecificGroup = ({ group }) => {
   const { groupName, subscribe } = useParams();
 
   useEffect(() => {
-    if(subscribe === "true"){
-      setIsSubscribe(true)
-    }else{
-      setIsSubscribe(false)
+    if (subscribe === "true") {
+      setIsSubscribe(true);
+    } else {
+      setIsSubscribe(false);
     }
-  }, [])
-  console.log(isSubscribe)
+  }, []);
+  console.log(isSubscribe);
 
   let { path, url } = useRouteMatch();
+  const handleEditGroup = (value) => {
+    history.push(value);
+  };
   return (
     <MainDashboard>
       <HeaderContainer>
@@ -58,7 +63,12 @@ const SpecificGroup = ({ group }) => {
       </HeaderContainer>
       <MainContainer>
         <MainMenuContainer>
-          <GroupNameContainer>{groupName}</GroupNameContainer>
+          <EditNameContainer>
+            <GroupNameContainer>{groupName}</GroupNameContainer>
+            <ButtonEditGroup
+              onClick={() => handleEditGroup("/edition/Grupo")}
+            />
+          </EditNameContainer>
           <DividerContainer />
           <NavContainer>
             <AnimateSharedLayout transition={{ duration: 0.5 }}>

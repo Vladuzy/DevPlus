@@ -22,7 +22,7 @@ const EditionPage = ({ id }) => {
   return (
     <BackgroundContainer>
       <HeaderContainer>
-        <h2 onClick={() => history.goBack()}>
+        <h2 onClick={() => history.push("/groups/all")}>
           <IoIosArrowBack /> Voltar
         </h2>
       </HeaderContainer>

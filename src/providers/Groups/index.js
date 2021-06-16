@@ -42,7 +42,7 @@ export const GroupsProviders = ({ children }) => {
         });
       })
       .catch((_) =>
-        toast.success("Você já faz parte da aventura", {
+        toast.success("Você já faz parte da aventura ;)", {
           autoClose: 1500,
           hideProgressBar: true,
           closeOnClick: true,

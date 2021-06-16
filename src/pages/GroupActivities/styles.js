@@ -1,23 +1,23 @@
-import styled from 'styled-components'
-import { motion } from 'framer-motion'
+import styled from "styled-components";
+import { motion } from "framer-motion";
 
 export const MainContainer = styled.main`
   /* height: 90vh; */
   background-color: var(--cinza-escuro);
 
   border-top-left-radius: 30px;
-`
+`;
 export const MainMenuContainer = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-`
+`;
 
 export const DividerContainer = styled.div`
   margin: 0 auto;
   width: 80%;
   border: 1px solid var(--cinza-claro);
-`
+`;
 
 export const NavContainer = styled.nav`
   height: 2rem;
@@ -33,7 +33,7 @@ export const NavContainer = styled.nav`
 
     position: relative;
   }
-`
+`;
 
 export const AnimationContainer = styled(motion.div)`
   width: 80px;
@@ -41,4 +41,4 @@ export const AnimationContainer = styled(motion.div)`
 
   position: absolute;
   bottom: -10px;
-`
+`;

@@ -2,13 +2,14 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useGroups } from "../../providers/Groups";
-
+import { useHistory } from "react-router-dom";
 import Input from "../Input";
 import Button from "../Buttons/Button";
 
 import { FormContainer, ErrorSpanContainer, InputContainer } from "./styles";
 
-const GroupEdition = ({ id }) => {
+const GroupEdition = () => {
+  const history = useHistory();
   const { editGroups } = useGroups();
   const formSchemaGroup = yup.object().shape({
     name: yup.string().max(20, "Máximo de 20 caracteres."),
@@ -26,9 +27,14 @@ const GroupEdition = ({ id }) => {
   });
 
   const onSubmitData = (data) => {
-    console.log(data);
-    id = 579;
-    editGroups(data, id);
+    const { description, name, category } = data;
+    const newData = {
+      description: description,
+      name: name,
+      category: `DevelopingHabitus${category}`,
+    };
+    editGroups(newData);
+    history.push("/groups/all");
   };
 
   return (
