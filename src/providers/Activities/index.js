@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import api from "../../services";
 import { useAuth } from "../AuthProvider";
 
@@ -78,6 +79,14 @@ export const ActivitiesProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
+  const updateActivity = (data, id) => {
+    api.patch(`/activities/${id}/`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then((res) => toast.success('alterado com sucesso!!'))
+      .catch(_ => toast.error('erro ao atualizar a atividade!'))
+  }
 
   const patchSwitchArchived = (activity, action) => {
     
@@ -93,7 +102,6 @@ export const ActivitiesProvider = ({ children }) => {
             realization_time: data
       }
     }
-
     api
       .patch(`/activities/${activity.id}/`, activityUpdate, {
         headers: {
@@ -127,7 +135,7 @@ export const ActivitiesProvider = ({ children }) => {
 
   return (
     <ActivitiesContext.Provider
-      value={{ activities, getGroupActivities, createActivities, patchActivities, deleteActivity, patchSwitchArchived }}
+      value={{ activities, getGroupActivities, createActivities, patchActivities, updateActivity, deleteActivity, patchSwitchArchived }}
     >
       {children}
     </ActivitiesContext.Provider>
