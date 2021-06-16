@@ -22,4 +22,8 @@ export const MenuFooterImg = styled.footer`
 
 export const FooterContainer = styled.div`
   background-color: var(--cinza-escuro);
+
+  @media (min-width: 768px){
+    display: none;
+  }
 `;
