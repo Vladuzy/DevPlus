@@ -65,9 +65,13 @@ const SpecificGroup = ({ group }) => {
         <MainMenuContainer>
           <EditNameContainer>
             <GroupNameContainer>{groupName}</GroupNameContainer>
-            <ButtonEditGroup
-              onClick={() => handleEditGroup("/edition/Grupo")}
-            />
+            {
+              isSubscribe && (
+                <ButtonEditGroup
+                  onClick={() => handleEditGroup("/edition/Grupo")}
+                />
+              )
+            }
           </EditNameContainer>
           <DividerContainer />
           <NavContainer>
