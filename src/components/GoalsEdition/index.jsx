@@ -13,8 +13,8 @@ import {
     SelectContainer,
 } from "./styles";
 
-const GoalsEdition = ({ id }) => {
-    const { createGoals } = useGoals();
+const GoalsEdition = ({ id = 1614}) => {
+    const { updateGoals } = useGoals();
     const formSchemaHabit = yup.object().shape({
         title: yup
         .string()
@@ -25,6 +25,7 @@ const GoalsEdition = ({ id }) => {
         .string()
         .required("Campo Obrigatório.")
         .oneOf(["Fácil", "Médio", "Difícil"], "Escolha uma das 3 opções."),
+        how_much_achieved: yup.number().required('Campo Obrigatório.').max(100, 'Maximo progressão de 100%')
     });
     const {
         handleSubmit,
@@ -35,9 +36,7 @@ const GoalsEdition = ({ id }) => {
     });
 
     const onSubmitData = (data) => {
-        const goal = id;
-        const newData = { ...data, goal };
-        //fazer a parte do update do provider
+        updateGoals(data, id)
     };
 
     return (
@@ -61,6 +60,17 @@ const GoalsEdition = ({ id }) => {
             </SelectContainer>
             {errors.difficulty?.message && (
             <ErrorSpanContainer>{errors.difficulty?.message}</ErrorSpanContainer>
+            )}
+        </InputContainer>
+        <InputContainer>
+            <Input
+            register={register}
+            name="how_much_achieved"
+            placeholder={"de 0 a 100 em progressão"}
+            type='number'
+            />
+            {errors.title?.message && (
+            <ErrorSpanContainer>{errors.title?.message}</ErrorSpanContainer>
             )}
         </InputContainer>
         <Button>Editar Meta</Button>

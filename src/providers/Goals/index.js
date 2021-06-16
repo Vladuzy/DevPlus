@@ -3,6 +3,7 @@ import { createContext, useState, useEffect, useContext } from "react";
 import { AuthContext } from "../AuthProvider";
 
 import api from "../../services";
+import { toast } from "react-toastify";
 
 export const GoalsContext = createContext();
 
@@ -89,6 +90,15 @@ export const GoalsProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
+  const updateGoals = (data, id) => {
+    api.patch(`/goals/${id}/`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(_ => toast.success('Meta atualizada com sucesso!!!'))
+    .catch(_ => toast.error('erro em atualizar a meta, tente de novo!'))
+  }
+
   const deleteGoal = (goal) => {
     //Lembrar de receber o goal por props na função quando pegar no card
     //Lembrar de passar o Id do goal (goal.id)
@@ -113,7 +123,7 @@ export const GoalsProvider = ({ children }) => {
 
   return (
     <GoalsContext.Provider
-      value={{ goals, getGoals, createGoals, patchGoal, deleteGoal }}
+      value={{ goals, getGoals, createGoals, patchGoal, updateGoals, deleteGoal }}
     >
       {children}
     </GoalsContext.Provider>

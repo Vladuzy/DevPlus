@@ -83,6 +83,7 @@ export const ActivitiesProvider = ({ children }) => {
         Authorization: `Bearer ${token}`
       }
     }).then((res) => toast.success('alterado com sucesso!!'))
+      .catch(_ => toast.error('erro ao atualizar a atividade!'))
   }
 
   const deleteActivity = () => {

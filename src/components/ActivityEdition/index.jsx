@@ -12,7 +12,7 @@ import {
     CalendarInput,
 } from "./styles";
 
-const ActivityEdition = ({ id }) => {
+const ActivityEdition = ({ id = 690 }) => {
     const { updateActivity } = useActivity()
     const formSchemaActivity = yup.object().shape({
     title: yup
