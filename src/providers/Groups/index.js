@@ -9,7 +9,7 @@ export const GroupsProviders = ({ children }) => {
   const { token } = useAuth();
   const [groups, setGroups] = useState([]);
   const [groupsSubs, setGroupsSubs] = useState([]);
-  const [groupId] = useState(() => {
+  const [groupId, setGroupId] = useState(() => {
     return parseInt(localStorage.getItem("@DevelopingHabitus:groupId")) || "";
   });
 
@@ -24,14 +24,29 @@ export const GroupsProviders = ({ children }) => {
   }, []);
 
   const subsInAGroup = () => {
+    console.log(groupId);
     api
-      .post(`/groups/${groupId}/subscribe/`, {
+      .post(`/groups/${groupId}/subscribe/`, null, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI0Mjk1ODg4LCJqdGkiOiI0MjIxMjhjMmZjZDM0OTgyOWYxZWQ5NzgzMmNjOThhYiIsInVzZXJfaWQiOjcxOX0.1Rq4pBuHPn-KCSh9AE3SRLjVEvgAPxcVRUJaRWYM99w`,
         },
       })
-      .then((_) => toast.success("usuario inserido no grupo"))
-      .catch((_) => toast.error("usuario já está no grupo"));
+      .then((_) => {
+        getGroups();
+        getGroupsSubs();
+        toast.success("Mais uma Aventura ;)", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
+      })
+      .catch((_) =>
+        toast.success("Você já faz parte da aventura", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        })
+      );
   };
 
   const createGroup = (data) => {
@@ -44,6 +59,8 @@ export const GroupsProviders = ({ children }) => {
         },
       })
       .then((response) => {
+        getGroups();
+        getGroupsSubs();
         setGroups([...groups, response.data]);
         toast.success("Grupo criado com sucesso!!!", {
           autoClose: 1500,
@@ -81,6 +98,7 @@ export const GroupsProviders = ({ children }) => {
         },
       })
       .then((_) => {
+        getGroups();
         getGroupsSubs();
         toast.success("Sucesso ao editar grupo!");
       })
@@ -88,6 +106,8 @@ export const GroupsProviders = ({ children }) => {
   };
 
   const unsubscribe = () => {
+    console.log(groupId);
+
     api
       .delete(`/groups/${groupId}/unsubscribe/`, {
         headers: {
@@ -95,11 +115,16 @@ export const GroupsProviders = ({ children }) => {
         },
       })
       .then((_) => {
+        getGroups();
         getGroupsSubs();
-        toast.success("Sucesso ao sair grupo!");
+        toast.success("Sucesso ao sair do grupo!", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
       })
-      .catch((_) => toast.error("Erro ao sair grupo."));
-  }
+      .catch((error) => console.log(error));
+  };
 
   return (
     <GroupsContext.Provider
@@ -111,7 +136,8 @@ export const GroupsProviders = ({ children }) => {
         createGroup,
         getGroupsSubs,
         editGroups,
-        unsubscribe
+        unsubscribe,
+        setGroupId,
       }}
     >
       {children}
