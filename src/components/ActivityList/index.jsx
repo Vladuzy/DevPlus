@@ -16,15 +16,17 @@ const ActivityList = ({showArchived}) => {
         {
           (showArchived)?(
             activities.map((activity) => 
+             
               (
-                (activity.realization_time !== "") && (
-                  <ActivityCard activity={activity} patchActivities={patchActivities} />
+                (activity.realization_time === "") && (
+                   console.log(activity.realization_time)
+                  // <ActivityCard activity={activity} patchActivities={patchActivities} />
                 )
               ))
           ) : (
             activities.map((activity) => 
             (
-              (activity.realization_time === "") && (
+              (activity.realization_time !== "") && (
                 <ActivityCard activity={activity} patchActivities={patchActivities} />
               )
            ))

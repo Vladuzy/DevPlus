@@ -21,6 +21,7 @@ export const HabitsProviders = ({ children }) => {
       .then((response) => {
         toast.success("Criou habito com sucesso");
         setDoingHabits([...doingHabits, response]);
+        getHabits();
       })
       .catch((_) => {
         toast.error("Erro ao criar habito");
@@ -37,10 +38,7 @@ export const HabitsProviders = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(
-        (response) => console.log(response)
-        // setDoingHabits([...doingHabits, response])
-      )
+      .then((response) =>  setDoingHabits([...doingHabits, response]) )
       .then(() => getHabits())
       .catch((err) => console.log(err));
   };
