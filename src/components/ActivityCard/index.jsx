@@ -15,6 +15,7 @@ const ActivityCard = ({
   patchActivities,
   deleteActivity,
   showArchived,
+  patchSwitchArchived
 }) => {
   const { id, title, realization_time } = activity;
   const date = new Date(realization_time);
@@ -23,19 +24,26 @@ const ActivityCard = ({
       <ButtonClose onClick={() => deleteActivity(activity)}>
         <IoClose className="close" />
       </ButtonClose>
-      <InfoContainer>
-        <h2>{title}</h2>
-        <h3>{date.toLocaleTimeString() + "h - " + date.toLocaleDateString()}</h3>
-      </InfoContainer>
-      <ButtonEdit></ButtonEdit>
       {showArchived ? (
-        <ButtonUncheck onClick={() => patchActivities(activity, "activate")}>
+        <>
+        <InfoContainer>
+          <h2>{title}</h2>
+          <h3>{date.toLocaleTimeString().slice(0,5) + "h - " + date.toLocaleDateString()}</h3>
+        </InfoContainer>
+        <ButtonUncheck onClick={() => patchSwitchArchived(activity, "activate")}>
           <RiArrowGoBackLine className="uncheck" />
         </ButtonUncheck>
+        </>
       ) : (
-        <ButtonCheck onClick={() => patchActivities(activity, "archieved")}>
+        <>
+        <InfoContainer>
+          <h2>{title}</h2>
+        </InfoContainer>
+        <ButtonEdit></ButtonEdit>
+        <ButtonCheck onClick={() => patchSwitchArchived(activity, "archieved")}>
           <FaCheck className="check" />
         </ButtonCheck>
+        </>
       )}
     </ActivityCardContainer>
   );

@@ -21,7 +21,7 @@ const AtivityCreation = ({ id }) => {
       .required("Campo Obrigatório.")
       .max(20, "Máximo de 20 caracteres."),
 
-    realization_time: yup.string().required("Campo Obrigatório."),
+    // realization_time: yup.string().required("Campo Obrigatório."),
   });
   const {
     handleSubmit,
@@ -32,8 +32,9 @@ const AtivityCreation = ({ id }) => {
   });
 
   const onSubmitData = (data) => {
-    const group = id;
-    const newData = { ...data, group };
+    const group = 636;
+    const realization_time = "1000-10-10T00:00:00Z";
+    const newData = { ...data, realization_time, group };
     createActivities(newData);
   };
 
@@ -49,7 +50,7 @@ const AtivityCreation = ({ id }) => {
           <ErrorSpanContainer>{errors.title?.message}</ErrorSpanContainer>
         )}
       </InputContainer>
-      <InputContainer>
+      {/* <InputContainer>
         <CalendarInput
           register={register}
           name="realization_time"
@@ -61,7 +62,7 @@ const AtivityCreation = ({ id }) => {
             {errors.realization_time?.message}
           </ErrorSpanContainer>
         )}
-      </InputContainer>
+      </InputContainer> */}
       <Button>Criar Atividade</Button>
     </FormContainer>
   );

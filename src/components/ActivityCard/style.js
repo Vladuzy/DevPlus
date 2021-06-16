@@ -23,13 +23,12 @@ export const InfoContainer = styled.section`
   h2 {
     color: var(--branco);
     font-size: 1.5rem;
-    margin-bottom: 10px;
   }
 
   h3 {
     color: var(--amarelo);
     font-size: 12px;
-    margin-bottom: 10px;
+    margin: 10px 0;
   }
 
   h4 {

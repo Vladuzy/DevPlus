@@ -7,7 +7,7 @@ import {
 } from "./style";
 
 const ActivityList = ({showArchived}) => {
-  const { activities, patchActivities } = useActivity();
+  const { activities, patchActivities, deleteActivity, patchSwitchArchived } = useActivity();
 
   console.log(activities);
 
@@ -18,16 +18,27 @@ const ActivityList = ({showArchived}) => {
             activities.map((activity) => 
              
               (
-                (activity.realization_time === "") && (
-                   console.log(activity.realization_time)
-                  // <ActivityCard activity={activity} patchActivities={patchActivities} />
+                (  Date.parse(activity.realization_time) !== Date.parse("1000-10-10T00:00:00Z") ) && (
+                  <ActivityCard 
+                    showArchived={true} 
+                    activity={activity} 
+                    patchActivities={patchActivities} 
+                    deleteActivity={deleteActivity}
+                    patchSwitchArchived = {patchSwitchArchived}
+                  />
                 )
               ))
           ) : (
             activities.map((activity) => 
             (
-              (activity.realization_time !== "") && (
-                <ActivityCard activity={activity} patchActivities={patchActivities} />
+              (Date.parse(activity.realization_time) === Date.parse("1000-10-10T00:00:00Z")) && (
+                <ActivityCard 
+                  showArchived={false} 
+                  activity={activity} 
+                  deleteActivity={deleteActivity} 
+                  patchActivities={patchActivities} 
+                  patchSwitchArchived = {patchSwitchArchived}
+                />
               )
            ))
           )
