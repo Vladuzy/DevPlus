@@ -1,38 +1,57 @@
-import {GoalCardContainer, InfoContainer, ButtonClose, ButtonCheck, ButtonUncheck, ProgressBar} from "./style"
+import {
+  GoalCardContainer,
+  InfoContainer,
+  ButtonClose,
+  ButtonCheck,
+  TitleCategory,
+  ButtonUncheck,
+  CategoryContainer,
+  ButtonConluds,
+  ProgressBar,
+} from "./style";
+import ButtonEdit from "../Buttons/ButtonEdit";
+import { FaCheck } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
+import { RiArrowGoBackLine } from "react-icons/ri";
 
-import { FaCheck } from 'react-icons/fa';
-import { IoClose } from "react-icons/io5"
-import { RiArrowGoBackLine } from "react-icons/ri"
+const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived }) => {
+  //Desestruturar
+  //Tentar fazer uma barrinha em função de 100%
+  //Lembrar de limitar o tamanho do titulo
+  //Progresso de 0 a 100
+  //Limitar Dificuldade
+  //Verificar se está escrito
 
-const GoalCard = ({goal, patchGoal, deleteGoal, showArchived}) => {
-    //Desestruturar
-    //Tentar fazer uma barrinha em função de 100%
-    //Lembrar de limitar o tamanho do titulo
-    //Progresso de 0 a 100
-    //Limitar Dificuldade
-    //Verificar se está escrito
+  const { id, title, difficulty, how_much_achieved } = goal;
 
-    const {id, title, difficulty, how_much_achieved} = goal;
-
-    return(
-        <GoalCardContainer key={id}>
-            <ButtonClose onClick={ () => deleteGoal(goal)}><IoClose className="close"/></ButtonClose>
-            <InfoContainer>
-                <h2>{title}</h2>
-                <h3>{difficulty}</h3>
-                <ProgressBar progress={how_much_achieved}>
-                    <span></span>
-                </ProgressBar>
-            </InfoContainer>
-            {
-                (showArchived)? (
-                    <ButtonUncheck onClick={ () => patchGoal(goal, "activate")}><RiArrowGoBackLine className="uncheck" /></ButtonUncheck>
-                ) : (
-                    <ButtonCheck onClick={ () => patchGoal(goal, "archieved")}><FaCheck className="check" /></ButtonCheck>
-                )
-            }
-        </GoalCardContainer>
-    )
-}
+  return (
+    <GoalCardContainer key={id}>
+      <ButtonClose onClick={() => deleteGoal(goal)}>
+        <IoClose className="close" />
+      </ButtonClose>
+      <InfoContainer>
+        <TitleCategory>
+          <CategoryContainer>{title}</CategoryContainer>
+          <p>{difficulty}</p>
+        </TitleCategory>
+        <ProgressBar progress={how_much_achieved}>
+          <span></span>
+        </ProgressBar>
+      </InfoContainer>
+      {showArchived ? (
+        <ButtonUncheck onClick={() => patchGoal(goal, "activate")}>
+          <RiArrowGoBackLine className="uncheck" />
+        </ButtonUncheck>
+      ) : (
+        <ButtonConluds>
+          <ButtonEdit className="ButtonEdit"></ButtonEdit>
+          <ButtonCheck onClick={() => patchGoal(goal, "archieved")}>
+            <FaCheck className="check" />
+          </ButtonCheck>
+        </ButtonConluds>
+      )}
+    </GoalCardContainer>
+  );
+};
 
 export default GoalCard;

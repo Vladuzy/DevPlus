@@ -7,6 +7,6 @@ export const ButtonEditContainer = styled.button`
   .edit {
     width: 28px;
     height: 28px;
-    color: var(--cinza-escuro);
+    color: var(--amarelo);
   }
 `;
