@@ -15,10 +15,10 @@ import {
 } from "./styles";
 import { useAuth } from "../../providers/AuthProvider";
 
-const HabitEdition = ({ habitId }) => {
+const HabitEdition = ({ cardId }) => {
   const history = useHistory();
   const { updateTextHabits } = useHabits();
-  const habit = { id: habitId };
+  const habit = { id: cardId };
   const formSchemaHabit = yup.object().shape({
     title: yup
       .string()

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const BackgroundContainer = styled.main`
   background-color: ${(props) =>
-    props.type === "Habito" ? "var(--verde)" : "var(--amarelo)"};
+    (props.type === "Habito" || props.type === "Atividade" || props.type === "Meta" ) ? "var(--verde)" : "var(--amarelo)"};
 `;
 
 export const HeaderContainer = styled.header`
