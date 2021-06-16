@@ -12,7 +12,8 @@ import {
     CalendarInput,
 } from "./styles";
 
-const ActivityEdition = ({ ActivityId }) => {
+const ActivityEdition = ({ id }) => {
+    const { updateActivity } = useActivity()
     const formSchemaActivity = yup.object().shape({
     title: yup
         .string()
@@ -30,8 +31,18 @@ const ActivityEdition = ({ ActivityId }) => {
 
     const onSubmitData = (data) => {
     const { title, realization_time } = data
+    let changes = {}
     if(realization_time === ''){
-        
+        changes = {
+            title: title,
+        }
+        updateActivity(changes, id)
+    }else{
+        changes = {
+            title: title,
+            realization_time: realization_time
+        }
+        updateActivity(changes, id)
     }
     };
 
