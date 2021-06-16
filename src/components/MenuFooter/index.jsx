@@ -21,6 +21,8 @@ const MenuFooter = () => {
 
   const handleCloseApplication = (value) => {
     setIsAuthenticated(false);
+    setInHome(true);
+    setInGroups(false);
     localStorage.clear();
     sendTo(value);
   };

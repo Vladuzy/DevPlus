@@ -1,12 +1,15 @@
 import ActivityCard from "../ActivityCard";
-
+import { useHistory } from "react-router";
 import { useActivity } from "../../providers/Activities";
-
+import ButtonAdd from "../Buttons/ButtonAdd";
 import { ActivitiesListContainer } from "./style";
 
 const ActivityList = ({showArchived}) => {
   const { activities, patchActivities, deleteActivity, patchSwitchArchived } = useActivity();
-
+  const history = useHistory();
+  const handleActivity = (value) => {
+    history.push(value);
+  };
   return (
       <ActivitiesListContainer>
         {
@@ -39,7 +42,12 @@ const ActivityList = ({showArchived}) => {
            ))
           )
         }
+       {/* handleGroups("/creation/Grupo") */}
+       {!showArchived && (
+      <ButtonAdd type="Atividade" onClick={() => handleActivity("/creation/Atividade")} />
+      )}
     </ActivitiesListContainer>
+    
   );
 };
 

@@ -7,11 +7,11 @@ export const FormContainer = styled.form`
   justify-content: space-between;
 
   input::placeholder {
-    color: var(--amarelo);
+    color: var(--verde);
   }
 
   button {
-    background-color: var(--amarelo);
+    background-color: var(--verde);
     color: var(--cinza-escuro);
   }
 `
@@ -24,7 +24,7 @@ export const SelectContainer = styled.select`
   font-size: 16px;
   font-family: "Roboto", sans-serif;
   border: none;
-  color: var(--amarelo);
+  color: var(--verde);
   padding-left: 15px;
   font-weight: 300;
   

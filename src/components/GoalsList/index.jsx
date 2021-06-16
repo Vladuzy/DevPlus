@@ -11,8 +11,6 @@ import { useHistory, useParams } from "react-router-dom";
 const GoalsList = ({ showArchived }) => {
   //Da para listar os achieved true ou false (botões para ficar alternando)
   const history = useHistory();
-  const { type } = useParams();
-
   const handleGoals = (value) => {
     history.push(value);
   };
@@ -47,11 +45,9 @@ const GoalsList = ({ showArchived }) => {
               )
           )}
 
-      {/* {showArchived ? (
-        <ButtonAdd onClick={() => handleGoals("/edition/Meta")} />
-      ) : (
-        <ButtonAdd onClick={() => handleGoals("/edition/Meta")} />
-      )} */}
+          {!showArchived && (
+            <ButtonAdd type="Atividade" onClick={() => handleGoals("/creation/Meta")} />
+          )}
     </GoalsListContainer>
   );
 };

@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Input from "../Input";
 import Button from "../Buttons/Button";
 import { useActivity } from "../../providers/Activities";
-
+import { useHistory } from "react-router-dom";
 import {
     FormContainer,
     ErrorSpanContainer,
@@ -12,8 +12,11 @@ import {
     CalendarInput,
 } from "./styles";
 
-const ActivityEdition = ({ id = 690 }) => {
+const ActivityEdition = ({ cardId }) => {
     const { updateActivity } = useActivity()
+
+    const history = useHistory()
+
     const formSchemaActivity = yup.object().shape({
     title: yup
         .string()
@@ -36,14 +39,16 @@ const ActivityEdition = ({ id = 690 }) => {
         changes = {
             title: title,
         }
-        updateActivity(changes, id)
+        updateActivity(changes, cardId)
     }else{
         changes = {
             title: title,
             realization_time: realization_time
         }
-        updateActivity(changes, id)
+        updateActivity(changes, cardId)
     }
+
+    history.goBack();
     };
 
     return (
@@ -59,6 +64,7 @@ const ActivityEdition = ({ id = 690 }) => {
         )}
         </InputContainer>
         <InputContainer>
+            <label for="realization_time">Data de Realização:</label>
             <CalendarInput
                 register={register}
                 name="realization_time"
