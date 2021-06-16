@@ -7,6 +7,8 @@ import {
   useHistory,
 } from "react-router-dom";
 
+import { useEffect } from "react";
+
 import {
   MainDashboard,
   HeaderContainer,
@@ -24,17 +26,30 @@ import ButtonExitGroup from "../../components/Buttons/ButtonExitGroup";
 import ButtonOpenGroup from "../../components/Buttons/ButtonOpenGroup";
 import GroupGoals from "../GroupGoals";
 import ButtonEditGroup from "../../components/Buttons/ButtonEditGroup";
+import { useAuth } from "../../providers/AuthProvider";
 
 // import Activity from "../Activity"
 import GroupActivities from "../GroupActivities";
 
 const SpecificGroup = ({ group }) => {
   // const { id } = group
+  // subscribe
+  const { setIsSubscribe, isSubscribe } = useAuth();
   const history = useHistory();
   const {
     location: { pathname },
   } = history;
   const { groupName, subscribe } = useParams();
+
+  useEffect(() => {
+    if (subscribe === "true") {
+      setIsSubscribe(true);
+    } else {
+      setIsSubscribe(false);
+    }
+  }, []);
+  console.log(isSubscribe);
+
   let { path, url } = useRouteMatch();
   const handleEditGroup = (value) => {
     history.push(value);

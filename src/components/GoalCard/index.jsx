@@ -15,6 +15,8 @@ import { IoClose } from "react-icons/io5";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
 
+import { useAuth } from "../../providers/AuthProvider";
+
 const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived }) => {
   //Desestruturar
   //Tentar fazer uma barrinha em função de 100%
@@ -23,7 +25,7 @@ const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived }) => {
   //Limitar Dificuldade
   //Verificar se está escrito
   const history = useHistory();
-
+  const { isSubscribe } = useAuth();
   const handleEditionGoal = (value) => {
     history.push(value);
   };
@@ -32,32 +34,46 @@ const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived }) => {
 
   return (
     <GoalCardContainer key={id}>
-      <ButtonClose onClick={() => deleteGoal(goal)}>
-        <IoClose className="close" />
-      </ButtonClose>
-      <InfoContainer>
-        <TitleCategory>
-          <CategoryContainer>{title}</CategoryContainer>
-          <p>{difficulty}</p>
-        </TitleCategory>
-        <ProgressBar progress={how_much_achieved}>
-          <span></span>
-        </ProgressBar>
-      </InfoContainer>
-      {showArchived ? (
-        <ButtonUncheck onClick={() => patchGoal(goal, "activate")}>
-          <RiArrowGoBackLine className="uncheck" />
-        </ButtonUncheck>
+      {isSubscribe ? (
+        <>
+          <ButtonClose onClick={() => deleteGoal(goal)}>
+            <IoClose className="close" />
+          </ButtonClose>
+          <InfoContainer>
+            <TitleCategory>
+              <CategoryContainer>{title}</CategoryContainer>
+              <p>{difficulty}</p>
+            </TitleCategory>
+            <ProgressBar progress={how_much_achieved}>
+              <span></span>
+            </ProgressBar>
+          </InfoContainer>
+          {showArchived ? (
+            <ButtonUncheck onClick={() => patchGoal(goal, "activate")}>
+              <RiArrowGoBackLine className="uncheck" />
+            </ButtonUncheck>
+          ) : (
+            <ButtonConluds>
+              <ButtonEdit
+                className="ButtonEdit"
+                onClick={() => handleEditionGoal(`/edition/Meta/${id}`)}
+              ></ButtonEdit>
+              <ButtonCheck onClick={() => patchGoal(goal, "archieved")}>
+                <FaCheck className="check" />
+              </ButtonCheck>
+            </ButtonConluds>
+          )}
+        </>
       ) : (
-        <ButtonConluds>
-          <ButtonEdit
-            className="ButtonEdit"
-            onClick={() => handleEditionGoal(`/edition/Meta/${id}`)}
-          ></ButtonEdit>
-          <ButtonCheck onClick={() => patchGoal(goal, "archieved")}>
-            <FaCheck className="check" />
-          </ButtonCheck>
-        </ButtonConluds>
+        <InfoContainer>
+          <TitleCategory>
+            <CategoryContainer>{title}</CategoryContainer>
+            <p>{difficulty}</p>
+          </TitleCategory>
+          <ProgressBar progress={how_much_achieved}>
+            <span></span>
+          </ProgressBar>
+        </InfoContainer>
       )}
     </GoalCardContainer>
   );

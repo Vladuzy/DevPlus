@@ -42,7 +42,7 @@ const AtivityCreation = ({ id }) => {
         <Input
           register={register}
           name="title"
-          placeholder={"Titúlo da Meta"}
+          placeholder={"Titúlo da Atividade"}
         />
         {errors.title?.message && (
           <ErrorSpanContainer>{errors.title?.message}</ErrorSpanContainer>

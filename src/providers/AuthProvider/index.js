@@ -13,6 +13,8 @@ export const AuthProvider = ({ children }) => {
 
   const [isAuthenticated, setIsAuthenticated] = useState((token !== "") ? true:false);
 
+  const [isSubscribe, setIsSubscribe] = useState(false)
+
   const handleAuth = () => {
     if (token !== "") {
       setIsAuthenticated(true);
@@ -55,7 +57,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ setIsAuthenticated, handleLogin, token, id, isAuthenticated }}
+      value={{ setIsAuthenticated, handleLogin, token, id, isAuthenticated, setIsSubscribe, isSubscribe }}
     >
       {children}
     </AuthContext.Provider>
