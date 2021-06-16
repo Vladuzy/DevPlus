@@ -30,6 +30,9 @@ export const ButtonClose = styled.button`
 
 export const InfoContainer = styled.section`
   width: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   h2 {
     color: var(--branco);
