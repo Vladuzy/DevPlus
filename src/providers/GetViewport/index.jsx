@@ -4,7 +4,9 @@ import { useContext, createContext, useState } from 'react'
 const ViewportContext = createContext('')
 
 export const ViewportProvider = ({ children }) => {
-  const [viewport, setViewport] = useState({})
+  const [viewport, setViewport] = useState(() => {
+    return JSON.parse(localStorage.getItem("@DevelopingHabitus:viewport")) || {};
+  });
 
   const getWindowDimension = () => {
     const width = window.innerWidth 
@@ -17,7 +19,10 @@ export const ViewportProvider = ({ children }) => {
   };
   
   useEffect(() => {
-    window.addEventListener("resize", () => setViewport(getWindowDimension()))
+    window.addEventListener("resize", () => {
+      setViewport(getWindowDimension())
+      localStorage.setItem( "@DevelopingHabitus:viewport", JSON.stringify(getWindowDimension()))
+    })
   }, [])
 
   return(
