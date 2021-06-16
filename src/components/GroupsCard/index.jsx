@@ -4,12 +4,14 @@ import { useHistory } from "react-router-dom";
 import { useActivity } from "../../providers/Activities";
 import { useGoals } from "../../providers/Goals";
 import { useAuth } from "../../providers/AuthProvider";
+import { useGroups } from "../../providers/Groups";
 export default function GroupsCard({
   currentGroup,
   title,
   description,
   language,
 }) {
+  const { setGroupId } = useGroups();
   const { id } = useAuth();
 
   const { getGroupActivities } = useActivity();
@@ -28,6 +30,7 @@ export default function GroupsCard({
   const handleClick = (value) => {
     getGroupActivities(currentGroup.id);
     getGoals(currentGroup.id);
+    setGroupId(currentGroup.id);
     sendTo(value);
   };
 

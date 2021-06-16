@@ -19,7 +19,8 @@ import {
 } from "./styles";
 import { AnimateSharedLayout } from "framer-motion";
 import { IoIosArrowBack } from "react-icons/io";
-
+import ButtonExitGroup from "../../components/Buttons/ButtonExitGroup";
+import ButtonOpenGroup from "../../components/Buttons/ButtonOpenGroup";
 import GroupGoals from "../GroupGoals";
 
 // import Activity from "../Activity"
@@ -73,11 +74,7 @@ const SpecificGroup = ({ group }) => {
               <GroupGoals />
             </Route>
           </Switch>
-          {subscribe === "true" ? (
-            <p>Estou incrito</p>
-          ) : (
-            <p>Não estou inscrito</p>
-          )}
+          {subscribe === "true" ? <ButtonExitGroup /> : <ButtonOpenGroup />}
         </MainMenuContainer>
       </MainContainer>
     </MainDashboard>
