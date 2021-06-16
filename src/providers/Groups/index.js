@@ -9,6 +9,9 @@ export const GroupsProviders = ({ children }) => {
   const { token } = useAuth();
   const [groups, setGroups] = useState([]);
   const [groupsSubs, setGroupsSubs] = useState([]);
+  const [groupId] = useState(() => {
+    return parseInt(localStorage.getItem("@DevelopingHabitus:groupId")) || "";
+  });
 
   const getGroups = () => {
     api
@@ -20,9 +23,9 @@ export const GroupsProviders = ({ children }) => {
     getGroups();
   }, []);
 
-  const subsInAGroup = (id) => {
+  const subsInAGroup = () => {
     api
-      .post(`/groups/${id}/subscribe/`, {
+      .post(`/groups/${groupId}/subscribe/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -70,9 +73,9 @@ export const GroupsProviders = ({ children }) => {
     [token]
   );
 
-  const editGroups = (data, id) => {
+  const editGroups = (data) => {
     api
-      .patch(`/groups/${id}/`, data, {
+      .patch(`/groups/${groupId}/`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -84,6 +87,20 @@ export const GroupsProviders = ({ children }) => {
       .catch((_) => toast.error("Erro ao editar grupo."));
   };
 
+  const unsubscribe = () => {
+    api
+      .delete(`/groups/${groupId}/unsubscribe/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((_) => {
+        getGroupsSubs();
+        toast.success("Sucesso ao sair grupo!");
+      })
+      .catch((_) => toast.error("Erro ao sair grupo."));
+  }
+
   return (
     <GroupsContext.Provider
       value={{
@@ -94,6 +111,7 @@ export const GroupsProviders = ({ children }) => {
         createGroup,
         getGroupsSubs,
         editGroups,
+        unsubscribe
       }}
     >
       {children}
