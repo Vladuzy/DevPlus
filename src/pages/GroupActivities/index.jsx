@@ -49,7 +49,7 @@ const GroupActivities = () => {
             <Activity showArchived={false} />
           </Route>
           <Route path={`${path}/done`}>
-            <p>done</p>
+            <Activity showArchived={true} />
           </Route>
         </Switch>
       </MainMenuContainer>

@@ -17,7 +17,7 @@ const ActivityCard = ({
   showArchived,
 }) => {
   const { id, title, realization_time } = activity;
-
+  const date = new Date(realization_time);
   return (
     <ActivityCardContainer key={id}>
       <ButtonClose onClick={() => deleteActivity(activity)}>
@@ -25,13 +25,7 @@ const ActivityCard = ({
       </ButtonClose>
       <InfoContainer>
         <h2>{title}</h2>
-        <h3>
-          {Number(realization_time.substring(11, 13)) -
-            3 +
-            realization_time.substring(13, 16) +
-            "h - " +
-            realization_time.replace(/T.*/, "").split("-").reverse().join("-")}
-        </h3>
+        <h3>{date.toLocaleTimeString() + "h - " + date.toLocaleDateString()}</h3>
       </InfoContainer>
       <ButtonEdit></ButtonEdit>
       {showArchived ? (
