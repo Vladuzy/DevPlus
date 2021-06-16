@@ -2,14 +2,10 @@ import ActivityCard from "../ActivityCard";
 
 import { useActivity } from "../../providers/Activities";
 
-import {
-  ActivitiesListContainer
-} from "./style";
+import { ActivitiesListContainer } from "./style";
 
 const ActivityList = ({showArchived}) => {
   const { activities, patchActivities, deleteActivity, patchSwitchArchived } = useActivity();
-
-  console.log(activities);
 
   return (
       <ActivitiesListContainer>
@@ -43,8 +39,7 @@ const ActivityList = ({showArchived}) => {
            ))
           )
         }
-   
-      </ActivitiesListContainer>
+    </ActivitiesListContainer>
   );
 };
 

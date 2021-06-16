@@ -1,23 +1,24 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import api from "../../services";
-import { useAuth } from '../AuthProvider'
+import { useAuth } from "../AuthProvider";
 
 export const GroupsContext = createContext();
 
 export const GroupsProviders = ({ children }) => {
-  const { token } = useAuth()
+  const { token } = useAuth();
   const [groups, setGroups] = useState([]);
   const [groupsSubs, setGroupsSubs] = useState([]);
 
   const getGroups = () => {
-    api.get("groups/?category=programming")
+    api
+      .get("groups/?category=DevelopingHabitus")
       .then((response) => setGroups([...response.data.results]));
   };
 
-  useEffect(_ => {
-    getGroups()
-  },[])
+  useEffect((_) => {
+    getGroups();
+  }, []);
 
   const subsInAGroup = (id) => {
     api
@@ -31,20 +32,24 @@ export const GroupsProviders = ({ children }) => {
   };
 
   const createGroup = (data) => {
-    console.log(data)
+    console.log(data);
     api
       .post("/groups/", data, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
         setGroups([...groups, response.data]);
-        toast.success("grupo criado com sucesso!!! :)");
+        toast.success("Grupo criado com sucesso!!!", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
       })
-      .catch(err => {
-        toast.error("erro ao criar o grupo, tente novamente!")
+      .catch((err) => {
+        toast.error("erro ao criar o grupo, tente novamente!");
       });
   };
 
@@ -58,22 +63,26 @@ export const GroupsProviders = ({ children }) => {
       .then((response) => setGroupsSubs([...response.data]));
   };
 
-  useEffect(_ => {
-    getGroupsSubs()
-  },[token])
+  useEffect(
+    (_) => {
+      getGroupsSubs();
+    },
+    [token]
+  );
 
   const editGroups = (data, id) => {
-    api.patch(`/groups/${id}/`, data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
-    })
-      .then(_ => {
-        getGroupsSubs()
-        toast.success('Sucesso ao editar grupo!')
+    api
+      .patch(`/groups/${id}/`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
-      .catch(_ => toast.error('Erro ao editar grupo.'))
-  }
+      .then((_) => {
+        getGroupsSubs();
+        toast.success("Sucesso ao editar grupo!");
+      })
+      .catch((_) => toast.error("Erro ao editar grupo."));
+  };
 
   return (
     <GroupsContext.Provider
@@ -84,7 +93,7 @@ export const GroupsProviders = ({ children }) => {
         subsInAGroup,
         createGroup,
         getGroupsSubs,
-        editGroups
+        editGroups,
       }}
     >
       {children}

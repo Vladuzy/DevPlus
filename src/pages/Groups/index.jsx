@@ -1,5 +1,12 @@
-import { Link, Switch, Route, useRouteMatch, Redirect, useHistory } from "react-router-dom";
-import InputSearch from '../../components/InputSearch'
+import {
+  Link,
+  Switch,
+  Route,
+  useRouteMatch,
+  Redirect,
+  useHistory,
+} from "react-router-dom";
+import InputSearch from "../../components/InputSearch";
 import {
   MainDashboard,
   HeaderContainer,
@@ -14,16 +21,18 @@ import { useAuth } from "../../providers/AuthProvider";
 import GroupList from "../../components/GroupList";
 
 const Groups = () => {
-  const history = useHistory()
-  const { location: { pathname } } = history
+  const history = useHistory();
+  const {
+    location: { pathname },
+  } = history;
   const { isAuthenticated } = useAuth();
   let { path, url } = useRouteMatch("");
-  const [searchGroups, setSearchGroups] = useState('')
+  const [searchGroups, setSearchGroups] = useState("");
 
   const searchGroup = (e) => {
-    setSearchGroups(e.target.value)
-    console.log(searchGroups)
-  }
+    setSearchGroups(e.target.value);
+    console.log(searchGroups);
+  };
 
   if (isAuthenticated === false) {
     return <Redirect to="/login" />;
@@ -52,20 +61,24 @@ const Groups = () => {
               </Link>
             </AnimateSharedLayout>
           </NavContainer>
-          <InputSearch placeholder='pesquisar' onChange={searchGroup}/>
+          <InputSearch placeholder="Pesquisar" onChange={searchGroup} />
           <Switch>
-            <Route exact path={`${path}`} render={() => history.push(`${url}/all`)}/>
+            <Route
+              exact
+              path={`${path}`}
+              render={() => history.push(`${url}/all`)}
+            />
             <Route path={`${path}/all`}>
-              <GroupList allGroups={true} search={searchGroups}/>
+              <GroupList allGroups={true} search={searchGroups} />
             </Route>
             <Route path={`${path}/mine`}>
-              <GroupList allGroups={false} search={searchGroups}/>
+              <GroupList allGroups={false} search={searchGroups} />
             </Route>
           </Switch>
         </MainMenuContainer>
       </MainContainer>
     </MainDashboard>
   );
-}
+};
 
 export default Groups;

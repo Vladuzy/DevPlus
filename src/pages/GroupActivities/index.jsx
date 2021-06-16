@@ -1,4 +1,11 @@
-import { Link, Switch, Route, useRouteMatch, Redirect, useHistory } from "react-router-dom";
+import {
+  Link,
+  Switch,
+  Route,
+  useRouteMatch,
+  Redirect,
+  useHistory,
+} from "react-router-dom";
 
 import {
   MainContainer,
@@ -12,9 +19,11 @@ import { useAuth } from "../../providers/AuthProvider";
 import Activity from "../Activity";
 
 const GroupActivities = () => {
-  const history = useHistory()
-  const { location: { pathname } } = history
-  
+  const history = useHistory();
+  const {
+    location: { pathname },
+  } = history;
+
   const { isAuthenticated } = useAuth();
   let { path, url } = useRouteMatch("");
 
@@ -44,7 +53,11 @@ const GroupActivities = () => {
         </NavContainer>
 
         <Switch>
-          <Route exact path={`${path}`} render={() => history.push(`${url}/active`)}/>
+          <Route
+            exact
+            path={`${path}`}
+            render={() => history.push(`${url}/active`)}
+          />
           <Route path={`${path}/active`}>
             <Activity showArchived={false} />
           </Route>
