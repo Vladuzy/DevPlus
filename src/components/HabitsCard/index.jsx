@@ -46,17 +46,20 @@ const HabitsCard = ({ habit, updateHabits, deleteHabits, showArchived }) => {
           <span></span>
         </ProgressBar> */}
       </InfoContainer>
-      <ButtonEdit
-        onClick={() => handleEditionHabits(`/edition/Habito/${id}`)}
-      ></ButtonEdit>
+  
       {showArchived ? (
         <ButtonUncheck onClick={() => updateHabits(habit, "activate")}>
           <RiArrowGoBackLine className="uncheck" />
         </ButtonUncheck>
       ) : (
+        <>
+        <ButtonEdit
+        onClick={() => handleEditionHabits(`/edition/Habito/${id}`)}
+      ></ButtonEdit>
         <ButtonCheck onClick={() => updateHabits(habit, "archieved")}>
           <FaCheck className="check" />
         </ButtonCheck>
+        </>
       )}
     </HabitCardContainer>
   );

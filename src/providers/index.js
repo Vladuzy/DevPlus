@@ -3,6 +3,7 @@ import { ActivitiesProvider } from "./Activities";
 import { GoalsProvider } from "./Goals";
 import { HabitsProviders } from "./Habits";
 import { GroupsProviders } from "./Groups";
+import { ViewportProvider } from "./GetViewport";
 
 const Providers = ({ children }) => {
     return (
@@ -11,7 +12,9 @@ const Providers = ({ children }) => {
           <GroupsProviders>
             <GoalsProvider>
               <ActivitiesProvider>
-                {children}
+                <ViewportProvider>
+                  {children}
+                </ViewportProvider>
               </ActivitiesProvider>
             </GoalsProvider>
           </GroupsProviders>
