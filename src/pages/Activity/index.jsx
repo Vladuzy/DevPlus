@@ -1,9 +1,9 @@
 import ActivityList from "../../components/ActivityList";
 
-const Activity = ({showArchived}) => {
+const Activity = ({ showArchived }) => {
   return (
     <>
-      <ActivityList showArchived ={showArchived}></ActivityList>
+      <ActivityList showArchived={showArchived}></ActivityList>
     </>
   );
 };

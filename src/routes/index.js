@@ -34,7 +34,7 @@ const Routes = () => {
       <Route exact path="/creation/:type">
         <CreatingPage />
       </Route>
-      <Route path="/:groupName">
+      <Route path="/:groupName/:subscribe">
         <SpecificGroup />
       </Route>
       <Route>

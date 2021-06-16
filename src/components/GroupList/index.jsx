@@ -3,12 +3,15 @@ import { useHistory } from "react-router-dom";
 import { GroupsContext } from "../../providers/Groups";
 import ButtonAdd from "../Buttons/ButtonAdd";
 import GroupsCard from "../GroupsCard";
-
+import { ContainerListGroup } from "./style";
 export default function GroupList({ allGroups, search }) {
   const { groups, groupsSubs } = useContext(GroupsContext);
-  const history = useHistory("/creation");
+  const history = useHistory();
+  const handleGroups = (value) => {
+    history.push(value);
+  };
   return (
-    <>
+    <ContainerListGroup>
       {search === "" && allGroups
         ? groups.map((element, index) => (
             <GroupsCard
@@ -33,7 +36,11 @@ export default function GroupList({ allGroups, search }) {
         : null}
       {search !== "" && allGroups
         ? groups
-            .filter((element) => element.name.includes(search) === true)
+            .filter(
+              (element) =>
+                element.name.toUpperCase().includes(search.toUpperCase()) ===
+                true
+            )
             .map((element, index) => {
               return (
                 <GroupsCard
@@ -48,7 +55,11 @@ export default function GroupList({ allGroups, search }) {
         : null}
       {search !== "" && allGroups !== true
         ? groupsSubs
-            .filter((element) => element.name.includes(search) === true)
+            .filter(
+              (element) =>
+                element.name.toUpperCase().includes(search.toUpperCase()) ===
+                true
+            )
             .map((element, index) => {
               return (
                 <GroupsCard
@@ -61,7 +72,7 @@ export default function GroupList({ allGroups, search }) {
               );
             })
         : null}
-      {/* {allGroups !== true ? <ButtonAdd onClick={() => history()} /> : null} */}
-    </>
+      <ButtonAdd type="Grupo" onClick={() => handleGroups("/creation/Grupo")} />
+    </ContainerListGroup>
   );
 }
