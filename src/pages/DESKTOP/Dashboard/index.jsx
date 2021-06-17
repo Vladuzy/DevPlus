@@ -4,16 +4,22 @@ import Header from '../../../components/DESKTOP/Header'
 import { IoIosAddCircle, IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
 import CardsHabbits from "../../../components/DESKTOP/CardsHabbits";
 import CardGoalsActivity from "../../../components/DESKTOP/CardGoalsActivity";
+import CreationDisplay from "../../../components/DESKTOP/CreationDisplay";
+import { useState } from "react";
 
 const DashboardDesktop = () => {
+  const [creationOpen, setCreationOpen] = useState(false)
+
   return(
+    <>
+    {creationOpen && <CreationDisplay close={setCreationOpen} type='Habito'/>}
     <MainDashboard>
       <Header />
       <MainContainer>
         <Container>
           <TitleContainer>
             <h2>ATIVOS</h2>
-            <Button><IoIosAddCircle />Novo Habito</Button>
+            <Button onClick={() => setCreationOpen(true)}><IoIosAddCircle />Novo Habito</Button>
           </TitleContainer>
           <HabitsContainer>
             <IoIosArrowDropleftCircle className='disabled'/>
@@ -39,6 +45,7 @@ const DashboardDesktop = () => {
         </Container>
       </MainContainer>
     </MainDashboard>
+    </>
   )
 }
 
