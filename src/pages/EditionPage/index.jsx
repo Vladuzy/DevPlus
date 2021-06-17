@@ -18,13 +18,22 @@ import GoalsEdition from "../../components/GoalsEdition";
 const EditionPage = ({ id }) => {
   const { cardId, type } = useParams();
   const history = useHistory();
-
+  console.log(history)
   return (
     <BackgroundContainer>
       <HeaderContainer>
-        <h2 onClick={() => history.goBack()}>
-          <IoIosArrowBack /> Voltar
-        </h2>
+        {
+          (type === "Grupo") ? (
+            <h2 onClick={() => history.push("/groups/all")}>
+              <IoIosArrowBack /> Voltar
+            </h2>
+          ) : (
+            <h2 onClick={() => history.goBack()}>
+              <IoIosArrowBack /> Voltar
+            </h2>
+          )
+        }
+      
       </HeaderContainer>
       <MainContainer>
         <TitleEditingContainer>Edição de {type}</TitleEditingContainer>
