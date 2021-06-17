@@ -11,7 +11,7 @@ export default function GroupsCard({
   description,
   language,
 }) {
-  const { setGroupId } = useGroups();
+  const { setGroupId, getGroup } = useGroups();
   const { id } = useAuth();
 
   const { getGroupActivities } = useActivity();
@@ -31,6 +31,7 @@ export default function GroupsCard({
     getGroupActivities(currentGroup.id);
     getGoals(currentGroup.id);
     setGroupId(currentGroup.id);
+    getGroup(currentGroup.id);
     sendTo(value);
   };
 

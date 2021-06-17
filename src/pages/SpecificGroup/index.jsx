@@ -27,14 +27,15 @@ import ButtonOpenGroup from "../../components/Buttons/ButtonOpenGroup";
 import GroupGoals from "../GroupGoals";
 import ButtonEditGroup from "../../components/Buttons/ButtonEditGroup";
 import { useAuth } from "../../providers/AuthProvider";
-
+import { useGroups } from "../../providers/Groups";
 // import Activity from "../Activity"
 import GroupActivities from "../GroupActivities";
 
-const SpecificGroup = ({ group }) => {
+const SpecificGroup = () => {
   // const { id } = group
   // subscribe
-  const { setIsSubscribe, isSubscribe } = useAuth();
+  const { setIsSubscribe, isSubscribe, id } = useAuth();
+  const {groupCreatorId} = useGroups();
   const history = useHistory();
   const {
     location: { pathname },
@@ -48,7 +49,7 @@ const SpecificGroup = ({ group }) => {
       setIsSubscribe(false);
     }
   }, []);
-  console.log(isSubscribe);
+  console.log(isSubscribe, groupCreatorId, id);
 
   let { path, url } = useRouteMatch();
   const handleEditGroup = (value) => {
@@ -66,7 +67,7 @@ const SpecificGroup = ({ group }) => {
           <EditNameContainer>
             <GroupNameContainer>{groupName}</GroupNameContainer>
             {
-              isSubscribe && (
+              (isSubscribe && groupCreatorId === id) && (
                 <ButtonEditGroup
                   onClick={() => handleEditGroup("/edition/Grupo")}
                 />
