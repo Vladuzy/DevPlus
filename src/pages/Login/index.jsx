@@ -1,6 +1,6 @@
-import Button from "../../components/Button";
+import Button from "../../components/Buttons/Button";
+import ButtonBack from "../../components/Buttons/ButtonBack";
 import Input from "../../components/Input";
-
 import {
   Container,
   HeaderContainer,
@@ -10,27 +10,26 @@ import {
   FooterContainer,
   TitleFooterContainer,
   SubTitleFooterContainer,
+  SpanFormContainer,
 } from "./styled";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { Link, useHistory } from "react-router-dom";
-import { useAuth } from '../../providers/AuthProvider'
+import { Link, useHistory, Redirect } from "react-router-dom";
+import { useAuth } from "../../providers/AuthProvider";
 
 import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
+// import ButtonAdd from "../../components/ButtonAdd";
 
 const Login = () => {
-  const { handleLogin } = useAuth()
+  const { handleLogin, isAuthenticated } = useAuth();
   const schema = yup.object().shape({
-    username: yup.string().required("Campo Obrigatório!!"),
+    username: yup.string().required("Campo Obrigatório*"),
 
-    password: yup.string(),
-    // .min(8, "Mínimo de 8 dígitos")
-    // .matches(/^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-    // "Sua senha deve conter ao menos uma letra maiúscula, uma minúscula, um número e um caracter especial!"),
+    password: yup.string().required("Campo Obrigatório*"),
   });
 
   const {
@@ -42,12 +41,12 @@ const Login = () => {
   const history = useHistory("/dashboard");
 
   const onSubmitFunction = (data) => {
-    handleLogin(data, jwt_decode, history, toast)
+    handleLogin(data, jwt_decode, history, toast);
   };
 
-  // if(isAuthenticated){
-  //     return <Redirect to={"/dashboard"} />
-  // }
+  if (isAuthenticated === true) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <Container>
@@ -56,12 +55,8 @@ const Login = () => {
         <SubTitleContainer>:&#x00029;</SubTitleContainer>
       </HeaderContainer>
       <FormContainer onSubmit={handleSubmit(onSubmitFunction)}>
-        <Input
-          register={register}
-          name={"username"}
-          placeholder={"Nome"}
-          error={errors.username?.message}
-        />
+        <Input register={register} name={"username"} placeholder={"Nome"} />
+        <SpanFormContainer>{errors.username?.message}</SpanFormContainer>
 
         <Input
           register={register}
@@ -70,6 +65,7 @@ const Login = () => {
           placeholder={"Senha"}
           error={errors.password?.message}
         />
+        <SpanFormContainer>{errors.password?.message}</SpanFormContainer>
         <Button type={"submit"}>CONECTE-SE</Button>
       </FormContainer>
       <FooterContainer>
@@ -78,6 +74,7 @@ const Login = () => {
           <Link to={"/register"}>REGISTRE-SE</Link>
         </SubTitleFooterContainer>
       </FooterContainer>
+      <ButtonBack onClick={() => history.goBack()}></ButtonBack>
     </Container>
   );
 };

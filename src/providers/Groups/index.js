@@ -1,57 +1,144 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import api from "../../services";
+import { useAuth } from "../AuthProvider";
 
 export const GroupsContext = createContext();
 
 export const GroupsProviders = ({ children }) => {
+  const { token } = useAuth();
   const [groups, setGroups] = useState([]);
   const [groupsSubs, setGroupsSubs] = useState([]);
+  const [groupId, setGroupId] = useState(() => {
+    return parseInt(localStorage.getItem("@DevelopingHabitus:groupId")) || "";
+  });
+  const [groupCreatorId, setGroupCreatorId] = useState("");
 
   const getGroups = () => {
     api
-      .get("/groups/", {
-        headers: {
-          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzc2NzMwLCJqdGkiOiJmMWViZTk4MTgwN2Q0YzdlYmU2NDc3ZmI3YzFmN2Q5NyIsInVzZXJfaWQiOjcxOX0.lgfQ81zXE7u8uTbisp7YcdVLBbmWlqRpOpJW3EeFjE8"}`,
-        },
-      })
-      .then((response) => setGroups([...groups, ...response]));
+      .get("groups/?category=DevelopingH")
+      .then((response) => setGroups([...response.data.results]));
   };
 
-  const subsInAGroup = (id) => {
+  useEffect((_) => {
+    getGroups();
+    getGroupsSubs();
+  }, []);
+
+  const subsInAGroup = () => {
     api
-      .post(`/groups/${id}/subscribe/`, {
+      .post(`/groups/${groupId}/subscribe/`, null, {
         headers: {
-          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzc2NzMwLCJqdGkiOiJmMWViZTk4MTgwN2Q0YzdlYmU2NDc3ZmI3YzFmN2Q5NyIsInVzZXJfaWQiOjcxOX0.lgfQ81zXE7u8uTbisp7YcdVLBbmWlqRpOpJW3EeFjE8"}`,
+          Authorization: `Bearer ${token}`,
         },
       })
-      .then((_) => toast.success("usuario inserido no grupo"))
-      .catch((_) => toast.error("usuario já está no grupo"));
+      .then((response) => {
+        getGroups();
+        getGroupsSubs();
+        toast.success("Mais uma Aventura ;)", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
+      })
+      .catch((_) =>
+        toast.success("Você já faz parte da aventura ;)", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        })
+      );
   };
 
   const createGroup = (data) => {
     api
       .post("/groups/", data, {
         headers: {
-          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzc2NzMwLCJqdGkiOiJmMWViZTk4MTgwN2Q0YzdlYmU2NDc3ZmI3YzFmN2Q5NyIsInVzZXJfaWQiOjcxOX0.lgfQ81zXE7u8uTbisp7YcdVLBbmWlqRpOpJW3EeFjE8"}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        setGroups([...groups, ...response]);
-        toast.success("grupo criado com sucesso!!! :)");
+        getGroups();
+        getGroupsSubs();
+        setGroups([...groups, response.data]);
+        toast.success("Grupo criado com sucesso!!!", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
       })
-      .catch((_) => toast.error("erro ao criar o grupo, tente novamente!"));
+      .catch((err) => {
+        toast.error("erro ao criar o grupo, tente novamente!");
+      });
   };
 
   const getGroupsSubs = () => {
     api
       .get("/groups/subscriptions/", {
         headers: {
-          Authorization: `Bearer ${"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzc2NzMwLCJqdGkiOiJmMWViZTk4MTgwN2Q0YzdlYmU2NDc3ZmI3YzFmN2Q5NyIsInVzZXJfaWQiOjcxOX0.lgfQ81zXE7u8uTbisp7YcdVLBbmWlqRpOpJW3EeFjE8"}`,
+          Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => setGroupsSubs([...groupsSubs, ...response]));
+      .then((response) => {
+        setGroupsSubs([...response.data]);
+      } );
   };
+
+  useEffect(
+    (_) => {
+      getGroupsSubs();
+    },
+    [token]
+  );
+
+  const editGroups = (data) => {
+    api
+      .patch(`/groups/${groupId}/`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((_) => {
+        getGroups();
+        getGroupsSubs();
+        toast.success("Sucesso ao editar grupo!");
+      })
+      .catch((err) => {
+        console.log(err)
+        toast.error("Erro ao editar grupo.")
+      });
+  };
+
+  const unsubscribe = () => {
+
+    api
+      .delete(`/groups/${groupId}/unsubscribe/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((_) => {
+        getGroups();
+        getGroupsSubs();
+        toast.success("Sucesso ao sair do grupo!", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const getGroup = (id) => {
+    api
+    .get(`/groups/${id}/`)
+    .then((res) => {
+      localStorage.setItem( "@DevelopingHabitus:groupCreatorId", JSON.stringify(res.data.creator.id));
+      setGroupCreatorId(res.data.creator.id);
+    })
+    .catch(err=>console.log(err))
+  }
 
   return (
     <GroupsContext.Provider
@@ -62,6 +149,11 @@ export const GroupsProviders = ({ children }) => {
         subsInAGroup,
         createGroup,
         getGroupsSubs,
+        editGroups,
+        unsubscribe,
+        setGroupId,
+        getGroup,
+        groupCreatorId
       }}
     >
       {children}

@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: var(--cinza-escuro);
-  height: 100vh;
 `;
 export const TitleContainer = styled.h1`
   color: var(--branco);
@@ -33,10 +32,16 @@ export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 150px;
   justify-content: space-between;
   width: 221px;
-  height: 133px;
   margin: 84px auto 0;
+`;
+
+export const SpanFormContainer = styled.span`
+  color: var(--vermelho);
+  font-size: 1rem;
+  margin-left: 63px;
 `;
 
 export const FooterContainer = styled.form`

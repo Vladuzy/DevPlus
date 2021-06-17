@@ -3,6 +3,7 @@ import { createContext, useState, useEffect, useContext } from "react";
 import { AuthContext } from "../AuthProvider";
 
 import api from "../../services";
+import { toast } from "react-toastify";
 
 export const GoalsContext = createContext();
 
@@ -11,100 +12,124 @@ export const GoalsProvider = ({ children }) => {
 
   //Lembrar de passar setGoal para receber os dados do modal criar Goal
   // const [goal, setGoal] = useState({})
-  const [goals, setGoals] = useState([]);
+  const [goals, setGoals] = useState(() => {
+    return JSON.parse(localStorage.getItem("@DevelopingHabitus:goals")) || [];
+  });
+  const [groupId, setGroupId] = useState(() => {
+    return parseInt(localStorage.getItem("@DevelopingHabitus:groupId")) || "";
+  });
 
-  const getGoals = () => {
+  const getGoals = (id="") => {
+    //pegando o id do grupo
+    setGroupId(id)
+    //salvando no localStorage
+    localStorage.setItem( "@DevelopingHabitus:groupId", JSON.stringify(id))
     //Lembrar de passar o Id do grupo
-    api
-      .get("/goals/?group=2")
+    if(id !== ""){
+      api
+      .get(`/goals/?group=${id}`)
       .then((response) => {
         setGoals(response.data.results);
+        localStorage.setItem( "@DevelopingHabitus:goals", JSON.stringify(response.data.results));
       })
       .catch((err) => console.log(err));
+    }
   };
 
-  const postGoal = () => {
+  const createGoals = (data) => {
     //Lembrar de mandar o que ta sendo enviado "dataGoal" (pegar os inputs no modal de criar Goal)
     //Lembrar de passar o Id do grupo
     //Lembrar de passar o token
-    const dataGoal = {
-      title:
-        "Nenhuma falta na academia cometida pelos membros do grupo na semana",
-      difficulty: "Díficil",
-      how_much_achieved: 100,
-      group: 2,
-    };
-
+    const fullData = {...data, group: groupId}
     api
-      .post("/goals/", dataGoal, {
+      .post("/goals/", fullData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => getGoals())
+      .then((res) =>{ 
+        getGoals(groupId)
+      })
       .catch((err) => console.log(err));
   };
 
-  const patchGoal = () => {
+  const patchGoal = (goal, action) => {
     //Lembrar de receber o goal por props na função quando pegar no card
     //Lembrar de mandar o que ta sendo enviado "dataGoal" ok
     //Lembrar de passar o Id do goal (goal.id)
     //Lembrar de alterar o id no url
     //Lembrar de passar o token ok
-    const dataGoalUpdate = {
-      achieved: true,
-    };
+
+    // const dataGoalUpdate = {
+    //   achieved: false,
+    // };
 
     //Mudança do data
-    // const dataGoalUpdate = {}
-    // if(goal.archieved === true){
-    //     dataGoalUpdate = {
-    //         "achieved": true
-    //       }
-    // }else{
-    //     dataGoalUpdate = {
-    //         "achieved": false
-    //       }
-    // }
+    let dataGoalUpdate = {}
+    if(goal.achieved === true && action === "activate"){
+        dataGoalUpdate = {
+            "achieved": false,
+            "how_much_achieved": 0
+          }
+    }else if(goal.achieved === false && action === "archieved"){
+        dataGoalUpdate = {
+            "achieved": true,
+            "how_much_achieved": 100
+          }
+    }
 
     api
-      .patch("/goals/1576/", dataGoalUpdate, {
+      .patch(`/goals/${goal.id}/`, dataGoalUpdate, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => getGoals())
+      .then(() => getGoals(groupId))
       .catch((err) => console.log(err));
   };
 
-  const deleteGoal = () => {
+  const updateGoals = (data, id) => {
+    api.patch(`/goals/${id}/`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(_ => {
+      getGoals(groupId);
+      toast.success('Meta atualizada com sucesso!!!');
+    })
+    .catch(_ => toast.error('erro em atualizar a meta, tente de novo!'))
+  }
+
+  const deleteGoal = (goal) => {
     //Lembrar de receber o goal por props na função quando pegar no card
     //Lembrar de passar o Id do goal (goal.id)
     //Lembrar de alterar o id no url
     //Lembrar de passar o token
 
     api
-      .delete("/goals/1577/", {
+      .delete(`/goals/${goal.id}/`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => getGoals())
+      .then(() => getGoals(groupId))
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    getGoals();
-  }, []);
+    getGoals(groupId);
+  }, [groupId]);
 
   return (
     <GoalsContext.Provider
-      value={{ goals, getGoals, postGoal, patchGoal, deleteGoal }}
+      value={{ goals, getGoals, createGoals, patchGoal, updateGoals, deleteGoal }}
     >
       {children}
     </GoalsContext.Provider>
   );
 };
+
+export const useGoals = () => useContext(GoalsContext)

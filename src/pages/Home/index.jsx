@@ -6,15 +6,20 @@ import {
   MainStyles,
 } from "./styles";
 import { FiAlignJustify } from "react-icons/fi";
-import Buttons from "../../components/Button";
-import { useHistory } from "react-router-dom";
+import Buttons from "../../components/Buttons/Button";
+import { useHistory, Redirect } from "react-router-dom";
+import { useAuth } from "../../providers/AuthProvider";
 
 export default function Home() {
   const history = useHistory();
-
+  const { isAuthenticated } = useAuth();
   const handleClick = (value) => {
     history.push(value);
   };
+
+  if (isAuthenticated === true) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <Container>
