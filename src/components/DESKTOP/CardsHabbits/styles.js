@@ -15,21 +15,23 @@ export const ContainerCard = styled.div `
         display: flex;
         p{
             margin-right: 30px;
+            font-size: 1rem;
             color: var(--vermelho)
         }
         span{
-            margin-top: 3px;
+            font-size: 1rem;
             color: var(--branco)
         }
     }
     div + div {
         display: flex;
         p{
-            font-size: 1rem;
+            font-size: 0.8rem;
             margin-right: 20px;
         }
         span {
-            color: var(--amarelo)
+            color: var(--amarelo);
+            font-size: 0.8rem;
         }
     }
 

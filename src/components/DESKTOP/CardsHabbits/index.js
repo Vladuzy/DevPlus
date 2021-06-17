@@ -1,6 +1,7 @@
 import React from 'react'
-import { ButtonExit } from '../../Buttons/ButtonExitGroup/style'
 import { ContainerCard } from './styles'
+import Button from '../Button'
+import ButtonFinnished from '../ButtonFinished'
 
 export default function CardsHabbits({ isFinnished = false }) {
     return (
@@ -14,6 +15,7 @@ export default function CardsHabbits({ isFinnished = false }) {
                 <p>progresso: <span>50%</span></p>
                 <span>frequencia</span>
             </div>
+            {isFinnished ? (<ButtonFinnished/>) : ( <> <Button/> <Button/> </>)}
             
         </ContainerCard>
     )
