@@ -19,8 +19,6 @@ import { useHistory } from "react-router-dom";
 const HabitsCard = ({ habit, updateHabits, deleteHabits, showArchived }) => {
   const { id, title, category, difficulty, frequency, how_much_achieved } =
     habit;
-  console.log(difficulty);
-
   const history = useHistory();
 
   const handleEditionHabits = (value) => {

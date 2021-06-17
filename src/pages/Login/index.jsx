@@ -26,7 +26,6 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   const { handleLogin, isAuthenticated } = useAuth();
-  console.log(isAuthenticated);
   const schema = yup.object().shape({
     username: yup.string().required("Campo Obrigatório*"),
 
@@ -46,7 +45,6 @@ const Login = () => {
   };
 
   if (isAuthenticated === true) {
-    console.log("ta autenticado");
     return <Redirect to="/dashboard" />;
   }
 
@@ -76,7 +74,7 @@ const Login = () => {
           <Link to={"/register"}>REGISTRE-SE</Link>
         </SubTitleFooterContainer>
       </FooterContainer>
-      <ButtonBack></ButtonBack>
+      <ButtonBack onClick={() => history.goBack()}></ButtonBack>
     </Container>
   );
 };

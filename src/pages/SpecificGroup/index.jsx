@@ -49,7 +49,6 @@ const SpecificGroup = () => {
       setIsSubscribe(false);
     }
   }, []);
-  console.log(isSubscribe, groupCreatorId, id);
 
   let { path, url } = useRouteMatch();
   const handleEditGroup = (value) => {

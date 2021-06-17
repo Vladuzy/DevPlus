@@ -1,7 +1,7 @@
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { BackFooterImg, TitleFooter } from "./style";
 import { useHistory } from "react-router-dom";
-const ButtonBack = () => {
+const ButtonBack = ({...rest}) => {
   // const history = useHistory();
 
   // const sendTo = (path) => {
@@ -12,7 +12,7 @@ const ButtonBack = () => {
   //   sendTo(history.goBack());
   // };
   return (
-    <BackFooterImg>
+    <BackFooterImg type="button" {...rest}>
       <IoMdArrowRoundBack className="backArrow"></IoMdArrowRoundBack>
       <TitleFooter>Voltar</TitleFooter>
     </BackFooterImg>

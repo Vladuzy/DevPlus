@@ -49,7 +49,6 @@ export const GoalsProvider = ({ children }) => {
         },
       })
       .then((res) =>{ 
-        console.log(res)
         getGoals(groupId)
       })
       .catch((err) => console.log(err));
@@ -70,11 +69,13 @@ export const GoalsProvider = ({ children }) => {
     let dataGoalUpdate = {}
     if(goal.achieved === true && action === "activate"){
         dataGoalUpdate = {
-            "achieved": false
+            "achieved": false,
+            "how_much_achieved": 0
           }
     }else if(goal.achieved === false && action === "archieved"){
         dataGoalUpdate = {
-            "achieved": true
+            "achieved": true,
+            "how_much_achieved": 100
           }
     }
 
@@ -85,7 +86,6 @@ export const GoalsProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => console.log(response))
       .then(() => getGoals(groupId))
       .catch((err) => console.log(err));
   };
@@ -115,7 +115,6 @@ export const GoalsProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response => console.log(response)))
       .then(() => getGoals(groupId))
       .catch((err) => console.log(err));
   };
