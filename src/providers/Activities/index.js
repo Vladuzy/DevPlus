@@ -10,6 +10,12 @@ export const ActivitiesProvider = ({ children }) => {
   const [activities, setActivities] = useState(() => {
     return JSON.parse(localStorage.getItem("@DevelopingHabitus:activities")) || [];
   });
+
+  const [activity, setActivity] = useState(() => {
+    return JSON.parse(localStorage.getItem("@DevelopingHabitus:activity")) || {};
+  });
+
+
   const [groupId, setGroupId] =  useState(() => {
     return parseInt(localStorage.getItem("@DevelopingHabitus:groupId")) || "";
   });
@@ -85,6 +91,7 @@ export const ActivitiesProvider = ({ children }) => {
       }
     }).then((res) => {
       getGroupActivities(groupId);
+      getOneActivity(id);
       toast.success('alterado com sucesso!!')
     })
       .catch(_ => toast.error('erro ao atualizar a atividade!'))
@@ -125,6 +132,16 @@ export const ActivitiesProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
+  const getOneActivity = (activityId) => {
+    api
+    .get(`/activities/${activityId}/`)
+    .then((response) => {
+      localStorage.setItem( "@DevelopingHabitus:activity", JSON.stringify(response.data));
+      setActivity(response.data)
+    })
+    .catch((err) => console.log(err));
+  }
+
   useEffect(()=>{
     getGroupActivities(groupId);
   }, [])
@@ -135,7 +152,7 @@ export const ActivitiesProvider = ({ children }) => {
 
   return (
     <ActivitiesContext.Provider
-      value={{ activities, getGroupActivities, createActivities, patchActivities, updateActivity, deleteActivity, patchSwitchArchived }}
+      value={{ activities, activity, getOneActivity, getGroupActivities, createActivities, patchActivities, updateActivity, deleteActivity, patchSwitchArchived }}
     >
       {children}
     </ActivitiesContext.Provider>

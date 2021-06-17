@@ -10,7 +10,8 @@ import { FormContainer, ErrorSpanContainer, InputContainer } from "./styles";
 
 const GroupEdition = () => {
   const history = useHistory();
-  const { editGroups } = useGroups();
+  const { editGroups, group } = useGroups();
+  const {category} = group;
   const formSchemaGroup = yup.object().shape({
     name: yup.string().max(20, "Máximo de 20 caracteres."),
 
@@ -40,13 +41,14 @@ const GroupEdition = () => {
   return (
     <FormContainer onSubmit={handleSubmit(onSubmitData)}>
       <InputContainer>
-        <Input register={register} name="name" placeholder={"Nome do Grupo"} />
+        <Input defaultValue={group.name} register={register} name="name" placeholder={"Nome do Grupo"} />
         {errors.name?.message && (
           <ErrorSpanContainer>{errors.name?.message}</ErrorSpanContainer>
         )}
       </InputContainer>
       <InputContainer>
         <Input
+          defaultValue={group.description}
           register={register}
           name="description"
           placeholder={"Descrição"}
@@ -56,7 +58,7 @@ const GroupEdition = () => {
         )}
       </InputContainer>
       <InputContainer>
-        <Input register={register} name="category" placeholder={"Categoria"} />
+        <Input defaultValue={category.slice(17)} register={register} name="category" placeholder={"Categoria"} />
         {errors.category?.message && (
           <ErrorSpanContainer>{errors.category?.message}</ErrorSpanContainer>
         )}

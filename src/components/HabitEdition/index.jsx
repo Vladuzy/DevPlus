@@ -14,10 +14,16 @@ import {
   SelectContainer,
 } from "./styles";
 import { useAuth } from "../../providers/AuthProvider";
+import { useEffect } from "react";
 
 const HabitEdition = ({ cardId }) => {
+
+  useEffect(() => {
+    getOneHabit(cardId)
+  }, [])
+
   const history = useHistory();
-  const { updateTextHabits } = useHabits();
+  const { updateTextHabits, getOneHabit, habitInfo } = useHabits();
   const habit = { id: cardId };
   const formSchemaHabit = yup.object().shape({
     title: yup
@@ -54,6 +60,7 @@ const HabitEdition = ({ cardId }) => {
     <FormContainer onSubmit={handleSubmit(onSubmitData)}>
       <InputContainer>
         <Input
+          defaultValue={habitInfo.title}
           register={register}
           name="title"
           placeholder={"Titúlo do Habito"}
@@ -63,13 +70,13 @@ const HabitEdition = ({ cardId }) => {
         )}
       </InputContainer>
       <InputContainer>
-        <Input register={register} name="category" placeholder={"Categoria"} />
+        <Input defaultValue={habitInfo.category} register={register} name="category" placeholder={"Categoria"} />
         {errors.category?.message && (
           <ErrorSpanContainer>{errors.category?.message}</ErrorSpanContainer>
         )}
       </InputContainer>
       <InputContainer>
-        <SelectContainer {...register("difficulty")}>
+        <SelectContainer defaultValue={habitInfo.difficulty} {...register("difficulty")}>
           <option value=""></option>
           <option value="Fácil">Fácil</option>
           <option value="Médio">Médio</option>
@@ -78,6 +85,7 @@ const HabitEdition = ({ cardId }) => {
       </InputContainer>
       <InputContainer>
         <Input
+          defaultValue={habitInfo.frequency}
           register={register}
           name="frequency"
           placeholder={"Frequência"}

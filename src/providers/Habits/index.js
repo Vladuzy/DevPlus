@@ -11,6 +11,10 @@ export const HabitsProviders = ({ children }) => {
     return JSON.parse(localStorage.getItem("@DevelopingHabitus:habits")) || [];
   });
 
+  const [habitInfo, setHabitInfo] = useState(() => {
+    return JSON.parse(localStorage.getItem("@DevelopingHabitus:habit")) || {};
+  });
+
   const createHabits = (data) => {
     api
       .post("/habits/", data, {
@@ -92,6 +96,16 @@ export const HabitsProviders = ({ children }) => {
       });
   };
 
+  const getOneHabit = (habitId) => {
+    api
+    .get(`/habits/${habitId}/`)
+    .then((response) => {
+      localStorage.setItem( "@DevelopingHabitus:habit", JSON.stringify(response.data));
+      setHabitInfo(response.data)
+    })
+    .catch((err) => console.log(err));
+  }
+
   useEffect(() => {
     getHabits();
   }, [token]);
@@ -106,6 +120,8 @@ export const HabitsProviders = ({ children }) => {
         doingHabits,
         setDoingHabits,
         updateTextHabits,
+        getOneHabit,
+        habitInfo
       }}
     >
       {children}

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useGoals } from "../../providers/Goals";
-
+import { useState, useEffect } from "react";
 import Input from "../Input";
 import Button from "../Buttons/Button";
 
@@ -13,10 +13,17 @@ import {
   SelectContainer,
 } from "./styles";
 import { useHistory } from "react-router-dom";
-
 const GoalsEdition = ({ cardId }) => {
+
+
   const history = useHistory();
-  const { updateGoals } = useGoals();
+  const { updateGoals, getOneGoal, goal } = useGoals();
+  console.log(cardId)
+  useEffect(() => {
+    getOneGoal(cardId)
+  }, [])
+
+  console.log(goal)
   const formSchemaHabit = yup.object().shape({
     title: yup
       .string()
@@ -42,6 +49,7 @@ const GoalsEdition = ({ cardId }) => {
 
   const onSubmitData = (data) => {
     updateGoals(data, cardId);
+    getOneGoal(cardId);
     history.goBack();
   };
 
@@ -49,6 +57,7 @@ const GoalsEdition = ({ cardId }) => {
     <FormContainer onSubmit={handleSubmit(onSubmitData)}>
       <InputContainer>
         <Input
+          defaultValue={goal.title}
           register={register}
           name="title"
           placeholder={"Titúlo da Meta"}
@@ -58,7 +67,7 @@ const GoalsEdition = ({ cardId }) => {
         )}
       </InputContainer>
       <InputContainer>
-        <SelectContainer {...register("difficulty")}>
+        <SelectContainer defaultValue={goal.difficulty} {...register("difficulty")}>
           <option value=""></option>
           <option value="Fácil">Fácil</option>
           <option value="Médio">Médio</option>
@@ -70,6 +79,7 @@ const GoalsEdition = ({ cardId }) => {
       </InputContainer>
       <InputContainer>
         <Input
+          defaultValue={goal.how_much_achieved}
           register={register}
           name="how_much_achieved"
           placeholder={"de 0 a 100 em progressão"}
