@@ -19,6 +19,7 @@ import Button from "../../components/Buttons/Button";
 import { toast } from "react-toastify";
 import { useAuth } from "../../providers/AuthProvider";
 import ButtonBack from "../../components/Buttons/ButtonBack";
+import User2 from "../../assets/boneco.svg";
 
 const FormRegister = () => {
   const history = useHistory();
@@ -80,7 +81,12 @@ const FormRegister = () => {
         <SubTitleContainer>Cadastre-se agora!</SubTitleContainer>
       </HeaderContainer>
       <FormContainer onSubmit={handleSubmit(handleForm)}>
-        <Input placeholder="nome *" register={register} name="username"></Input>
+        <Input
+          placeholder="nome *"
+          register={register}
+          name="username"
+          icon={User2}
+        ></Input>
         <SpanFormContainer>{errors.username?.message}</SpanFormContainer>
         <Input placeholder="email *" register={register} name="email"></Input>
         <SpanFormContainer>{errors.email?.message}</SpanFormContainer>
@@ -106,7 +112,7 @@ const FormRegister = () => {
           <Link to={"/login"}>LOGAR-SE</Link>
         </SubTitleFooterContainer>
       </FooterContainer>
-      <ButtonBack onClick={() => history.goBack()} ></ButtonBack>
+      <ButtonBack onClick={() => history.goBack()}></ButtonBack>
     </Container>
   );
 };
