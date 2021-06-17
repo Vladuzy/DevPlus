@@ -1,10 +1,12 @@
 import { MainDashboard, MainContainer, Container, TitleContainer, HabitsContainer, HabitsListContainer } from "./styles"
 import Button from "../../../components/Buttons/Button"
+import Header from '../../../components/DESKTOP/Header'
 import { IoIosAddCircle, IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
 
 const DashboardDesktop = () => {
   return(
     <MainDashboard>
+      <Header />
       <MainContainer>
         <Container>
           <TitleContainer>

@@ -66,8 +66,8 @@ export const HabitsContainer = styled.div`
     cursor: pointer;
   }
   .disabled {
-      color: rgba(33, 52, 58, 0.8) ;
-    }
+    color: rgba(33, 52, 58, 0.8) ;
+  }
 `
 
 export const HabitsListContainer = styled.div`

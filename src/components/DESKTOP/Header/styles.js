@@ -44,7 +44,7 @@ export const ButtonNavContainer = styled.nav`
 export const HeaderContainer= styled.header`
   height: 12vh;
   display:flex;
-  background-color: var(--verde);
+  background-color: ${({ value }) => value === 'All' ? 'var(--amarelo)' : 'var(--verde)'};
   justify-content: space-between;
   align-items: center;
 `
