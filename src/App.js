@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <ToastContainer />
-      {width < 769 ? <MenuFooter /> : <Header />}
+      {width < 769 && <MenuFooter />}
       <Routes />
       
     </>
