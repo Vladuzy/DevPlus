@@ -6,7 +6,7 @@ export const MainGroups = styled.main`
 `
 
 export const MainContainer = styled.main`
-  height: 88vh;
+  min-height: 88vh;
   background-color: var(--cinza-escuro);
   border-top-left-radius: 30px;
 
@@ -26,7 +26,6 @@ export const GroupsSelectContainer = styled.div`
   width: 80%;
   height: 100%;
   min-width: 430px;
-  border: 1px solid red;
 `
 
 export const TitleGroupSelectContainer = styled.div`
