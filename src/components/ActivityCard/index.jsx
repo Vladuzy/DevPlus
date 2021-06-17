@@ -11,23 +11,51 @@ import { IoClose } from "react-icons/io5";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
 import {useAuth} from "../../providers/AuthProvider"
+import { useMotionValue, useTransform } from 'framer-motion'
+
 const ActivityCard = ({
   activity,
   patchActivities,
   deleteActivity,
   showArchived,
-  patchSwitchArchived
+  patchSwitchArchived,
+  limit
 }) => {
   const { id, title, realization_time } = activity;
   const date = new Date(realization_time);
   const {isSubscribe} = useAuth();
   const history = useHistory();
 
+  //ANIMATION
+  const x = useMotionValue(0)
+  const xInput = [-100, 0, 100]
+  const opacityOutput = [0.7, 1, 0.7]
+  const colorOutput = showArchived ? ["#F8565D", "#30444D", "#FBC442"] : ["#F8565D", "#30444D", "#3DD598"]
+  const opacity = useTransform(x, xInput, opacityOutput)
+  const background = useTransform(x, xInput, colorOutput)
+
+  const handleEventDrag = (_, info) => {
+    const { offset: { x } } = info
+    if (x > 170) {
+      showArchived ? patchSwitchArchived(activity, "activate") : patchSwitchArchived(activity, "archieved")
+      
+    } else if (x < -170) {
+      deleteActivity(activity)
+    }
+  }
+
   const handleEditionActivity = (value) => {
     history.push(value);
   };
   return (
-    <ActivityCardContainer key={id}>
+    <ActivityCardContainer 
+      key={id}
+      drag='x'
+      dragConstraints={limit}
+      dragElastic={0.3}
+      style={{ x, background, opacity }}
+      onDragEnd={(e, info) => handleEventDrag(e, info)}
+    >
       {
         isSubscribe ? (
           <>

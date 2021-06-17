@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion } from 'framer-motion'
 
-export const GoalCardContainer = styled.section`
+export const GoalCardContainer = styled(motion.section)`
   /* width: 320px; */
   /* max-width: 380px; */
   /* height: 85px; */
@@ -15,7 +16,7 @@ export const GoalCardContainer = styled.section`
 `;
 
 export const CategoryContainer = styled.h3`
-  color: var(--verde);
+  color: var(--branco);
 `;
 
 export const InfoContainer = styled.section`
