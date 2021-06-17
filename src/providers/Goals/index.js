@@ -40,9 +40,9 @@ export const GoalsProvider = ({ children }) => {
     //Lembrar de mandar o que ta sendo enviado "dataGoal" (pegar os inputs no modal de criar Goal)
     //Lembrar de passar o Id do grupo
     //Lembrar de passar o token
-
+    const fullData = {...data, group: groupId}
     api
-      .post("/goals/", data, {
+      .post("/goals/", fullData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -95,7 +95,10 @@ export const GoalsProvider = ({ children }) => {
       headers: {
         Authorization: `Bearer ${token}`
       }
-    }).then(_ => toast.success('Meta atualizada com sucesso!!!'))
+    }).then(_ => {
+      getGoals(groupId);
+      toast.success('Meta atualizada com sucesso!!!');
+    })
     .catch(_ => toast.error('erro em atualizar a meta, tente de novo!'))
   }
 

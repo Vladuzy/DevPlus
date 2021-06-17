@@ -6,6 +6,9 @@ export const FormContainer = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 
     input::placeholder {
     color: var(--verde);
@@ -20,7 +23,12 @@ export const FormContainer = styled.form`
 export const InputContainer = styled.div`
     display: flex;
     flex-direction: column;
-    height: 60px;
+    label{
+        padding: 0 0 13px 5px;
+        color: var(--branco);
+        font-weight: 300;
+        font-size: 1.2rem;
+    }
 `;
 
 export const ErrorSpanContainer = styled.span`

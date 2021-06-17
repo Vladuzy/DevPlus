@@ -23,12 +23,12 @@ const HabitCreation = () => {
     title: yup
       .string()
       .required("Campo Obrigatório.")
-      .max(20, "Máximo de 20 caracteres."),
+      .max(15, "Máximo de 15 caracteres."),
 
     category: yup
       .string()
       .required("Campo Obrigatório.")
-      .max(20, "Máximo de 20 caracteres."),
+      .max(15, "Máximo de 15 caracteres."),
 
     difficulty: yup
       .string()

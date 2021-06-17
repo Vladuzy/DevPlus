@@ -33,7 +33,7 @@ const Routes = () => {
       <Route path="/groups">
         <Groups />
       </Route>
-      <Route exact path="/edition/:type/:habitId">
+      <Route exact path="/edition/:type/:cardId">
         <EditionPage />
       </Route>
       <Route exact path="/creation/:type">

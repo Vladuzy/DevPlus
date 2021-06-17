@@ -15,8 +15,9 @@ export const ActivitiesProvider = ({ children }) => {
   });
 
   const createActivities = (data) => {
+    const fullData = {...data, group: groupId}
     api
-      .post("/activities/", data, {
+      .post("/activities/", fullData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -74,7 +75,6 @@ export const ActivitiesProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => console.log(response))
       .then(() => getGroupActivities(groupId))
       .catch((err) => console.log(err));
   };
@@ -84,7 +84,10 @@ export const ActivitiesProvider = ({ children }) => {
       headers: {
         Authorization: `Bearer ${token}`
       }
-    }).then((res) => toast.success('alterado com sucesso!!'))
+    }).then((res) => {
+      getGroupActivities(groupId);
+      toast.success('alterado com sucesso!!')
+    })
       .catch(_ => toast.error('erro ao atualizar a atividade!'))
   }
 

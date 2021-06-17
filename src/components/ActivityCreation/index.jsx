@@ -2,24 +2,22 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useActivity } from "../../providers/Activities";
-
+import { useHistory } from "react-router-dom";
 import Input from "../Input";
 import Button from "../Buttons/Button";
 
-import {
-  FormContainer,
-  ErrorSpanContainer,
-  InputContainer,
-  CalendarInput,
-} from "./styles";
+import { FormContainer, ErrorSpanContainer, InputContainer } from "./styles";
 
 const AtivityCreation = ({ id }) => {
   const { createActivities } = useActivity();
+
+  const history = useHistory();
+
   const formSchemaHabit = yup.object().shape({
     title: yup
       .string()
       .required("Campo Obrigatório.")
-      .max(20, "Máximo de 20 caracteres."),
+      .max(15, "Máximo de 15 caracteres."),
 
     // realization_time: yup.string().required("Campo Obrigatório."),
   });
@@ -32,10 +30,10 @@ const AtivityCreation = ({ id }) => {
   });
 
   const onSubmitData = (data) => {
-    const group = 636;
     const realization_time = "1000-10-10T00:00:00Z";
-    const newData = { ...data, realization_time, group };
+    const newData = { ...data, realization_time };
     createActivities(newData);
+    history.goBack();
   };
 
   return (
@@ -44,7 +42,7 @@ const AtivityCreation = ({ id }) => {
         <Input
           register={register}
           name="title"
-          placeholder={"Titúlo da Meta"}
+          placeholder={"Titúlo da Atividade"}
         />
         {errors.title?.message && (
           <ErrorSpanContainer>{errors.title?.message}</ErrorSpanContainer>

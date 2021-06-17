@@ -5,6 +5,7 @@ import { useGoals } from "../../providers/Goals";
 
 import Input from "../Input";
 import Button from "../Buttons/Button";
+import { useHistory } from "react-router-dom";
 
 import {
   FormContainer,
@@ -13,13 +14,14 @@ import {
   SelectContainer,
 } from "./styles";
 
-const GoalsCreation = ({ id }) => {
+const GoalsCreation = () => {
   const { createGoals } = useGoals();
+  const history = useHistory();
   const formSchemaHabit = yup.object().shape({
     title: yup
       .string()
       .required("Campo Obrigatório.")
-      .max(20, "Máximo de 20 caracteres."),
+      .max(15, "Máximo de 15 caracteres."),
 
     difficulty: yup
       .string()
@@ -36,9 +38,9 @@ const GoalsCreation = ({ id }) => {
 
   const onSubmitData = (data) => {
     const how_much_achieved = 0;
-    const group = id;
-    const newData = { ...data, how_much_achieved, group };
+    const newData = { ...data, how_much_achieved };
     createGoals(newData);
+    history.goBack();
   };
 
   return (

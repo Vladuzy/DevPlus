@@ -9,7 +9,7 @@ export const GroupsProviders = ({ children }) => {
   const { token } = useAuth();
   const [groups, setGroups] = useState([]);
   const [groupsSubs, setGroupsSubs] = useState([]);
-  const [groupId] = useState(() => {
+  const [groupId, setGroupId] = useState(() => {
     return parseInt(localStorage.getItem("@DevelopingHabitus:groupId")) || "";
   });
 
@@ -24,14 +24,30 @@ export const GroupsProviders = ({ children }) => {
   }, []);
 
   const subsInAGroup = () => {
+    console.log(groupId);
     api
-      .post(`/groups/${groupId}/subscribe/`, {
+      .post(`/groups/${groupId}/subscribe/`, null, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((_) => toast.success("usuario inserido no grupo"))
-      .catch((_) => toast.error("usuario já está no grupo"));
+      .then((response) => {
+        console.log(response)
+        getGroups();
+        getGroupsSubs();
+        toast.success("Mais uma Aventura ;)", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
+      })
+      .catch((_) =>
+        toast.success("Você já faz parte da aventura ;)", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        })
+      );
   };
 
   const createGroup = (data) => {
@@ -44,6 +60,8 @@ export const GroupsProviders = ({ children }) => {
         },
       })
       .then((response) => {
+        getGroups();
+        getGroupsSubs();
         setGroups([...groups, response.data]);
         toast.success("Grupo criado com sucesso!!!", {
           autoClose: 1500,
@@ -63,7 +81,11 @@ export const GroupsProviders = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => setGroupsSubs([...response.data]));
+      .then((response) => {
+        getGroups();
+        getGroupsSubs();
+        setGroupsSubs([...response.data]);
+      } );
   };
 
   useEffect(
@@ -81,6 +103,7 @@ export const GroupsProviders = ({ children }) => {
         },
       })
       .then((_) => {
+        getGroups();
         getGroupsSubs();
         toast.success("Sucesso ao editar grupo!");
       })
@@ -88,6 +111,8 @@ export const GroupsProviders = ({ children }) => {
   };
 
   const unsubscribe = () => {
+    console.log(groupId);
+
     api
       .delete(`/groups/${groupId}/unsubscribe/`, {
         headers: {
@@ -95,11 +120,16 @@ export const GroupsProviders = ({ children }) => {
         },
       })
       .then((_) => {
+        getGroups();
         getGroupsSubs();
-        toast.success("Sucesso ao sair grupo!");
+        toast.success("Sucesso ao sair do grupo!", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
       })
-      .catch((_) => toast.error("Erro ao sair grupo."));
-  }
+      .catch((error) => console.log(error));
+  };
 
   return (
     <GroupsContext.Provider
@@ -111,7 +141,8 @@ export const GroupsProviders = ({ children }) => {
         createGroup,
         getGroupsSubs,
         editGroups,
-        unsubscribe
+        unsubscribe,
+        setGroupId,
       }}
     >
       {children}

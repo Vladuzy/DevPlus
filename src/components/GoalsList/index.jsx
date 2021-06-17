@@ -7,18 +7,16 @@ import ButtonAdd from "../Buttons/ButtonAdd";
 
 import { GoalsContext } from "../../providers/Goals";
 import { useHistory, useParams } from "react-router-dom";
-
+import {useAuth} from "../../providers/AuthProvider"
 const GoalsList = ({ showArchived }) => {
   //Da para listar os achieved true ou false (botões para ficar alternando)
   const history = useHistory();
-  const { type } = useParams();
-
   const handleGoals = (value) => {
     history.push(value);
   };
 
   const { goals, patchGoal, deleteGoal } = useContext(GoalsContext);
-
+  const {isSubscribe} = useAuth();
   return (
     <GoalsListContainer>
       {showArchived
@@ -47,11 +45,9 @@ const GoalsList = ({ showArchived }) => {
               )
           )}
 
-      {/* {showArchived ? (
-        <ButtonAdd onClick={() => handleGoals("/edition/Meta")} />
-      ) : (
-        <ButtonAdd onClick={() => handleGoals("/edition/Meta")} />
-      )} */}
+          { (!showArchived && isSubscribe) && (
+            <ButtonAdd type="Atividade" onClick={() => handleGoals("/creation/Meta")} />
+          )}
     </GoalsListContainer>
   );
 };

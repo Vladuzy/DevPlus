@@ -35,6 +35,12 @@ export const GroupNameContainer = styled.h2`
   font-size: 18px;
   text-align: center;
 `;
+
+export const EditNameContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+`;
 export const DividerContainer = styled.div`
   margin: 0 auto;
   width: 80%;
