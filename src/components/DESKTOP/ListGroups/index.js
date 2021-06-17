@@ -1,12 +1,15 @@
 import React from 'react'
 import { useGroups } from '../../../providers/Groups'
 import CardGroups from '../CardGroups';
-
+import { useEffect } from 'react';
 export default function ListGroups({ values, search }) {
     const { getGroups, groups, getGroupsSubs, groupsSubs } = useGroups();
     
-    values === 'All' && getGroups()
-    values === 'Mine' && getGroupsSubs()
+    useEffect(() => {
+        getGroups();
+        getGroupsSubs();
+    }, [])
+
     return (
         <>
             {values === 'All' && search === '' ? groups.map((element, index) => {

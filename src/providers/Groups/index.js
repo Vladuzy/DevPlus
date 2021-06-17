@@ -23,10 +23,10 @@ export const GroupsProviders = ({ children }) => {
       .then((response) => setGroups([...response.data.results]));
   };
 
-  useEffect((_) => {
-    getGroups();
-    getGroupsSubs();
-  }, []);
+  // useEffect((_) => {
+  //   getGroups();
+  //   getGroupsSubs();
+  // }, []);
 
   const subsInAGroup = () => {
     api
