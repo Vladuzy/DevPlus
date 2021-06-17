@@ -9,7 +9,6 @@ import { useAuth } from "../../providers/AuthProvider";
 
 const ProfileEdition = ({ cardId }) => {
   const { updateUserInfo, getUserInfo } = useAuth();
-  console.log(updateUserInfo);
   const history = useHistory();
 
   const formSchemaActivity = yup.object().shape({
@@ -28,7 +27,6 @@ const ProfileEdition = ({ cardId }) => {
 
   const onSubmitData = (data) => {
     getUserInfo();
-    console.log(updateUserInfo);
     updateUserInfo(data);
     history.push("/profile");
   };

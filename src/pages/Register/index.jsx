@@ -56,7 +56,6 @@ const FormRegister = () => {
     api
       .post("/users/", addUser)
       .then((response) => {
-        console.log(response);
         toast.success("Cadastrado com sucesso!", {
           autoClose: 1500,
           hideProgressBar: true,
@@ -107,7 +106,7 @@ const FormRegister = () => {
           <Link to={"/login"}>LOGAR-SE</Link>
         </SubTitleFooterContainer>
       </FooterContainer>
-      <ButtonBack></ButtonBack>
+      <ButtonBack onClick={() => history.goBack()} ></ButtonBack>
     </Container>
   );
 };

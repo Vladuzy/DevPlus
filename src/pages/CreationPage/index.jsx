@@ -20,7 +20,6 @@ const CreationPage = ({ id }) => {
   const history = useHistory();
   const { type } = useParams();
   // type = "Atividade";
-  console.log(type);
   return (
     <BackgroundContainer type={type}>
       <HeaderContainer>

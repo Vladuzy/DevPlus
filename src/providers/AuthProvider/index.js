@@ -34,7 +34,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     getUserInfo();
     handleAuth();
-    console.log(userInfo);
   }, [token]);
 
   const handleLogin = (userData, decoder, history, toast) => {
@@ -84,7 +83,6 @@ export const AuthProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => console.log(response));
   };
 
   return (

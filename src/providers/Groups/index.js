@@ -26,7 +26,6 @@ export const GroupsProviders = ({ children }) => {
   }, []);
 
   const subsInAGroup = () => {
-    console.log(groupId);
     api
       .post(`/groups/${groupId}/subscribe/`, null, {
         headers: {
@@ -34,7 +33,6 @@ export const GroupsProviders = ({ children }) => {
         },
       })
       .then((response) => {
-        console.log(response)
         getGroups();
         getGroupsSubs();
         toast.success("Mais uma Aventura ;)", {
@@ -53,7 +51,6 @@ export const GroupsProviders = ({ children }) => {
   };
 
   const createGroup = (data) => {
-    console.log(data);
     api
       .post("/groups/", data, {
         headers: {
@@ -114,7 +111,6 @@ export const GroupsProviders = ({ children }) => {
   };
 
   const unsubscribe = () => {
-    console.log(groupId);
 
     api
       .delete(`/groups/${groupId}/unsubscribe/`, {

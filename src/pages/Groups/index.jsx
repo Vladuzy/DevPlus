@@ -31,7 +31,6 @@ const Groups = () => {
 
   const searchGroup = (e) => {
     setSearchGroups(e.target.value);
-    console.log(searchGroups);
   };
 
   if (isAuthenticated === false) {

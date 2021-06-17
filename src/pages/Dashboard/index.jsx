@@ -21,7 +21,6 @@ const Dashboard = () => {
   let { path, url } = useRouteMatch("");
 
   if (isAuthenticated === false) {
-    console.log("ta autenticado");
     return <Redirect to="/login" />;
   }
 

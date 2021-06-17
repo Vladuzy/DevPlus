@@ -22,7 +22,6 @@ export const ActivitiesProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => console.log(response))
       .then(() => getGroupActivities(groupId))
       .catch((err) => console.log(err));
   };
@@ -111,7 +110,6 @@ export const ActivitiesProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => console.log(response))
       .then(() => getGroupActivities(groupId))
       .catch((err) => console.log(err));
   };
@@ -123,7 +121,6 @@ export const ActivitiesProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => console.log(response))
       .then(() => getGroupActivities(groupId))
       .catch((err) => console.log(err));
   };

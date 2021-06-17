@@ -19,7 +19,6 @@ import ProfileEdition from "../../components/ProfileEdition"
 const EditionPage = ({ id }) => {
   const { cardId, type } = useParams();
   const history = useHistory();
-  console.log(history)
   return (
     <BackgroundContainer>
       <HeaderContainer>

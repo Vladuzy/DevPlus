@@ -74,7 +74,6 @@ export const HabitsProviders = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => console.log(response))
       .then(() => getHabits())
       .catch((err) => console.log(err));
   };

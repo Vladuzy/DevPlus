@@ -52,6 +52,15 @@ const Routes = () => {
     </Switch>
     :
     <Switch>
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route path="/login">
+        <Login />
+      </Route>
+      <Route path="/register">
+        <FormRegister></FormRegister>
+      </Route>
       <Route path='/Dashboard'>
         <DashboardDesktop />
       </Route>
