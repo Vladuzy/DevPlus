@@ -17,7 +17,9 @@ import { useHistory } from "react-router-dom";
 
 import { useAuth } from "../../providers/AuthProvider";
 
-const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived }) => {
+import { useMotionValue, useTransform } from 'framer-motion'
+
+const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived, limit }) => {
   //Desestruturar
   //Tentar fazer uma barrinha em função de 100%
   //Lembrar de limitar o tamanho do titulo
@@ -32,8 +34,34 @@ const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived }) => {
 
   const { id, title, difficulty, how_much_achieved } = goal;
 
+  //ANIMATION
+  const x = useMotionValue(0)
+  const xInput = [-100, 0, 100]
+  const opacityOutput = [0.7, 1, 0.7]
+  const colorOutput = showArchived ? ["#F8565D", "#30444D", "#FBC442"] : ["#F8565D", "#30444D", "#3DD598"]
+  const opacity = useTransform(x, xInput, opacityOutput)
+  const background = useTransform(x, xInput, colorOutput)
+
+  const handleEventDrag = (_, info) => {
+    const { offset: { x } } = info
+    if (x > 170) {
+      showArchived ? patchGoal(goal, "activate") : patchGoal(goal, "archieved")
+      
+    } else if (x < -170) {
+      deleteGoal(goal)
+    }
+  }
+
+
   return (
-    <GoalCardContainer key={id}>
+    <GoalCardContainer 
+      key={id}
+      drag='x'
+      dragConstraints={limit}
+      dragElastic={0.3}
+      style={{ x, background, opacity }}
+      onDragEnd={(e, info) => handleEventDrag(e, info)}
+    >
       {isSubscribe ? (
         <>
           <ButtonClose onClick={() => deleteGoal(goal)}>
