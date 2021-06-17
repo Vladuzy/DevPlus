@@ -16,10 +16,10 @@ import GoalsCreation from "../../components/GoalsCreation";
 import AtivityCreation from "../../components/ActivityCreation";
 import { useParams } from "react-router";
 
-const CreationPage = ({ id }) => {
+const CreationPage = () => {
   const history = useHistory();
   const { type } = useParams();
-  // type = "Atividade";
+
   return (
     <BackgroundContainer type={type}>
       <HeaderContainer>

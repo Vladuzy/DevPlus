@@ -18,6 +18,7 @@ import { IoClose } from "react-icons/io5";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
 import { useViewport } from "../../providers/GetViewport";
+import { useHabits } from "../../providers/Habits";
 
 import { useMotionValue, useTransform } from "framer-motion";
 
@@ -34,6 +35,8 @@ const HabitsCard = ({
   const {
     viewport: { width },
   } = useViewport();
+  const { getOneHabit } = useHabits();
+
   //ANIMATION
   const x = useMotionValue(0);
   const xInput = [-100, 0, 100];
@@ -57,8 +60,11 @@ const HabitsCard = ({
     }
   };
 
-  const handleEditionHabits = (value) => {
-    history.push(value);
+  const handleEditionHabits = () => {
+    getOneHabit(id);
+    setTimeout(function () {
+      history.push(`/edition/Habito/${id}`);
+    }, 700);
   };
 
   return (
@@ -111,7 +117,9 @@ const HabitsCard = ({
             <ContainerTitle>
               <TitleContainer>{title}</TitleContainer>
               <ButtonEdit
-                onClick={() => handleEditionHabits(`/edition/Habito/${id}`)}
+                onClick={() => {
+                  handleEditionHabits();
+                }}
               ></ButtonEdit>
             </ContainerTitle>
             <FlexContainer>

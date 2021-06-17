@@ -11,6 +11,10 @@ export const HabitsProviders = ({ children }) => {
     return JSON.parse(localStorage.getItem("@DevelopingHabitus:habits")) || [];
   });
 
+  const [habitInfo, setHabitInfo] = useState(() => {
+    return JSON.parse(localStorage.getItem("@DevelopingHabitus:habit")) || {};
+  });
+
   const createHabits = (data) => {
     api
       .post("/habits/", data, {
@@ -19,12 +23,20 @@ export const HabitsProviders = ({ children }) => {
         },
       })
       .then((response) => {
-        toast.success("Criou habito com sucesso");
+        toast.success("Criou habito com sucesso", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
         setDoingHabits([...doingHabits, response]);
         getHabits();
       })
       .catch((_) => {
-        toast.error("Erro ao criar habito");
+        toast.error("Erro ao criar habito", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
       });
   };
 
@@ -92,6 +104,16 @@ export const HabitsProviders = ({ children }) => {
       });
   };
 
+  const getOneHabit = (habitId) => {
+    api
+    .get(`/habits/${habitId}/`)
+    .then((response) => {
+      localStorage.setItem( "@DevelopingHabitus:habit", JSON.stringify(response.data));
+      setHabitInfo(response.data)
+    })
+    .catch((err) => console.log(err));
+  }
+
   useEffect(() => {
     getHabits();
   }, [token]);
@@ -106,6 +128,8 @@ export const HabitsProviders = ({ children }) => {
         doingHabits,
         setDoingHabits,
         updateTextHabits,
+        getOneHabit,
+        habitInfo
       }}
     >
       {children}

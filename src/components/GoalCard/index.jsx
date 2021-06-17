@@ -16,10 +16,10 @@ import { RiArrowGoBackLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
 
 import { useAuth } from "../../providers/AuthProvider";
-
+import { useGoals } from "../../providers/Goals";
 import { useMotionValue, useTransform } from 'framer-motion'
+const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived,limit }) => {
 
-const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived, limit }) => {
   //Desestruturar
   //Tentar fazer uma barrinha em função de 100%
   //Lembrar de limitar o tamanho do titulo
@@ -28,8 +28,11 @@ const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived, limit }) => {
   //Verificar se está escrito
   const history = useHistory();
   const { isSubscribe } = useAuth();
-  const handleEditionGoal = (value) => {
-    history.push(value);
+  const { getOneGoal } = useGoals();
+
+  const handleEditionGoal = () => {
+    getOneGoal(id);
+    setTimeout(function () {history.push(`/edition/Meta/${id}`)}, 700);
   };
 
   const { id, title, difficulty, how_much_achieved } = goal;
@@ -84,7 +87,7 @@ const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived, limit }) => {
             <ButtonConluds>
               <ButtonEdit
                 className="ButtonEdit"
-                onClick={() => handleEditionGoal(`/edition/Meta/${id}`)}
+                onClick={() =>   {handleEditionGoal()}}
               ></ButtonEdit>
               <ButtonCheck onClick={() => patchGoal(goal, "archieved")}>
                 <FaCheck className="check" />

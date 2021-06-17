@@ -27,11 +27,16 @@ const EditionPage = ({ id }) => {
             <h2 onClick={() => history.push("/groups/all")}>
               <IoIosArrowBack /> Voltar
             </h2>
-          ) : (
-            <h2 onClick={() => history.goBack()}>
+          ) : (type === "Username") ? (
+            <h2 onClick={() =>  history.push("/profile")}>
               <IoIosArrowBack /> Voltar
             </h2>
+          ) : (
+            <h2 onClick={() => history.goBack()}>
+            <IoIosArrowBack /> Voltar
+          </h2>
           )
+
         }
       
       </HeaderContainer>

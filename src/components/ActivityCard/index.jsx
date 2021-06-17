@@ -12,6 +12,7 @@ import { RiArrowGoBackLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
 import {useAuth} from "../../providers/AuthProvider"
 import { useMotionValue, useTransform } from 'framer-motion'
+import {useActivity} from "../../providers/Activities"
 
 const ActivityCard = ({
   activity,
@@ -25,6 +26,7 @@ const ActivityCard = ({
   const date = new Date(realization_time);
   const {isSubscribe} = useAuth();
   const history = useHistory();
+  const {getOneActivity} = useActivity();
 
   //ANIMATION
   const x = useMotionValue(0)
@@ -45,7 +47,8 @@ const ActivityCard = ({
   }
 
   const handleEditionActivity = (value) => {
-    history.push(value);
+    getOneActivity(id)
+    setTimeout(function () {history.push(`/edition/Atividade/${id}`)}, 700);
   };
   return (
     <ActivityCardContainer 
@@ -77,7 +80,7 @@ const ActivityCard = ({
               <InfoContainer>
                 <h2>{title}</h2>
               </InfoContainer>
-              <ButtonEdit  onClick={() => handleEditionActivity(`/edition/Atividade/${id}`)}></ButtonEdit>
+              <ButtonEdit  onClick={() => handleEditionActivity()}></ButtonEdit>
               <ButtonCheck onClick={() => patchSwitchArchived(activity, "archieved")}>
                 <FaCheck className="check" />
               </ButtonCheck>

@@ -21,12 +21,17 @@ import { CgEnter } from 'react-icons/cg'
 import { IoIosAddCircle, IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
 import { useState } from 'react'
 import CardGroups from '../../../components/DESKTOP/CardGroups'
+import CreationDisplay from '../../../components/DESKTOP/CreationDisplay'
 
 const GroupsDesktop = () => {
+  const [creationOpen, setCreationOpen] = useState(false)
+  const [type, setType] = useState('')
   const [groupsType, setGroupsType] = useState('All')
-  const pertenceAoGrupo = false
+  const pertenceAoGrupo = true
 
   return(
+    <>
+    {creationOpen && <CreationDisplay close={setCreationOpen} type={type}/>}
     <MainGroups type={groupsType}>
       <Header type={groupsType}/>
       <MainContainer>
@@ -50,13 +55,32 @@ const GroupsDesktop = () => {
         <SelectedContainer>
         
           <TitleSelectedContainer group={pertenceAoGrupo}>
-            { pertenceAoGrupo ? <Button><IoIosAddCircle />Criar Grupo</Button> : <Button>Entrar no Grupo <CgEnter /></Button>}
+            { pertenceAoGrupo ? 
+            <Button 
+              onClick={() => {
+                setCreationOpen(true)
+                setType('Grupo')
+              }}
+            >
+              <IoIosAddCircle />Criar Grupo
+            </Button> : 
+            <Button>
+              Entrar no Grupo <CgEnter />
+            </Button>}
             <h2>Nome do Grupo</h2>
           </TitleSelectedContainer>
           <SomethingSelectedContainer>
             <TitleSomethingSelectedContainer>
               <h2>ATIVIDADES</h2>
-              { pertenceAoGrupo && <Button><IoIosAddCircle />Nova Atividade</Button>}
+              { pertenceAoGrupo && 
+              <Button 
+                onClick={() => {
+                  setCreationOpen(true)
+                  setType('Atividade')
+                }}
+              >
+                <IoIosAddCircle />Nova Atividade
+              </Button>}
             </TitleSomethingSelectedContainer>
             <GroupContentContainer type={groupsType}>
               <IoIosArrowDropleftCircle />
@@ -70,7 +94,15 @@ const GroupsDesktop = () => {
           <SomethingSelectedContainer>
             <TitleSomethingSelectedContainer meta>
               <h2>METAS</h2>
-              { pertenceAoGrupo && <Button><IoIosAddCircle />Nova Meta</Button>}
+              { pertenceAoGrupo && 
+              <Button
+                onClick={() => {
+                  setCreationOpen(true)
+                  setType('Meta')
+                }}
+              >
+                <IoIosAddCircle />Nova Meta
+              </Button>}
             </TitleSomethingSelectedContainer>
             <GroupContentContainer type={groupsType}>
               <IoIosArrowDropleftCircle />
@@ -85,6 +117,7 @@ const GroupsDesktop = () => {
 
       </MainContainer>
     </MainGroups>
+    </>
   )
 }
 
