@@ -12,10 +12,11 @@ export const GroupsProviders = ({ children }) => {
   const [groupId, setGroupId] = useState(() => {
     return parseInt(localStorage.getItem("@DevelopingHabitus:groupId")) || "";
   });
+  const [groupCreatorId, setGroupCreatorId] = useState("");
 
   const getGroups = () => {
     api
-      .get("groups/?category=DevelopingHabitus")
+      .get("groups/?category=DevelopingH")
       .then((response) => setGroups([...response.data.results]));
   };
 
@@ -82,8 +83,6 @@ export const GroupsProviders = ({ children }) => {
         },
       })
       .then((response) => {
-        getGroups();
-        getGroupsSubs();
         setGroupsSubs([...response.data]);
       } );
   };
@@ -131,6 +130,16 @@ export const GroupsProviders = ({ children }) => {
       .catch((error) => console.log(error));
   };
 
+  const getGroup = (id) => {
+    api
+    .get(`/groups/${id}/`)
+    .then((res) => {
+      localStorage.setItem( "@DevelopingHabitus:groupCreatorId", JSON.stringify(res.data.creator.id));
+      setGroupCreatorId(res.data.creator.id);
+    })
+    .catch(err=>console.log(err))
+  }
+
   return (
     <GroupsContext.Provider
       value={{
@@ -143,6 +152,8 @@ export const GroupsProviders = ({ children }) => {
         editGroups,
         unsubscribe,
         setGroupId,
+        getGroup,
+        groupCreatorId
       }}
     >
       {children}
