@@ -4,24 +4,19 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Input from "../Input";
 import Button from "../Buttons/Button";
 import { useHistory } from "react-router-dom";
-import {
-  FormContainer,
-  ErrorSpanContainer,
-  InputContainer
-} from "./styles";
-
+import { FormContainer, ErrorSpanContainer, InputContainer } from "./styles";
 import { useAuth } from "../../providers/AuthProvider";
 
 const ProfileEdition = ({ cardId }) => {
-  const {updateUserInfo} = useAuth();
-    console.log(updateUserInfo)
+  const { updateUserInfo, getUserInfo } = useAuth();
+  console.log(updateUserInfo);
   const history = useHistory();
 
   const formSchemaActivity = yup.object().shape({
     username: yup
       .string()
       .required("Campo Obrigatório.")
-      .max(15, "Máximo de 15 caracteres.")
+      .max(15, "Máximo de 15 caracteres."),
   });
   const {
     handleSubmit,
@@ -32,9 +27,10 @@ const ProfileEdition = ({ cardId }) => {
   });
 
   const onSubmitData = (data) => {
-      console.log(updateUserInfo)
-    updateUserInfo(data)
-    history.goBack();
+    getUserInfo();
+    console.log(updateUserInfo);
+    updateUserInfo(data);
+    history.push("/profile");
   };
 
   return (
