@@ -12,6 +12,7 @@ import CreatingPage from "../pages/CreationPage";
 import EditionPage from "../pages/EditionPage";
 import DashboardDesktop from "../pages/DESKTOP/Dashboard";
 import Profile from "../pages/Profile"
+import GroupsDesktop from "../pages/DESKTOP/Groups";
 
 const Routes = () => {
   const { viewport: { width } } = useViewport()
@@ -53,6 +54,9 @@ const Routes = () => {
     <Switch>
       <Route path='/Dashboard'>
         <DashboardDesktop />
+      </Route>
+      <Route path='/Groups'>
+        <GroupsDesktop />
       </Route>
       <Route>
         <NotFound />

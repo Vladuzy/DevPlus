@@ -1,9 +1,10 @@
 import Button from "../../Buttons/Button"
 import { LogoContainer, ButtonNavContainer, HeaderContainer, GroupSVG, LogoutSVG, ListSVG } from './styles'
 
-const Header = () => {
+const Header = ({ type }) => {
+
   return(
-    <HeaderContainer>
+    <HeaderContainer value={type}>
       <LogoContainer>
         <h2>DEV PLUS</h2>
       </LogoContainer>
