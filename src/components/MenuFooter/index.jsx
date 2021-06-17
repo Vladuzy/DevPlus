@@ -1,17 +1,16 @@
 import { AiFillHome, AiOutlineHome } from "react-icons/ai";
 import { HiUserGroup, HiOutlineUserGroup } from "react-icons/hi";
-import { FaUserEdit } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
 import { useState } from "react";
 import { MenuFooterImg, FooterContainer } from "./style";
-import { FaUser } from "react-icons/fa";
-import { FaRegUser } from "react-icons/fa";
+import { FaRegUser, FaUser } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../providers/AuthProvider";
 const MenuFooter = () => {
   const { isAuthenticated, setIsAuthenticated } = useAuth();
   const [inHome, setInHome] = useState(true);
   const [inGroups, setInGroups] = useState(false);
+  const [inProfile, setInProfile] = useState(false);
   const history = useHistory();
 
   const sendTo = (path) => {
@@ -26,6 +25,7 @@ const MenuFooter = () => {
     setIsAuthenticated(false);
     setInHome(true);
     setInGroups(false);
+    setInProfile(false)
     localStorage.clear();
     sendTo(value);
   };
@@ -33,11 +33,19 @@ const MenuFooter = () => {
   const handleSwitchToHome = () => {
     setInHome(true);
     setInGroups(false);
+    setInProfile(false)
   };
 
   const handleSwitchToGroups = () => {
     setInHome(false);
     setInGroups(true);
+    setInProfile(false);
+  };
+
+  const handleSwitchToProfile = () => {
+    setInHome(false);
+    setInGroups(false);
+    setInProfile(true);
   };
 
   return (
@@ -80,10 +88,29 @@ const MenuFooter = () => {
             ></AiOutlineHome>
           )}
 
-          <FaUserEdit
-            className="figure-profile"
-            onClick={() => handleClick("/profile")}
-          ></FaUserEdit>
+
+          {inProfile ? (
+            <FaUser
+              className="figure-profile"
+              onClick={() =>  {
+                handleClick("/profile");
+                handleSwitchToProfile();
+              }}
+            ></FaUser>
+            ) : (
+              <FaRegUser
+                className="figure-profile"
+                onClick={() => {
+                  handleClick("/profile");
+                  handleSwitchToProfile();
+                }}
+              ></FaRegUser>
+          )}  
+
+
+
+
+
           <IoLogOutOutline
             onClick={() => handleCloseApplication("/")}
             className="figure"
