@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   const [isSubscribe, setIsSubscribe] = useState(false)
 
   const [userInfo, setUserInfo] = useState(() => {
-    return JSON.parse(localStorage.getItem("@DevelopingHabitus:token")) || {};
+    return JSON.parse(localStorage.getItem("@DevelopingHabitus:userInfo")) || {};
   });
 
   const handleAuth = () => {
@@ -31,7 +31,6 @@ export const AuthProvider = ({ children }) => {
     getUserInfo()
     handleAuth();
     getUserInfo();
-    updateUserInfo();
     console.log(userInfo)
   }, [token]);
 
@@ -67,16 +66,15 @@ export const AuthProvider = ({ children }) => {
       api
       .get(`/users/${id}/`)
       .then((res) => {
+        localStorage.setItem( "@DevelopingHabitus:userInfo",
+        JSON.stringify(res.data))
         setUserInfo(res.data);
        })
     }
 
-    const updateUserInfo = () => { 
-      const dataInfo={
-        email:"alow@gmail.com"
-      }
+    const updateUserInfo = (data) => { 
 
-      api.patch(`/users/${id}/`, dataInfo, {
+      api.patch(`/users/${id}/`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -86,7 +84,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ userInfo, setIsAuthenticated, handleLogin, token, id, isAuthenticated, setIsSubscribe, isSubscribe }}
+      value={{ userInfo, updateUserInfo, setIsAuthenticated, handleLogin, token, id, isAuthenticated, setIsSubscribe, isSubscribe }}
     >
       {children}
     </AuthContext.Provider>

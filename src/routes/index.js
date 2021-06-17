@@ -11,6 +11,7 @@ import SpecificGroup from "../pages/SpecificGroup";
 import CreatingPage from "../pages/CreationPage";
 import EditionPage from "../pages/EditionPage";
 import DashboardDesktop from "../pages/DESKTOP/Dashboard";
+import Profile from "../pages/Profile"
 
 const Routes = () => {
   const { viewport: { width } } = useViewport()
@@ -28,6 +29,9 @@ const Routes = () => {
       </Route>
       <Route path="/dashboard">
         <Dashboard />
+      </Route>
+      <Route path="/profile">
+        <Profile />
       </Route>
       <Route path="/groups">
         <Groups />

@@ -14,6 +14,7 @@ import HabitEdition from "../../components/HabitEdition";
 import GroupEdition from "../../components/GroupEdition";
 import ActivityEdition from "../../components/ActivityEdition";
 import GoalsEdition from "../../components/GoalsEdition";
+import ProfileEdition from "../../components/ProfileEdition"
 
 const EditionPage = ({ id }) => {
   const { cardId, type } = useParams();
@@ -43,6 +44,7 @@ const EditionPage = ({ id }) => {
         {type === "Grupo" && <GroupEdition />}
         {type === "Atividade" && <ActivityEdition cardId={cardId} />}
         {type === "Meta" && <GoalsEdition cardId={cardId} />}
+        {type === "Username" && <ProfileEdition />}
       </MainContainer>
     </BackgroundContainer>
   );
