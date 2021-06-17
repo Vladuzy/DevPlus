@@ -21,7 +21,7 @@ import { CgEnter } from 'react-icons/cg'
 import { IoIosAddCircle, IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
 import { useState } from 'react'
 import CardGroups from '../../../components/DESKTOP/CardGroups'
-import CreationDisplay from '../../../components/DESKTOP/CreationDisplay'
+import DisplayPopUp from '../../../components/DESKTOP/DisplayPopUp'
 
 const GroupsDesktop = () => {
   const [creationOpen, setCreationOpen] = useState(false)
@@ -31,7 +31,7 @@ const GroupsDesktop = () => {
 
   return(
     <>
-    {creationOpen && <CreationDisplay close={setCreationOpen} type={type}/>}
+    {creationOpen && <DisplayPopUp close={setCreationOpen} type={type}/>}
     <MainGroups type={groupsType}>
       <Header type={groupsType}/>
       <MainContainer>

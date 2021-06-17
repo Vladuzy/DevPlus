@@ -14,8 +14,8 @@ import {
   IoIosArrowDroprightCircle,
 } from "react-icons/io";
 
-import CreationDisplay from "../../../components/DESKTOP/CreationDisplay";
 import HabitsList from "../../../components/HabitsList";
+import DisplayPopUp from "../../../components/DESKTOP/DisplayPopUp";
 
 import { useState } from "react";
 
@@ -24,9 +24,7 @@ const DashboardDesktop = () => {
 
   return (
     <>
-      {creationOpen && (
-        <CreationDisplay close={setCreationOpen} type="Habito" />
-      )}
+      {creationOpen && <DisplayPopUp close={setCreationOpen} type="Habito" />}
       <MainDashboard>
         <Header />
         <MainContainer>

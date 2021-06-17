@@ -51,7 +51,10 @@ export const ButtonClose = styled.button`
     font-weight: bold;
   }
   @media (min-width: 758px) {
-    background-color: var(--cinza-escuro);
+    background-color: var(--vermelho);
+    width: 25%;
+    border-radius: 20px;
+    color: var(--branco);
   }
 `;
 
@@ -107,6 +110,11 @@ export const ButtonCheck = styled.button`
     color: green;
     font-size: 1.7rem;
     font-weight: bold;
+  }
+  @media (min-width: 758px) {
+    background-color: var(--verde);
+    border-radius: 20px;
+    color: var(--branco);
   }
 `;
 
