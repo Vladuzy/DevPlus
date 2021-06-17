@@ -1,21 +1,26 @@
 import { AuthProvider } from "./AuthProvider";
-import { ActiviesProvider } from "./Activities";
+import { ActivitiesProvider } from "./Activities";
 import { GoalsProvider } from "./Goals";
 import { HabitsProviders } from "./Habits";
 import { GroupsProviders } from "./Groups";
+import { ViewportProvider } from "./GetViewport";
 
 const Providers = ({ children }) => {
-  return (
-    <AuthProvider>
-      <ActiviesProvider>
-        <GoalsProvider>
+    return (
+      <AuthProvider>
+        <HabitsProviders>
           <GroupsProviders>
-            <HabitsProviders>{children}</HabitsProviders>
+            <GoalsProvider>
+              <ActivitiesProvider>
+                <ViewportProvider>
+                  {children}
+                </ViewportProvider>
+              </ActivitiesProvider>
+            </GoalsProvider>
           </GroupsProviders>
-        </GoalsProvider>
-      </ActiviesProvider>
-    </AuthProvider>
-  );
+        </HabitsProviders>
+      </AuthProvider>
+    );
 };
 
 export default Providers;
