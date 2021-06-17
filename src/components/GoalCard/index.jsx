@@ -29,8 +29,10 @@ const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived,limit }) => {
   const history = useHistory();
   const { isSubscribe } = useAuth();
   const { getOneGoal } = useGoals();
-  const handleEditionGoal = (value) => {
-    history.push(value);
+
+  const handleEditionGoal = () => {
+    getOneGoal(id);
+    setTimeout(function () {history.push(`/edition/Meta/${id}`)}, 700);
   };
 
   const { id, title, difficulty, how_much_achieved } = goal;
@@ -85,7 +87,7 @@ const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived,limit }) => {
             <ButtonConluds>
               <ButtonEdit
                 className="ButtonEdit"
-                onClick={() =>   { handleEditionGoal(`/edition/Meta/${id}`)}}
+                onClick={() =>   {handleEditionGoal()}}
               ></ButtonEdit>
               <ButtonCheck onClick={() => patchGoal(goal, "archieved")}>
                 <FaCheck className="check" />

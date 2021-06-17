@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../services";
-
+import { toast } from "react-toastify";
 export const AuthContext = createContext("");
 
 export const AuthProvider = ({ children }) => {
@@ -62,12 +62,17 @@ export const AuthProvider = ({ children }) => {
         history.push("/dashboard");
       })
       .catch((err) => {
-        toast.error("Error ao fazer o Login.");
+        toast.error("Error ao fazer o Login.", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
       });
   };
 
   const getUserInfo = () => {
-    api.get(`/users/${id}/`).then((res) => {
+    api.get(`/users/${id}/`)
+    .then((res) => {
       localStorage.setItem(
         "@DevelopingHabitus:userInfo",
         JSON.stringify(res.data)
@@ -83,6 +88,11 @@ export const AuthProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
+      .catch((err)=>toast.error("Usuário já existente, tente outro nome!!",{
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+      } ));
   };
 
   return (

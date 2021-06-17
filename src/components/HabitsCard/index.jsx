@@ -15,7 +15,7 @@ import { FaCheck } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
-// import { useHabits } from "../../providers/Habits";
+import { useHabits } from "../../providers/Habits";
 
 import { useMotionValue, useTransform } from 'framer-motion'
 
@@ -23,7 +23,7 @@ const HabitsCard = ({ habit, updateHabits, deleteHabits, showArchived, limit }) 
   const { id, title, category, difficulty, frequency, how_much_achieved } =
     habit;
   const history = useHistory();
-  // const {getOneHabit} = useHabits();
+  const {getOneHabit} = useHabits();
 
   //ANIMATION
   const x = useMotionValue(0)
@@ -43,8 +43,9 @@ const HabitsCard = ({ habit, updateHabits, deleteHabits, showArchived, limit }) 
     }
   }
 
-  const handleEditionHabits = (value) => {
-    history.push(value);
+  const handleEditionHabits = () => {
+    getOneHabit(id);
+    setTimeout(function () {history.push(`/edition/Habito/${id}`)}, 700);
   };
 
   return (
@@ -81,7 +82,7 @@ const HabitsCard = ({ habit, updateHabits, deleteHabits, showArchived, limit }) 
       ) : (
         <>
         <ButtonEdit
-        onClick={() => {handleEditionHabits(`/edition/Habito/${id}`)} }
+        onClick={() => {handleEditionHabits()} }
       ></ButtonEdit>
         <ButtonCheck onClick={() => updateHabits(habit, "archieved")}>
           <FaCheck className="check" />
