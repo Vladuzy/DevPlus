@@ -28,10 +28,11 @@ export const GroupsProviders = ({ children }) => {
     api
       .post(`/groups/${groupId}/subscribe/`, null, {
         headers: {
-          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI0Mjk1ODg4LCJqdGkiOiI0MjIxMjhjMmZjZDM0OTgyOWYxZWQ5NzgzMmNjOThhYiIsInVzZXJfaWQiOjcxOX0.1Rq4pBuHPn-KCSh9AE3SRLjVEvgAPxcVRUJaRWYM99w`,
+          Authorization: `Bearer ${token}`,
         },
       })
-      .then((_) => {
+      .then((response) => {
+        console.log(response)
         getGroups();
         getGroupsSubs();
         toast.success("Mais uma Aventura ;)", {
@@ -80,7 +81,11 @@ export const GroupsProviders = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => setGroupsSubs([...response.data]));
+      .then((response) => {
+        getGroups();
+        getGroupsSubs();
+        setGroupsSubs([...response.data]);
+      } );
   };
 
   useEffect(

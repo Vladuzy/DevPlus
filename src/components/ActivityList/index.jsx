@@ -3,10 +3,12 @@ import { useHistory } from "react-router";
 import { useActivity } from "../../providers/Activities";
 import ButtonAdd from "../Buttons/ButtonAdd";
 import { ActivitiesListContainer } from "./style";
-
+import {useAuth} from "../../providers/AuthProvider"
 const ActivityList = ({showArchived}) => {
   const { activities, patchActivities, deleteActivity, patchSwitchArchived } = useActivity();
   const history = useHistory();
+  const {isSubscribe} = useAuth();
+  
   const handleActivity = (value) => {
     history.push(value);
   };
@@ -43,7 +45,7 @@ const ActivityList = ({showArchived}) => {
           )
         }
        {/* handleGroups("/creation/Grupo") */}
-       {!showArchived && (
+       {(!showArchived && isSubscribe) && (
       <ButtonAdd type="Atividade" onClick={() => handleActivity("/creation/Atividade")} />
       )}
     </ActivitiesListContainer>
