@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 export const HabitsContainer = styled(motion.div)`
   :last-child {
@@ -7,4 +7,7 @@ export const HabitsContainer = styled(motion.div)`
   }
   margin: 30px auto 0;
   width: 100%;
+  @media (min-width: 758px) {
+    height: 47%;
+  }
 `;
