@@ -1,16 +1,16 @@
 import React from 'react'
 import { ContainerButton, ContainerCard, ContainerImg, ContentText } from './styles'
 
-export default function CardGroups() {
+export default function CardGroups({ name, description, category, activity, goals }) {
     return (
         <ContainerCard>
             <ContentText>
-                <h3>Nome do grupo</h3>
-                <p>descriçao do grupo</p>
+                <h3>{name}</h3>
+                <p>{description}</p>
                 <div>
-                    <p>linguagem</p>
-                    <p>atividades: <span>5</span></p>
-                    <p>metas: <span>5</span></p>
+                    <p>{category.slice(17)}</p>
+                    <p>atividades: <span>{activity}</span></p>
+                    <p>metas: <span>{goals}</span></p>
                 </div>
             </ContentText>
             <ContainerButton>

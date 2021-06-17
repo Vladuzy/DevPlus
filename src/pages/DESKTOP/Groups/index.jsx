@@ -22,12 +22,18 @@ import { IoIosAddCircle, IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } f
 import { useState } from 'react'
 import CardGroups from '../../../components/DESKTOP/CardGroups'
 import DisplayPopUp from '../../../components/DESKTOP/DisplayPopUp'
+import ListGroups from '../../../components/DESKTOP/ListGroups'
 
 const GroupsDesktop = () => {
   const [creationOpen, setCreationOpen] = useState(false)
   const [type, setType] = useState('')
   const [groupsType, setGroupsType] = useState('All')
-  const pertenceAoGrupo = true
+  const [search, setSearch] = useState('')
+  const pertenceAoGrupo = false
+
+  const serchName = (e) => {
+    setSearch(e.target.value)
+  }
 
   return(
     <>
@@ -41,14 +47,14 @@ const GroupsDesktop = () => {
             <TitleGroupSelectContainer>
               <h2>GRUPOS</h2> 
               <InputsContainer type={groupsType}>
-                <InputSearch placeholder='Pesquisar...'/>
+                <InputSearch placeholder='Pesquisar...' onChange={serchName}/>
                 <SelectTypeContainer onChange={(e) => setGroupsType(e.target.value)}>
                   <option value="All">TODOS</option>
                   <option value="Mine">MEUS</option>
                 </SelectTypeContainer>
               </InputsContainer>
             </TitleGroupSelectContainer>
-            <CardGroups/>
+            <ListGroups values={groupsType} search={search}/>
           </GroupsSelectContainer>
         </SelectContainer>
 
