@@ -15,6 +15,10 @@ const Header = ({ type }) => {
   const handleAlternRoutes = (value) => {
     history.push(value);
   };
+  const handleCloseApplication = (value) => {
+    localStorage.clear();
+    history.push(value);
+  };
 
   return (
     <HeaderContainer value={type}>
@@ -28,7 +32,7 @@ const Header = ({ type }) => {
         <Button onClick={() => handleAlternRoutes("/groups")}>
           GRUPOS <GroupSVG />
         </Button>
-        <Button onClick={() => handleAlternRoutes("/")}>
+        <Button onClick={() => handleCloseApplication("/login")}>
           LOG-OUT <LogoutSVG />
         </Button>
       </ButtonNavContainer>
