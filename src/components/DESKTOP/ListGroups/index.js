@@ -3,14 +3,13 @@ import { useGroups } from '../../../providers/Groups'
 import CardGroups from '../CardGroups';
 
 export default function ListGroups({ values, search }) {
-    const { getGroups, groups, getGroupsSubs, groupsSubs } = useGroups();
+    const { groups, groupsSubs } = useGroups();
     
-    values === 'All' && getGroups()
-    values === 'Mine' && getGroupsSubs()
     return (
         <>
             {values === 'All' && search === '' ? groups.map((element, index) => {
                 return <CardGroups key={index} 
+                currentGroup = {element}
                 name={element.name}
                 description={element.description}
                 category={element.category}
