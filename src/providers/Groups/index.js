@@ -13,6 +13,9 @@ export const GroupsProviders = ({ children }) => {
     return parseInt(localStorage.getItem("@DevelopingHabitus:groupId")) || "";
   });
   const [groupCreatorId, setGroupCreatorId] = useState("");
+  const [group, setGroup] = useState(() => {
+    return JSON.parse(localStorage.getItem("@DevelopingHabitus:group")) || {};
+  });
 
   const getGroups = () => {
     api
@@ -102,6 +105,7 @@ export const GroupsProviders = ({ children }) => {
       .then((_) => {
         getGroups();
         getGroupsSubs();
+        getGroup(groupId);
         toast.success("Sucesso ao editar grupo!");
       })
       .catch((err) => {
@@ -134,6 +138,8 @@ export const GroupsProviders = ({ children }) => {
     api
     .get(`/groups/${id}/`)
     .then((res) => {
+      setGroup(res.data);
+      localStorage.setItem( "@DevelopingHabitus:group", JSON.stringify(res.data));
       localStorage.setItem( "@DevelopingHabitus:groupCreatorId", JSON.stringify(res.data.creator.id));
       setGroupCreatorId(res.data.creator.id);
     })
@@ -153,6 +159,7 @@ export const GroupsProviders = ({ children }) => {
         unsubscribe,
         setGroupId,
         getGroup,
+        group,
         groupCreatorId
       }}
     >

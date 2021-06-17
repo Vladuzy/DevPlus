@@ -15,6 +15,9 @@ export const GoalsProvider = ({ children }) => {
   const [goals, setGoals] = useState(() => {
     return JSON.parse(localStorage.getItem("@DevelopingHabitus:goals")) || [];
   });
+
+  const [goal, setGoal] = useState({}); 
+
   const [groupId, setGroupId] = useState(() => {
     return parseInt(localStorage.getItem("@DevelopingHabitus:groupId")) || "";
   });
@@ -97,6 +100,7 @@ export const GoalsProvider = ({ children }) => {
       }
     }).then(_ => {
       getGoals(groupId);
+      getOneGoal(id)
       toast.success('Meta atualizada com sucesso!!!');
     })
     .catch(_ => toast.error('erro em atualizar a meta, tente de novo!'))
@@ -119,13 +123,23 @@ export const GoalsProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
+  const getOneGoal = (goalId) => {
+    api
+    .get(`/goals/${goalId}/`)
+    .then((response) => {
+      // localStorage.setItem( "@DevelopingHabitus:goal", JSON.stringify(response.data));
+      setGoal(response.data)
+    })
+    .catch((err) => console.log(err));
+  }
+
   useEffect(() => {
     getGoals(groupId);
   }, [groupId]);
 
   return (
     <GoalsContext.Provider
-      value={{ goals, getGoals, createGoals, patchGoal, updateGoals, deleteGoal }}
+      value={{ goals, getGoals, createGoals, patchGoal, updateGoals, deleteGoal, getOneGoal, goal }}
     >
       {children}
     </GoalsContext.Provider>

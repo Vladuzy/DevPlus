@@ -16,7 +16,7 @@ import { RiArrowGoBackLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
 
 import { useAuth } from "../../providers/AuthProvider";
-
+import { useGoals } from "../../providers/Goals";
 const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived }) => {
   //Desestruturar
   //Tentar fazer uma barrinha em função de 100%
@@ -26,6 +26,7 @@ const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived }) => {
   //Verificar se está escrito
   const history = useHistory();
   const { isSubscribe } = useAuth();
+  const { getOneGoal } = useGoals();
   const handleEditionGoal = (value) => {
     history.push(value);
   };
@@ -56,7 +57,7 @@ const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived }) => {
             <ButtonConluds>
               <ButtonEdit
                 className="ButtonEdit"
-                onClick={() => handleEditionGoal(`/edition/Meta/${id}`)}
+                onClick={() =>   { handleEditionGoal(`/edition/Meta/${id}`)}}
               ></ButtonEdit>
               <ButtonCheck onClick={() => patchGoal(goal, "archieved")}>
                 <FaCheck className="check" />

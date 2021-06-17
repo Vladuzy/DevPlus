@@ -21,6 +21,7 @@ const ActivityList = ({showArchived}) => {
               (
                 (  Date.parse(activity.realization_time) !== Date.parse("1000-10-10T00:00:00Z") ) && (
                   <ActivityCard 
+                    key={activity.id}
                     showArchived={true} 
                     activity={activity} 
                     patchActivities={patchActivities} 
@@ -34,6 +35,7 @@ const ActivityList = ({showArchived}) => {
             (
               (Date.parse(activity.realization_time) === Date.parse("1000-10-10T00:00:00Z")) && (
                 <ActivityCard 
+                  key={activity.id}
                   showArchived={false} 
                   activity={activity} 
                   deleteActivity={deleteActivity} 
