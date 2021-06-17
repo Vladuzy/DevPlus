@@ -20,6 +20,7 @@ import Button from '../../../components/Buttons/Button'
 import { CgEnter } from 'react-icons/cg'
 import { IoIosAddCircle, IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
 import { useState } from 'react'
+import CardGroups from '../../../components/DESKTOP/CardGroups'
 
 const GroupsDesktop = () => {
   const [groupsType, setGroupsType] = useState('All')
@@ -42,6 +43,7 @@ const GroupsDesktop = () => {
                 </SelectTypeContainer>
               </InputsContainer>
             </TitleGroupSelectContainer>
+            <CardGroups/>
           </GroupsSelectContainer>
         </SelectContainer>
 
