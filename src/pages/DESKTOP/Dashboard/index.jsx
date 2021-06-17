@@ -4,7 +4,7 @@ import Header from '../../../components/DESKTOP/Header'
 import { IoIosAddCircle, IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
 import CardsHabbits from "../../../components/DESKTOP/CardsHabbits";
 import CardGoalsActivity from "../../../components/DESKTOP/CardGoalsActivity";
-import CreationDisplay from "../../../components/DESKTOP/CreationDisplay";
+import DisplayPopUp from "../../../components/DESKTOP/DisplayPopUp";
 import { useState } from "react";
 
 const DashboardDesktop = () => {
@@ -12,7 +12,7 @@ const DashboardDesktop = () => {
 
   return(
     <>
-    {creationOpen && <CreationDisplay close={setCreationOpen} type='Habito'/>}
+    {creationOpen && <DisplayPopUp close={setCreationOpen} type='Habito' edit/>}
     <MainDashboard>
       <Header />
       <MainContainer>
