@@ -22,6 +22,7 @@ export const GroupsProviders = ({ children }) => {
 
   useEffect((_) => {
     getGroups();
+    getGroupsSubs();
   }, []);
 
   const subsInAGroup = () => {
@@ -106,7 +107,10 @@ export const GroupsProviders = ({ children }) => {
         getGroupsSubs();
         toast.success("Sucesso ao editar grupo!");
       })
-      .catch((_) => toast.error("Erro ao editar grupo."));
+      .catch((err) => {
+        console.log(err)
+        toast.error("Erro ao editar grupo.")
+      });
   };
 
   const unsubscribe = () => {
