@@ -18,12 +18,17 @@ export const MenuFooterImg = styled.footer`
     height: 31.87px;
     color: var(--verde);
   }
+  .figure-profile {
+    width: 31.33px;
+    height: 28.33px;
+    color: var(--verde);
+  }
 `;
 
 export const FooterContainer = styled.div`
   background-color: var(--cinza-escuro);
 
-  @media (min-width: 768px){
+  @media (min-width: 768px) {
     display: none;
   }
 `;
