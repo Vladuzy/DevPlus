@@ -1,6 +1,17 @@
 import styled from "styled-components";
 
-export const Container = styled.input`
+export const InputStyled = styled.input`
+  background-color: transparent;
+  width: 180px;
+  height: 100%;
+  border: none;
+
+  &::placeholder {
+    color: var(--verde);
+  }
+`;
+
+export const Container = styled.div`
   width: 220px;
   height: 35px;
   background-color: var(--cinza-claro);
@@ -10,8 +21,12 @@ export const Container = styled.input`
   border: none;
   color: var(--branco);
   padding-left: 15px;
+  display: flex;
+`;
 
-  &::placeholder {
-    color: var(--verde);
-  }
+export const ContainerImg = styled.div`
+  background: url(${(props) => props.icon});
+  background-size: cover;
+  width: 40px;
+  height: 35px;
 `;

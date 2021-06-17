@@ -2,16 +2,30 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: var(--cinza-escuro);
+  @media (min-width: 758px) {
+    height: 500px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+  }
 `;
 export const TitleContainer = styled.h1`
   color: var(--branco);
   font-size: 30px;
   padding: 7px;
+  @media (min-width: 758px) {
+    margin: 0 auto;
+  }
 `;
 export const SubTitleContainer = styled.h3`
   color: var(--amarelo);
   font-size: 15px;
   padding: 7px;
+  @media (min-width: 758px) {
+    margin: 0 auto;
+  }
 `;
 
 export const HeaderContainer = styled.section`
@@ -20,6 +34,9 @@ export const HeaderContainer = styled.section`
   flex-direction: column;
   justify-content: flex-end;
   margin-left: 40px;
+  @media (min-width: 758px) {
+    margin: 0 auto;
+  }
 `;
 
 export const FormContainer = styled.form`
