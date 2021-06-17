@@ -11,12 +11,16 @@ export const AuthProvider = ({ children }) => {
     return JSON.parse(localStorage.getItem("@DevelopingHabitus:token")) || "";
   });
 
-  const [isAuthenticated, setIsAuthenticated] = useState((token !== "") ? true:false);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    token !== "" ? true : false
+  );
 
-  const [isSubscribe, setIsSubscribe] = useState(false)
+  const [isSubscribe, setIsSubscribe] = useState(false);
 
   const [userInfo, setUserInfo] = useState(() => {
-    return JSON.parse(localStorage.getItem("@DevelopingHabitus:userInfo")) || {};
+    return (
+      JSON.parse(localStorage.getItem("@DevelopingHabitus:userInfo")) || {}
+    );
   });
 
   const handleAuth = () => {
@@ -28,10 +32,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    getUserInfo()
-    handleAuth();
     getUserInfo();
-    console.log(userInfo)
+    handleAuth();
+    console.log(userInfo);
   }, [token]);
 
   const handleLogin = (userData, decoder, history, toast) => {
@@ -52,9 +55,11 @@ export const AuthProvider = ({ children }) => {
           `${decodedToken.user_id}`
         );
 
-        toast.success("Sucesso ao logar!", {autoClose: 1500,
+        toast.success("Sucesso ao logar!", {
+          autoClose: 1500,
           hideProgressBar: true,
-          closeOnClick: true});
+          closeOnClick: true,
+        });
         history.push("/dashboard");
       })
       .catch((err) => {
@@ -62,29 +67,40 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-    const getUserInfo = () => {
-      api
-      .get(`/users/${id}/`)
-      .then((res) => {
-        localStorage.setItem( "@DevelopingHabitus:userInfo",
-        JSON.stringify(res.data))
-        setUserInfo(res.data);
-       })
-    }
+  const getUserInfo = () => {
+    api.get(`/users/${id}/`).then((res) => {
+      localStorage.setItem(
+        "@DevelopingHabitus:userInfo",
+        JSON.stringify(res.data)
+      );
+      setUserInfo(res.data);
+    });
+  };
 
-    const updateUserInfo = (data) => { 
-
-      api.patch(`/users/${id}/`, data, {
+  const updateUserInfo = (data) => {
+    api
+      .patch(`/users/${id}/`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-        .then((response) => console.log(response))
-    }
+      .then((response) => console.log(response));
+  };
 
   return (
     <AuthContext.Provider
-      value={{ userInfo, updateUserInfo, setIsAuthenticated, handleLogin, token, id, isAuthenticated, setIsSubscribe, isSubscribe }}
+      value={{
+        userInfo,
+        updateUserInfo,
+        setIsAuthenticated,
+        handleLogin,
+        token,
+        id,
+        isAuthenticated,
+        setIsSubscribe,
+        isSubscribe,
+        getUserInfo,
+      }}
     >
       {children}
     </AuthContext.Provider>
