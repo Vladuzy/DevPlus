@@ -71,8 +71,6 @@ export const AuthProvider = ({ children }) => {
        })
     }
 
-  
-
     const updateUserInfo = () => { 
       const dataInfo={
         email:"alow@gmail.com"
@@ -84,7 +82,6 @@ export const AuthProvider = ({ children }) => {
         },
       })
         .then((response) => console.log(response))
-
     }
 
   return (
