@@ -23,12 +23,20 @@ export const HabitsProviders = ({ children }) => {
         },
       })
       .then((response) => {
-        toast.success("Criou habito com sucesso");
+        toast.success("Criou habito com sucesso", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
         setDoingHabits([...doingHabits, response]);
         getHabits();
       })
       .catch((_) => {
-        toast.error("Erro ao criar habito");
+        toast.error("Erro ao criar habito", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
       });
   };
 

@@ -101,9 +101,17 @@ export const GoalsProvider = ({ children }) => {
     }).then(_ => {
       getGoals(groupId);
       getOneGoal(id)
-      toast.success('Meta atualizada com sucesso!!!');
+      toast.success('Meta atualizada com sucesso!!!', {
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+      });
     })
-    .catch(_ => toast.error('erro em atualizar a meta, tente de novo!'))
+    .catch(_ => toast.error('erro em atualizar a meta, tente de novo!', {
+      autoClose: 1500,
+      hideProgressBar: true,
+      closeOnClick: true,
+    }))
   }
 
   const deleteGoal = (goal) => {

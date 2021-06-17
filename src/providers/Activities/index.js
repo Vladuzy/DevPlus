@@ -94,7 +94,11 @@ export const ActivitiesProvider = ({ children }) => {
       getOneActivity(id);
       toast.success('alterado com sucesso!!')
     })
-      .catch(_ => toast.error('erro ao atualizar a atividade!'))
+      .catch(_ => toast.error('erro ao atualizar a atividade!', {
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+      }))
   }
 
   const patchSwitchArchived = (activity, action) => {
