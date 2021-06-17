@@ -4,16 +4,20 @@ import { useActivity } from "../../providers/Activities";
 import ButtonAdd from "../Buttons/ButtonAdd";
 import { ActivitiesListContainer } from "./style";
 import {useAuth} from "../../providers/AuthProvider"
+import { useRef } from 'react'
+
 const ActivityList = ({showArchived}) => {
   const { activities, patchActivities, deleteActivity, patchSwitchArchived } = useActivity();
   const history = useHistory();
   const {isSubscribe} = useAuth();
+  //ANIMATION
+  const limit = useRef(null)
   
   const handleActivity = (value) => {
     history.push(value);
   };
   return (
-      <ActivitiesListContainer>
+      <ActivitiesListContainer ref={limit}>
         {
           (showArchived)?(
             activities.map((activity) => 
@@ -27,6 +31,7 @@ const ActivityList = ({showArchived}) => {
                     patchActivities={patchActivities} 
                     deleteActivity={deleteActivity}
                     patchSwitchArchived = {patchSwitchArchived}
+                    limit={limit}
                   />
                 )
               ))
@@ -41,6 +46,7 @@ const ActivityList = ({showArchived}) => {
                   deleteActivity={deleteActivity} 
                   patchActivities={patchActivities} 
                   patchSwitchArchived = {patchSwitchArchived}
+                  limit={limit}
                 />
               )
            ))

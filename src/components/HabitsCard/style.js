@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion } from 'framer-motion'
 
-export const HabitCardContainer = styled.div`
+export const HabitCardContainer = styled(motion.div)`
   /* width: 320px; */
   /* max-width: 380px; */
   /* height: 85px; */
