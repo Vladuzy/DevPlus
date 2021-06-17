@@ -11,11 +11,11 @@ export const BackgroundContainer = styled.main`
   align-items: center;
 `
 
-export const CreationSection = styled.section`
+export const PopUpSection = styled.section`
   border-radius: 20px;
   width: 450px;
   height: 380px;
-  background-color: ${({ type }) => type === 'Grupo' ? 'rgba(251, 196, 66, 0.35)' : 'rgba(61, 213, 152, 0.35)'};
+  background-color: ${({ type }) => type === 'Grupo' ? 'var(--amarelo)' : 'var(--verde)'};
   position: relative;
 
   display: flex;
@@ -23,7 +23,7 @@ export const CreationSection = styled.section`
 
   h2 {
     padding-top: 15px;
-    color: var(--branco);
+    color: var(--cinza-escuro);
     font-weight: 300;
     text-align: center;
     flex-grow: 1;
@@ -39,7 +39,7 @@ export const CreationSection = styled.section`
   }
 `
 
-export const CreationDivisor = styled.div`
+export const PopUpDivisor = styled.div`
   width: 100%;
   height: 80%;
   background-color: var(--cinza-escuro);
