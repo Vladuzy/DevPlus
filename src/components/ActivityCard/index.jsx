@@ -4,6 +4,8 @@ import {
   ButtonClose,
   ButtonCheck,
   ButtonUncheck,
+  ContainerSubTitle,
+  ContainerEdition,
 } from "./style";
 import ButtonEdit from "../Buttons/ButtonEdit";
 import { FaCheck } from "react-icons/fa";
@@ -13,6 +15,7 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from "../../providers/AuthProvider";
 import { useMotionValue, useTransform } from "framer-motion";
 import { useActivity } from "../../providers/Activities";
+import { useViewport } from "../../providers/GetViewport";
 
 const ActivityCard = ({
   activity,
@@ -27,6 +30,9 @@ const ActivityCard = ({
   const { isSubscribe } = useAuth();
   const history = useHistory();
   const { getOneActivity } = useActivity();
+  const {
+    viewport: { width },
+  } = useViewport();
 
   //ANIMATION
   const x = useMotionValue(0);
@@ -58,68 +64,142 @@ const ActivityCard = ({
     }, 700);
   };
   return (
-    <ActivityCardContainer
-      key={id}
-      drag="x"
-      dragConstraints={limit}
-      dragElastic={0.3}
-      style={{ x, background, opacity }}
-      onDragEnd={(e, info) => handleEventDrag(e, info)}
-    >
-      {isSubscribe ? (
-        <>
-          <ButtonClose onClick={() => deleteActivity(activity)}>
-            <IoClose className="close" />
-          </ButtonClose>
-          {showArchived ? (
+    <>
+      {width < 768 ? (
+        <ActivityCardContainer
+          key={id}
+          drag="x"
+          dragConstraints={limit}
+          dragElastic={0.3}
+          style={{ x, background, opacity }}
+          onDragEnd={(e, info) => handleEventDrag(e, info)}
+        >
+          {isSubscribe ? (
             <>
-              <InfoContainer>
-                <h2>{title}</h2>
-                <h3>
-                  {date.toLocaleTimeString().slice(0, 5) +
-                    "h - " +
-                    date.toLocaleDateString()}
-                </h3>
-              </InfoContainer>
-              <ButtonUncheck
-                onClick={() => patchSwitchArchived(activity, "activate")}
-              >
-                <RiArrowGoBackLine className="uncheck" />
-              </ButtonUncheck>
+              <ButtonClose onClick={() => deleteActivity(activity)}>
+                <IoClose className="close" />
+              </ButtonClose>
+              {showArchived ? (
+                <>
+                  <InfoContainer>
+                    <h2>{title}</h2>
+                    <h3>
+                      {date.toLocaleTimeString().slice(0, 5) +
+                        "h - " +
+                        date.toLocaleDateString()}
+                    </h3>
+                  </InfoContainer>
+                  <ButtonUncheck
+                    onClick={() => patchSwitchArchived(activity, "activate")}
+                  >
+                    <RiArrowGoBackLine className="uncheck" />
+                  </ButtonUncheck>
+                </>
+              ) : (
+                <>
+                  <InfoContainer>
+                    <h2>{title}</h2>
+                  </InfoContainer>
+                  <ButtonEdit
+                    onClick={() => handleEditionActivity()}
+                  ></ButtonEdit>
+                  <ButtonCheck
+                    onClick={() => patchSwitchArchived(activity, "archieved")}
+                  >
+                    <FaCheck className="check" />
+                  </ButtonCheck>
+                </>
+              )}
             </>
           ) : (
             <>
-              <InfoContainer>
-                <h2>{title}</h2>
-              </InfoContainer>
-              <ButtonEdit onClick={() => handleEditionActivity()}></ButtonEdit>
-              <ButtonCheck
-                onClick={() => patchSwitchArchived(activity, "archieved")}
-              >
-                <FaCheck className="check" />
-              </ButtonCheck>
+              {showArchived ? (
+                <InfoContainer>
+                  <h2>{title}</h2>
+                  <h3>
+                    {date.toLocaleTimeString().slice(0, 5) +
+                      "h - " +
+                      date.toLocaleDateString()}
+                  </h3>
+                </InfoContainer>
+              ) : (
+                <InfoContainer>
+                  <h2>{title}</h2>
+                </InfoContainer>
+              )}
             </>
           )}
-        </>
+        </ActivityCardContainer>
       ) : (
-        <>
-          {showArchived ? (
-            <InfoContainer>
-              <h2>{title}</h2>
-              <h3>
-                {date.toLocaleTimeString().slice(0, 5) +
-                  "h - " +
-                  date.toLocaleDateString()}
-              </h3>
-            </InfoContainer>
+        <ActivityCardContainer>
+          {isSubscribe ? (
+            <>
+              {showArchived ? (
+                <>
+                  <ContainerEdition>
+                    <ButtonEdit
+                      onClick={() => handleEditionActivity()}
+                    ></ButtonEdit>
+                    <InfoContainer>
+                      <h2>{title}</h2>
+                      <h3>
+                        {date.toLocaleTimeString().slice(0, 5) +
+                          "h - " +
+                          date.toLocaleDateString()}
+                      </h3>
+                    </InfoContainer>
+                  </ContainerEdition>
+                  <ButtonUncheck
+                    onClick={() => patchSwitchArchived(activity, "activate")}
+                  >
+                    <h2>VOLTAR</h2>
+                  </ButtonUncheck>
+                  <ButtonEdit
+                    onClick={() => handleEditionActivity()}
+                  ></ButtonEdit>
+                </>
+              ) : (
+                <>
+                  <InfoContainer>
+                    <ButtonEdit
+                      onClick={() => handleEditionActivity()}
+                    ></ButtonEdit>
+                    <h2>{title}</h2>
+                  </InfoContainer>
+                  <ContainerSubTitle>
+                    <ButtonClose onClick={() => deleteActivity(activity)}>
+                      <h2>DELETAR</h2>
+                    </ButtonClose>
+                    <ButtonCheck
+                      onClick={() => patchSwitchArchived(activity, "archieved")}
+                    >
+                      <h2>FEITO</h2>
+                    </ButtonCheck>
+                  </ContainerSubTitle>
+                </>
+              )}
+            </>
           ) : (
-            <InfoContainer>
-              <h2>{title}</h2>
-            </InfoContainer>
+            <>
+              {showArchived ? (
+                <InfoContainer>
+                  <h2>{title}</h2>
+                  <h3>
+                    {date.toLocaleTimeString().slice(0, 5) +
+                      "h - " +
+                      date.toLocaleDateString()}
+                  </h3>
+                </InfoContainer>
+              ) : (
+                <InfoContainer>
+                  <h2>{title}</h2>
+                </InfoContainer>
+              )}
+            </>
           )}
-        </>
+        </ActivityCardContainer>
       )}
-    </ActivityCardContainer>
+    </>
   );
 };
 export default ActivityCard;

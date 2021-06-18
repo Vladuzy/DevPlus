@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 export const ActivityCardContainer = styled(motion.section)`
   width: 100%;
@@ -13,6 +13,27 @@ export const ActivityCardContainer = styled(motion.section)`
   min-height: 82px;
   display: flex;
   justify-content: space-around;
+  @media (min-width: 758px) {
+    background-color: var(--cinza-escuro);
+    height: 121px;
+    border: var(--vermelho) solid 2px;
+    width: 300px;
+    border-radius: 20px;
+    background-color: var(--cinza-escuro);
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+export const ContainerSubTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+`;
+
+export const ContainerEdition = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 export const InfoContainer = styled.section`
@@ -36,6 +57,11 @@ export const InfoContainer = styled.section`
     color: var(--branco);
     font-size: 12px;
   }
+  @media (min-width: 758px) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+  }
 `;
 
 export const ButtonClose = styled.button`
@@ -49,6 +75,15 @@ export const ButtonClose = styled.button`
     font-size: 1.7rem;
     font-weight: bold;
   }
+  @media (min-width: 758px) {
+    background-color: var(--vermelho);
+    border-radius: 20px;
+    color: var(--branco);
+    width: 117px;
+    height: 27px;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const ButtonCheck = styled.button`
@@ -59,6 +94,15 @@ export const ButtonCheck = styled.button`
     color: green;
     font-size: 1.7rem;
     font-weight: bold;
+  }
+  @media (min-width: 758px) {
+    background-color: var(--verde);
+    border-radius: 20px;
+    color: var(--branco);
+    width: 117px;
+    height: 27px;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -71,5 +115,12 @@ export const ButtonUncheck = styled.button`
     color: yellow;
     font-size: 1.7rem;
     font-weight: bold;
+  }
+  @media (min-width: 758px) {
+    background: var(--amarelo);
+    width: 147px;
+    height: 33px;
+    border-radius: 20px;
+    color: var(--cinza-escuro);
   }
 `;
