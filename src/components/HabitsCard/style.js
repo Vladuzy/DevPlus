@@ -16,13 +16,15 @@ export const HabitCardContainer = styled(motion.div)`
   min-height: 82px;
   @media (min-width: 758px) {
     background-color: var(--cinza-escuro);
-    height: 100%;
+    height: 121px;
     border: var(--vermelho) solid 2px;
-    width: 307px;
+    width: 300px;
     border-radius: 20px;
     background-color: var(--cinza-escuro);
     display: flex;
     flex-direction: column;
+  }
+  @media (min-width: 1024px) {
   }
 `;
 export const ContainerTitle = styled.div`

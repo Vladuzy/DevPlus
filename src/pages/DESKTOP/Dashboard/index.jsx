@@ -3,7 +3,6 @@ import {
   MainContainer,
   Container,
   TitleContainer,
-  HabitsContainer,
   HabitsListContainer,
 } from "./styles";
 import Button from "../../../components/Buttons/Button";
@@ -13,10 +12,18 @@ import { IoIosAddCircle } from "react-icons/io";
 import HabitsList from "../../../components/HabitsList";
 import DisplayPopUp from "../../../components/DESKTOP/DisplayPopUp";
 import { useAuth } from "../../../providers/AuthProvider";
+import { useHabits } from '../../../providers/Habits'
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
 
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Scrollbars } from 'react-custom-scrollbars-2';
+
 const DashboardDesktop = () => {
+  const { doingHabits } = useHabits() 
+  const active = doingHabits.filter(({ achieved }) => achieved === false).length
+  const done = doingHabits.filter(({ achieved }) => achieved === true).length
+
   const [creationOpen, setCreationOpen] = useState(false);
   const [edit, setEdit] = useState(false);
   const { isAuthenticated } = useAuth();
@@ -46,30 +53,41 @@ const DashboardDesktop = () => {
                 Novo Habito
               </Button>
             </TitleContainer>
-            <HabitsContainer>
-              <HabitsListContainer>
-                <HabitsList
-                  setEdit={setEdit}
-                  setCreationOpen={setCreationOpen}
-                  showArchived={false}
-                ></HabitsList>
-                {/* Importa aqui o card */}
-              </HabitsListContainer>
-            </HabitsContainer>
+            <HabitsListContainer >
+             
+                <InfiniteScroll
+                  inverse={true}
+                  dataLength={active}
+                >
+                  <HabitsList
+                    setEdit={setEdit}
+                    setCreationOpen={setCreationOpen}
+                    showArchived={false}
+                  ></HabitsList>
+                </InfiniteScroll>
+
+            </HabitsListContainer>
           </Container>
           <Container>
             <TitleContainer>
               <h2>FEITOS</h2>
             </TitleContainer>
-            <HabitsContainer>
-              <HabitsListContainer>
-                <HabitsList
-                  setEdit={setEdit}
-                  setCreationOpen={setCreationOpen}
-                  showArchived={true}
-                ></HabitsList>
-              </HabitsListContainer>
-            </HabitsContainer>
+            <Scrollbars >
+            <HabitsListContainer >
+              
+                <InfiniteScroll
+                  inverse={true}
+                  dataLength={done}
+                >
+                  <HabitsList
+                    setEdit={setEdit}
+                    setCreationOpen={setCreationOpen}
+                    showArchived={true}
+                  ></HabitsList>
+                </InfiniteScroll>
+              
+            </HabitsListContainer>
+            </Scrollbars>
           </Container>
         </MainContainer>
       </MainDashboard>
