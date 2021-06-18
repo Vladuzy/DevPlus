@@ -90,6 +90,7 @@ const HabitCreation = ({ setCreationOpen }) => {
           name="frequency"
           placeholder={"Frequência"}
         />
+        
         {errors.frequency?.message && (
           <ErrorSpanContainer>{errors.frequency?.message}</ErrorSpanContainer>
         )}

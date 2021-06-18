@@ -12,7 +12,14 @@ export const HabitsContainer = styled(motion.div)`
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
+    :last-child {
+      margin-bottom: 0;
+    }
+
+    :first-child {
+      padding-left: 15px;
+    }
   }
   @media (min-width: 1024px) {
     height: 43%;
