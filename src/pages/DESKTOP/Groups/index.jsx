@@ -72,7 +72,7 @@ const GroupsDesktop = () => {
 
         <SelectedContainer>
           <Switch>
-            <Route path={`${path}/:id/:subscribe`}>
+            <Route path={`${path}/:name/:subscribe`}>
               <SpecificGroupDesktop setType={setType} setCreationOpen={setCreationOpen} groupsType={groupsType}/>
             </Route>
           </Switch>
