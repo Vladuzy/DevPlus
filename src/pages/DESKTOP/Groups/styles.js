@@ -24,8 +24,12 @@ export const SelectContainer = styled.section`
 
 export const GroupsSelectContainer = styled.div`
   width: 80%;
-  height: 100%;
+  height: 88vh;
   min-width: 430px;
+`
+
+export const GroupsScrollContainer = styled.div`
+  width: 100%;
 `
 
 export const TitleGroupSelectContainer = styled.div`
