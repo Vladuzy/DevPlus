@@ -16,29 +16,26 @@ export const GoalsProvider = ({ children }) => {
     return JSON.parse(localStorage.getItem("@DevelopingHabitus:goals")) || [];
   });
 
-  const [goal, setGoal] = useState({});
+  const [goal, setGoal] = useState({}); 
 
   const [groupId, setGroupId] = useState(() => {
     return parseInt(localStorage.getItem("@DevelopingHabitus:groupId")) || "";
   });
 
-  const getGoals = (id = "") => {
+  const getGoals = (id="") => {
     //pegando o id do grupo
-    setGroupId(id);
+    setGroupId(id)
     //salvando no localStorage
-    localStorage.setItem("@DevelopingHabitus:groupId", JSON.stringify(id));
+    localStorage.setItem( "@DevelopingHabitus:groupId", JSON.stringify(id))
     //Lembrar de passar o Id do grupo
-    if (id !== "") {
+    if(id !== ""){
       api
-        .get(`/goals/?group=${id}`)
-        .then((response) => {
-          setGoals(response.data.results);
-          localStorage.setItem(
-            "@DevelopingHabitus:goals",
-            JSON.stringify(response.data.results)
-          );
-        })
-        .catch((err) => toast.error("erro ao pegar metas"));
+      .get(`/goals/?group=${id}`)
+      .then((response) => {
+        setGoals(response.data.results);
+        localStorage.setItem( "@DevelopingHabitus:goals", JSON.stringify(response.data.results));
+      })
+      .catch((err) => console.log(err));
     }
   };
 
@@ -46,7 +43,7 @@ export const GoalsProvider = ({ children }) => {
     //Lembrar de mandar o que ta sendo enviado "dataGoal" (pegar os inputs no modal de criar Goal)
     //Lembrar de passar o Id do grupo
     //Lembrar de passar o token
-    const fullData = { ...data, group: groupId };
+    const fullData = {...data, group: groupId}
     api
       .post("/goals/", fullData, {
         headers: {
@@ -54,10 +51,10 @@ export const GoalsProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((res) => {
-        getGoals(groupId);
+      .then((res) =>{ 
+        getGoals(groupId)
       })
-      .catch((err) => toast.error("erro ao criar atividade"));
+      .catch((err) => console.log(err));
   };
 
   const patchGoal = (goal, action) => {
@@ -72,17 +69,17 @@ export const GoalsProvider = ({ children }) => {
     // };
 
     //Mudança do data
-    let dataGoalUpdate = {};
-    if (goal.achieved === true && action === "activate") {
-      dataGoalUpdate = {
-        achieved: false,
-        how_much_achieved: 0,
-      };
-    } else if (goal.achieved === false && action === "archieved") {
-      dataGoalUpdate = {
-        achieved: true,
-        how_much_achieved: 100,
-      };
+    let dataGoalUpdate = {}
+    if(goal.achieved === true && action === "activate"){
+        dataGoalUpdate = {
+            "achieved": false,
+            "how_much_achieved": 0
+          }
+    }else if(goal.achieved === false && action === "archieved"){
+        dataGoalUpdate = {
+            "achieved": true,
+            "how_much_achieved": 100
+          }
     }
 
     api
@@ -93,33 +90,29 @@ export const GoalsProvider = ({ children }) => {
         },
       })
       .then(() => getGoals(groupId))
-      .catch((err) => toast.error("erro ao editar meta"));
+      .catch((err) => console.log(err));
   };
 
   const updateGoals = (data, id) => {
-    api
-      .patch(`/goals/${id}/`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((_) => {
-        getGoals(groupId);
-        getOneGoal(id);
-        toast.success("Meta atualizada com sucesso!!!", {
-          autoClose: 1500,
-          hideProgressBar: true,
-          closeOnClick: true,
-        });
-      })
-      .catch((_) =>
-        toast.error("erro em atualizar a meta, tente de novo!", {
-          autoClose: 1500,
-          hideProgressBar: true,
-          closeOnClick: true,
-        })
-      );
-  };
+    api.patch(`/goals/${id}/`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(_ => {
+      getGoals(groupId);
+      getOneGoal(id)
+      toast.success('Meta atualizada com sucesso!!!', {
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+      });
+    })
+    .catch(_ => toast.error('erro em atualizar a meta, tente de novo!', {
+      autoClose: 1500,
+      hideProgressBar: true,
+      closeOnClick: true,
+    }))
+  }
 
   const deleteGoal = (goal) => {
     //Lembrar de receber o goal por props na função quando pegar no card
@@ -135,18 +128,18 @@ export const GoalsProvider = ({ children }) => {
         },
       })
       .then(() => getGoals(groupId))
-      .catch((err) => toast.error("erro ao deletar atividade"));
+      .catch((err) => console.log(err));
   };
 
   const getOneGoal = (goalId) => {
     api
-      .get(`/goals/${goalId}/`)
-      .then((response) => {
-        // localStorage.setItem( "@DevelopingHabitus:goal", JSON.stringify(response.data));
-        setGoal(response.data);
-      })
-      .catch((err) => toast.error("erro ao pegar atividade"));
-  };
+    .get(`/goals/${goalId}/`)
+    .then((response) => {
+      // localStorage.setItem( "@DevelopingHabitus:goal", JSON.stringify(response.data));
+      setGoal(response.data)
+    })
+    .catch((err) => console.log(err));
+  }
 
   useEffect(() => {
     getGoals(groupId);
@@ -154,20 +147,11 @@ export const GoalsProvider = ({ children }) => {
 
   return (
     <GoalsContext.Provider
-      value={{
-        goals,
-        getGoals,
-        createGoals,
-        patchGoal,
-        updateGoals,
-        deleteGoal,
-        getOneGoal,
-        goal,
-      }}
+      value={{ goals, getGoals, createGoals, patchGoal, updateGoals, deleteGoal, getOneGoal, goal }}
     >
       {children}
     </GoalsContext.Provider>
   );
 };
 
-export const useGoals = () => useContext(GoalsContext);
+export const useGoals = () => useContext(GoalsContext)

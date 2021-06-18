@@ -40,7 +40,7 @@ export default function Home() {
         </label>
       </HeaderStyles>
       <MainStyles>
-        <h1>Habits app</h1>
+        <h1>Habbits app</h1>
         <h2>Venha fazer parte da nossa familia!</h2>
         <p>
           {" "}
