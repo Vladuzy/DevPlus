@@ -15,6 +15,7 @@ export const ContentText = styled.div `
     display: flex;
     flex-direction: column;
     align-items: center;
+
     h3, p {
         margin-left: 3vw;
     }
@@ -47,7 +48,7 @@ export const ContentText = styled.div `
 export const ContainerButton = styled.button `
     width: 12%;
     height: 100%;
-    background: var(--amarelo);
+    background: ${({ type }) => type === 'All' ? 'var(--amarelo)' : 'var(--verde)'};
     border-radius: 0px 10px 10px 0px;
     display: flex;
     justify-content: center;

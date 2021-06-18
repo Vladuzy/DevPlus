@@ -16,6 +16,7 @@ export default function ListGroups({ values, search, url }) {
                 activity={element.activities.length}
                 goals={element.goals.length} 
                 url={url}
+                type={values}
                 />
             })
             :
@@ -30,6 +31,7 @@ export default function ListGroups({ values, search, url }) {
                 activity={element.activities.length}
                 goals={element.goals.length} 
                 url={url}
+                type={values}
                 />
             })
             :
@@ -46,6 +48,8 @@ export default function ListGroups({ values, search, url }) {
                 category={element.category}
                 activity={element.activities.length}
                 goals={element.goals.length} 
+                url={url}
+                type={values}
                 />
             })
             :
@@ -61,6 +65,8 @@ export default function ListGroups({ values, search, url }) {
                 category={element.category}
                 activity={element.activities.length}
                 goals={element.goals.length} 
+                url={url}
+                type={values}
                 />
             })
             :
