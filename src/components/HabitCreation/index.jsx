@@ -99,7 +99,7 @@ const HabitCreation = ({ setCreationOpen }) => {
         width < 768 ? (
           <Button>Criar Habito</Button>
         ) : (
-          <Button onClick={()=> setCreationOpen(false)}>Criar Habito</Button>
+          <Button>Criar Habito</Button>
         )
       }
     </FormContainer>
