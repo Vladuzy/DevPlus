@@ -13,6 +13,7 @@ import { useAuth } from "../../providers/AuthProvider";
 import Goals from "../Goals";
 
 const GroupGoals = () => {
+
   const history = useHistory()
   const { location: { pathname } } = history
   const { isAuthenticated } = useAuth();
