@@ -55,9 +55,6 @@ const Routes = () => {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route path="/:groupName/:subscribe">
-        <SpecificGroup />
-      </Route>
       <Route path="/login">
         <Login />
       </Route>

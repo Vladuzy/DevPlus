@@ -2,7 +2,7 @@ import React from 'react'
 import { useGroups } from '../../../providers/Groups'
 import CardGroups from '../CardGroups';
 
-export default function ListGroups({ values, search }) {
+export default function ListGroups({ values, search, url }) {
     const { groups, groupsSubs } = useGroups();
     
     return (
@@ -15,6 +15,7 @@ export default function ListGroups({ values, search }) {
                 category={element.category}
                 activity={element.activities.length}
                 goals={element.goals.length} 
+                url={url}
                 />
             })
             :
@@ -27,6 +28,7 @@ export default function ListGroups({ values, search }) {
                 category={element.category}
                 activity={element.activities.length}
                 goals={element.goals.length} 
+                url={url}
                 />
             })
             :
