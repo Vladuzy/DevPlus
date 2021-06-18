@@ -68,7 +68,6 @@ const HabitsCard = ({
     setTimeout(function () {
       history.push(`/edition/Habito/${id}`);
     }, 700);
-    setCreationOpen();
   };
 
   const handleEditionHabit = () => {

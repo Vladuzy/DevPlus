@@ -14,11 +14,12 @@ import {
   InputContainer,
   SelectContainer,
 } from "./styles";
-
+import { useViewport } from "../../providers/GetViewport";
 const HabitCreation = ({ setCreationOpen }) => {
   const history = useHistory();
   const { id } = useAuth();
   const { createHabits } = useHabits();
+  const {viewport: {width}} = useViewport();
   const formSchemaHabit = yup.object().shape({
     title: yup
       .string()
@@ -51,7 +52,6 @@ const HabitCreation = ({ setCreationOpen }) => {
     const user = id;
     const newData = { ...data, achieved, how_much_achieved, user };
     createHabits(newData);
-    setCreationOpen(false);
     history.push("/dashboard");
   };
 
@@ -94,7 +94,13 @@ const HabitCreation = ({ setCreationOpen }) => {
           <ErrorSpanContainer>{errors.frequency?.message}</ErrorSpanContainer>
         )}
       </InputContainer>
-      <Button>Criar Habito</Button>
+      {
+        width < 768 ? (
+          <Button>Criar Habito</Button>
+        ) : (
+          <Button onClick={()=> setCreationOpen(false)}>Criar Habito</Button>
+        )
+      }
     </FormContainer>
   );
 };
