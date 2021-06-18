@@ -51,6 +51,7 @@ const GroupsDesktop = () => {
 
   let { path, url } = useRouteMatch()
   const { isAuthenticated } = useAuth();
+  const [edit, setEdit] = useState(false);
   
   if (isAuthenticated === false) {
     return <Redirect to="/login" />;
@@ -62,7 +63,7 @@ const GroupsDesktop = () => {
 
   return(
     <>
-    {creationOpen && <DisplayPopUp close={setCreationOpen} type={type}/>}
+    {creationOpen && <DisplayPopUp close={setCreationOpen} edit={edit} type={type}/>}
     <MainGroups type={groupsType}>
       <Header type={groupsType}/>
       <MainContainer>
@@ -95,7 +96,7 @@ const GroupsDesktop = () => {
         <SelectedContainer>
           <Switch>
             <Route path={`${path}/:name/:subscribe`}>
-              <SpecificGroupDesktop setType={setType} setCreationOpen={setCreationOpen} groupsType={groupsType}/>
+              <SpecificGroupDesktop setEdit={setEdit} setType={setType} setCreationOpen={setCreationOpen} groupsType={groupsType}/>
             </Route>
           </Switch>
         </SelectedContainer>

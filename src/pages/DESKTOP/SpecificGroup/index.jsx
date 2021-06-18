@@ -20,7 +20,7 @@ import GroupActivities from '../../GroupActivities';
 import GroupGoals from '../../GroupGoals';
 import ButtonEditGroup from '../../../components/Buttons/ButtonEditGroup';
 
-const SpecificGroupDesktop = ({ setCreationOpen, setType, groupsType }) => {
+const SpecificGroupDesktop = ({ setEdit, setCreationOpen, setType, groupsType }) => {
   const { name, subscribe } = useParams()
   const { setIsSubscribe, isSubscribe, id  } = useAuth();
   const { unsubscribe, subsInAGroup, groupCreatorId} = useGroups();
@@ -52,7 +52,7 @@ const SpecificGroupDesktop = ({ setCreationOpen, setType, groupsType }) => {
 
   return(
     <>
-      <TitleSelectedContainer group={pertenceAoGrupo}>
+      <TitleSelectedContainer group={subscribe === "true"}>
             { subscribe === "true" ? 
             <Button onClick={() => handleExitGroup("/groups/all")}>
             Sair do Grupo <CgEnter />
@@ -65,8 +65,12 @@ const SpecificGroupDesktop = ({ setCreationOpen, setType, groupsType }) => {
             <h2>{name}</h2>
             {
               (isSubscribe && groupCreatorId === id) && (
-                <ButtonEditGroup
-                onClick={() => handleEditGroup("/edition/Grupo")}
+                <ButtonEditGroup 
+                onClick={() => {
+                  setEdit(true);
+                  setType("Grupo");
+                  setCreationOpen(true);
+                }}
               />
               ) 
             }
@@ -74,7 +78,7 @@ const SpecificGroupDesktop = ({ setCreationOpen, setType, groupsType }) => {
           <SomethingSelectedContainer>
             <TitleSomethingSelectedContainer>
               <h2>ATIVIDADES</h2>
-              { pertenceAoGrupo && 
+              { subscribe === "true" && 
               <Button 
                 onClick={() => {
                   setCreationOpen(true)
@@ -96,7 +100,7 @@ const SpecificGroupDesktop = ({ setCreationOpen, setType, groupsType }) => {
           <SomethingSelectedContainer>
             <TitleSomethingSelectedContainer meta>
               <h2>METAS</h2>
-              { pertenceAoGrupo && 
+              { subscribe === "true" && 
               <Button
                 onClick={() => {
                   setCreationOpen(true)
