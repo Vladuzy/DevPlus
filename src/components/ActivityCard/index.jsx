@@ -13,6 +13,10 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from "../../providers/AuthProvider";
 import { useMotionValue, useTransform } from "framer-motion";
 import { useActivity } from "../../providers/Activities";
+import DisplayPopUp from '../DESKTOP/DisplayPopUp'
+import { useState } from "react";
+import { useViewport } from "../../providers/GetViewport";
+
 
 const ActivityCard = ({
   activity,
@@ -27,6 +31,10 @@ const ActivityCard = ({
   const { isSubscribe } = useAuth();
   const history = useHistory();
   const { getOneActivity } = useActivity();
+  const { viewport: { width } } = useViewport();
+  const [type, setType] = useState('')
+  const [edit, setEdit] = useState(false);
+  const [creationOpen, setCreationOpen] = useState(false)
 
   //ANIMATION
   const x = useMotionValue(0);
@@ -66,6 +74,7 @@ const ActivityCard = ({
       style={{ x, background, opacity }}
       onDragEnd={(e, info) => handleEventDrag(e, info)}
     >
+      {creationOpen && <DisplayPopUp cardId={id} close={setCreationOpen} edit={edit} type={type}/>}
       {isSubscribe ? (
         <>
           <ButtonClose onClick={() => deleteActivity(activity)}>
@@ -92,7 +101,19 @@ const ActivityCard = ({
               <InfoContainer>
                 <h2>{title}</h2>
               </InfoContainer>
-              <ButtonEdit onClick={() => handleEditionActivity()}></ButtonEdit>
+              {
+                width > 768 ? (
+                  <ButtonEdit onClick={() => {
+                    setEdit(true);
+                    setType("Atividade");
+                    setCreationOpen(true) }}></ButtonEdit>
+                ) : (
+                  <ButtonEdit onClick={() => {
+                    handleEditionActivity()}}></ButtonEdit>
+                )
+              }
+            
+              
               <ButtonCheck
                 onClick={() => patchSwitchArchived(activity, "archieved")}
               >

@@ -13,7 +13,7 @@ import ActivityEdition from "../../ActivityEdition";
 import ProfileEdition from "../../ProfileEdition";
 import { useHabits } from "../../../providers/Habits";
 
-const DisplayPopUp = ({ setCreationOpen, close, type, edit = false }) => {
+const DisplayPopUp = ({ cardId, setCreationOpen, close, type, edit = false }) => {
   const { habitId } = useHabits();
   return (
     <BackgroundContainer>
@@ -40,12 +40,12 @@ const DisplayPopUp = ({ setCreationOpen, close, type, edit = false }) => {
             ))}
           {type === "Meta" &&
             (edit ? (
-              <GoalsEdition setCreationOpen={setCreationOpen} />
+              <GoalsEdition cardId={cardId} setCreationOpen={setCreationOpen} />
             ) : (
               <GoalsCreation setCreationOpen={setCreationOpen} />
             ))}
           {type === "Atividade" &&
-            (edit ? <ActivityEdition /> : <AtivityCreation />)}
+            (edit ? <ActivityEdition cardId={cardId}/> : <AtivityCreation />)}
           {type === "Profile" && edit && <ProfileEdition />}
         </PopUpDivisor>
       </PopUpSection>
