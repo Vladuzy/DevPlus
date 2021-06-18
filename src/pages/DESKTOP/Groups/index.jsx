@@ -18,6 +18,8 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { useState } from 'react'
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useGroups } from '../../../providers/Groups'
+import { useAuth } from "../../../providers/AuthProvider";
+import { Redirect } from "react-router-dom";
 
 const GroupsDesktop = () => {
   const { groups, groupsSubs } = useGroups();
@@ -29,6 +31,12 @@ const GroupsDesktop = () => {
   const [search, setSearch] = useState('')
 
   let { path, url } = useRouteMatch()
+  const { isAuthenticated } = useAuth();
+  
+  if (isAuthenticated === false) {
+    return <Redirect to="/login" />;
+  }
+
 
   const serchName = (e) => {
     setSearch(e.target.value)

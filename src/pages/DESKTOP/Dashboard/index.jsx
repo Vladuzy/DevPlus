@@ -14,11 +14,17 @@ import {
 
 import HabitsList from "../../../components/HabitsList";
 import DisplayPopUp from "../../../components/DESKTOP/DisplayPopUp";
-
+import { useAuth } from "../../../providers/AuthProvider";
 import { useState } from "react";
+import { Redirect } from "react-router-dom";
 
 const DashboardDesktop = () => {
   const [creationOpen, setCreationOpen] = useState(false);
+  const { isAuthenticated } = useAuth();
+  
+  if (isAuthenticated === false) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <>
