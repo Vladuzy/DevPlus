@@ -32,6 +32,9 @@ const AtivityCreation = ({ id }) => {
     const realization_time = "1000-10-10T00:00:00Z";
     const newData = { ...data, realization_time };
     createActivities(newData);
+    if(width<768){
+      history.goBack()
+    }
   };
 
   return (
@@ -59,13 +62,9 @@ const AtivityCreation = ({ id }) => {
           </ErrorSpanContainer>
         )}
       </InputContainer> */}
-      {
-        width<768 ? (
-          <Button onClick={()=> history.goBack()}>Criar Atividade</Button>
-        ):(
-          <Button >Criar Atividade</Button>
-        )
-      }
+
+    
+      <Button >Criar Atividade</Button>
     </FormContainer>
   );
 };
