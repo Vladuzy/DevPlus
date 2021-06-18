@@ -7,6 +7,7 @@ export const ContainerCard = styled.div `
     background: var(--cinza-claro);
     border-radius: 10px;
     display: flex;
+    margin-bottom: 10px;
 `
 
 export const ContentText = styled.div `

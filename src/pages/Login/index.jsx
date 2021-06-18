@@ -22,6 +22,8 @@ import { useAuth } from "../../providers/AuthProvider";
 
 import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
+import User2 from "../../assets/boneco.svg";
+import Password from "../../assets/password.svg";
 // import ButtonAdd from "../../components/ButtonAdd";
 
 const Login = () => {
@@ -55,7 +57,13 @@ const Login = () => {
         <SubTitleContainer>:&#x00029;</SubTitleContainer>
       </HeaderContainer>
       <FormContainer onSubmit={handleSubmit(onSubmitFunction)}>
-        <Input register={register} name={"username"} placeholder={"Nome"} />
+        <Input
+          register={register}
+          name={"username"}
+          placeholder={"Nome"}
+          icon={User2}
+          iconType="email"
+        />
         <SpanFormContainer>{errors.username?.message}</SpanFormContainer>
 
         <Input
@@ -64,6 +72,8 @@ const Login = () => {
           type={"password"}
           placeholder={"Senha"}
           error={errors.password?.message}
+          icon={Password}
+          iconType="password"
         />
         <SpanFormContainer>{errors.password?.message}</SpanFormContainer>
         <Button type={"submit"}>CONECTE-SE</Button>
