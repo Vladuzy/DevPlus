@@ -18,6 +18,11 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from "../../providers/AuthProvider";
 import { useGoals } from "../../providers/Goals";
 import { useMotionValue, useTransform } from 'framer-motion'
+import DisplayPopUp from '../DESKTOP/DisplayPopUp'
+import { useState } from "react";
+import { useViewport } from "../../providers/GetViewport";
+
+
 const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived,limit }) => {
 
   //Desestruturar
@@ -29,6 +34,11 @@ const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived,limit }) => {
   const history = useHistory();
   const { isSubscribe } = useAuth();
   const { getOneGoal } = useGoals();
+
+  const { viewport: { width } } = useViewport();
+  const [type, setType] = useState('')
+  const [edit, setEdit] = useState(false);
+  const [creationOpen, setCreationOpen] = useState(false)
 
   const handleEditionGoal = () => {
     getOneGoal(id);
@@ -65,6 +75,7 @@ const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived,limit }) => {
       style={{ x, background, opacity }}
       onDragEnd={(e, info) => handleEventDrag(e, info)}
     >
+      {creationOpen && <DisplayPopUp cardId={id} close={setCreationOpen} edit={edit} type={type}/>}
       {isSubscribe ? (
         <>
           <ButtonClose onClick={() => deleteGoal(goal)}>
@@ -85,10 +96,24 @@ const GoalCard = ({ goal, patchGoal, deleteGoal, showArchived,limit }) => {
             </ButtonUncheck>
           ) : (
             <ButtonConluds>
-              <ButtonEdit
-                className="ButtonEdit"
-                onClick={() =>   {handleEditionGoal()}}
-              ></ButtonEdit>
+                {
+                width > 768 ? (
+                  <ButtonEdit
+                  className="ButtonEdit"
+                  onClick={() =>   {
+                    setEdit(true);
+                    setType("Meta");
+                    setCreationOpen(true)
+                  }}
+                ></ButtonEdit>
+                ) : (
+                  <ButtonEdit
+                  className="ButtonEdit"
+                  onClick={() =>   {handleEditionGoal()}}
+                ></ButtonEdit>
+                )
+              }
+        
               <ButtonCheck onClick={() => patchGoal(goal, "archieved")}>
                 <FaCheck className="check" />
               </ButtonCheck>

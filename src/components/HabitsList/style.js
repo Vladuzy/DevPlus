@@ -11,7 +11,14 @@ export const HabitsContainer = styled(motion.div)`
     height: 43%;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+    gap: 30px;
+
+    :last-child {
+      margin-bottom: 0;
+    }
+
+    :first-child {
+      padding-left: 15px;
+    }
   }
 `;
