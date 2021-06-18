@@ -8,14 +8,15 @@ import {
   LogoutSVG,
   ListSVG,
 } from "./styles";
-
+import { useAuth } from "../../../providers/AuthProvider";
 const Header = ({ type }) => {
   const history = useHistory();
-
+  const { setIsAuthenticated } = useAuth();
   const handleAlternRoutes = (value) => {
     history.push(value);
   };
   const handleCloseApplication = (value) => {
+    setIsAuthenticated(false)
     localStorage.clear();
     history.push(value);
   };
@@ -32,7 +33,7 @@ const Header = ({ type }) => {
         <Button onClick={() => handleAlternRoutes("/groups")}>
           GRUPOS <GroupSVG />
         </Button>
-        <Button onClick={() => handleCloseApplication("/login")}>
+        <Button onClick={() => handleCloseApplication("/")}>
           LOG-OUT <LogoutSVG />
         </Button>
       </ButtonNavContainer>
