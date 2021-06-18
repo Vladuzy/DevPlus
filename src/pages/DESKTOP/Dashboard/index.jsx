@@ -53,12 +53,11 @@ const DashboardDesktop = () => {
                 Novo Habito
               </Button>
             </TitleContainer>
-            <HabitsListContainer id='ScrollContainer' style={{ overflow: "auto" }}>
-              <Scrollbars autoHide autoHideTimeout={500} autoHideDuration={200}>
+            <HabitsListContainer >
+             
                 <InfiniteScroll
                   inverse={true}
                   dataLength={active}
-                  scrollableTarget='ScrollContainer'
                 >
                   <HabitsList
                     setEdit={setEdit}
@@ -66,7 +65,7 @@ const DashboardDesktop = () => {
                     showArchived={false}
                   ></HabitsList>
                 </InfiniteScroll>
-              </Scrollbars>
+
             </HabitsListContainer>
           </Container>
           <Container>
@@ -78,7 +77,7 @@ const DashboardDesktop = () => {
               
                 <InfiniteScroll
                   inverse={true}
-                  dataLength={active}
+                  dataLength={done}
                 >
                   <HabitsList
                     setEdit={setEdit}
