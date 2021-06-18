@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion } from 'framer-motion'
 
-export const ActivityCardContainer = styled.section`
+export const ActivityCardContainer = styled(motion.section)`
   width: 100%;
   /* max-width: 380px; */
   /* height: 85px; */

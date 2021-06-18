@@ -11,9 +11,15 @@ import {
   InputContainer,
   CalendarInput,
 } from "./styles";
+import { useEffect } from "react";
 
 const ActivityEdition = ({ cardId }) => {
-  const { updateActivity } = useActivity();
+
+  useEffect(() => {
+    getOneActivity(cardId)
+  }, [])
+
+  const { updateActivity, activity, getOneActivity } = useActivity();
 
   const history = useHistory();
 
@@ -55,6 +61,7 @@ const ActivityEdition = ({ cardId }) => {
     <FormContainer onSubmit={handleSubmit(onSubmitData)}>
       <InputContainer>
         <Input
+          defaultValue={activity.title}
           register={register}
           name="title"
           placeholder={"Titúlo da atividade"}

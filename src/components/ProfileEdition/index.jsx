@@ -28,7 +28,7 @@ const ProfileEdition = ({ cardId }) => {
   const onSubmitData = (data) => {
     getUserInfo();
     updateUserInfo(data);
-    history.push("/profile");
+    setTimeout(function () {history.push("/profile")}, 1000);
   };
 
   return (

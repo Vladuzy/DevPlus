@@ -3,8 +3,12 @@ import HabitsCard from "../HabitsCard";
 import { useHabits } from "../../providers/Habits";
 import ButtonAdd from "../Buttons/ButtonAdd";
 import { useHistory } from "react-router-dom";
+import { useRef } from "react";
 
-const HabitsList = ({ showArchived }) => {
+const HabitsList = ({ showArchived, setCreationOpen, setEdit }) => {
+  //ANIMATION
+  const limit = useRef(null);
+
   const history = useHistory();
 
   const handleHabits = (value) => {
@@ -13,7 +17,7 @@ const HabitsList = ({ showArchived }) => {
   const { doingHabits, updateHabits, deleteHabits } = useHabits();
 
   return (
-    <HabitsContainer>
+    <HabitsContainer ref={limit}>
       {showArchived
         ? doingHabits.map(
             (habit) =>
@@ -24,6 +28,9 @@ const HabitsList = ({ showArchived }) => {
                   updateHabits={updateHabits}
                   deleteHabits={deleteHabits}
                   showArchived={showArchived}
+                  limit={limit}
+                  setCreationOpen={setCreationOpen}
+                  setEdit={setEdit}
                 />
               )
           )
@@ -36,6 +43,9 @@ const HabitsList = ({ showArchived }) => {
                   updateHabits={updateHabits}
                   deleteHabits={deleteHabits}
                   showArchived={showArchived}
+                  limit={limit}
+                  setCreationOpen={setCreationOpen}
+                  setEdit={setEdit}
                 />
               )
           )}
