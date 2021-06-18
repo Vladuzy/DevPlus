@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 export const MainContainer = styled.main`
-  /* height: 90vh; */
+  height: 100%;
   background-color: var(--cinza-escuro);
 
   border-top-left-radius: 30px;
@@ -11,6 +11,7 @@ export const MainMenuContainer = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  height:100%;
 `;
 
 export const DividerContainer = styled.div`

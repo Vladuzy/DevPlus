@@ -12,7 +12,12 @@ export const GoalsListContainer = styled(motion.main)`
     :last-child {
       margin-bottom: 0;
     }
-    height: 43%;
+    .infinite-scroll-component__outerdiv{
+      width:99%;
+      height:100%;
+    }
+    height: 74%;
+    margin:0;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;

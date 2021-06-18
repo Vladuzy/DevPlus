@@ -6,10 +6,10 @@ import { useHistory } from "react-router-dom";
 import Input from "../Input";
 import Button from "../Buttons/Button";
 import { FormContainer, ErrorSpanContainer, InputContainer } from "./styles";
-
+import { useViewport } from "../../providers/GetViewport";
 const AtivityCreation = ({ id }) => {
   const { createActivities } = useActivity();
-
+  const { viewport: { width } } = useViewport()
   const history = useHistory();
 
   const formSchemaHabit = yup.object().shape({
@@ -32,7 +32,6 @@ const AtivityCreation = ({ id }) => {
     const realization_time = "1000-10-10T00:00:00Z";
     const newData = { ...data, realization_time };
     createActivities(newData);
-    history.goBack();
   };
 
   return (
@@ -60,7 +59,13 @@ const AtivityCreation = ({ id }) => {
           </ErrorSpanContainer>
         )}
       </InputContainer> */}
-      <Button>Criar Atividade</Button>
+      {
+        width<768 ? (
+          <Button onClick={()=> history.goBack()}>Criar Atividade</Button>
+        ):(
+          <Button >Criar Atividade</Button>
+        )
+      }
     </FormContainer>
   );
 };
