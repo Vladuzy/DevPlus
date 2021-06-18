@@ -25,12 +25,25 @@ const DisplayPopUp = ({ setCreationOpen, close, type, edit = false }) => {
         <PopUpDivisor>
           {type === "Habito" &&
             (edit ? (
-              <HabitEdition habitId={habitId} />
+              <HabitEdition
+                setCreationOpen={setCreationOpen}
+                habitId={habitId}
+              />
             ) : (
               <HabitCreation setCreationOpen={setCreationOpen} />
             ))}
-          {type === "Grupo" && (edit ? <GroupEdition /> : <GroupCreation />)}
-          {type === "Meta" && (edit ? <GoalsEdition /> : <GoalsCreation />)}
+          {type === "Grupo" &&
+            (edit ? (
+              <GroupEdition setCreationOpen={setCreationOpen} />
+            ) : (
+              <GroupCreation setCreationOpen={setCreationOpen} />
+            ))}
+          {type === "Meta" &&
+            (edit ? (
+              <GoalsEdition setCreationOpen={setCreationOpen} />
+            ) : (
+              <GoalsCreation setCreationOpen={setCreationOpen} />
+            ))}
           {type === "Atividade" &&
             (edit ? <ActivityEdition /> : <AtivityCreation />)}
           {type === "Profile" && edit && <ProfileEdition />}

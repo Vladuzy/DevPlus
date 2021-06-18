@@ -1,6 +1,6 @@
-import Button from "../../components/Button";
+import Button from "../../components/Buttons/Button";
+import ButtonBack from "../../components/Buttons/ButtonBack";
 import Input from "../../components/Input";
-
 import {
   Container,
   HeaderContainer,
@@ -10,6 +10,7 @@ import {
   FooterContainer,
   TitleFooterContainer,
   SubTitleFooterContainer,
+  SpanFormContainer,
 } from "./styled";
 
 import { useForm } from "react-hook-form";
@@ -17,19 +18,20 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Link, useHistory, Redirect } from "react-router-dom";
-import api from "../../services/index";
+import { useAuth } from "../../providers/AuthProvider";
 
 import jwt_decode from "jwt-decode";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
+import User2 from "../../assets/boneco.svg";
+import Password from "../../assets/password.svg";
+// import ButtonAdd from "../../components/ButtonAdd";
 
 const Login = () => {
+  const { handleLogin, isAuthenticated } = useAuth();
   const schema = yup.object().shape({
-    username: yup.string().required("Campo Obrigatório!!"),
+    username: yup.string().required("Campo Obrigatório*"),
 
-    password: yup.string(),
-    // .min(8, "Mínimo de 8 dígitos")
-    // .matches(/^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-    // "Sua senha deve conter ao menos uma letra maiúscula, uma minúscula, um número e um caracter especial!"),
+    password: yup.string().required("Campo Obrigatório*"),
   });
 
   const {
@@ -38,28 +40,15 @@ const Login = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  // const history = useHistory("/dashboard");
+  const history = useHistory("/dashboard");
 
   const onSubmitFunction = (data) => {
-    api
-      .post("/sessions/", data)
-      .then((reponse) => {
-        const token = reponse.data.access;
-        console.log(token);
-        localStorage.setItem("@DevelopingHabitus:token", JSON.stringify(token));
-        const decodedToken = jwt_decode(token);
-        console.log(decodedToken);
-        const id = decodedToken.user_id;
-        console.log(id);
-        localStorage.setItem("@DevelopingHabitus:user", JSON.stringify(id));
-        // return history.push("/dashboard");
-      })
-      .catch((err) => alert("Username ou senha inválidos!!"));
+    handleLogin(data, jwt_decode, history, toast);
   };
 
-  // if(isAuthenticated){
-  //     return <Redirect to={"/dashboard"} />
-  // }
+  if (isAuthenticated === true) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <Container>
@@ -72,8 +61,10 @@ const Login = () => {
           register={register}
           name={"username"}
           placeholder={"Nome"}
-          error={errors.username?.message}
+          icon={User2}
+          iconType="email"
         />
+        <SpanFormContainer>{errors.username?.message}</SpanFormContainer>
 
         <Input
           register={register}
@@ -81,7 +72,10 @@ const Login = () => {
           type={"password"}
           placeholder={"Senha"}
           error={errors.password?.message}
+          icon={Password}
+          iconType="password"
         />
+        <SpanFormContainer>{errors.password?.message}</SpanFormContainer>
         <Button type={"submit"}>CONECTE-SE</Button>
       </FormContainer>
       <FooterContainer>
@@ -90,6 +84,7 @@ const Login = () => {
           <Link to={"/register"}>REGISTRE-SE</Link>
         </SubTitleFooterContainer>
       </FooterContainer>
+      <ButtonBack onClick={() => history.goBack()}></ButtonBack>
     </Container>
   );
 };

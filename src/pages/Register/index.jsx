@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, Redirect } from "react-router-dom";
 import api from "../../services";
 import {
   Container,
@@ -12,25 +12,35 @@ import {
   TitleFooterContainer,
   SubTitleFooterContainer,
   HeaderContainer,
+  SpanFormContainer,
 } from "./style.js";
 import Input from "../../components/Input";
-import Button from "../../components/Button";
+import Button from "../../components/Buttons/Button";
 import { toast } from "react-toastify";
+import { useAuth } from "../../providers/AuthProvider";
+import ButtonBack from "../../components/Buttons/ButtonBack";
+import User2 from "../../assets/boneco.svg";
+import Email from "../../assets/email.svg";
+import Password from "../../assets/password.svg";
 
 const FormRegister = () => {
   const history = useHistory();
-
+  const { isAuthenticated } = useAuth();
   const schema = yup.object().shape({
-    username: yup.string().required("Campo obrigatório"),
-    email: yup.string().email("Email inválido").required("Campo obrigatório"),
+    username: yup.string().required("Campo obrigatório*"),
+    email: yup.string().email("Email inválido").required("Campo obrigatório*"),
     password: yup
       .string()
-      .min(7, "Minimo de 7 digitos")
-      .required("Campo obrigatório"),
+      .min(8, "Mínimo de 8 dígitos*")
+      .matches(
+        /^((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+        "Senha deve conter ao menos uma letra maiúscula, uma minúscula, um número e um caracter especial!"
+      )
+      .required("Campo obrigatório*"),
     passwordConfirm: yup
       .string()
       .oneOf([yup.ref("password")], "senhas diferentes")
-      .required("Senha obrigatória"),
+      .required("Senha obrigatória*"),
   });
 
   const {
@@ -40,33 +50,28 @@ const FormRegister = () => {
     reset,
   } = useForm({ resolver: yupResolver(schema) });
 
+  if (isAuthenticated === true) {
+    return <Redirect to="/dashboard" />;
+  }
+
   const handleForm = ({ username, email, password }) => {
     const addUser = { username, email, password };
     api
       .post("/users/", addUser)
       .then((response) => {
-        console.log(response);
         toast.success("Cadastrado com sucesso!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
+          autoClose: 1500,
+          hideProgressBar: true,
           closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
         });
         reset();
         history.push("/login");
       })
       .catch((e) =>
         toast.error(" Usuário ou Email já cadastrado!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
+          autoClose: 1500,
+          hideProgressBar: true,
           closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
         })
       );
   };
@@ -78,20 +83,40 @@ const FormRegister = () => {
         <SubTitleContainer>Cadastre-se agora!</SubTitleContainer>
       </HeaderContainer>
       <FormContainer onSubmit={handleSubmit(handleForm)}>
-        <Input placeholder="nome *" register={register} name="username"></Input>
-        <Input placeholder="email *" register={register} name="email"></Input>
+        <Input
+          placeholder="Nome *"
+          register={register}
+          name="username"
+          icon={User2}
+          iconType="email"
+        ></Input>
+        <SpanFormContainer>{errors.username?.message}</SpanFormContainer>
+        <Input
+          placeholder="Email *"
+          register={register}
+          name="email"
+          icon={Email}
+          iconType="email"
+        ></Input>
+        <SpanFormContainer>{errors.email?.message}</SpanFormContainer>
         <Input
           type="password"
-          placeholder="senha *"
+          placeholder="Senha *"
           register={register}
           name="password"
+          icon={Password}
+          iconType="password"
         ></Input>
+        <SpanFormContainer>{errors.password?.message}</SpanFormContainer>
         <Input
           type="password"
-          placeholder="confirmar senha"
+          placeholder="Confirmar senha"
           register={register}
           name="passwordConfirm"
+          icon={Password}
+          iconType="password"
         ></Input>
+        <SpanFormContainer>{errors.passwordConfirm?.message}</SpanFormContainer>
         <Button type="submit">CADASTRAR</Button>
       </FormContainer>
       <FooterContainer>
@@ -100,6 +125,7 @@ const FormRegister = () => {
           <Link to={"/login"}>LOGAR-SE</Link>
         </SubTitleFooterContainer>
       </FooterContainer>
+      <ButtonBack onClick={() => history.goBack()}></ButtonBack>
     </Container>
   );
 };

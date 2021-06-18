@@ -2,25 +2,41 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: var(--cinza-escuro);
-  height: 100vh;
+  @media (min-width: 758px) {
+    height: 500px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+  }
 `;
 export const TitleContainer = styled.h1`
   color: var(--branco);
   font-size: 30px;
   padding: 7px;
+  @media (min-width: 758px) {
+    margin: 0 auto;
+  }
 `;
 export const SubTitleContainer = styled.h3`
   color: var(--amarelo);
   font-size: 15px;
   padding: 7px;
+  @media (min-width: 758px) {
+    margin: 0 auto;
+  }
 `;
 
 export const HeaderContainer = styled.section`
-  height: 150px;
+  height: 110px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   margin-left: 40px;
+  @media (min-width: 758px) {
+    margin: 0 auto;
+  }
 `;
 
 export const FormContainer = styled.form`
@@ -28,8 +44,13 @@ export const FormContainer = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 231px;
-  margin-top: 100px;
+  height: 260px;
+  margin-top: 37px;
+`;
+export const SpanFormContainer = styled.span`
+  color: var(--vermelho);
+  font-size: 1rem;
+  margin-left: 63px;
 `;
 
 export const FooterContainer = styled.form`

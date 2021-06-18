@@ -2,7 +2,7 @@ import { Container } from "./styles";
 
 const Button = ({ children, ...rest }) => {
   return (
-    <Container type="button" {...rest}>
+    <Container type="submit" {...rest}>
       {children}
     </Container>
   );

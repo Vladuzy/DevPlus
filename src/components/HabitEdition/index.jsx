@@ -16,7 +16,7 @@ import {
 import { useAuth } from "../../providers/AuthProvider";
 import { useEffect } from "react";
 
-const HabitEdition = ({ cardId, habitId }) => {
+const HabitEdition = ({ cardId, habitId, setCreationOpen }) => {
   useEffect(() => {
     getOneHabit(cardId);
   }, []);
@@ -53,6 +53,7 @@ const HabitEdition = ({ cardId, habitId }) => {
   const onSubmitData = (data) => {
     updateTextHabits(data, habit.id);
     history.push("/dashboard");
+    setCreationOpen(false);
   };
 
   return (
