@@ -20,6 +20,7 @@ import GroupActivities from '../../GroupActivities';
 import GroupGoals from '../../GroupGoals';
 import ButtonEditGroup from '../../../components/Buttons/ButtonEditGroup';
 
+
 const SpecificGroupDesktop = ({ setEdit, setCreationOpen, setType, groupsType }) => {
   const { name, subscribe } = useParams()
   const { setIsSubscribe, isSubscribe, id  } = useAuth();
@@ -90,7 +91,6 @@ const SpecificGroupDesktop = ({ setEdit, setCreationOpen, setType, groupsType })
             </TitleSomethingSelectedContainer>
             <GroupContentContainer type={groupsType}>
               <ContentContainer>
-                <p>ATIVIDADES VEM AQUI</p>
                 {/* <ActivityList/> */}
                 <GroupActivities />
               </ContentContainer>
@@ -112,7 +112,6 @@ const SpecificGroupDesktop = ({ setEdit, setCreationOpen, setType, groupsType })
             </TitleSomethingSelectedContainer>
             <GroupContentContainer type={groupsType}>
               <ContentContainer>
-                <p>METAS VEM AQUI</p>
                 <GroupGoals />
               </ContentContainer>
             </GroupContentContainer>
