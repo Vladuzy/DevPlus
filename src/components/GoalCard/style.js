@@ -13,6 +13,16 @@ export const GoalCardContainer = styled(motion.section)`
   height: 82px;
   display: flex;
   justify-content: space-around;
+  @media (min-width: 758px) {
+    background-color: var(--cinza-escuro);
+    height: 121px;
+    border: var(--vermelho) solid 2px;
+    width: 300px;
+    border-radius: 20px;
+    background-color: var(--cinza-escuro);
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const CategoryContainer = styled.h3`
@@ -35,12 +45,23 @@ export const InfoContainer = styled.section`
   }
 `;
 
+export const ContainerActivies = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+`;
+
 export const ButtonConluds = styled.div`
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
   .ButtonEdit {
     margin-right: 0px;
+  }
+  @media (min-width: 758px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
   }
 `;
 
@@ -62,6 +83,25 @@ export const ButtonClose = styled.button`
     font-size: 1.7rem;
     font-weight: bold;
   }
+  @media (min-width: 758px) {
+    background-color: var(--vermelho);
+    border-radius: 20px;
+    color: var(--branco);
+    width: 117px;
+    height: 27px;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+export const ContainerTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 273px;
+  @media (min-width: 758px) {
+    width: 0px;
+  }
 `;
 
 export const ButtonCheck = styled.button`
@@ -72,6 +112,15 @@ export const ButtonCheck = styled.button`
     color: green;
     font-size: 1.7rem;
     font-weight: bold;
+  }
+  @media (min-width: 758px) {
+    background-color: var(--verde);
+    border-radius: 20px;
+    color: var(--branco);
+    width: 117px;
+    height: 27px;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -84,6 +133,13 @@ export const ButtonUncheck = styled.button`
     color: yellow;
     font-size: 1.7rem;
     font-weight: bold;
+  }
+  @media (min-width: 758px) {
+    background: var(--amarelo);
+    width: 147px;
+    height: 33px;
+    border-radius: 20px;
+    color: var(--cinza-escuro);
   }
 `;
 

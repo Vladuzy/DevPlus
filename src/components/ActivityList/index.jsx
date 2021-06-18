@@ -97,7 +97,7 @@ const ActivityList = ({showArchived}) => {
           </InfiniteScroll>
         }
        {/* handleGroups("/creation/Grupo") */}
-       {(!showArchived && isSubscribe) && (
+       {(!showArchived && isSubscribe &&  width < 769) && (
       <ButtonAdd type="Atividade" onClick={() => handleActivity("/creation/Atividade")} />
       )}
     </ActivitiesListContainer>
