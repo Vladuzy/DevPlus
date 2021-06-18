@@ -10,7 +10,7 @@ import { FormContainer, ErrorSpanContainer, InputContainer } from "./styles";
 
 const GroupCreation = () => {
   const history = useHistory();
-  const { createGroup } = useGroups();
+  const { createGroup, getGroups } = useGroups();
   const formSchemaGroup = yup.object().shape({
     name: yup
       .string()
@@ -40,6 +40,7 @@ const GroupCreation = () => {
       category: `DevelopingHabitus${category}`,
     };
     createGroup(newData);
+    getGroups();
     history.push("/groups");
   };
 

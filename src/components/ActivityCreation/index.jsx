@@ -5,7 +5,6 @@ import { useActivity } from "../../providers/Activities";
 import { useHistory } from "react-router-dom";
 import Input from "../Input";
 import Button from "../Buttons/Button";
-
 import { FormContainer, ErrorSpanContainer, InputContainer } from "./styles";
 
 const AtivityCreation = ({ id }) => {

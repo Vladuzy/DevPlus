@@ -15,7 +15,7 @@ import {
   SelectContainer,
 } from "./styles";
 
-const HabitCreation = () => {
+const HabitCreation = ({ setCreationOpen }) => {
   const history = useHistory();
   const { id } = useAuth();
   const { createHabits } = useHabits();
@@ -51,6 +51,7 @@ const HabitCreation = () => {
     const user = id;
     const newData = { ...data, achieved, how_much_achieved, user };
     createHabits(newData);
+    setCreationOpen(false);
     history.push("/dashboard");
   };
 

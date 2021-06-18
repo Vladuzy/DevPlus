@@ -19,6 +19,9 @@ import Button from "../../components/Buttons/Button";
 import { toast } from "react-toastify";
 import { useAuth } from "../../providers/AuthProvider";
 import ButtonBack from "../../components/Buttons/ButtonBack";
+import User2 from "../../assets/boneco.svg";
+import Email from "../../assets/email.svg";
+import Password from "../../assets/password.svg";
 
 const FormRegister = () => {
   const history = useHistory();
@@ -80,22 +83,38 @@ const FormRegister = () => {
         <SubTitleContainer>Cadastre-se agora!</SubTitleContainer>
       </HeaderContainer>
       <FormContainer onSubmit={handleSubmit(handleForm)}>
-        <Input placeholder="nome *" register={register} name="username"></Input>
+        <Input
+          placeholder="Nome *"
+          register={register}
+          name="username"
+          icon={User2}
+          iconType="email"
+        ></Input>
         <SpanFormContainer>{errors.username?.message}</SpanFormContainer>
-        <Input placeholder="email *" register={register} name="email"></Input>
+        <Input
+          placeholder="Email *"
+          register={register}
+          name="email"
+          icon={Email}
+          iconType="email"
+        ></Input>
         <SpanFormContainer>{errors.email?.message}</SpanFormContainer>
         <Input
           type="password"
-          placeholder="senha *"
+          placeholder="Senha *"
           register={register}
           name="password"
+          icon={Password}
+          iconType="password"
         ></Input>
         <SpanFormContainer>{errors.password?.message}</SpanFormContainer>
         <Input
           type="password"
-          placeholder="confirmar senha"
+          placeholder="Confirmar senha"
           register={register}
           name="passwordConfirm"
+          icon={Password}
+          iconType="password"
         ></Input>
         <SpanFormContainer>{errors.passwordConfirm?.message}</SpanFormContainer>
         <Button type="submit">CADASTRAR</Button>
@@ -106,7 +125,7 @@ const FormRegister = () => {
           <Link to={"/login"}>LOGAR-SE</Link>
         </SubTitleFooterContainer>
       </FooterContainer>
-      <ButtonBack onClick={() => history.goBack()} ></ButtonBack>
+      <ButtonBack onClick={() => history.goBack()}></ButtonBack>
     </Container>
   );
 };

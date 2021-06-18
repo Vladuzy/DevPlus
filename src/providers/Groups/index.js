@@ -13,6 +13,9 @@ export const GroupsProviders = ({ children }) => {
     return parseInt(localStorage.getItem("@DevelopingHabitus:groupId")) || "";
   });
   const [groupCreatorId, setGroupCreatorId] = useState("");
+  const [group, setGroup] = useState(() => {
+    return JSON.parse(localStorage.getItem("@DevelopingHabitus:group")) || {};
+  });
 
   const getGroups = () => {
     api
@@ -69,7 +72,11 @@ export const GroupsProviders = ({ children }) => {
         });
       })
       .catch((err) => {
-        toast.error("erro ao criar o grupo, tente novamente!");
+        toast.error("erro ao criar o grupo, tente novamente!", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
       });
   };
 
@@ -102,11 +109,20 @@ export const GroupsProviders = ({ children }) => {
       .then((_) => {
         getGroups();
         getGroupsSubs();
-        toast.success("Sucesso ao editar grupo!");
+        getGroup(groupId);
+        toast.success("Sucesso ao editar grupo!", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
       })
       .catch((err) => {
         console.log(err)
-        toast.error("Erro ao editar grupo.")
+        toast.error("Erro ao editar grupo.", {
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+        })
       });
   };
 
@@ -134,6 +150,8 @@ export const GroupsProviders = ({ children }) => {
     api
     .get(`/groups/${id}/`)
     .then((res) => {
+      setGroup(res.data);
+      localStorage.setItem( "@DevelopingHabitus:group", JSON.stringify(res.data));
       localStorage.setItem( "@DevelopingHabitus:groupCreatorId", JSON.stringify(res.data.creator.id));
       setGroupCreatorId(res.data.creator.id);
     })
@@ -153,6 +171,7 @@ export const GroupsProviders = ({ children }) => {
         unsubscribe,
         setGroupId,
         getGroup,
+        group,
         groupCreatorId
       }}
     >

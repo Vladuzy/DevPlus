@@ -2,6 +2,11 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: var(--cinza-escuro);
+  @media (min-width: 758px) {
+    height: 350px;
+    width: 350px;
+    margin: 0 auto;
+  }
 `;
 export const TitleContainer = styled.h1`
   color: var(--branco);
@@ -9,6 +14,10 @@ export const TitleContainer = styled.h1`
   padding: 7px;
   width: 272px;
   height: 41px;
+
+  @media (min-width: 758px) {
+    margin: 0 auto;
+  }
 `;
 
 export const SubTitleContainer = styled.h3`
@@ -18,6 +27,10 @@ export const SubTitleContainer = styled.h3`
   padding: 7px;
   width: 126px;
   height: 22px;
+  @media (min-width: 758px) {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 export const HeaderContainer = styled.section`

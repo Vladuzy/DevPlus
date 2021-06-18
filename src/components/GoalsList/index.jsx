@@ -8,7 +8,10 @@ import ButtonAdd from "../Buttons/ButtonAdd";
 import { GoalsContext } from "../../providers/Goals";
 import { useHistory, useParams } from "react-router-dom";
 import {useAuth} from "../../providers/AuthProvider"
+import { useRef } from "react";
 const GoalsList = ({ showArchived }) => {
+  //ANIMATION
+  const limit = useRef(null)
   //Da para listar os achieved true ou false (botões para ficar alternando)
   const history = useHistory();
   const handleGoals = (value) => {
@@ -18,7 +21,7 @@ const GoalsList = ({ showArchived }) => {
   const { goals, patchGoal, deleteGoal } = useContext(GoalsContext);
   const {isSubscribe} = useAuth();
   return (
-    <GoalsListContainer>
+    <GoalsListContainer ref={limit}>
       {showArchived
         ? goals.map(
             (goal) =>
@@ -29,6 +32,7 @@ const GoalsList = ({ showArchived }) => {
                   patchGoal={patchGoal}
                   deleteGoal={deleteGoal}
                   showArchived={showArchived}
+                  limit={limit}
                 />
               )
           )
@@ -41,6 +45,7 @@ const GoalsList = ({ showArchived }) => {
                   patchGoal={patchGoal}
                   deleteGoal={deleteGoal}
                   showArchived={showArchived}
+                  limit={limit}
                 />
               )
           )}
