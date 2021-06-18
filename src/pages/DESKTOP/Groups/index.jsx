@@ -20,9 +20,10 @@ import Button from '../../../components/Buttons/Button'
 import { CgEnter } from 'react-icons/cg'
 import { IoIosAddCircle, IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
 import { useState } from 'react'
-import CardGroups from '../../../components/DESKTOP/CardGroups'
 import DisplayPopUp from '../../../components/DESKTOP/DisplayPopUp'
 import ListGroups from '../../../components/DESKTOP/ListGroups'
+import { useAuth } from "../../../providers/AuthProvider";
+import { Redirect } from "react-router-dom";
 
 const GroupsDesktop = () => {
   const [creationOpen, setCreationOpen] = useState(false)
@@ -30,6 +31,12 @@ const GroupsDesktop = () => {
   const [groupsType, setGroupsType] = useState('All')
   const [search, setSearch] = useState('')
   const pertenceAoGrupo = false
+  const { isAuthenticated } = useAuth();
+  
+  if (isAuthenticated === false) {
+    return <Redirect to="/login" />;
+  }
+
 
   const serchName = (e) => {
     setSearch(e.target.value)
