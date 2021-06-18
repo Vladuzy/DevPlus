@@ -68,6 +68,9 @@ export const ContactContainer = styled.section`
     margin-top: 100px;
     margin-left: 50vw;
   }
+  .Contato {
+    margin-left: 200px;
+  }
 `;
 
 export const MainStyles = styled.main`
@@ -124,5 +127,23 @@ export const MainStyles = styled.main`
         margin-left: 20px;
       }
     }
+  }
+`;
+
+export const LogoContainer = styled.div`
+  margin-left: 30px;
+  width: 170px;
+  height: 55px;
+  border-radius: 20px;
+  border: 5px solid var(--cinza-escuro);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 300;
   }
 `;

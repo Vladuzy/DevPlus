@@ -4,11 +4,13 @@ import {
   HeaderStyles,
   ContactContainer,
   MainStyles,
+  LogoContainer,
 } from "./styles";
 import { FiAlignJustify } from "react-icons/fi";
 import Buttons from "../../components/Buttons/Button";
 import { useHistory, Redirect } from "react-router-dom";
 import { useAuth } from "../../providers/AuthProvider";
+import ProfileEdition from "../../components/ProfileEdition";
 
 export default function Home() {
   const history = useHistory();
@@ -24,12 +26,14 @@ export default function Home() {
   return (
     <Container>
       <HeaderStyles>
-        <h4>Habbits lifes</h4>
+        <LogoContainer>
+          <h2>DEV PLUS</h2>
+        </LogoContainer>
         <input id="check" type="checkbox" />
         <ContactContainer>
-          <p>Contato</p>
-          <p>comunidade</p>
-          <p>Recursos</p>
+          <Buttons onClick={() => handleClick("/contact")} className="Contato">
+            Contato
+          </Buttons>
         </ContactContainer>
         <label for="check">
           <FiAlignJustify />

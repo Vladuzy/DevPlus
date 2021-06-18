@@ -1,5 +1,5 @@
 import { Route, Switch } from "react-router-dom";
-import { useViewport } from '../providers/GetViewport'
+import { useViewport } from "../providers/GetViewport";
 
 import Home from "../pages/Home";
 import FormRegister from "../pages/Register";
@@ -11,13 +11,17 @@ import SpecificGroup from "../pages/SpecificGroup";
 import CreatingPage from "../pages/CreationPage";
 import EditionPage from "../pages/EditionPage";
 import DashboardDesktop from "../pages/DESKTOP/Dashboard";
-import Profile from "../pages/Profile"
+import Profile from "../pages/Profile";
 import GroupsDesktop from "../pages/DESKTOP/Groups";
+import Contact from "../pages/Contact";
+import { Container } from "../components/Input/styles";
 
 const Routes = () => {
-  const { viewport: { width } } = useViewport()
+  const {
+    viewport: { width },
+  } = useViewport();
 
-  return ( width < 769 ?
+  return width < 769 ? (
     <Switch>
       <Route exact path="/">
         <Home />
@@ -46,11 +50,14 @@ const Routes = () => {
       <Route path="/:groupName/:subscribe">
         <SpecificGroup />
       </Route>
+      <Route path="/contact">
+        <Contact />
+      </Route>
       <Route>
         <NotFound />
       </Route>
     </Switch>
-    :
+  ) : (
     <Switch>
       <Route exact path="/">
         <Home />
@@ -61,11 +68,14 @@ const Routes = () => {
       <Route path="/register">
         <FormRegister></FormRegister>
       </Route>
-      <Route path='/Dashboard'>
+      <Route path="/Dashboard">
         <DashboardDesktop />
       </Route>
-      <Route path='/Groups'>
+      <Route path="/Groups">
         <GroupsDesktop />
+      </Route>
+      <Route path="/contact">
+        <Contact />
       </Route>
       <Route>
         <NotFound />
