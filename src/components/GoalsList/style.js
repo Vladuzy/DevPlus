@@ -8,4 +8,9 @@ export const GoalsListContainer = styled(motion.main)`
     margin-bottom: 137px;
   }
   /* margin: 0 auto; */
-`;
+  @media (min-width: 768px){
+    :last-child {
+    margin-bottom: 0;
+   }
+  }
+`

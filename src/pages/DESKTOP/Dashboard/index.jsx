@@ -8,23 +8,33 @@ import {
 } from "./styles";
 import Button from "../../../components/Buttons/Button";
 import Header from "../../../components/DESKTOP/Header";
-import {
-  IoIosAddCircle,
-  IoIosArrowDropleftCircle,
-  IoIosArrowDroprightCircle,
-} from "react-icons/io";
+import { IoIosAddCircle } from "react-icons/io";
 
 import HabitsList from "../../../components/HabitsList";
 import DisplayPopUp from "../../../components/DESKTOP/DisplayPopUp";
-
+import { useAuth } from "../../../providers/AuthProvider";
 import { useState } from "react";
+import { Redirect } from "react-router-dom";
 
 const DashboardDesktop = () => {
   const [creationOpen, setCreationOpen] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const { isAuthenticated } = useAuth();
+
+  if (isAuthenticated === false) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <>
-      {creationOpen && <DisplayPopUp close={setCreationOpen} type="Habito" />}
+      {creationOpen && (
+        <DisplayPopUp
+          setCreationOpen={setCreationOpen}
+          close={setCreationOpen}
+          type="Habito"
+          edit={edit}
+        />
+      )}
       <MainDashboard>
         <Header />
         <MainContainer>
@@ -37,12 +47,14 @@ const DashboardDesktop = () => {
               </Button>
             </TitleContainer>
             <HabitsContainer>
-              <IoIosArrowDropleftCircle className="disabled" />
               <HabitsListContainer>
-                <HabitsList showArchived={false}></HabitsList>
+                <HabitsList
+                  setEdit={setEdit}
+                  setCreationOpen={setCreationOpen}
+                  showArchived={false}
+                ></HabitsList>
                 {/* Importa aqui o card */}
               </HabitsListContainer>
-              <IoIosArrowDroprightCircle />
             </HabitsContainer>
           </Container>
           <Container>
@@ -50,11 +62,13 @@ const DashboardDesktop = () => {
               <h2>FEITOS</h2>
             </TitleContainer>
             <HabitsContainer>
-              <IoIosArrowDropleftCircle className="disabled" />
               <HabitsListContainer>
-                <HabitsList showArchived={true}></HabitsList>
+                <HabitsList
+                  setEdit={setEdit}
+                  setCreationOpen={setCreationOpen}
+                  showArchived={true}
+                ></HabitsList>
               </HabitsListContainer>
-              <IoIosArrowDroprightCircle />
             </HabitsContainer>
           </Container>
         </MainContainer>

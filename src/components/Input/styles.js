@@ -27,6 +27,8 @@ export const Container = styled.div`
 export const ContainerImg = styled.div`
   background: url(${(props) => props.icon});
   background-size: cover;
-  width: 40px;
-  height: 35px;
+  width: ${(props) => (props.iconType === "email" ? "17px" : "15px")};
+  height: ${(props) => (props.iconType === "email" ? "15px" : "18px")};
+  margin-top: 10px;
+  margin-right: 5px;
 `;

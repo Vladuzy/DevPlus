@@ -2,23 +2,26 @@ import React from 'react'
 import { useGroups } from '../../../providers/Groups'
 import CardGroups from '../CardGroups';
 import { useEffect } from 'react';
-export default function ListGroups({ values, search }) {
+export default function ListGroups({ values, search, url }) {
     const { getGroups, groups, getGroupsSubs, groupsSubs } = useGroups();
     
     useEffect(() => {
         getGroups();
         getGroupsSubs();
     }, [])
-
+    
     return (
         <>
             {values === 'All' && search === '' ? groups.map((element, index) => {
                 return <CardGroups key={index} 
+                currentGroup = {element}
                 name={element.name}
                 description={element.description}
                 category={element.category}
                 activity={element.activities.length}
                 goals={element.goals.length} 
+                url={url}
+                type={values}
                 />
             })
             :
@@ -26,11 +29,14 @@ export default function ListGroups({ values, search }) {
             }
             {values === 'Mine' && search === '' ? groupsSubs.map((element, index) => {
                 return <CardGroups key={index} 
+                currentGroup = {element}
                 name={element.name}
                 description={element.description}
                 category={element.category}
                 activity={element.activities.length}
                 goals={element.goals.length} 
+                url={url}
+                type={values}
                 />
             })
             :
@@ -41,11 +47,14 @@ export default function ListGroups({ values, search }) {
                 return element.name.toUpperCase().includes(search.toUpperCase()) === true
             }).map((element,index) => {
                 return <CardGroups key={index} 
+                currentGroup = {element}
                 name={element.name}
                 description={element.description}
                 category={element.category}
                 activity={element.activities.length}
                 goals={element.goals.length} 
+                url={url}
+                type={values}
                 />
             })
             :
@@ -55,11 +64,14 @@ export default function ListGroups({ values, search }) {
                 return element.name.toUpperCase().includes(search.toUpperCase()) === true
             }).map((element,index) => {
                 return <CardGroups key={index} 
+                currentGroup = {element}
                 name={element.name}
                 description={element.description}
                 category={element.category}
                 activity={element.activities.length}
                 goals={element.goals.length} 
+                url={url}
+                type={values}
                 />
             })
             :
