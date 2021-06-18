@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 export const HabitCardContainer = styled(motion.div)`
   /* width: 320px; */
@@ -14,6 +14,29 @@ export const HabitCardContainer = styled(motion.div)`
   display: flex;
   justify-content: space-around;
   min-height: 82px;
+  @media (min-width: 758px) {
+    background-color: var(--cinza-escuro);
+
+    height: 100%;
+    border: red solid 2px;
+    width: 307px;
+    border-radius: 20px;
+    background-color: var(--cinza-escuro);
+    display: flex;
+    flex-direction: column;
+  }
+`;
+export const ContainerTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 273px;
+`;
+
+export const ContainerButtons = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
 `;
 
 export const ButtonClose = styled.button`
@@ -26,6 +49,12 @@ export const ButtonClose = styled.button`
     color: red;
     font-size: 1.7rem;
     font-weight: bold;
+  }
+  @media (min-width: 758px) {
+    background-color: var(--vermelho);
+    width: 25%;
+    border-radius: 20px;
+    color: var(--branco);
   }
 `;
 
@@ -81,6 +110,11 @@ export const ButtonCheck = styled.button`
     color: green;
     font-size: 1.7rem;
     font-weight: bold;
+  }
+  @media (min-width: 758px) {
+    background-color: var(--verde);
+    border-radius: 20px;
+    color: var(--branco);
   }
 `;
 

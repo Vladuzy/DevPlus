@@ -72,6 +72,6 @@ export const HabitsContainer = styled.div`
 
 export const HabitsListContainer = styled.div`
   height: 100%;
-  width: 93%;
+  width: 98%;
   border: 1px solid black;
 ` 
