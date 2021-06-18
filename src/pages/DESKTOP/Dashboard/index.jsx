@@ -28,7 +28,13 @@ const DashboardDesktop = () => {
 
   return (
     <>
-      {creationOpen && <DisplayPopUp close={setCreationOpen} type="Habito" />}
+      {creationOpen && (
+        <DisplayPopUp
+          setCreationOpen={setCreationOpen}
+          close={setCreationOpen}
+          type="Habito"
+        />
+      )}
       <MainDashboard>
         <Header />
         <MainContainer>

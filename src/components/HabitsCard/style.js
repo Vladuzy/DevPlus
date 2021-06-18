@@ -18,7 +18,7 @@ export const HabitCardContainer = styled(motion.div)`
     background-color: var(--cinza-escuro);
 
     height: 100%;
-    border: red solid 2px;
+    border: var(--vermelho) solid 2px;
     width: 307px;
     border-radius: 20px;
     background-color: var(--cinza-escuro);
@@ -52,9 +52,12 @@ export const ButtonClose = styled.button`
   }
   @media (min-width: 758px) {
     background-color: var(--vermelho);
-    width: 25%;
     border-radius: 20px;
     color: var(--branco);
+    width: 117px;
+    height: 27px;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -115,7 +118,17 @@ export const ButtonCheck = styled.button`
     background-color: var(--verde);
     border-radius: 20px;
     color: var(--branco);
+    width: 117px;
+    height: 27px;
+    justify-content: center;
+    align-items: center;
   }
+`;
+
+export const ContainerCenterBack = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 export const ButtonUncheck = styled.button`
@@ -127,6 +140,13 @@ export const ButtonUncheck = styled.button`
     color: yellow;
     font-size: 1.7rem;
     font-weight: bold;
+  }
+  @media (min-width: 758px) {
+    background: var(--amarelo);
+    width: 147px;
+    height: 33px;
+    border-radius: 20px;
+    color: var(--cinza-escuro);
   }
 `;
 

@@ -10,6 +10,7 @@ import {
   TitleHardSkill,
   ContainerButtons,
   ContainerTitle,
+  ContainerCenterBack,
   ProgressBar,
 } from "./style";
 import ButtonEdit from "../Buttons/ButtonEdit";
@@ -136,16 +137,18 @@ const HabitsCard = ({
           </InfoContainer>
 
           {showArchived ? (
-            <ButtonUncheck onClick={() => updateHabits(habit, "activate")}>
-              <RiArrowGoBackLine className="uncheck" />
-            </ButtonUncheck>
+            <ContainerCenterBack>
+              <ButtonUncheck onClick={() => updateHabits(habit, "activate")}>
+                <h2>VOLTAR</h2>
+              </ButtonUncheck>
+            </ContainerCenterBack>
           ) : (
             <ContainerButtons>
               <ButtonCheck onClick={() => updateHabits(habit, "archieved")}>
-                <h2>feito</h2>
+                <h2>FEITO</h2>
               </ButtonCheck>
               <ButtonClose onClick={() => deleteHabits(habit)}>
-                <h2>Deletar</h2>
+                <h2>DELETAR</h2>
               </ButtonClose>
             </ContainerButtons>
           )}
