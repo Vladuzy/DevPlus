@@ -10,10 +10,15 @@ export const ActivitiesListContainer = styled(motion.main)`
   /* margin: 0 auto; */
 
   @media (min-width: 768px) {
+    margin:0;
     :last-child {
       margin-bottom: 0;
     }
-    height: 43%;
+    .infinite-scroll-component__outerdiv{
+      width:99%;
+      height:100%;
+    }
+    height: 74%;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;

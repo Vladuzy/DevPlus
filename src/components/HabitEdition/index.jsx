@@ -15,12 +15,12 @@ import {
 } from "./styles";
 import { useAuth } from "../../providers/AuthProvider";
 import { useEffect } from "react";
-
+import { useViewport } from "../../providers/GetViewport";
 const HabitEdition = ({ cardId, habitId, setCreationOpen }) => {
   useEffect(() => {
     getOneHabit(cardId);
   }, []);
-
+  const {viewport:{width}} = useViewport();
   const history = useHistory();
   const { updateTextHabits, getOneHabit, habitInfo } = useHabits();
   const habit = { id: cardId ? cardId : habitId };
@@ -53,7 +53,6 @@ const HabitEdition = ({ cardId, habitId, setCreationOpen }) => {
   const onSubmitData = (data) => {
     updateTextHabits(data, habit.id);
     history.push("/dashboard");
-    setCreationOpen(false);
   };
 
   return (
@@ -102,7 +101,13 @@ const HabitEdition = ({ cardId, habitId, setCreationOpen }) => {
           <ErrorSpanContainer>{errors.frequency?.message}</ErrorSpanContainer>
         )}
       </InputContainer>
-      <Button>Editar Habito</Button>
+      {
+        width < 768 ? (
+          <Button >Editar Habito</Button>
+        ) : (
+          <Button onClick={()=> setCreationOpen(false)}>Editar Habito</Button>
+        )
+      }
     </FormContainer>
   );
 };

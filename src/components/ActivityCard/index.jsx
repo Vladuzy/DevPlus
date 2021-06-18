@@ -140,31 +140,15 @@ const ActivityCard = ({
                   <h2>{title}</h2>
                 </InfoContainer>
               )}
-
-              {width > 768 ? (
-                <ButtonEdit
-                  onClick={() => {
-                    setEdit(true);
-                    setType("Atividade");
-                    setCreationOpen(true);
-                  }}
-                ></ButtonEdit>
-              ) : (
-                <ButtonEdit
-                  onClick={() => {
-                    handleEditionActivity();
-                  }}
-                ></ButtonEdit>
-              )}
-
-              <ButtonCheck
-                onClick={() => patchSwitchArchived(activity, "archieved")}
-              >
-                <FaCheck className="check" />
-              </ButtonCheck>
             </>
-          )}
+              
+          )
+          }
         </ActivityCardContainer>
+
+
+
+
       ) : (
         <ActivityCardContainer>
           {isSubscribe ? (
@@ -172,16 +156,16 @@ const ActivityCard = ({
               {showArchived ? (
                 <>
                   <ContainerEdition>
-                    <ButtonEdit
-                      onClick={() => handleEditionActivity()}
-                    ></ButtonEdit>
+                    <ButtonClose onClick={() => deleteActivity(activity)}>
+                      <IoClose className="close" />
+                    </ButtonClose>
                     <InfoContainer>
-                      <h2>{title}</h2>
-                      <h3>
+                    <h3>
                         {date.toLocaleTimeString().slice(0, 5) +
                           "h - " +
                           date.toLocaleDateString()}
                       </h3>
+                      <h2>{title}</h2>
                     </InfoContainer>
                   </ContainerEdition>
                   <ButtonUncheck
@@ -189,9 +173,6 @@ const ActivityCard = ({
                   >
                     <h2>VOLTAR</h2>
                   </ButtonUncheck>
-                  <ButtonEdit
-                    onClick={() => handleEditionActivity()}
-                  ></ButtonEdit>
                 </>
               ) : (
                 <>

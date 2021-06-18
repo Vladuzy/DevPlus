@@ -15,9 +15,9 @@ export const ActivityCardContainer = styled(motion.section)`
   justify-content: space-around;
   @media (min-width: 758px) {
     background-color: var(--cinza-escuro);
-    height: 121px;
+    height: 130px;
     border: var(--vermelho) solid 2px;
-    width: 300px;
+    width: 420px;
     border-radius: 20px;
     background-color: var(--cinza-escuro);
     display: flex;

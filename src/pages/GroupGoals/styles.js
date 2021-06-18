@@ -3,13 +3,14 @@ import { motion } from "framer-motion";
 
 export const MainContainer = styled.main`
   background-color: var(--cinza-escuro);
-
+  height: 100%;
   border-top-left-radius: 30px;
 `;
 export const MainMenuContainer = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  height:100%;
 `;
 
 export const DividerContainer = styled.div`

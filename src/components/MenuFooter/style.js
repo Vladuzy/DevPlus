@@ -13,6 +13,7 @@ export const MenuFooterImg = styled.footer`
   bottom: 0px;
   width: 100%;
   position: fixed;
+  z-index:2;
   .figure {
     width: 37.5px;
     height: 31.87px;
@@ -27,7 +28,7 @@ export const MenuFooterImg = styled.footer`
 
 export const FooterContainer = styled.div`
   background-color: var(--cinza-escuro);
-
+  z-index:2;
   @media (min-width: 768px) {
     display: none;
   }

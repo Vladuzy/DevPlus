@@ -60,7 +60,8 @@ const ActivityList = ({showArchived}) => {
           :
           <InfiniteScroll
             dataLength={showArchived ? done : active}
-            height={120}
+            height={"100%"}
+            width={"100%"}
           >
             {(showArchived)?(
                 activities.map((activity) => 

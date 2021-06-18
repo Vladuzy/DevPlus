@@ -5,7 +5,8 @@ export const InputStyled = styled.input`
   width: 180px;
   height: 100%;
   border: none;
-
+  font-size: 1.2rem;
+  color: var(--branco);
   &::placeholder {
     color: var(--verde);
   }
