@@ -89,7 +89,7 @@ export const GroupsProviders = ({ children }) => {
       })
       .then((response) => {
         setGroupsSubs([...response.data]);
-      });
+      } );
   };
 
   useEffect(
@@ -117,15 +117,17 @@ export const GroupsProviders = ({ children }) => {
         });
       })
       .catch((err) => {
+        console.log(err)
         toast.error("Erro ao editar grupo.", {
           autoClose: 1500,
           hideProgressBar: true,
           closeOnClick: true,
-        });
+        })
       });
   };
 
   const unsubscribe = () => {
+
     api
       .delete(`/groups/${groupId}/unsubscribe/`, {
         headers: {
@@ -141,26 +143,20 @@ export const GroupsProviders = ({ children }) => {
           closeOnClick: true,
         });
       })
-      .catch((error) => toast.error("erro ao sair do grupo"));
+      .catch((error) => console.log(error));
   };
 
   const getGroup = (id) => {
     api
-      .get(`/groups/${id}/`)
-      .then((res) => {
-        setGroup(res.data);
-        localStorage.setItem(
-          "@DevelopingHabitus:group",
-          JSON.stringify(res.data)
-        );
-        localStorage.setItem(
-          "@DevelopingHabitus:groupCreatorId",
-          JSON.stringify(res.data.creator.id)
-        );
-        setGroupCreatorId(res.data.creator.id);
-      })
-      .catch((err) => toast.error("erro"));
-  };
+    .get(`/groups/${id}/`)
+    .then((res) => {
+      setGroup(res.data);
+      localStorage.setItem( "@DevelopingHabitus:group", JSON.stringify(res.data));
+      localStorage.setItem( "@DevelopingHabitus:groupCreatorId", JSON.stringify(res.data.creator.id));
+      setGroupCreatorId(res.data.creator.id);
+    })
+    .catch(err=>console.log(err))
+  }
 
   return (
     <GroupsContext.Provider
@@ -176,7 +172,7 @@ export const GroupsProviders = ({ children }) => {
         setGroupId,
         getGroup,
         group,
-        groupCreatorId,
+        groupCreatorId
       }}
     >
       {children}

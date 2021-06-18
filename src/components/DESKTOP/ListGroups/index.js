@@ -1,14 +1,9 @@
 import React from 'react'
 import { useGroups } from '../../../providers/Groups'
 import CardGroups from '../CardGroups';
-import { useEffect } from 'react';
+
 export default function ListGroups({ values, search, url }) {
-    const { getGroups, groups, getGroupsSubs, groupsSubs } = useGroups();
-    
-    useEffect(() => {
-        getGroups();
-        getGroupsSubs();
-    }, [])
+    const { groups, groupsSubs } = useGroups();
     
     return (
         <>
