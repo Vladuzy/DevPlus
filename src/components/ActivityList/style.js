@@ -8,4 +8,10 @@ export const ActivitiesListContainer = styled(motion.main)`
   }
   width: 100%;
   /* margin: 0 auto; */
+
+  @media (min-width: 768px){
+    :last-child {
+    margin-bottom: 0;
+  }
+  }
 `;

@@ -6,7 +6,7 @@ import { useGoals } from "../../../providers/Goals";
 import { useAuth } from "../../../providers/AuthProvider";
 import { useGroups } from "../../../providers/Groups";
 
-export default function CardGroups({ currentGroup, name, description, category, activity, goals, url }) {
+export default function CardGroups({ currentGroup, name, description, category, activity, goals, url, type }) {
     
     const { setGroupId, getGroup } = useGroups();
     const { id } = useAuth();
@@ -44,7 +44,7 @@ export default function CardGroups({ currentGroup, name, description, category, 
                     <p>metas: <span>{goals}</span></p>
                 </div>
             </ContentText>
-            <ContainerButton onClick={() => handleClick(`${url}/${name}/${subscribe}`)}>
+            <ContainerButton onClick={() => handleClick(`${url}/${name}/${subscribe}`)} type={type}>
                 <ContainerImg/>
             </ContainerButton>
         </ContainerCard>

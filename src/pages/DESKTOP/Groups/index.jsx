@@ -6,7 +6,8 @@ import {
   GroupsSelectContainer, 
   TitleGroupSelectContainer,
   SelectTypeContainer,
-  InputsContainer
+  InputsContainer,
+  GroupsScrollContainer
 } from './styles'
 import Header from '../../../components/DESKTOP/Header'
 import DisplayPopUp from '../../../components/DESKTOP/DisplayPopUp'
@@ -20,6 +21,24 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useGroups } from '../../../providers/Groups'
 import { useAuth } from "../../../providers/AuthProvider";
 import { Redirect } from "react-router-dom";
+
+import { Scrollbars } from 'react-custom-scrollbars-2';
+
+const renderThumb = ({ style, ...props }) => {
+  const thumbStyle = {
+    borderRadius: 6,
+    backgroundColor: 'var(--cinza-escuro)'
+  };
+  return <div style={{ ...style, ...thumbStyle }} {...props} />;
+};
+
+const CustomScrollbars = props => (
+  <Scrollbars
+    renderThumbHorizontal={renderThumb}
+    renderThumbVertical={renderThumb}
+    {...props}
+  />
+);
 
 const GroupsDesktop = () => {
   const { groups, groupsSubs } = useGroups();
@@ -36,7 +55,6 @@ const GroupsDesktop = () => {
   if (isAuthenticated === false) {
     return <Redirect to="/login" />;
   }
-
 
   const serchName = (e) => {
     setSearch(e.target.value)
@@ -61,18 +79,22 @@ const GroupsDesktop = () => {
                 </SelectTypeContainer>
               </InputsContainer>
             </TitleGroupSelectContainer>
-            <InfiniteScroll
-              dataLength={type === 'All' ? groups.length : groupsSubs.length}
-              height={420}
-            >
-              <ListGroups values={groupsType} search={search} url={url}/>
-            </InfiniteScroll>
+            <GroupsScrollContainer id='GroupsScroll' style={{ height: 'calc(88vh - 130px)', overflow: "auto" }}>
+              <CustomScrollbars autoHide autoHideTimeout={500} autoHideDuration={200} >
+                <InfiniteScroll
+                  dataLength={type === 'All' ? groups.length : groupsSubs.length}
+                  scrollableTarget='GroupsScroll'
+                >
+                  <ListGroups values={groupsType} search={search} url={url}/>  
+                </InfiniteScroll>
+              </CustomScrollbars>
+            </GroupsScrollContainer>
           </GroupsSelectContainer>
         </SelectContainer>
 
         <SelectedContainer>
           <Switch>
-            <Route path={`${path}/:id/:subscribe`}>
+            <Route path={`${path}/:name/:subscribe`}>
               <SpecificGroupDesktop setType={setType} setCreationOpen={setCreationOpen} groupsType={groupsType}/>
             </Route>
           </Switch>

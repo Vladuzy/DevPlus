@@ -10,6 +10,7 @@ import {
   TitleHardSkill,
   ContainerButtons,
   ContainerTitle,
+  ContainerCenterBack,
   ProgressBar,
 } from "./style";
 import ButtonEdit from "../Buttons/ButtonEdit";
@@ -28,6 +29,8 @@ const HabitsCard = ({
   deleteHabits,
   showArchived,
   limit,
+  setCreationOpen,
+  setEdit,
 }) => {
   const { id, title, category, difficulty, frequency, how_much_achieved } =
     habit;
@@ -35,7 +38,7 @@ const HabitsCard = ({
   const {
     viewport: { width },
   } = useViewport();
-  const { getOneHabit } = useHabits();
+  const { getOneHabit, habitId, setHabitId } = useHabits();
 
   //ANIMATION
   const x = useMotionValue(0);
@@ -65,6 +68,14 @@ const HabitsCard = ({
     setTimeout(function () {
       history.push(`/edition/Habito/${id}`);
     }, 700);
+    setCreationOpen();
+  };
+
+  const handleEditionHabit = () => {
+    setCreationOpen(true);
+    setEdit(true);
+    setHabitId(id);
+    history.push("/dashboard");
   };
 
   return (
@@ -118,7 +129,7 @@ const HabitsCard = ({
               <TitleContainer>{title}</TitleContainer>
               <ButtonEdit
                 onClick={() => {
-                  handleEditionHabits();
+                  handleEditionHabit();
                 }}
               ></ButtonEdit>
             </ContainerTitle>
@@ -136,16 +147,18 @@ const HabitsCard = ({
           </InfoContainer>
 
           {showArchived ? (
-            <ButtonUncheck onClick={() => updateHabits(habit, "activate")}>
-              <RiArrowGoBackLine className="uncheck" />
-            </ButtonUncheck>
+            <ContainerCenterBack>
+              <ButtonUncheck onClick={() => updateHabits(habit, "activate")}>
+                <h2>VOLTAR</h2>
+              </ButtonUncheck>
+            </ContainerCenterBack>
           ) : (
             <ContainerButtons>
               <ButtonCheck onClick={() => updateHabits(habit, "archieved")}>
-                <h2>feito</h2>
+                <h2>FEITO</h2>
               </ButtonCheck>
               <ButtonClose onClick={() => deleteHabits(habit)}>
-                <h2>Deletar</h2>
+                <h2>DELETAR</h2>
               </ButtonClose>
             </ContainerButtons>
           )}

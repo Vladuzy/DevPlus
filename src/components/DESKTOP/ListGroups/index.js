@@ -16,6 +16,7 @@ export default function ListGroups({ values, search, url }) {
                 activity={element.activities.length}
                 goals={element.goals.length} 
                 url={url}
+                type={values}
                 />
             })
             :
@@ -23,12 +24,14 @@ export default function ListGroups({ values, search, url }) {
             }
             {values === 'Mine' && search === '' ? groupsSubs.map((element, index) => {
                 return <CardGroups key={index} 
+                currentGroup = {element}
                 name={element.name}
                 description={element.description}
                 category={element.category}
                 activity={element.activities.length}
                 goals={element.goals.length} 
                 url={url}
+                type={values}
                 />
             })
             :
@@ -39,11 +42,14 @@ export default function ListGroups({ values, search, url }) {
                 return element.name.toUpperCase().includes(search.toUpperCase()) === true
             }).map((element,index) => {
                 return <CardGroups key={index} 
+                currentGroup = {element}
                 name={element.name}
                 description={element.description}
                 category={element.category}
                 activity={element.activities.length}
                 goals={element.goals.length} 
+                url={url}
+                type={values}
                 />
             })
             :
@@ -53,11 +59,14 @@ export default function ListGroups({ values, search, url }) {
                 return element.name.toUpperCase().includes(search.toUpperCase()) === true
             }).map((element,index) => {
                 return <CardGroups key={index} 
+                currentGroup = {element}
                 name={element.name}
                 description={element.description}
                 category={element.category}
                 activity={element.activities.length}
                 goals={element.goals.length} 
+                url={url}
+                type={values}
                 />
             })
             :
