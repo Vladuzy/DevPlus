@@ -31,7 +31,7 @@ export const ContainerTitle = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 273px;
+  width: 100%;
 `;
 
 export const ContainerButtons = styled.div`
