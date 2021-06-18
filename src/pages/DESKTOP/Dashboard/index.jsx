@@ -10,8 +10,6 @@ import Button from "../../../components/Buttons/Button";
 import Header from "../../../components/DESKTOP/Header";
 import {
   IoIosAddCircle,
-  IoIosArrowDropleftCircle,
-  IoIosArrowDroprightCircle,
 } from "react-icons/io";
 
 import HabitsList from "../../../components/HabitsList";
@@ -43,12 +41,12 @@ const DashboardDesktop = () => {
               </Button>
             </TitleContainer>
             <HabitsContainer>
-              <IoIosArrowDropleftCircle className="disabled" />
+              
               <HabitsListContainer>
                 <HabitsList showArchived={false}></HabitsList>
                 {/* Importa aqui o card */}
               </HabitsListContainer>
-              <IoIosArrowDroprightCircle />
+          
             </HabitsContainer>
           </Container>
           <Container>
@@ -56,11 +54,9 @@ const DashboardDesktop = () => {
               <h2>FEITOS</h2>
             </TitleContainer>
             <HabitsContainer>
-              <IoIosArrowDropleftCircle className="disabled" />
               <HabitsListContainer>
                 <HabitsList showArchived={true}></HabitsList>
               </HabitsListContainer>
-              <IoIosArrowDroprightCircle />
             </HabitsContainer>
           </Container>
         </MainContainer>
