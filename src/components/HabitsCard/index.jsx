@@ -29,6 +29,8 @@ const HabitsCard = ({
   deleteHabits,
   showArchived,
   limit,
+  setCreationOpen,
+  setEdit,
 }) => {
   const { id, title, category, difficulty, frequency, how_much_achieved } =
     habit;
@@ -36,7 +38,7 @@ const HabitsCard = ({
   const {
     viewport: { width },
   } = useViewport();
-  const { getOneHabit } = useHabits();
+  const { getOneHabit, habitId, setHabitId } = useHabits();
 
   //ANIMATION
   const x = useMotionValue(0);
@@ -66,6 +68,14 @@ const HabitsCard = ({
     setTimeout(function () {
       history.push(`/edition/Habito/${id}`);
     }, 700);
+    setCreationOpen();
+  };
+
+  const handleEditionHabit = () => {
+    setCreationOpen(true);
+    setEdit(true);
+    setHabitId(id);
+    history.push("/dashboard");
   };
 
   return (
@@ -119,7 +129,7 @@ const HabitsCard = ({
               <TitleContainer>{title}</TitleContainer>
               <ButtonEdit
                 onClick={() => {
-                  handleEditionHabits();
+                  handleEditionHabit();
                 }}
               ></ButtonEdit>
             </ContainerTitle>

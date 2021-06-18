@@ -11,8 +11,10 @@ import GroupEdition from "../../GroupEdition";
 import GoalsEdition from "../../GoalsEdition";
 import ActivityEdition from "../../ActivityEdition";
 import ProfileEdition from "../../ProfileEdition";
+import { useHabits } from "../../../providers/Habits";
 
 const DisplayPopUp = ({ setCreationOpen, close, type, edit = false }) => {
+  const { habitId } = useHabits();
   return (
     <BackgroundContainer>
       <PopUpSection type={type} edit={edit}>
@@ -23,12 +25,25 @@ const DisplayPopUp = ({ setCreationOpen, close, type, edit = false }) => {
         <PopUpDivisor>
           {type === "Habito" &&
             (edit ? (
-              <HabitEdition />
+              <HabitEdition
+                setCreationOpen={setCreationOpen}
+                habitId={habitId}
+              />
             ) : (
               <HabitCreation setCreationOpen={setCreationOpen} />
             ))}
-          {type === "Grupo" && (edit ? <GroupEdition /> : <GroupCreation />)}
-          {type === "Meta" && (edit ? <GoalsEdition /> : <GoalsCreation />)}
+          {type === "Grupo" &&
+            (edit ? (
+              <GroupEdition setCreationOpen={setCreationOpen} />
+            ) : (
+              <GroupCreation setCreationOpen={setCreationOpen} />
+            ))}
+          {type === "Meta" &&
+            (edit ? (
+              <GoalsEdition setCreationOpen={setCreationOpen} />
+            ) : (
+              <GoalsCreation setCreationOpen={setCreationOpen} />
+            ))}
           {type === "Atividade" &&
             (edit ? <ActivityEdition /> : <AtivityCreation />)}
           {type === "Profile" && edit && <ProfileEdition />}

@@ -16,7 +16,6 @@ export const HabitCardContainer = styled(motion.div)`
   min-height: 82px;
   @media (min-width: 758px) {
     background-color: var(--cinza-escuro);
-
     height: 100%;
     border: var(--vermelho) solid 2px;
     width: 307px;

@@ -7,6 +7,7 @@ export const HabitsContext = createContext();
 
 export const HabitsProviders = ({ children }) => {
   const { token, id } = useAuth();
+  const [habitId, setHabitId] = useState("");
   const [doingHabits, setDoingHabits] = useState(() => {
     return JSON.parse(localStorage.getItem("@DevelopingHabitus:habits")) || [];
   });
@@ -106,13 +107,16 @@ export const HabitsProviders = ({ children }) => {
 
   const getOneHabit = (habitId) => {
     api
-    .get(`/habits/${habitId}/`)
-    .then((response) => {
-      localStorage.setItem( "@DevelopingHabitus:habit", JSON.stringify(response.data));
-      setHabitInfo(response.data)
-    })
-    .catch((err) => console.log(err));
-  }
+      .get(`/habits/${habitId}/`)
+      .then((response) => {
+        localStorage.setItem(
+          "@DevelopingHabitus:habit",
+          JSON.stringify(response.data)
+        );
+        setHabitInfo(response.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     getHabits();
@@ -129,7 +133,9 @@ export const HabitsProviders = ({ children }) => {
         setDoingHabits,
         updateTextHabits,
         getOneHabit,
-        habitInfo
+        habitInfo,
+        habitId,
+        setHabitId,
       }}
     >
       {children}
