@@ -53,7 +53,7 @@ export const HabitsProviders = ({ children }) => {
       })
       .then((response) => setDoingHabits([...doingHabits, response]))
       .then(() => getHabits())
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("erro ao editar Hábito"));
   };
 
   const updateHabits = (habit, action) => {
@@ -77,7 +77,7 @@ export const HabitsProviders = ({ children }) => {
       })
       .then((response) => setDoingHabits([...doingHabits, response]))
       .then(() => getHabits())
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("erro ao editar Hábito"));
   };
 
   const deleteHabits = (habit) => {
@@ -88,7 +88,7 @@ export const HabitsProviders = ({ children }) => {
         },
       })
       .then(() => getHabits())
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("erro ao deletar Hábito"));
   };
 
   const getHabits = () => {
@@ -115,7 +115,7 @@ export const HabitsProviders = ({ children }) => {
         );
         setHabitInfo(response.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("erro ao editar Hábito"));
   };
 
   useEffect(() => {
