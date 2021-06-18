@@ -20,6 +20,7 @@ import GroupActivities from '../../GroupActivities';
 import GroupGoals from '../../GroupGoals';
 import ButtonEditGroup from '../../../components/Buttons/ButtonEditGroup';
 
+
 const SpecificGroupDesktop = ({ setEdit, setCreationOpen, setType, groupsType }) => {
   const { name, subscribe } = useParams()
   const { setIsSubscribe, isSubscribe, id  } = useAuth();
