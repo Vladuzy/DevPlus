@@ -20,7 +20,7 @@ import GroupActivities from '../../GroupActivities';
 import GroupGoals from '../../GroupGoals';
 import ButtonEditGroup from '../../../components/Buttons/ButtonEditGroup';
 
-const SpecificGroupDesktop = ({ setCreationOpen, setType, groupsType }) => {
+const SpecificGroupDesktop = ({ setEdit, setCreationOpen, setType, groupsType }) => {
   const { name, subscribe } = useParams()
   const { setIsSubscribe, isSubscribe, id  } = useAuth();
   const { unsubscribe, subsInAGroup, groupCreatorId} = useGroups();
@@ -65,8 +65,12 @@ const SpecificGroupDesktop = ({ setCreationOpen, setType, groupsType }) => {
             <h2>{name}</h2>
             {
               (isSubscribe && groupCreatorId === id) && (
-                <ButtonEditGroup
-                onClick={() => handleEditGroup("/edition/Grupo")}
+                <ButtonEditGroup 
+                onClick={() => {
+                  setEdit(true);
+                  setType("Grupo");
+                  setCreationOpen(true);
+                }}
               />
               ) 
             }
