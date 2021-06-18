@@ -1,14 +1,13 @@
 import { GoalsListContainer } from "./style";
-
 import GoalCard from "../GoalCard";
-
 import { useContext } from "react";
 import ButtonAdd from "../Buttons/ButtonAdd";
-
 import { GoalsContext } from "../../providers/Goals";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {useAuth} from "../../providers/AuthProvider"
 import { useRef } from "react";
+import { useViewport } from '../../providers/GetViewport'
+
 const GoalsList = ({ showArchived }) => {
   //ANIMATION
   const limit = useRef(null)
@@ -17,6 +16,7 @@ const GoalsList = ({ showArchived }) => {
   const handleGoals = (value) => {
     history.push(value);
   };
+  const { viewport: { width } } = useViewport()
 
   const { goals, patchGoal, deleteGoal } = useContext(GoalsContext);
   const {isSubscribe} = useAuth();
@@ -50,7 +50,7 @@ const GoalsList = ({ showArchived }) => {
               )
           )}
 
-          { (!showArchived && isSubscribe) && (
+          { (!showArchived && isSubscribe && width < 769) && (
             <ButtonAdd type="Atividade" onClick={() => handleGoals("/creation/Meta")} />
           )}
     </GoalsListContainer>

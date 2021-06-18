@@ -5,6 +5,7 @@ import ButtonAdd from "../Buttons/ButtonAdd";
 import { ActivitiesListContainer } from "./style";
 import {useAuth} from "../../providers/AuthProvider"
 import { useRef } from 'react'
+import { useViewport } from '../../providers/GetViewport'
 
 const ActivityList = ({showArchived}) => {
   const { activities, patchActivities, deleteActivity, patchSwitchArchived } = useActivity();
@@ -12,7 +13,9 @@ const ActivityList = ({showArchived}) => {
   const {isSubscribe} = useAuth();
   //ANIMATION
   const limit = useRef(null)
-  
+  const { viewport: { width } } = useViewport()
+
+
   const handleActivity = (value) => {
     history.push(value);
   };
@@ -53,7 +56,7 @@ const ActivityList = ({showArchived}) => {
           )
         }
        {/* handleGroups("/creation/Grupo") */}
-       {(!showArchived && isSubscribe) && (
+       {(!showArchived && isSubscribe &&  width < 769) && (
       <ButtonAdd type="Atividade" onClick={() => handleActivity("/creation/Atividade")} />
       )}
     </ActivitiesListContainer>

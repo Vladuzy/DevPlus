@@ -52,7 +52,7 @@ const SpecificGroupDesktop = ({ setEdit, setCreationOpen, setType, groupsType })
 
   return(
     <>
-      <TitleSelectedContainer group={pertenceAoGrupo}>
+      <TitleSelectedContainer group={subscribe === "true"}>
             { subscribe === "true" ? 
             <Button onClick={() => handleExitGroup("/groups/all")}>
             Sair do Grupo <CgEnter />
@@ -78,7 +78,7 @@ const SpecificGroupDesktop = ({ setEdit, setCreationOpen, setType, groupsType })
           <SomethingSelectedContainer>
             <TitleSomethingSelectedContainer>
               <h2>ATIVIDADES</h2>
-              { pertenceAoGrupo && 
+              { subscribe === "true" && 
               <Button 
                 onClick={() => {
                   setCreationOpen(true)
@@ -100,7 +100,7 @@ const SpecificGroupDesktop = ({ setEdit, setCreationOpen, setType, groupsType })
           <SomethingSelectedContainer>
             <TitleSomethingSelectedContainer meta>
               <h2>METAS</h2>
-              { pertenceAoGrupo && 
+              { subscribe === "true" && 
               <Button
                 onClick={() => {
                   setCreationOpen(true)
